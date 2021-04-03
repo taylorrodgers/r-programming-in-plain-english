@@ -1,0 +1,97 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Answer Key {#answers}
+
+## Chapter 3
+
+1. Filter the following vector to values greater than 2
+```{r A3.1, results=FALSE}
+  q1 <- seq(1,20,2)
+  q1[q1 > 2]
+```
+2. Filter the following vector to values between 20 and 30, but only for the first three entries that meet that criteria. (Hint: add `[n:n]` for the range of values after you determine which values meet that criteria)
+```{r A3.2, results=FALSE}
+  q2 <- round(rnorm(20,32,7),0)
+  q2 >= 20 & q2 <= 30
+  q2[q2 >= 20 & q2 <= 30][1:3]
+```
+3. Multiple the following matrices together.
+```{r A3.3, results=FALSE}
+  q3_1 <- matrix(round(seq(1,40,3.27),0),3)
+  q3_2 <- matrix(seq(1,8,1),4)
+  q3_1 %*% q3_2
+```
+4. Subtract 41 from every entry in the second column of the following matrix. Replace the column with those new values.
+```{r A3.4, eval=FALSE}
+  q4 <- matrix(seq(1,120,4),10,3)
+  q4
+  q4[,2] <- q4[,2] - 41
+  q4
+```
+5. Select the second row each matrix in the following array. Subtract 5 from those rows.
+```{r A3.5, eval=FALSE}
+  q5 <- array(data=c(matrix(seq(1,15,1),5,3),
+                  matrix(seq(4,60,4),5,3),
+                  matrix(seq(2,30,2),5,3)),
+                dim=c(5,3,3))
+  q5
+  q5[2,,]-5
+```
+6. Filter the following data frame to Bond films starring Roger Moore.
+```{r A3.6, eval=FALSE}
+  bond[bond["actor"]=="Roger Moore",]
+```
+7. Filter the following data frame to Bond films starring Sean Connery made after 1966.
+```{r A3.7, eval=FALSE}
+  bond[bond["actor"]=="Sean Connery" & bond["year"] > 1966,]
+```
+## Chapter 5
+
+1. Modify the simply standard deviation function we wrote and change it to calculate mean. Do this without using the built-in `mean` function.
+
+```{r A5.1, eval=FALSE}
+  avg.simple <- function(data,field) {
+    field <- data[,paste(field)]
+    sum(field)/length(field)
+  }
+```
+2. Alter the `summary.group` function to include median, minimum, and maximum values.
+```{r A5.2, eval=FALSE}
+  summary.group <- function(data,group,field) {
+    groups <- levels(factor(data[,paste(group)]))
+    output <- data.frame(group=character(),
+                         mean=numeric(),
+                         sd=numeric(),
+                         median=numeric(),
+                         minimum=numeric(),
+                         maximum=numeric())
+    for(i in 1:length(groups)) {
+      subdata <- data[data[,paste(group)]==groups[i],
+                      paste(field)]
+      output[i,1:6] <- data.frame(groups[i],
+                                  mean(subdata),
+                                  sd(subdata),
+                                  median(subdata),
+                                  min(subdata),
+                                  max(subdata))
+      }
+    output
+  }
+```
+3. Write a function for the *Fibonacci Sequence*, which ends at a number you choose. You'll need to use a control flow to accomplish this and a default value for the end of the sequence. (Hint: You won't use the `for(var in seq) expr` control flow. Execute `?Control` to use a different version.)
+xn=xn-1 + xn-2
+0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55
+```{r A5.3, eval=FALSE}
+  fib <- function(end=55){
+    x <- c(0,1)
+    n <- length(x)
+    while(x[n]<end){
+      x[n+1] <- x[n]+x[n-1]
+      n <- length(x)
+    }
+    x
+  }
+```

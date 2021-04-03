@@ -1,0 +1,173 @@
+# Understanding and Using R Packages {#packages}
+
+Packages are one of the most important concepts in R programming. It's almost hard to conceive R programming without them.
+
+An R **package** stores various functions and data sets for other users to access. It allows R to move beyond its roots in statistical programming and achieve more complex goals.
+
+For example, you might be writing a research paper. You want to clearly show the results of your regression analysis in this report, along with various tables and charts. You can use a combination of *Rmarkdown*, *ggplot2*, *xtable*, and various other packages to accomplish this goal.
+
+That way you don't have to copy and paste your work to a word document as you analyze the results. You merely write it and program it in R and then export it to Word when you're done. This saves you a lot of time in the long run and makes your code far more re-producible.
+
+## Why Does R Use Packages?
+
+Packages allow R to operate as an open source language. Programmers, statisticians, and data scientists can develop new functions and commands and then share them with other users elsewhere - for free! This is common for open source programming languages.
+
+If you want, you can actually develop you're own package. If you find existing resources don't perform or operate the way you'd like, you can develop your own functions and save them in a package for others to use.
+
+## How to Access R Packages
+
+Before I show you how to use an R package, you need to understand there's a difference between **installing** and **loading** a package. Installing means pulling it from CRAN and saving it on your computer. Loading a package means using it in your current R session.
+
+Why would R do this?
+
+Mostly for efficiency. It would take more memory if your R session ran every package installed on your computer. It improves your computer's performance to load packages only as you need them.
+
+Also, it's not uncommon for R packages from different developers to have functions with the same name, but different purposes and inputs. Forcing you to load only the package with the function solves this issue.
+
+## How to Install and Load a Package - The Easy Way
+
+There are a couple of different ways to install and load packages. It depends on whether you need to save and re-use your code later or if you're running a quick analysis.
+
+The easiest way to manage R packages is through RStudio's user interface. This is better for quick analysis that you don't need to save.
+
+The RStudio packages tab on the bottom right pane neatly organizes and details your current packages:
+
+```{r 4.1, echo=FALSE,fig.align="center",out.width="60%"}
+knitr::include_graphics("1.24_Packages.png",dpi=150)
+```
+
+You can use this tab to install and download a package.
+
+To install a package, select the install button:
+
+```{r 4.2, echo=FALSE,fig.align="center",out.width="60%"}
+knitr::include_graphics("1.38_Install_Package.png",dpi=150)
+```
+
+After that, type in the name of your package. In the example below, I type in "dplyr" to install the `dplyr` package.
+
+```{r 4.3, echo=FALSE,fig.align="center",out.width="60%"}
+knitr::include_graphics("1.39_Install_Dplyr.png",dpi=150)
+```
+
+You will now see this package show up in the packages tab in the bottom right pane of RStudio:
+
+```{r 4.4, echo=FALSE,fig.align="center",out.width="60%"}
+knitr::include_graphics("1.40_Dplyr_Package.png",dpi=150)
+```
+
+This doesn't make the dplyr package available for us to use though. We still have to *load* it.
+
+This is where RStudio makes things easy. All you have to do is click the little check box next to **dplyr** to load it.
+
+```{r 4.5, echo=FALSE,fig.align="center",out.width="60%"}
+knitr::include_graphics("1.41_Dplyr_Loaded.png",dpi=150)
+```
+
+And now your package is loaded!
+
+## Why You Should Still Learn to Install and Load Packages the "Old Fashioned" Way
+
+A developer once told me people who use RStudio weren't real "programmers." Real programmers, he said, type everything out by hand. RStudio was for "posers."
+
+If that's true, I am happy to be a poser. RStudio makes package management far easier. But there are some legitimate reasons to use the old fashioned methods, other than proving yourself as a real programmer.
+
+If you need to share your code with other people, for example, it's better to include any code that installs and / or loads packages needed. That way the person opening your script doesn't have to guess which packages to load.
+
+## How to Install and Load R Packages - The Old Fashioned Way
+
+There are two key functions you need to remember to install and load a package:
+1. `install.packages()`
+2. `library()`
+
+`install.packages()` installs the package from CRAN onto your computer. `library()` will load it into your current R session.
+
+Oddly enough, there's a difference in notation between the two. The `install.packages()` function requires you to put quotations "" around the package name. `library()` does not.
+
+To see what I mean, look at the example down below:
+
+```{r 4.6, eval=FALSE}
+  install.packages("dplyr")
+  library(dplyr)
+```
+
+Notice how the quotations marks are used in the first function? This is required for `install.packages()`. The `library()` function does not require it, but you can use quotation marks and it'll still execute.
+
+## A Simple Trick to Include Install and Load Any Packages Needed
+
+If you share your R script with a colleague, they may not have all packages needed on their local computer to execute it. 
+
+To take care of this, you can include both the `install.packages()` and `library()` functions at the top of the script.
+
+If it's a script that only you'll use in the future, you only need to include the `library()` function near the beginning, as you already installed the package beforehand.
+
+## How to Find New Packages to Install
+
+One of the best kept secrets of computer engineers and programmers is that the majority of what they learned came from Google. Every time something doesn't work, they google how to do it.
+
+Changes are high that you'll do the same as you program in R and most of these sites will tell you what packages to download. It's typically in the top left or right corner.
+
+```{r 4.7, echo=FALSE,fig.align="center",out.width="60%"}
+knitr::include_graphics("1.42_Package_Info.png",dpi=150)
+```
+
+For example, I recently google'd "survival analysis in R." Unlike regression analysis, R doesn't have handy base functions to perform survival analysis. I found a couple of websites with information on how to do this in R. All of them required a new package called **survival**, which they displayed in the top left or right of the website.
+
+```{r 4.7.1, echo=FALSE,fig.align="center",out.width="60%"}
+knitr::include_graphics("1.43_Package_Info.png",dpi=150)
+```
+
+## How to Find Documentation on Packages
+
+Most packages you install will have documentation with it. Sadly, much of this documentation is unreadable, but it's still a great resource and I rely on it heavily.
+
+To access this documentation, you can click on the hyperlinked package name in the packages tab. 
+
+Click on the **dplyr** link on your own RStudio screen to see what I mean:
+
+```{r 4.8, echo=FALSE,fig.align="center",out.width="60%"}
+knitr::include_graphics("1.41_Dplyr_Loaded.png",dpi=150)
+```
+
+This will take you to the **Help** tab and you can see documentation on all commands, functions, and data sets for a given package.
+
+```{r 4.8.1, echo=FALSE,fig.align="center",out.width="60%"}
+knitr::include_graphics("1.44_Package_Documentation.png",dpi=150)
+```
+
+You can select any of these hyperlinks to view instructions for how to use a specific function from this package. Down below, I select the **mutate** function documentation.
+
+```{r 4.9, echo=FALSE,fig.align="center",out.width="60%"}
+knitr::include_graphics("1.45_Select_Mutate_Documentation.png",dpi=150)
+```
+
+And this will take you to the documentation page.
+
+```{r 4.10, echo=FALSE,fig.align="center",out.width="60%"}
+knitr::include_graphics("1.46_Mutate_Documentation.png",dpi=150)
+```
+
+As you may have noticed, the documentation also lists the function's package in the top left hand of the corner. This is useful as you look up functions later.
+
+```{r 4.11, echo=FALSE,fig.align="center",out.width="60%"}
+knitr::include_graphics("1.47_Package_Reference.png",dpi=150)
+```
+
+You can also use certain commands to pull up this documentation. The following will bring up a package's documentation in the Help tab.
+
+```{r 4.12, eval=FALSE}
+  ?dplyr()
+```
+
+And you can look up individual functions from the package.
+
+```{r 4.13, eval=FALSE}
+  ?mutate()
+```
+
+## Things to Remember
+
+* Packages are what allows you to adapt R programming to meet your needs
+* You can install and load packages using the **Packages** tab in RStudio or the `install.packages()` and `library()` commands
+* Whenever you research new functions on the internet, you will often see the package required in the top left or right hand corner
+* You can research packages using the **Help** tab in RStudio

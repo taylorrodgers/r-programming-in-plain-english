@@ -1,0 +1,407 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Functions {#functions}
+
+As I said a few chapters ago, R programming runs on objects. Most object types relate to the way data is stored and how it's handled. There's one object type, though, that's unique compared to the others. 
+
+That would be the **function** object type.
+
+R functions allow you to script out various commands to transform and analyze data. This can be as simple as taking data from a vector and outputting a data frame. Or it could be something as complicated as a machine learning algorithm!
+
+It all depends on your own R programming goals.
+
+## Two Approaches to Using R Functions
+
+There's two approaches that you can take with functions: 
+
+1. use an existing function
+2. write your own function
+
+Both methods use the same underlying structure.
+
+The more common functions you'll use include those in the R **base** and **stats** packages. These automatically come with R. These functions perform common calculations needed for statistical programming, such as `mean()`, `sum()`, `sd()`, `lm()`, `glm()` and `confint()`.
+
+Other "existing" functions can include those developed by other R programmers, which you can access by installing and loading other packages. (See the chapter on R packages for more details)
+
+## Why You Should Learn to Write Your Own Functions
+
+R is flexible enough though that you can write your own functions as well. This might sound like more trouble than it's worth, but it's really not. It takes a lot of time to learn other people's functions. Not only that, you have to verify that their functions perform accurately. That's especially true for packages developed by lesser known organizations.
+
+Sadly, not every package out there goes through rigorous quality checks and much of the documentation is poorly written. So it's easy to misunderstand how a function works and then use it incorrectly. 
+
+As a matter of fact, my professor in my machine learning class suggested creating our own scripts for some more advanced machine learning processes because existing packages didn't work in every context. This is the trade off with open source programming languages.
+
+## The Components of an R Function
+
+Regardless of whether you use an existing function or write your own, both require the same components to execute: **argument** and a **value**. 
+
+These are the technical terms for it, but it might be easier to think of an argument as the **input** and the value as the **output**.
+
+Fortunately, R documentation tells you what the required arguments are for existing functions. Simply add a question mark `?` before a function and the documentation will appear in the **Help** tab on the bottom right pane of RStudio.
+
+```{r 5.0, echo=FALSE,fig.align="center",out.width="50%"}
+knitr::include_graphics("1.48_Function_Documentation.png",dpi=150)
+```
+
+Try it yourself with these functions:
+
+```{r 5.1, eval=FALSE}
+?mean
+?sd
+?cor
+?confint
+```
+
+In the example of the `mean` function, we see that it requires at least an `x` value. The **Arguments** section of the documentation states that x is merely an R object. 
+
+```{r 5.1.1, echo=FALSE,fig.align="center",out.width="50%"}
+knitr::include_graphics("1.48.0_Function_Documentation.png",dpi=150)
+```
+
+We can see the **Value** section gives details on the output this function will generate.
+
+```{r 5.1.2, echo=FALSE,fig.align="center",out.width="50%"}
+knitr::include_graphics("1.49_Function_Documentation.png",dpi=150)
+```
+
+## Required versus Non-Required Arguments
+
+You may have noticed in the documentation for the `mean()` function that there were two other arguments: trim and na.rm. The `mean()` function still can execute, even if you don't specify what those arguments are. The reason is that there's a *default* setting already in place for them.
+
+```{r 5.1.3, echo=FALSE,fig.align="center",out.width="50%"}
+knitr::include_graphics("1.48.1_Function_Documentation.png",dpi=150)
+```
+
+Whoever created this function set the default for the *trim* to `0` and the *na.rm* argument to `FALSE`. That way the user only has to modify those arguments if it's necessary.
+
+## When Order Matters for Arguments
+
+If you execute `?lm` in your console, you'll see the linear model function has argument options for *formula, data, subset, weights*, etc. That means we could execute the model using our Bond data as `lm(gross~actor,bond)`. Even though we don't specify the arguments, R will execute this function because the formula argument (`gross~actor`) and the data argument (`bond`) are placed in the correct order.
+
+You can see this order in the documentation:
+
+```{r 5.1.4, echo=FALSE,fig.align="center",out.width="50%"}
+knitr::include_graphics("1.50_Function_Documentation.png",dpi=150)
+```
+
+If we tried this backwards, it wouldn't work. Executing `lm(bond,gross~actor)` in your console would throw up an error. However, if we specify the arguments with an equal `=` sign, it will execute. That would look like this: `lm(data=bond,formula=gross~actor)`.
+
+## How to Write Your Own Function
+
+As you may have noticed, existing R functions require at least one argument (with the option for more) and typically displays at least one values as an output. If you write your own functions, they'll need the same thing.
+
+According to R's own base documentation, a function is defined by an assignment, such as:
+
+```{r 5.2, eval=FALSE}
+name <- function(arg_1, arg_2, …) expression
+```
+
+We're going to follow this convention and create several functions, with each one becoming more and more complex. 
+
+
+Our end goal will be to create a function that:
+
+1. takes a data set
+2. groups data based on a single categorical variable
+3. calculates the mean and standard deviation of a continuous variable
+
+But we'll start with a simpler version of this first.
+
+Before we begin though, go ahead and reload James Bond data set, as we'll use it in our examples later.
+
+```{r 5.3}
+bond <- read.csv("https://raw.githubusercontent.com/taylorrodgers/bond/main/bond.csv")
+```
+
+Our first function will calculate standard deviation for a continuous variable. This function actually exists already (`?sd`), but we want to become familiar with something simple before moving on to something that's more complicated.
+
+First, we'll need a name for the function and any arguments we know will need to be passed through. We know it'll require a data frame and a field to calculate standard deviation. I call those `data` and `field`, respectively. I name the function `sd.simple`.
+
+You can see in the script below the template for a function and the new name and arguments that I replaced it with.
+
+```{r 5.4, eval=FALSE}
+# Template  
+name <- function(arg_1, arg_2, …) expression 
+# New function
+sd.simple <- function(data, field) expression 
+```
+
+Now we'll need to calculate add an **expression**. An expression is the actual script that takes your arguments and uses them to execute certain tasks. Our expression will need to use the data frame, grouping variable, and calculate standard deviation.
+
+To start the expression part of a new function, we use the `{}` notations:
+
+```{r 5.4.1, eval=FALSE}
+sd.simple <- function(data, field) {
+}
+```
+  
+Next, we need the function to evaluate the data frame that's placed in the `data` argument and select the `field` that's specified. To do this, we use the same methods we used for selecting data from a data frame. (Note: when you design functions, it's important to keep in mind the type of objects that will be entered into a function.)
+
+Now if we're selecting a field directly from the **Bond** data frame we created earlier, our script would look something like this:
+
+```{r 5.4.2, eval=FALSE}
+bond[,"gross"]
+```
+
+Since I want this function to be able to evaluate any data frame and field inputted, I simply replace certain parts of the script with the arguments. That means I replace "bond" with "data" and "gross" with "field," which were the arguments I specified when I started writing this function. See what I mean below:
+
+```{r 5.4.3, eval=FALSE}
+sd.simple <- function(data,field) {
+  field <- data[,paste(field)]
+}
+```
+
+Now you probably realized that I actually replaced "gross" with `paste(field)`. The `paste()` function is a handy little tool when it comes to writing your own R functions. It allows you to inject an argument into a filtering command. So when we later specify our `field` argument to be "gross", it'll simply plug that argument into the function to filter the data frame.
+
+It probably confused you why we're assigning an object the name **field** when we've already specified that as an argument. This will be more clear later, but it's because the **field** argument is used to specify a variable within a data frame - not an existing R object. To make it easier to analyze in our next part of the function, we need to turn it into it's own object.
+
+Next, we need to write a script to calculate standard devation. We'll use the *sample standard deviation* equation, which is:
+
+$$
+ \sqrt{\frac{\sum{(X_i-\bar{X})^2}}{n-1}}
+$$
+
+And we'll plug that into our function:
+
+```{r 5.4.4, eval=FALSE}
+sd.simple <- function(data,field) {
+  field <- data[,paste(field)]
+  sqrt(sum((field - mean(field))^2)
+       / (length(field) - 1))
+}
+```
+
+And walla! We created our first function! To execute this function, we simply plug our arguments into the function.
+
+```{r 5.4.5, eval=FALSE}
+sd.simple(bond,"gross")
+```
+```{r 5.4.5.1, echo=FALSE}
+214.4881
+```
+
+If you notice, I put quotation marks around the field argument "gross". That's because that argument is used with filtering a data frame, which requires quotation marks when we filter down to a column by column name (i.e. `data.frame[,"column name"]`). If we were using column number, we wouldn't need to use a quotation mark (i.e. `data.frame[,n]`).
+
+We can check our work against the existing `sd()` function already built into R to make sure we did it correctly.
+
+```{r 5.4.6,eval=FALSE}
+sd.simple(bond,"gross") == sd(bond[,"gross"])
+```
+```{r 5.4.6.1,echo=FALSE}
+TRUE
+```
+
+Looks like we got it right!
+
+## Writing Functions Using Control Flows
+
+The truth is that you typically won't need to write short functions like this one because there's plenty of existing functions in base R that perform these kinds of calculations. The functions you'll need to write are able to evaluate large amounts of data and run calculations on subsets of said data. That's where things get tricky and where function writing is both a benefit and challenge.
+
+That's where the **control flow** comes in handy. Some people call them "loops," which I think is an easier term myself. A control flow simply repeats a calculation over and over again for certain subgroups. Even though this is easy to conceive, it's a challenge to implement it without lots of thought and planning.
+
+There's several different types of control flows, which you can read up by executing `?Control` in your console.
+
+The one we'll use is the `for (var in seq) expr` version. It's hard to visualize how that works, unless we provide an example. Down below I create a loop that prints each individual word in the `statement` vector until we reach the end.
+
+```{r 5.4.7}
+statement <- c("This","book","is","the","greatest",
+               "book","ever","and","I","will",
+               "recommend","it","to","everyone")
+for (i in 1:length(statement)) {
+  print(statement[i])
+}
+```
+
+First, I create the vector. Then I said print every `i` entry of the vector until we reach the end. Even though this is a simple example, you can see why this would be useful in larger, more complicated scripting.
+
+## Applying a Control Flow to Our Summary Stats Function
+
+Now we're going to build upon our previous function with a control flow and use it to report both standard deviation and the average of a subgroup within a larger data frame. We'll demonstrate this using the **Bond** data frame and report those summary statistics for each Bond actor's net gross. 
+
+First, to make sure it's easy to visualize what we're doing, I'm going to replace our own *standard deviation* script with the built-in `sd()` function. I'm also going to add the built-in `mean()` function and rename the function to "summary.group". 
+  
+```{r 5.4.8, eval=FALSE}
+summary.group <- function(data,field) {
+  field <- data[,paste(field)]
+  sd(field)
+  mean(field)
+}
+```  
+
+Next, I'm going to replace the **field** assignment with **groups** and **output**.
+
+```{r 5.4.9, eval=FALSE}
+summary.group <- function(data, group, field) {
+  groups <- levels(factor(data[,paste(group)]))
+  output <- data.frame(group=character(),
+                       mean=numeric(),
+                       sd=numeric())
+  sd(field)
+  mean(field)
+}
+``` 
+
+The **groups** object creates a short vector that specifies the groups we want to evaluate. Since we'll evaluate the actors in the Bond data frame, this would be Daniel Craig, Sean Connery, etc. It works similarly to the previous field object assignment we had.
+
+The **output** object is an empty data frame that will populate with our summary statistics, such as mean and standard deviation, as the control flow evaluates each subgroup. We want to create an empty data frame before the control flow, otherwise the control flow will continuously overwrite itself.
+
+Now we'll begin our control flow. Down below I add the control flow and it evaluates each individual group found at the beginning of the function:
+ 
+```{r 5.4.10, eval=FALSE} 
+summary.group <- function(data,group,field) {
+  groups <- levels(factor(data[,paste(group)]))
+  output <- data.frame(group=character(),
+                       mean=numeric(),
+                       sd=numeric())
+  for(i in 1:length(groups)) {
+    #sd(field) - can't run properly yet
+    #mean(field) - can't run properly yet
+    }
+  }
+```
+
+Now we'll want to update the output data frame with the group name, the mean, and the standard deviation:
+
+```{r 5.4.11, eval=FALSE} 
+summary.group <- function(data,group,field) {
+  groups <- levels(factor(data[,paste(group)]))
+  output <- data.frame(group=character(),
+                       mean=numeric(),
+                       sd=numeric())
+  for(i in 1:length(groups)) {
+    subdata <- data[data[,paste(group)]==groups[i],
+                    paste(field)]
+    output[i,1:3] <- data.frame(groups[i],
+                                mean(subdata),
+                                sd(subdata))
+    }
+  }
+```
+
+Now there was a lot added there and I should explain. The **subdata** object filters down the data to the group we want to evaluate. The `output[i,1:3]` object updates the output data frame for row `i` with the group name, the mean of the field within that group, and the standard deviation. 
+
+Now this function will run, but there's still one piece we're missing. We need to provide a **value**.
+
+In this function, our value we want to use is the **output** object, which is the data frame containing our summary statistics. We can merely add the output reference at the end, outside the control flow:
+
+```{r 5.4.12, eval=FALSE} 
+summary.group <- function(data,group,field) {
+  groups <- levels(factor(data[,paste(group)]))
+  output <- data.frame(group=character(),
+                       mean=numeric(),
+                       sd=numeric())
+  for(i in 1:length(groups)) {
+    subdata <- data[data[,paste(group)]==groups[i],
+                    paste(field)]
+    output[i,1:3] <- data.frame(groups[i],
+                                mean(subdata),
+                                sd(subdata))
+    }
+  output
+  }
+```
+
+If we run this function with the Bond data frame, we'll get this result:
+
+```{r 5.4.13,eval=FALSE}
+summary.group(bond,"actor","gross")
+```
+```{r 5.4.13.1, echo=FALSE}
+data.frame(cbind(group=c("Daniel Craig","George Lazenby","Pierce Brosnan","Roger Moore",    "Sean Connery","Timothy Dalton"),mean=
+                 c(820.3165,505.8998,510.9380,550.8332,724.8824,333.1230),
+                 sd=c(222.57396,NA,30.61869,177.63450,213.95672,67.83394)))
+```
+
+## Breaking Down the Function We Just Made
+
+This probably is confusing to you since you're not totally familiar with R control flows yet. It also doesn't help that you're still learning how to filter and transform the various object types.
+
+To make it easier, I'm going to show you step-by-step how this function took the Bond data and created this output.
+
+First, the function reviewed the group we defined and created a vector with the members of that group. 
+
+```{r 5.4.13.2, echo=FALSE,fig.align="center",out.width="50%"}
+knitr::include_graphics("1.52_Function_Breakdown.png",dpi=150) 
+```
+
+In this instance, that would include the Bond actors:
+
+```{r 5.4.13.3,results=FALSE} 
+levels(factor(bond[,"actor"]))
+```
+```{r 5.4.13.3.1,echo=FALSE,size="tiny"} 
+levels(factor(bond[,"actor"]))
+```
+
+Second, the function created an empty data frame that will later store the actor names, their mean, and their standard deviation:
+
+```{r 5.4.13.4, echo=FALSE,fig.align="center",out.width="50%"}
+knitr::include_graphics("1.53_Function_Breakdown.png",dpi=150) 
+```
+
+Our function then started a control flow, which will evaluate each actor's data to fill the data frame we just created:
+
+```{r 5.4.13.5, echo=FALSE,fig.align="center",out.width="50%"}
+knitr::include_graphics("1.54_Function_Breakdown.png",dpi=150) 
+```
+
+Next, it filtered the Bond data set down to the first actor:
+
+```{r 5.4.13.6, echo=FALSE,fig.align="center",out.width="50%"}
+knitr::include_graphics("1.55_Function_Breakdown.png",dpi=150) 
+```
+
+Really, this function filtered the Bond data set in a similar way to the code below:
+
+```{r 5.4.13.7}
+groups <- levels(factor(bond[,"actor"]))
+bond[bond[,"actor"]==groups[1],"gross"]
+```
+
+The function then took the subdata and calculated our summary statistics. This populated the empty data set one by one...
+
+```{r 5.4.13.8, echo=FALSE,fig.align="center",out.width="50%"}
+knitr::include_graphics("1.56_Function_Breakdown.png",dpi=150) 
+```
+
+...with each new row looked something like this:
+
+```{r 5.4.13.9,echo=FALSE}
+subdata <- bond[bond[,"actor"]==groups[1],"gross"]
+data.frame(groups[1],mean(subdata),sd(subdata))
+```
+
+And finally, it displayed the complete data frame once finished with the control flow!
+
+```{r 5.4.13.10, echo=FALSE,fig.align="center",out.width="50%"}
+knitr::include_graphics("1.57_Function_Breakdown.png",dpi=150) 
+```
+## Assigning Functions Outputs a Name
+
+Any objects named within a function are not saved in your R environment. To save the results, you need to assign the executed function a name, like you would with any other object.
+
+```{r 5.4.14,eval=FALSE}
+bond_eval <- summary.group(bond,"actor","gross")
+bond_eval
+```
+
+This can apply to any existing functions.
+
+## Things to Remember
+
+* Functions are the only object type that modifies other objects
+* Functions require an argument to execute and typically outputs a value
+* Packages store various previously built functions that you can utilize
+* You can build your own functions to suit your R programming needs
+* Control flows or "loops" are a handy way to automate data management tasks at a granular level
+
+## Exercises
+
+Try to see if you can complete the following exercises. Answers are in the back of the book!
+
+1. Modify the simply standard deviation function we wrote and change it to calculate mean. Do this without using the built-in `mean` function.
+2. Alter the `summary.group` function to include median, maximum, and minimum values.
+3. Write a function for the *Fibonacci Sequence*, which ends at a number you choose. You'll need to use a control flow to accomplish this and a default value for the end of the sequence. (Hint: You won't use the `for(var in seq) expr` control flow. Execute `?Control` to use a different version.)
