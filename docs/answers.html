@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 10 Answer Key | R Programming in Plain English</title>
+  <meta name="description" content="A simple guide to R programming for those without programming experience" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 10 Answer Key | R Programming in Plain English" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A simple guide to R programming for those without programming experience" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 10 Answer Key | R Programming in Plain English" />
+  
+  <meta name="twitter:description" content="A simple guide to R programming for those without programming experience" />
+  
+
+<meta name="author" content="Taylor Rodgers" />
+
+
+<meta name="date" content="2021-04-03" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="importdata.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R Programming in Plain English</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About This Book</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#things-you-should-know-before-reading"><i class="fa fa-check"></i><b>1.1</b> Things You Should Know Before Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="whatisr.html"><a href="whatisr.html"><i class="fa fa-check"></i><b>2</b> What is R Programming?</a><ul>
+<li class="chapter" data-level="2.1" data-path="whatisr.html"><a href="whatisr.html#is-r-the-best-statistical-programming-language"><i class="fa fa-check"></i><b>2.1</b> Is R the Best Statistical Programming Language?</a></li>
+<li class="chapter" data-level="2.2" data-path="whatisr.html"><a href="whatisr.html#things-to-remember"><i class="fa fa-check"></i><b>2.2</b> Things to Remember</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>3</b> Getting Setup in R and RStudio</a><ul>
+<li class="chapter" data-level="3.1" data-path="setup.html"><a href="setup.html#how-to-download-r"><i class="fa fa-check"></i><b>3.1</b> How to Download R</a></li>
+<li class="chapter" data-level="3.2" data-path="setup.html"><a href="setup.html#understanding-base-rs-user-interface"><i class="fa fa-check"></i><b>3.2</b> Understanding Base R’s User Interface</a></li>
+<li class="chapter" data-level="3.3" data-path="setup.html"><a href="setup.html#limitations-of-r-base"><i class="fa fa-check"></i><b>3.3</b> Limitations of R Base</a></li>
+<li class="chapter" data-level="3.4" data-path="setup.html"><a href="setup.html#what-is-rstudio"><i class="fa fa-check"></i><b>3.4</b> What is RStudio?</a></li>
+<li class="chapter" data-level="3.5" data-path="setup.html"><a href="setup.html#how-to-download-rstudio"><i class="fa fa-check"></i><b>3.5</b> How to Download RStudio</a></li>
+<li class="chapter" data-level="3.6" data-path="setup.html"><a href="setup.html#understanding-rstudio-interface"><i class="fa fa-check"></i><b>3.6</b> Understanding RStudio Interface</a></li>
+<li class="chapter" data-level="3.7" data-path="setup.html"><a href="setup.html#things-to-remember-1"><i class="fa fa-check"></i><b>3.7</b> Things to Remember</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="objects.html"><a href="objects.html"><i class="fa fa-check"></i><b>4</b> R Objects Types</a><ul>
+<li class="chapter" data-level="4.1" data-path="objects.html"><a href="objects.html#why-do-objects-matter"><i class="fa fa-check"></i><b>4.1</b> Why Do Objects Matter?</a></li>
+<li class="chapter" data-level="4.2" data-path="objects.html"><a href="objects.html#understanding-object-types-makes-it-easier-to-transform-and-analyze"><i class="fa fa-check"></i><b>4.2</b> Understanding Object Types Makes It Easier to Transform and Analyze</a></li>
+<li class="chapter" data-level="4.3" data-path="objects.html"><a href="objects.html#the-basic-objects-to-remember"><i class="fa fa-check"></i><b>4.3</b> The Basic Objects to Remember</a></li>
+<li class="chapter" data-level="4.4" data-path="objects.html"><a href="objects.html#vectors"><i class="fa fa-check"></i><b>4.4</b> Vectors</a></li>
+<li class="chapter" data-level="4.5" data-path="objects.html"><a href="objects.html#matrices-and-arrays"><i class="fa fa-check"></i><b>4.5</b> Matrices and Arrays</a></li>
+<li class="chapter" data-level="4.6" data-path="objects.html"><a href="objects.html#data-frames"><i class="fa fa-check"></i><b>4.6</b> Data Frames</a></li>
+<li class="chapter" data-level="4.7" data-path="objects.html"><a href="objects.html#factors"><i class="fa fa-check"></i><b>4.7</b> Factors</a></li>
+<li class="chapter" data-level="4.8" data-path="objects.html"><a href="objects.html#lists"><i class="fa fa-check"></i><b>4.8</b> Lists</a></li>
+<li class="chapter" data-level="4.9" data-path="objects.html"><a href="objects.html#functions"><i class="fa fa-check"></i><b>4.9</b> Functions</a></li>
+<li class="chapter" data-level="4.10" data-path="objects.html"><a href="objects.html#things-to-remember-2"><i class="fa fa-check"></i><b>4.10</b> Things to Remember</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="baserfilter.html"><a href="baserfilter.html"><i class="fa fa-check"></i><b>5</b> How to Filter and Transform Data in Base R</a><ul>
+<li class="chapter" data-level="5.1" data-path="baserfilter.html"><a href="baserfilter.html#what-are-operators"><i class="fa fa-check"></i><b>5.1</b> What Are Operators?</a></li>
+<li class="chapter" data-level="5.2" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-and-transform-data-from-a-vector"><i class="fa fa-check"></i><b>5.2</b> How to Filter and Transform Data From a Vector</a></li>
+<li class="chapter" data-level="5.3" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-and-transform-data-from-a-matrix"><i class="fa fa-check"></i><b>5.3</b> How to Filter and Transform Data From a Matrix</a></li>
+<li class="chapter" data-level="5.4" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-and-transform-data-from-arrays"><i class="fa fa-check"></i><b>5.4</b> How to Filter and Transform Data from Arrays</a></li>
+<li class="chapter" data-level="5.5" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-and-transform-data-from-a-data-frame"><i class="fa fa-check"></i><b>5.5</b> How to Filter and Transform Data from a Data Frame</a></li>
+<li class="chapter" data-level="5.6" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-a-list"><i class="fa fa-check"></i><b>5.6</b> How to Filter a List</a></li>
+<li class="chapter" data-level="5.7" data-path="baserfilter.html"><a href="baserfilter.html#things-to-remember-3"><i class="fa fa-check"></i><b>5.7</b> Things to Remember</a></li>
+<li class="chapter" data-level="5.8" data-path="baserfilter.html"><a href="baserfilter.html#exercises"><i class="fa fa-check"></i><b>5.8</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="dplyr.html"><a href="dplyr.html"><i class="fa fa-check"></i><b>6</b> How to Filter and Transform Data with the Dplyr Package</a><ul>
+<li class="chapter" data-level="6.1" data-path="dplyr.html"><a href="dplyr.html#why-is-dplyr-so-popular"><i class="fa fa-check"></i><b>6.1</b> Why is <code>dplyr</code> So Popular?</a></li>
+<li class="chapter" data-level="6.2" data-path="dplyr.html"><a href="dplyr.html#its-still-worth-learning-base-r"><i class="fa fa-check"></i><b>6.2</b> It’s Still Worth Learning Base R</a></li>
+<li class="chapter" data-level="6.3" data-path="dplyr.html"><a href="dplyr.html#the-dplyr-syntax"><i class="fa fa-check"></i><b>6.3</b> The <code>dplyr</code> Syntax</a></li>
+<li class="chapter" data-level="6.4" data-path="dplyr.html"><a href="dplyr.html#understand-the-difference-between-selecting-and-filtering"><i class="fa fa-check"></i><b>6.4</b> Understand the Difference Between Selecting and Filtering</a></li>
+<li class="chapter" data-level="6.5" data-path="dplyr.html"><a href="dplyr.html#how-to-select-and-mutate-a-data-frame-with-dplyr-in-r"><i class="fa fa-check"></i><b>6.5</b> How to Select and Mutate a Data Frame with <code>dplyr</code> in R</a></li>
+<li class="chapter" data-level="6.6" data-path="dplyr.html"><a href="dplyr.html#how-to-filter-a-data-frame-with-dplyr-in-r"><i class="fa fa-check"></i><b>6.6</b> How to Filter a Data Frame with <code>dplyr</code> in R</a></li>
+<li class="chapter" data-level="6.7" data-path="dplyr.html"><a href="dplyr.html#how-to-summarize-and-group-data-with-dplyr-in-r"><i class="fa fa-check"></i><b>6.7</b> How to Summarize and Group Data with <code>dplyr</code> in R</a></li>
+<li class="chapter" data-level="6.8" data-path="dplyr.html"><a href="dplyr.html#things-to-remember-4"><i class="fa fa-check"></i><b>6.8</b> Things to Remember</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>7</b> Understanding and Using R Packages</a><ul>
+<li class="chapter" data-level="7.1" data-path="packages.html"><a href="packages.html#why-does-r-use-packages"><i class="fa fa-check"></i><b>7.1</b> Why Does R Use Packages?</a></li>
+<li class="chapter" data-level="7.2" data-path="packages.html"><a href="packages.html#how-to-access-r-packages"><i class="fa fa-check"></i><b>7.2</b> How to Access R Packages</a></li>
+<li class="chapter" data-level="7.3" data-path="packages.html"><a href="packages.html#how-to-install-and-load-a-package---the-easy-way"><i class="fa fa-check"></i><b>7.3</b> How to Install and Load a Package - The Easy Way</a></li>
+<li class="chapter" data-level="7.4" data-path="packages.html"><a href="packages.html#why-you-should-still-learn-to-install-and-load-packages-the-old-fashioned-way"><i class="fa fa-check"></i><b>7.4</b> Why You Should Still Learn to Install and Load Packages the “Old Fashioned” Way</a></li>
+<li class="chapter" data-level="7.5" data-path="packages.html"><a href="packages.html#how-to-install-and-load-r-packages---the-old-fashioned-way"><i class="fa fa-check"></i><b>7.5</b> How to Install and Load R Packages - The Old Fashioned Way</a></li>
+<li class="chapter" data-level="7.6" data-path="packages.html"><a href="packages.html#a-simple-trick-to-include-install-and-load-any-packages-needed"><i class="fa fa-check"></i><b>7.6</b> A Simple Trick to Include Install and Load Any Packages Needed</a></li>
+<li class="chapter" data-level="7.7" data-path="packages.html"><a href="packages.html#how-to-find-new-packages-to-install"><i class="fa fa-check"></i><b>7.7</b> How to Find New Packages to Install</a></li>
+<li class="chapter" data-level="7.8" data-path="packages.html"><a href="packages.html#how-to-find-documentation-on-packages"><i class="fa fa-check"></i><b>7.8</b> How to Find Documentation on Packages</a></li>
+<li class="chapter" data-level="7.9" data-path="packages.html"><a href="packages.html#things-to-remember-5"><i class="fa fa-check"></i><b>7.9</b> Things to Remember</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="objects.html"><a href="objects.html#functions"><i class="fa fa-check"></i><b>8</b> Functions</a><ul>
+<li class="chapter" data-level="8.1" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>8.1</b> Two Approaches to Using R Functions</a></li>
+<li class="chapter" data-level="8.2" data-path="functions.html"><a href="functions.html#why-you-should-learn-to-write-your-own-functions"><i class="fa fa-check"></i><b>8.2</b> Why You Should Learn to Write Your Own Functions</a></li>
+<li class="chapter" data-level="8.3" data-path="functions.html"><a href="functions.html#the-components-of-an-r-function"><i class="fa fa-check"></i><b>8.3</b> The Components of an R Function</a></li>
+<li class="chapter" data-level="8.4" data-path="functions.html"><a href="functions.html#required-versus-non-required-arguments"><i class="fa fa-check"></i><b>8.4</b> Required versus Non-Required Arguments</a></li>
+<li class="chapter" data-level="8.5" data-path="functions.html"><a href="functions.html#when-order-matters-for-arguments"><i class="fa fa-check"></i><b>8.5</b> When Order Matters for Arguments</a></li>
+<li class="chapter" data-level="8.6" data-path="functions.html"><a href="functions.html#how-to-write-your-own-function"><i class="fa fa-check"></i><b>8.6</b> How to Write Your Own Function</a></li>
+<li class="chapter" data-level="8.7" data-path="functions.html"><a href="functions.html#writing-functions-using-control-flows"><i class="fa fa-check"></i><b>8.7</b> Writing Functions Using Control Flows</a></li>
+<li class="chapter" data-level="8.8" data-path="functions.html"><a href="functions.html#applying-a-control-flow-to-our-summary-stats-function"><i class="fa fa-check"></i><b>8.8</b> Applying a Control Flow to Our Summary Stats Function</a></li>
+<li class="chapter" data-level="8.9" data-path="functions.html"><a href="functions.html#breaking-down-the-function-we-just-made"><i class="fa fa-check"></i><b>8.9</b> Breaking Down the Function We Just Made</a></li>
+<li class="chapter" data-level="8.10" data-path="functions.html"><a href="functions.html#things-to-remember-6"><i class="fa fa-check"></i><b>8.10</b> Things to Remember</a></li>
+<li class="chapter" data-level="8.11" data-path="functions.html"><a href="functions.html#exercises-1"><i class="fa fa-check"></i><b>8.11</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="importdata.html"><a href="importdata.html"><i class="fa fa-check"></i><b>9</b> Importing Data into R</a><ul>
+<li class="chapter" data-level="9.1" data-path="importdata.html"><a href="importdata.html#how-to-import-a-raw-data-file-the-easy-way"><i class="fa fa-check"></i><b>9.1</b> How to Import a Raw Data File the Easy Way</a></li>
+<li class="chapter" data-level="9.2" data-path="importdata.html"><a href="importdata.html#import-a-raw-data-file-the-hard-way"><i class="fa fa-check"></i><b>9.2</b> Import a Raw Data File the Hard Way</a></li>
+<li class="chapter" data-level="9.3" data-path="importdata.html"><a href="importdata.html#save-import-functions"><i class="fa fa-check"></i><b>9.3</b> Save Import Functions</a></li>
+<li class="chapter" data-level="9.4" data-path="importdata.html"><a href="importdata.html#connect-to-a-database"><i class="fa fa-check"></i><b>9.4</b> Connect to a Database</a></li>
+<li class="chapter" data-level="9.5" data-path="importdata.html"><a href="importdata.html#connect-to-an-api"><i class="fa fa-check"></i><b>9.5</b> Connect to an API</a></li>
+<li class="chapter" data-level="9.6" data-path="importdata.html"><a href="importdata.html#why-api-connections-are-sometimes-overrated"><i class="fa fa-check"></i><b>9.6</b> Why API Connections Are Sometimes Overrated</a></li>
+<li class="chapter" data-level="9.7" data-path="importdata.html"><a href="importdata.html#things-to-remember-7"><i class="fa fa-check"></i><b>9.7</b> Things to Remember</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="answers.html"><a href="answers.html"><i class="fa fa-check"></i><b>10</b> Answer Key</a><ul>
+<li class="chapter" data-level="10.1" data-path="answers.html"><a href="answers.html#chapter-3"><i class="fa fa-check"></i><b>10.1</b> Chapter 3</a></li>
+<li class="chapter" data-level="10.2" data-path="answers.html"><a href="answers.html#chapter-5"><i class="fa fa-check"></i><b>10.2</b> Chapter 5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R Programming in Plain English</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="answers" class="section level1">
+<h1><span class="header-section-number">Chapter 10</span> Answer Key</h1>
+<div id="chapter-3" class="section level2">
+<h2><span class="header-section-number">10.1</span> Chapter 3</h2>
+<ol style="list-style-type: decimal">
+<li>Filter the following vector to values greater than 2</li>
+</ol>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="answers.html#cb237-1"></a>  q1 &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">20</span>,<span class="dv">2</span>)</span>
+<span id="cb237-2"><a href="answers.html#cb237-2"></a>  q1[q1 <span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span>]</span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Filter the following vector to values between 20 and 30, but only for the first three entries that meet that criteria. (Hint: add <code>[n:n]</code> for the range of values after you determine which values meet that criteria)</li>
+</ol>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="answers.html#cb238-1"></a>  q2 &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">rnorm</span>(<span class="dv">20</span>,<span class="dv">32</span>,<span class="dv">7</span>),<span class="dv">0</span>)</span>
+<span id="cb238-2"><a href="answers.html#cb238-2"></a>  q2 <span class="op">&gt;=</span><span class="st"> </span><span class="dv">20</span> <span class="op">&amp;</span><span class="st"> </span>q2 <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span></span>
+<span id="cb238-3"><a href="answers.html#cb238-3"></a>  q2[q2 <span class="op">&gt;=</span><span class="st"> </span><span class="dv">20</span> <span class="op">&amp;</span><span class="st"> </span>q2 <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>][<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>Multiple the following matrices together.</li>
+</ol>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="answers.html#cb239-1"></a>  q3_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">round</span>(<span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">40</span>,<span class="fl">3.27</span>),<span class="dv">0</span>),<span class="dv">3</span>)</span>
+<span id="cb239-2"><a href="answers.html#cb239-2"></a>  q3_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">8</span>,<span class="dv">1</span>),<span class="dv">4</span>)</span>
+<span id="cb239-3"><a href="answers.html#cb239-3"></a>  q3_<span class="dv">1</span> <span class="op">%*%</span><span class="st"> </span>q3_<span class="dv">2</span></span></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>Subtract 41 from every entry in the second column of the following matrix. Replace the column with those new values.</li>
+</ol>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="answers.html#cb240-1"></a>  q4 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">120</span>,<span class="dv">4</span>),<span class="dv">10</span>,<span class="dv">3</span>)</span>
+<span id="cb240-2"><a href="answers.html#cb240-2"></a>  q4</span>
+<span id="cb240-3"><a href="answers.html#cb240-3"></a>  q4[,<span class="dv">2</span>] &lt;-<span class="st"> </span>q4[,<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span><span class="dv">41</span></span>
+<span id="cb240-4"><a href="answers.html#cb240-4"></a>  q4</span></code></pre></div>
+<ol start="5" style="list-style-type: decimal">
+<li>Select the second row each matrix in the following array. Subtract 5 from those rows.</li>
+</ol>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="answers.html#cb241-1"></a>  q5 &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dt">data=</span><span class="kw">c</span>(<span class="kw">matrix</span>(<span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">15</span>,<span class="dv">1</span>),<span class="dv">5</span>,<span class="dv">3</span>),</span>
+<span id="cb241-2"><a href="answers.html#cb241-2"></a>                  <span class="kw">matrix</span>(<span class="kw">seq</span>(<span class="dv">4</span>,<span class="dv">60</span>,<span class="dv">4</span>),<span class="dv">5</span>,<span class="dv">3</span>),</span>
+<span id="cb241-3"><a href="answers.html#cb241-3"></a>                  <span class="kw">matrix</span>(<span class="kw">seq</span>(<span class="dv">2</span>,<span class="dv">30</span>,<span class="dv">2</span>),<span class="dv">5</span>,<span class="dv">3</span>)),</span>
+<span id="cb241-4"><a href="answers.html#cb241-4"></a>                <span class="dt">dim=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">3</span>))</span>
+<span id="cb241-5"><a href="answers.html#cb241-5"></a>  q5</span>
+<span id="cb241-6"><a href="answers.html#cb241-6"></a>  q5[<span class="dv">2</span>,,]<span class="op">-</span><span class="dv">5</span></span></code></pre></div>
+<ol start="6" style="list-style-type: decimal">
+<li>Filter the following data frame to Bond films starring Roger Moore.</li>
+</ol>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="answers.html#cb242-1"></a>  bond[bond[<span class="st">&quot;actor&quot;</span>]<span class="op">==</span><span class="st">&quot;Roger Moore&quot;</span>,]</span></code></pre></div>
+<ol start="7" style="list-style-type: decimal">
+<li>Filter the following data frame to Bond films starring Sean Connery made after 1966.</li>
+</ol>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="answers.html#cb243-1"></a>  bond[bond[<span class="st">&quot;actor&quot;</span>]<span class="op">==</span><span class="st">&quot;Sean Connery&quot;</span> <span class="op">&amp;</span><span class="st"> </span>bond[<span class="st">&quot;year&quot;</span>] <span class="op">&gt;</span><span class="st"> </span><span class="dv">1966</span>,]</span></code></pre></div>
+</div>
+<div id="chapter-5" class="section level2">
+<h2><span class="header-section-number">10.2</span> Chapter 5</h2>
+<ol style="list-style-type: decimal">
+<li>Modify the simply standard deviation function we wrote and change it to calculate mean. Do this without using the built-in <code>mean</code> function.</li>
+</ol>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="answers.html#cb244-1"></a>  avg.simple &lt;-<span class="st"> </span><span class="cf">function</span>(data,field) {</span>
+<span id="cb244-2"><a href="answers.html#cb244-2"></a>    field &lt;-<span class="st"> </span>data[,<span class="kw">paste</span>(field)]</span>
+<span id="cb244-3"><a href="answers.html#cb244-3"></a>    <span class="kw">sum</span>(field)<span class="op">/</span><span class="kw">length</span>(field)</span>
+<span id="cb244-4"><a href="answers.html#cb244-4"></a>  }</span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Alter the <code>summary.group</code> function to include median, minimum, and maximum values.</li>
+</ol>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="answers.html#cb245-1"></a>  summary.group &lt;-<span class="st"> </span><span class="cf">function</span>(data,group,field) {</span>
+<span id="cb245-2"><a href="answers.html#cb245-2"></a>    groups &lt;-<span class="st"> </span><span class="kw">levels</span>(<span class="kw">factor</span>(data[,<span class="kw">paste</span>(group)]))</span>
+<span id="cb245-3"><a href="answers.html#cb245-3"></a>    output &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">group=</span><span class="kw">character</span>(),</span>
+<span id="cb245-4"><a href="answers.html#cb245-4"></a>                         <span class="dt">mean=</span><span class="kw">numeric</span>(),</span>
+<span id="cb245-5"><a href="answers.html#cb245-5"></a>                         <span class="dt">sd=</span><span class="kw">numeric</span>(),</span>
+<span id="cb245-6"><a href="answers.html#cb245-6"></a>                         <span class="dt">median=</span><span class="kw">numeric</span>(),</span>
+<span id="cb245-7"><a href="answers.html#cb245-7"></a>                         <span class="dt">minimum=</span><span class="kw">numeric</span>(),</span>
+<span id="cb245-8"><a href="answers.html#cb245-8"></a>                         <span class="dt">maximum=</span><span class="kw">numeric</span>())</span>
+<span id="cb245-9"><a href="answers.html#cb245-9"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(groups)) {</span>
+<span id="cb245-10"><a href="answers.html#cb245-10"></a>      subdata &lt;-<span class="st"> </span>data[data[,<span class="kw">paste</span>(group)]<span class="op">==</span>groups[i],</span>
+<span id="cb245-11"><a href="answers.html#cb245-11"></a>                      <span class="kw">paste</span>(field)]</span>
+<span id="cb245-12"><a href="answers.html#cb245-12"></a>      output[i,<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>] &lt;-<span class="st"> </span><span class="kw">data.frame</span>(groups[i],</span>
+<span id="cb245-13"><a href="answers.html#cb245-13"></a>                                  <span class="kw">mean</span>(subdata),</span>
+<span id="cb245-14"><a href="answers.html#cb245-14"></a>                                  <span class="kw">sd</span>(subdata),</span>
+<span id="cb245-15"><a href="answers.html#cb245-15"></a>                                  <span class="kw">median</span>(subdata),</span>
+<span id="cb245-16"><a href="answers.html#cb245-16"></a>                                  <span class="kw">min</span>(subdata),</span>
+<span id="cb245-17"><a href="answers.html#cb245-17"></a>                                  <span class="kw">max</span>(subdata))</span>
+<span id="cb245-18"><a href="answers.html#cb245-18"></a>      }</span>
+<span id="cb245-19"><a href="answers.html#cb245-19"></a>    output</span>
+<span id="cb245-20"><a href="answers.html#cb245-20"></a>  }</span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>Write a function for the <em>Fibonacci Sequence</em>, which ends at a number you choose. You’ll need to use a control flow to accomplish this and a default value for the end of the sequence. (Hint: You won’t use the <code>for(var in seq) expr</code> control flow. Execute <code>?Control</code> to use a different version.)
+xn=xn-1 + xn-2
+0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55</li>
+</ol>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="answers.html#cb246-1"></a>  fib &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">end=</span><span class="dv">55</span>){</span>
+<span id="cb246-2"><a href="answers.html#cb246-2"></a>    x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb246-3"><a href="answers.html#cb246-3"></a>    n &lt;-<span class="st"> </span><span class="kw">length</span>(x)</span>
+<span id="cb246-4"><a href="answers.html#cb246-4"></a>    <span class="cf">while</span>(x[n]<span class="op">&lt;</span>end){</span>
+<span id="cb246-5"><a href="answers.html#cb246-5"></a>      x[n<span class="op">+</span><span class="dv">1</span>] &lt;-<span class="st"> </span>x[n]<span class="op">+</span>x[n<span class="dv">-1</span>]</span>
+<span id="cb246-6"><a href="answers.html#cb246-6"></a>      n &lt;-<span class="st"> </span><span class="kw">length</span>(x)</span>
+<span id="cb246-7"><a href="answers.html#cb246-7"></a>    }</span>
+<span id="cb246-8"><a href="answers.html#cb246-8"></a>    x</span>
+<span id="cb246-9"><a href="answers.html#cb246-9"></a>  }</span></code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="importdata.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/09-answers.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
