@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 10 Answer Key | R Programming in Plain English</title>
+  <title>Chapter 11 Answer Key | R Programming in Plain English</title>
   <meta name="description" content="A simple guide to R programming for those without programming experience" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 10 Answer Key | R Programming in Plain English" />
+  <meta property="og:title" content="Chapter 11 Answer Key | R Programming in Plain English" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 10 Answer Key | R Programming in Plain English" />
+  <meta name="twitter:title" content="Chapter 11 Answer Key | R Programming in Plain English" />
   
   <meta name="twitter:description" content="A simple guide to R programming for those without programming experience" />
   
@@ -24,14 +24,14 @@
 <meta name="author" content="Taylor Rodgers" />
 
 
-<meta name="date" content="2021-04-03" />
+<meta name="date" content="2021-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="importdata.html"/>
+<link rel="prev" href="plotdata.html"/>
 <link rel="next" href="references.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,6 +51,13 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -139,7 +146,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="2" data-path="whatisr.html"><a href="whatisr.html"><i class="fa fa-check"></i><b>2</b> What is R Programming?</a><ul>
 <li class="chapter" data-level="2.1" data-path="whatisr.html"><a href="whatisr.html#is-r-the-best-statistical-programming-language"><i class="fa fa-check"></i><b>2.1</b> Is R the Best Statistical Programming Language?</a></li>
-<li class="chapter" data-level="2.2" data-path="whatisr.html"><a href="whatisr.html#things-to-remember"><i class="fa fa-check"></i><b>2.2</b> Things to Remember</a></li>
+<li class="chapter" data-level="2.2" data-path="whatisr.html"><a href="whatisr.html#how-will-learning-r-versus-python-impact-my-job-opportunities"><i class="fa fa-check"></i><b>2.2</b> How Will Learning R versus Python Impact My Job Opportunities?</a></li>
+<li class="chapter" data-level="2.3" data-path="whatisr.html"><a href="whatisr.html#things-to-remember"><i class="fa fa-check"></i><b>2.3</b> Things to Remember</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>3</b> Getting Setup in R and RStudio</a><ul>
 <li class="chapter" data-level="3.1" data-path="setup.html"><a href="setup.html#how-to-download-r"><i class="fa fa-check"></i><b>3.1</b> How to Download R</a></li>
@@ -193,18 +201,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.8" data-path="packages.html"><a href="packages.html#how-to-find-documentation-on-packages"><i class="fa fa-check"></i><b>7.8</b> How to Find Documentation on Packages</a></li>
 <li class="chapter" data-level="7.9" data-path="packages.html"><a href="packages.html#things-to-remember-5"><i class="fa fa-check"></i><b>7.9</b> Things to Remember</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="objects.html"><a href="objects.html#functions"><i class="fa fa-check"></i><b>8</b> Functions</a><ul>
-<li class="chapter" data-level="8.1" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>8.1</b> Two Approaches to Using R Functions</a></li>
-<li class="chapter" data-level="8.2" data-path="functions.html"><a href="functions.html#why-you-should-learn-to-write-your-own-functions"><i class="fa fa-check"></i><b>8.2</b> Why You Should Learn to Write Your Own Functions</a></li>
-<li class="chapter" data-level="8.3" data-path="functions.html"><a href="functions.html#the-components-of-an-r-function"><i class="fa fa-check"></i><b>8.3</b> The Components of an R Function</a></li>
-<li class="chapter" data-level="8.4" data-path="functions.html"><a href="functions.html#required-versus-non-required-arguments"><i class="fa fa-check"></i><b>8.4</b> Required versus Non-Required Arguments</a></li>
-<li class="chapter" data-level="8.5" data-path="functions.html"><a href="functions.html#when-order-matters-for-arguments"><i class="fa fa-check"></i><b>8.5</b> When Order Matters for Arguments</a></li>
-<li class="chapter" data-level="8.6" data-path="functions.html"><a href="functions.html#how-to-write-your-own-function"><i class="fa fa-check"></i><b>8.6</b> How to Write Your Own Function</a></li>
-<li class="chapter" data-level="8.7" data-path="functions.html"><a href="functions.html#writing-functions-using-control-flows"><i class="fa fa-check"></i><b>8.7</b> Writing Functions Using Control Flows</a></li>
-<li class="chapter" data-level="8.8" data-path="functions.html"><a href="functions.html#applying-a-control-flow-to-our-summary-stats-function"><i class="fa fa-check"></i><b>8.8</b> Applying a Control Flow to Our Summary Stats Function</a></li>
-<li class="chapter" data-level="8.9" data-path="functions.html"><a href="functions.html#breaking-down-the-function-we-just-made"><i class="fa fa-check"></i><b>8.9</b> Breaking Down the Function We Just Made</a></li>
-<li class="chapter" data-level="8.10" data-path="functions.html"><a href="functions.html#things-to-remember-6"><i class="fa fa-check"></i><b>8.10</b> Things to Remember</a></li>
-<li class="chapter" data-level="8.11" data-path="functions.html"><a href="functions.html#exercises-1"><i class="fa fa-check"></i><b>8.11</b> Exercises</a></li>
+<li class="chapter" data-level="8" data-path="function.html"><a href="function.html"><i class="fa fa-check"></i><b>8</b> How to Write Functions</a><ul>
+<li class="chapter" data-level="8.1" data-path="function.html"><a href="function.html#two-approaches-to-using-r-functions"><i class="fa fa-check"></i><b>8.1</b> Two Approaches to Using R Functions</a></li>
+<li class="chapter" data-level="8.2" data-path="function.html"><a href="function.html#why-you-should-learn-to-write-your-own-functions"><i class="fa fa-check"></i><b>8.2</b> Why You Should Learn to Write Your Own Functions</a></li>
+<li class="chapter" data-level="8.3" data-path="function.html"><a href="function.html#the-components-of-an-r-function"><i class="fa fa-check"></i><b>8.3</b> The Components of an R Function</a></li>
+<li class="chapter" data-level="8.4" data-path="function.html"><a href="function.html#required-versus-non-required-arguments"><i class="fa fa-check"></i><b>8.4</b> Required versus Non-Required Arguments</a></li>
+<li class="chapter" data-level="8.5" data-path="function.html"><a href="function.html#when-order-matters-for-arguments"><i class="fa fa-check"></i><b>8.5</b> When Order Matters for Arguments</a></li>
+<li class="chapter" data-level="8.6" data-path="function.html"><a href="function.html#how-to-write-your-own-function"><i class="fa fa-check"></i><b>8.6</b> How to Write Your Own Function</a></li>
+<li class="chapter" data-level="8.7" data-path="function.html"><a href="function.html#writing-functions-using-control-flows"><i class="fa fa-check"></i><b>8.7</b> Writing Functions Using Control Flows</a></li>
+<li class="chapter" data-level="8.8" data-path="function.html"><a href="function.html#applying-a-control-flow-to-our-summary-stats-function"><i class="fa fa-check"></i><b>8.8</b> Applying a Control Flow to Our Summary Stats Function</a></li>
+<li class="chapter" data-level="8.9" data-path="function.html"><a href="function.html#breaking-down-the-function-we-just-made"><i class="fa fa-check"></i><b>8.9</b> Breaking Down the Function We Just Made</a></li>
+<li class="chapter" data-level="8.10" data-path="function.html"><a href="function.html#things-to-remember-6"><i class="fa fa-check"></i><b>8.10</b> Things to Remember</a></li>
+<li class="chapter" data-level="8.11" data-path="function.html"><a href="function.html#exercises-1"><i class="fa fa-check"></i><b>8.11</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="importdata.html"><a href="importdata.html"><i class="fa fa-check"></i><b>9</b> Importing Data into R</a><ul>
 <li class="chapter" data-level="9.1" data-path="importdata.html"><a href="importdata.html#how-to-import-a-raw-data-file-the-easy-way"><i class="fa fa-check"></i><b>9.1</b> How to Import a Raw Data File the Easy Way</a></li>
@@ -212,12 +220,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.3" data-path="importdata.html"><a href="importdata.html#save-import-functions"><i class="fa fa-check"></i><b>9.3</b> Save Import Functions</a></li>
 <li class="chapter" data-level="9.4" data-path="importdata.html"><a href="importdata.html#connect-to-a-database"><i class="fa fa-check"></i><b>9.4</b> Connect to a Database</a></li>
 <li class="chapter" data-level="9.5" data-path="importdata.html"><a href="importdata.html#connect-to-an-api"><i class="fa fa-check"></i><b>9.5</b> Connect to an API</a></li>
-<li class="chapter" data-level="9.6" data-path="importdata.html"><a href="importdata.html#why-api-connections-are-sometimes-overrated"><i class="fa fa-check"></i><b>9.6</b> Why API Connections Are Sometimes Overrated</a></li>
-<li class="chapter" data-level="9.7" data-path="importdata.html"><a href="importdata.html#things-to-remember-7"><i class="fa fa-check"></i><b>9.7</b> Things to Remember</a></li>
+<li class="chapter" data-level="9.6" data-path="importdata.html"><a href="importdata.html#things-to-remember-7"><i class="fa fa-check"></i><b>9.6</b> Things to Remember</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="answers.html"><a href="answers.html"><i class="fa fa-check"></i><b>10</b> Answer Key</a><ul>
-<li class="chapter" data-level="10.1" data-path="answers.html"><a href="answers.html#chapter-3"><i class="fa fa-check"></i><b>10.1</b> Chapter 3</a></li>
-<li class="chapter" data-level="10.2" data-path="answers.html"><a href="answers.html#chapter-5"><i class="fa fa-check"></i><b>10.2</b> Chapter 5</a></li>
+<li class="chapter" data-level="10" data-path="plotdata.html"><a href="plotdata.html"><i class="fa fa-check"></i><b>10</b> How to Plot Data in R</a><ul>
+<li class="chapter" data-level="10.1" data-path="plotdata.html"><a href="plotdata.html#which-r-plot-package-is-best"><i class="fa fa-check"></i><b>10.1</b> Which R Plot Package is Best?</a></li>
+<li class="chapter" data-level="10.2" data-path="plotdata.html"><a href="plotdata.html#so-which-data-viz-package-is-actually-the-best"><i class="fa fa-check"></i><b>10.2</b> So Which Data Viz Package is Actually the Best?</a></li>
+<li class="chapter" data-level="10.3" data-path="plotdata.html"><a href="plotdata.html#how-to-write-ggplot2-scripts"><i class="fa fa-check"></i><b>10.3</b> How to Write ggplot2 Scripts</a></li>
+<li class="chapter" data-level="10.4" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-common-data-visualizations-in-ggplot2"><i class="fa fa-check"></i><b>10.4</b> How to Plot Common Data Visualizations in ggplot2</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-a-scatterplot"><i class="fa fa-check"></i><b>10.4.1</b> How to Plot a Scatterplot</a></li>
+<li class="chapter" data-level="10.4.2" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-a-bar-graph-histogram"><i class="fa fa-check"></i><b>10.4.2</b> How to Plot a Bar Graph / Histogram</a></li>
+<li class="chapter" data-level="10.4.3" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-a-line-graph"><i class="fa fa-check"></i><b>10.4.3</b> How to Plot a Line Graph</a></li>
+<li class="chapter" data-level="10.4.4" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-a-box-and-whiskers-plot"><i class="fa fa-check"></i><b>10.4.4</b> How to Plot a Box-and-Whiskers Plot</a></li>
+<li class="chapter" data-level="10.4.5" data-path="plotdata.html"><a href="plotdata.html#how-to-improve-labels-and-other-formatting-tips"><i class="fa fa-check"></i><b>10.4.5</b> How to Improve Labels and Other Formatting Tips</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="plotdata.html"><a href="plotdata.html#things-to-remember-8"><i class="fa fa-check"></i><b>10.5</b> Things to Remember</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="answers.html"><a href="answers.html"><i class="fa fa-check"></i><b>11</b> Answer Key</a><ul>
+<li class="chapter" data-level="11.1" data-path="answers.html"><a href="answers.html#chapter-3"><i class="fa fa-check"></i><b>11.1</b> Chapter 3</a></li>
+<li class="chapter" data-level="11.2" data-path="answers.html"><a href="answers.html#chapter-5"><i class="fa fa-check"></i><b>11.2</b> Chapter 5</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -241,97 +261,97 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="answers" class="section level1">
-<h1><span class="header-section-number">Chapter 10</span> Answer Key</h1>
+<h1><span class="header-section-number">Chapter 11</span> Answer Key</h1>
 <div id="chapter-3" class="section level2">
-<h2><span class="header-section-number">10.1</span> Chapter 3</h2>
+<h2><span class="header-section-number">11.1</span> Chapter 3</h2>
 <ol style="list-style-type: decimal">
 <li>Filter the following vector to values greater than 2</li>
 </ol>
-<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="answers.html#cb237-1"></a>  q1 &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">20</span>,<span class="dv">2</span>)</span>
-<span id="cb237-2"><a href="answers.html#cb237-2"></a>  q1[q1 <span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="answers.html#cb264-1"></a>  q1 &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">20</span>,<span class="dv">2</span>)</span>
+<span id="cb264-2"><a href="answers.html#cb264-2"></a>  q1[q1 <span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span>]</span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>Filter the following vector to values between 20 and 30, but only for the first three entries that meet that criteria. (Hint: add <code>[n:n]</code> for the range of values after you determine which values meet that criteria)</li>
 </ol>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="answers.html#cb238-1"></a>  q2 &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">rnorm</span>(<span class="dv">20</span>,<span class="dv">32</span>,<span class="dv">7</span>),<span class="dv">0</span>)</span>
-<span id="cb238-2"><a href="answers.html#cb238-2"></a>  q2 <span class="op">&gt;=</span><span class="st"> </span><span class="dv">20</span> <span class="op">&amp;</span><span class="st"> </span>q2 <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span></span>
-<span id="cb238-3"><a href="answers.html#cb238-3"></a>  q2[q2 <span class="op">&gt;=</span><span class="st"> </span><span class="dv">20</span> <span class="op">&amp;</span><span class="st"> </span>q2 <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>][<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="answers.html#cb265-1"></a>  q2 &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">rnorm</span>(<span class="dv">20</span>,<span class="dv">32</span>,<span class="dv">7</span>),<span class="dv">0</span>)</span>
+<span id="cb265-2"><a href="answers.html#cb265-2"></a>  q2 <span class="op">&gt;=</span><span class="st"> </span><span class="dv">20</span> <span class="op">&amp;</span><span class="st"> </span>q2 <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span></span>
+<span id="cb265-3"><a href="answers.html#cb265-3"></a>  q2[q2 <span class="op">&gt;=</span><span class="st"> </span><span class="dv">20</span> <span class="op">&amp;</span><span class="st"> </span>q2 <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>][<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li>Multiple the following matrices together.</li>
 </ol>
-<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="answers.html#cb239-1"></a>  q3_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">round</span>(<span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">40</span>,<span class="fl">3.27</span>),<span class="dv">0</span>),<span class="dv">3</span>)</span>
-<span id="cb239-2"><a href="answers.html#cb239-2"></a>  q3_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">8</span>,<span class="dv">1</span>),<span class="dv">4</span>)</span>
-<span id="cb239-3"><a href="answers.html#cb239-3"></a>  q3_<span class="dv">1</span> <span class="op">%*%</span><span class="st"> </span>q3_<span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="answers.html#cb266-1"></a>  q3_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">round</span>(<span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">40</span>,<span class="fl">3.27</span>),<span class="dv">0</span>),<span class="dv">3</span>)</span>
+<span id="cb266-2"><a href="answers.html#cb266-2"></a>  q3_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">8</span>,<span class="dv">1</span>),<span class="dv">4</span>)</span>
+<span id="cb266-3"><a href="answers.html#cb266-3"></a>  q3_<span class="dv">1</span> <span class="op">%*%</span><span class="st"> </span>q3_<span class="dv">2</span></span></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
 <li>Subtract 41 from every entry in the second column of the following matrix. Replace the column with those new values.</li>
 </ol>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="answers.html#cb240-1"></a>  q4 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">120</span>,<span class="dv">4</span>),<span class="dv">10</span>,<span class="dv">3</span>)</span>
-<span id="cb240-2"><a href="answers.html#cb240-2"></a>  q4</span>
-<span id="cb240-3"><a href="answers.html#cb240-3"></a>  q4[,<span class="dv">2</span>] &lt;-<span class="st"> </span>q4[,<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span><span class="dv">41</span></span>
-<span id="cb240-4"><a href="answers.html#cb240-4"></a>  q4</span></code></pre></div>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="answers.html#cb267-1"></a>  q4 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">120</span>,<span class="dv">4</span>),<span class="dv">10</span>,<span class="dv">3</span>)</span>
+<span id="cb267-2"><a href="answers.html#cb267-2"></a>  q4</span>
+<span id="cb267-3"><a href="answers.html#cb267-3"></a>  q4[,<span class="dv">2</span>] &lt;-<span class="st"> </span>q4[,<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span><span class="dv">41</span></span>
+<span id="cb267-4"><a href="answers.html#cb267-4"></a>  q4</span></code></pre></div>
 <ol start="5" style="list-style-type: decimal">
 <li>Select the second row each matrix in the following array. Subtract 5 from those rows.</li>
 </ol>
-<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="answers.html#cb241-1"></a>  q5 &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dt">data=</span><span class="kw">c</span>(<span class="kw">matrix</span>(<span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">15</span>,<span class="dv">1</span>),<span class="dv">5</span>,<span class="dv">3</span>),</span>
-<span id="cb241-2"><a href="answers.html#cb241-2"></a>                  <span class="kw">matrix</span>(<span class="kw">seq</span>(<span class="dv">4</span>,<span class="dv">60</span>,<span class="dv">4</span>),<span class="dv">5</span>,<span class="dv">3</span>),</span>
-<span id="cb241-3"><a href="answers.html#cb241-3"></a>                  <span class="kw">matrix</span>(<span class="kw">seq</span>(<span class="dv">2</span>,<span class="dv">30</span>,<span class="dv">2</span>),<span class="dv">5</span>,<span class="dv">3</span>)),</span>
-<span id="cb241-4"><a href="answers.html#cb241-4"></a>                <span class="dt">dim=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">3</span>))</span>
-<span id="cb241-5"><a href="answers.html#cb241-5"></a>  q5</span>
-<span id="cb241-6"><a href="answers.html#cb241-6"></a>  q5[<span class="dv">2</span>,,]<span class="op">-</span><span class="dv">5</span></span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="answers.html#cb268-1"></a>  q5 &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dt">data=</span><span class="kw">c</span>(<span class="kw">matrix</span>(<span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">15</span>,<span class="dv">1</span>),<span class="dv">5</span>,<span class="dv">3</span>),</span>
+<span id="cb268-2"><a href="answers.html#cb268-2"></a>                  <span class="kw">matrix</span>(<span class="kw">seq</span>(<span class="dv">4</span>,<span class="dv">60</span>,<span class="dv">4</span>),<span class="dv">5</span>,<span class="dv">3</span>),</span>
+<span id="cb268-3"><a href="answers.html#cb268-3"></a>                  <span class="kw">matrix</span>(<span class="kw">seq</span>(<span class="dv">2</span>,<span class="dv">30</span>,<span class="dv">2</span>),<span class="dv">5</span>,<span class="dv">3</span>)),</span>
+<span id="cb268-4"><a href="answers.html#cb268-4"></a>                <span class="dt">dim=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">3</span>))</span>
+<span id="cb268-5"><a href="answers.html#cb268-5"></a>  q5</span>
+<span id="cb268-6"><a href="answers.html#cb268-6"></a>  q5[<span class="dv">2</span>,,]<span class="op">-</span><span class="dv">5</span></span></code></pre></div>
 <ol start="6" style="list-style-type: decimal">
 <li>Filter the following data frame to Bond films starring Roger Moore.</li>
 </ol>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="answers.html#cb242-1"></a>  bond[bond[<span class="st">&quot;actor&quot;</span>]<span class="op">==</span><span class="st">&quot;Roger Moore&quot;</span>,]</span></code></pre></div>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="answers.html#cb269-1"></a>  bond[bond[<span class="st">&quot;actor&quot;</span>]<span class="op">==</span><span class="st">&quot;Roger Moore&quot;</span>,]</span></code></pre></div>
 <ol start="7" style="list-style-type: decimal">
 <li>Filter the following data frame to Bond films starring Sean Connery made after 1966.</li>
 </ol>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="answers.html#cb243-1"></a>  bond[bond[<span class="st">&quot;actor&quot;</span>]<span class="op">==</span><span class="st">&quot;Sean Connery&quot;</span> <span class="op">&amp;</span><span class="st"> </span>bond[<span class="st">&quot;year&quot;</span>] <span class="op">&gt;</span><span class="st"> </span><span class="dv">1966</span>,]</span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="answers.html#cb270-1"></a>  bond[bond[<span class="st">&quot;actor&quot;</span>]<span class="op">==</span><span class="st">&quot;Sean Connery&quot;</span> <span class="op">&amp;</span><span class="st"> </span>bond[<span class="st">&quot;year&quot;</span>] <span class="op">&gt;</span><span class="st"> </span><span class="dv">1966</span>,]</span></code></pre></div>
 </div>
 <div id="chapter-5" class="section level2">
-<h2><span class="header-section-number">10.2</span> Chapter 5</h2>
+<h2><span class="header-section-number">11.2</span> Chapter 5</h2>
 <ol style="list-style-type: decimal">
 <li>Modify the simply standard deviation function we wrote and change it to calculate mean. Do this without using the built-in <code>mean</code> function.</li>
 </ol>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="answers.html#cb244-1"></a>  avg.simple &lt;-<span class="st"> </span><span class="cf">function</span>(data,field) {</span>
-<span id="cb244-2"><a href="answers.html#cb244-2"></a>    field &lt;-<span class="st"> </span>data[,<span class="kw">paste</span>(field)]</span>
-<span id="cb244-3"><a href="answers.html#cb244-3"></a>    <span class="kw">sum</span>(field)<span class="op">/</span><span class="kw">length</span>(field)</span>
-<span id="cb244-4"><a href="answers.html#cb244-4"></a>  }</span></code></pre></div>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="answers.html#cb271-1"></a>  avg.simple &lt;-<span class="st"> </span><span class="cf">function</span>(data,field) {</span>
+<span id="cb271-2"><a href="answers.html#cb271-2"></a>    field &lt;-<span class="st"> </span>data[,<span class="kw">paste</span>(field)]</span>
+<span id="cb271-3"><a href="answers.html#cb271-3"></a>    <span class="kw">sum</span>(field)<span class="op">/</span><span class="kw">length</span>(field)</span>
+<span id="cb271-4"><a href="answers.html#cb271-4"></a>  }</span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>Alter the <code>summary.group</code> function to include median, minimum, and maximum values.</li>
 </ol>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="answers.html#cb245-1"></a>  summary.group &lt;-<span class="st"> </span><span class="cf">function</span>(data,group,field) {</span>
-<span id="cb245-2"><a href="answers.html#cb245-2"></a>    groups &lt;-<span class="st"> </span><span class="kw">levels</span>(<span class="kw">factor</span>(data[,<span class="kw">paste</span>(group)]))</span>
-<span id="cb245-3"><a href="answers.html#cb245-3"></a>    output &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">group=</span><span class="kw">character</span>(),</span>
-<span id="cb245-4"><a href="answers.html#cb245-4"></a>                         <span class="dt">mean=</span><span class="kw">numeric</span>(),</span>
-<span id="cb245-5"><a href="answers.html#cb245-5"></a>                         <span class="dt">sd=</span><span class="kw">numeric</span>(),</span>
-<span id="cb245-6"><a href="answers.html#cb245-6"></a>                         <span class="dt">median=</span><span class="kw">numeric</span>(),</span>
-<span id="cb245-7"><a href="answers.html#cb245-7"></a>                         <span class="dt">minimum=</span><span class="kw">numeric</span>(),</span>
-<span id="cb245-8"><a href="answers.html#cb245-8"></a>                         <span class="dt">maximum=</span><span class="kw">numeric</span>())</span>
-<span id="cb245-9"><a href="answers.html#cb245-9"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(groups)) {</span>
-<span id="cb245-10"><a href="answers.html#cb245-10"></a>      subdata &lt;-<span class="st"> </span>data[data[,<span class="kw">paste</span>(group)]<span class="op">==</span>groups[i],</span>
-<span id="cb245-11"><a href="answers.html#cb245-11"></a>                      <span class="kw">paste</span>(field)]</span>
-<span id="cb245-12"><a href="answers.html#cb245-12"></a>      output[i,<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>] &lt;-<span class="st"> </span><span class="kw">data.frame</span>(groups[i],</span>
-<span id="cb245-13"><a href="answers.html#cb245-13"></a>                                  <span class="kw">mean</span>(subdata),</span>
-<span id="cb245-14"><a href="answers.html#cb245-14"></a>                                  <span class="kw">sd</span>(subdata),</span>
-<span id="cb245-15"><a href="answers.html#cb245-15"></a>                                  <span class="kw">median</span>(subdata),</span>
-<span id="cb245-16"><a href="answers.html#cb245-16"></a>                                  <span class="kw">min</span>(subdata),</span>
-<span id="cb245-17"><a href="answers.html#cb245-17"></a>                                  <span class="kw">max</span>(subdata))</span>
-<span id="cb245-18"><a href="answers.html#cb245-18"></a>      }</span>
-<span id="cb245-19"><a href="answers.html#cb245-19"></a>    output</span>
-<span id="cb245-20"><a href="answers.html#cb245-20"></a>  }</span></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="answers.html#cb272-1"></a>  summary.group &lt;-<span class="st"> </span><span class="cf">function</span>(data,group,field) {</span>
+<span id="cb272-2"><a href="answers.html#cb272-2"></a>    groups &lt;-<span class="st"> </span><span class="kw">levels</span>(<span class="kw">factor</span>(data[,<span class="kw">paste</span>(group)]))</span>
+<span id="cb272-3"><a href="answers.html#cb272-3"></a>    output &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">group=</span><span class="kw">character</span>(),</span>
+<span id="cb272-4"><a href="answers.html#cb272-4"></a>                         <span class="dt">mean=</span><span class="kw">numeric</span>(),</span>
+<span id="cb272-5"><a href="answers.html#cb272-5"></a>                         <span class="dt">sd=</span><span class="kw">numeric</span>(),</span>
+<span id="cb272-6"><a href="answers.html#cb272-6"></a>                         <span class="dt">median=</span><span class="kw">numeric</span>(),</span>
+<span id="cb272-7"><a href="answers.html#cb272-7"></a>                         <span class="dt">minimum=</span><span class="kw">numeric</span>(),</span>
+<span id="cb272-8"><a href="answers.html#cb272-8"></a>                         <span class="dt">maximum=</span><span class="kw">numeric</span>())</span>
+<span id="cb272-9"><a href="answers.html#cb272-9"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(groups)) {</span>
+<span id="cb272-10"><a href="answers.html#cb272-10"></a>      subdata &lt;-<span class="st"> </span>data[data[,<span class="kw">paste</span>(group)]<span class="op">==</span>groups[i],</span>
+<span id="cb272-11"><a href="answers.html#cb272-11"></a>                      <span class="kw">paste</span>(field)]</span>
+<span id="cb272-12"><a href="answers.html#cb272-12"></a>      output[i,<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>] &lt;-<span class="st"> </span><span class="kw">data.frame</span>(groups[i],</span>
+<span id="cb272-13"><a href="answers.html#cb272-13"></a>                                  <span class="kw">mean</span>(subdata),</span>
+<span id="cb272-14"><a href="answers.html#cb272-14"></a>                                  <span class="kw">sd</span>(subdata),</span>
+<span id="cb272-15"><a href="answers.html#cb272-15"></a>                                  <span class="kw">median</span>(subdata),</span>
+<span id="cb272-16"><a href="answers.html#cb272-16"></a>                                  <span class="kw">min</span>(subdata),</span>
+<span id="cb272-17"><a href="answers.html#cb272-17"></a>                                  <span class="kw">max</span>(subdata))</span>
+<span id="cb272-18"><a href="answers.html#cb272-18"></a>      }</span>
+<span id="cb272-19"><a href="answers.html#cb272-19"></a>    output</span>
+<span id="cb272-20"><a href="answers.html#cb272-20"></a>  }</span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li>Write a function for the <em>Fibonacci Sequence</em>, which ends at a number you choose. You’ll need to use a control flow to accomplish this and a default value for the end of the sequence. (Hint: You won’t use the <code>for(var in seq) expr</code> control flow. Execute <code>?Control</code> to use a different version.)
 xn=xn-1 + xn-2
 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55</li>
 </ol>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="answers.html#cb246-1"></a>  fib &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">end=</span><span class="dv">55</span>){</span>
-<span id="cb246-2"><a href="answers.html#cb246-2"></a>    x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)</span>
-<span id="cb246-3"><a href="answers.html#cb246-3"></a>    n &lt;-<span class="st"> </span><span class="kw">length</span>(x)</span>
-<span id="cb246-4"><a href="answers.html#cb246-4"></a>    <span class="cf">while</span>(x[n]<span class="op">&lt;</span>end){</span>
-<span id="cb246-5"><a href="answers.html#cb246-5"></a>      x[n<span class="op">+</span><span class="dv">1</span>] &lt;-<span class="st"> </span>x[n]<span class="op">+</span>x[n<span class="dv">-1</span>]</span>
-<span id="cb246-6"><a href="answers.html#cb246-6"></a>      n &lt;-<span class="st"> </span><span class="kw">length</span>(x)</span>
-<span id="cb246-7"><a href="answers.html#cb246-7"></a>    }</span>
-<span id="cb246-8"><a href="answers.html#cb246-8"></a>    x</span>
-<span id="cb246-9"><a href="answers.html#cb246-9"></a>  }</span></code></pre></div>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="answers.html#cb273-1"></a>  fib &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">end=</span><span class="dv">55</span>){</span>
+<span id="cb273-2"><a href="answers.html#cb273-2"></a>    x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb273-3"><a href="answers.html#cb273-3"></a>    n &lt;-<span class="st"> </span><span class="kw">length</span>(x)</span>
+<span id="cb273-4"><a href="answers.html#cb273-4"></a>    <span class="cf">while</span>(x[n]<span class="op">&lt;</span>end){</span>
+<span id="cb273-5"><a href="answers.html#cb273-5"></a>      x[n<span class="op">+</span><span class="dv">1</span>] &lt;-<span class="st"> </span>x[n]<span class="op">+</span>x[n<span class="dv">-1</span>]</span>
+<span id="cb273-6"><a href="answers.html#cb273-6"></a>      n &lt;-<span class="st"> </span><span class="kw">length</span>(x)</span>
+<span id="cb273-7"><a href="answers.html#cb273-7"></a>    }</span>
+<span id="cb273-8"><a href="answers.html#cb273-8"></a>    x</span>
+<span id="cb273-9"><a href="answers.html#cb273-9"></a>  }</span></code></pre></div>
 
 </div>
 </div>
@@ -340,7 +360,7 @@ xn=xn-1 + xn-2
           </div>
         </div>
       </div>
-<a href="importdata.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="plotdata.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
@@ -372,7 +392,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/09-answers.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/10-answers.Rmd",
 "text": "Edit"
 },
 "history": {

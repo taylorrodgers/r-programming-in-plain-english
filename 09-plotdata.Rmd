@@ -1,0 +1,445 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# How to Plot Data in R {#plotdata}
+
+Within R, there’s three popular methods for plotting data. The first uses the `plot` function in R base. The second uses the `ggplot2` package, which RStudio developed with their `tidyverse` package set. The third is `plot_ly`, which was developed by the "Plotly" company.
+
+The R base version of plot functions is much more subdued and uses simpler graphics. It typically looks something like this:
+
+```{r 9, echo=FALSE}
+cars <- cars
+plot(cars$speed,cars$dist,xlab="Speed",ylab="Dist")
+```
+
+`ggplot2` outputs something more like this:
+
+```{r 9.1, echo=FALSE}
+library(ggplot2)
+ggplot(cars,aes(x=speed,y=dist)) + 
+   geom_point() + 
+   labs(x="Speed",y="Dist")
+```
+
+`plotly` outputs something similar to `ggplot2`, but has some built-in interactivity, such as tool tips:
+
+```{r 9.2, echo=FALSE,message=FALSE}
+library(plotly)
+plot_ly(data=cars,x=~speed,y=~dist) %>% 
+   layout(xaxis=list(title="Speed"),
+          yaxis=list(title="Dist"))
+```
+
+People who build more elaborate data visualizations using R typically prefer `ggplot2` or `plotly`. Those two packages have more robust aesthetics and interactivity than R base plot functions.
+
+## Which R Plot Package is Best?
+
+That question is a solid "it depends!" And it highlights one of R's greatest strengths and weaknesses. It's an open-source language, which has led to multiple packages providing similar purposes, but with subtle differences in functionality.
+
+I'd say the base plot package is definitely the "smarter" pacakge. And by that, I mean it often makes an educated guess on how to plot your data.
+
+For example, you can literally run the `plot()` function on linear regression models, single variables, and data frames, and the function makes a pretty good assumption of what plots you want to see. This is handy for exploratory data analysis.
+
+I would say the default aesthetics for the base package are not great. As you saw in the last section, ggplot2 and plotly add a bit more flare. That being said, most data viz tools are only as good as their developer. If you know how to use color, font selection, and the right data viz effectively, you can make the base plots look good. It just takes more work, in my experience.
+
+For example, I took our Bond data set and made a data viz with the base package. I changed the color, font, and other settings and managed to make it look pretty good. You can see the code and output below:
+
+```{r 9.3}
+bond <- read.csv("https://raw.githubusercontent.com/taylorrodgers/bond/main/bond.csv")
+bond$actor <- factor(bond$actor)
+bond_colors <- c("#7fb7be","#d3f3ee","#dacc3e","#bc2c1a","#7d1538","#454444")
+bond_colors <- bond_colors[as.numeric(bond$actor)]
+plot(bond$year,
+     bond$gross,
+     bg=bond_colors,
+     col="black",
+     cex=2,
+     pch=21,
+     xlab="Year Released",
+     ylab="Gross Revenue (in millions)",
+     main="Gross Revenue for Bond Films",
+     col.axis="#454444",
+     col.main="#454444",
+     col.lab="#454444",
+   fg="#454444",
+   family="Droid Sans"
+     ) 
+legend("top",inset=0.05,
+       legend=unique(bond$actor),
+       cex=.9,pch=21,pt.cex=1.2,
+       pt.bg=unique(bond_colors))
+```
+
+This wasn't easy to do though. I had to do more research to figure out how to accomplish the visualizaiton above.
+
+I think `ggplot2` has a more intuitive syntax. For example, I produce a similar plot to the one with a much shorter script:
+
+```{r 9.4}
+library(ggplot2)
+bond <- read.csv("https://raw.githubusercontent.com/taylorrodgers/bond/main/bond.csv")
+bond$actor <- factor(bond$actor)
+
+ggplot(data=bond,
+       mapping=aes(x=year,y=gross,color=actor)) +
+   geom_point(size=3) +
+   labs(x="Year",
+        y="Gross Revenue (in millions)",
+        title="Gross Revenue for Bond Films") +
+   theme(plot.title = element_text(hjust = 0.5))
+```
+
+You probably noticed that this script is a lot shorter than the last one. It has a similar syntax to the `dplyr` package. It uses a `+` operator to add layers to the plot, similar to how `dplyr` uses `%>%` to create a series of data transformations.
+
+And best of all, `ggplot2` plots look pretty good. It didn't take too much work to produce a semi-professional looking graph.
+
+The only thing I don't like about `ggplot2` is the default aesthetics. It looks better than base, but it just looks "busy" to me. I don't like the gray background of the plot and I don't like the lines. Most data viz professionals advise keeping your plots somewhat minimalistic.
+
+In order for me to make the plot less busy, I have to write a few additional lines of code:
+
+```{r 9.5}
+ggplot(data=bond,
+       mapping=aes(x=year,y=gross,color=actor)) +
+   geom_point(size=3) +
+   labs(x="Year",
+        y="Gross Revenue (in millions)",
+        title="Gross Revenue for Bond Films") +
+   theme(plot.title = element_text(hjust = 0.5),
+         panel.grid.major = element_blank(),
+         panel.grid.minor = element_blank(),
+         panel.background = element_blank(),
+         axis.line = element_line(color="grey"))
+```
+
+This isn't a big deal to add this, but it is tedious to do so. Thankfully, there are pre-built themes in the `ggthemes` package that you can use. They have themes that mimic the aesthetics of the *Wall Street Journal*, *The Economist*, *FiveThirtyEight*, and several other well-known data journalism outlets.
+
+Here's *FiveThirtyEight*'s template below:
+
+```{r 9.6}
+library(ggthemes)
+ggplot(data=bond,
+       mapping=aes(x=year,y=gross,color=actor)) +
+   geom_point(size=3) +
+   labs(x="Year",
+        y="Gross Revenue (in millions)",
+        title="Gross Revenue for Bond Films") +
+   theme_fivethirtyeight()
+```
+
+I personally like the *pander* theme most of all. It provides just enough detail to help the human eye without becoming too busy.
+
+```{r 9.7}
+library(ggthemes)
+ggplot(data=bond,
+       mapping=aes(x=year,y=gross,color=actor)) +
+   geom_point(size=3) +
+   labs(x="Year",
+        y="Gross Revenue (in millions)",
+        title="Gross Revenue for Bond Films") +
+   theme_pander()
+```
+
+`plotly` data viz strikes a good balance between intuitive syntax and great default visualizations. It also provides great resources for building interactive web-based applications. I've used it extensively now for building Shiny applications that engineers would use to make predictions. The fact that I can get real specific with event tracking and interactions makes it the best for developers.
+
+Here's an example:
+```{r 9.8,warning=FALSE,message=FALSE}
+library(plotly)
+plot_ly(data=bond,x=~year,y=~gross,color=~actor,size=10)
+```
+
+`plotly` has a somewhat less intuitive syntax though. The functions become a hierarchy of `lists`. If you look at the code and output below, you'll notice that I have to specify formatting options with lists:
+
+```{r 9.9,warning=FALSE,message=FALSE}
+library(plotly)
+plot_ly(data=bond,x=~year,y=~gross,color=~actor,size=10) %>%
+        layout(title="Gross Revenue for Bond Films",
+               xaxis=list(title="Year"),
+               yaxis=list(title="Gross Revenue (in millions)"))
+```
+
+This syntax isn't too hard to learn, but it does require some practice. 
+
+## So Which Data Viz Package is Actually the Best?
+
+Many data scientists would say the best method is the one you already know. As I said, if you understand the fundamentals of good data visualization, you can use any tool pretty well. And if you already know one of these methods (or know another tool like Tableau or PowerBI), I say go with that one.
+
+That said, I suggest `ggplot2` for those who conduct research. And I will focus on `ggplot2` exclusively for the remaining chapter.
+
+The reason I like `ggplot2` best is the readable syntax and the ability to use templates. It's also one many other R programmers know and allows you to easily share your work with others.
+
+## How to Write ggplot2 Scripts
+
+I would have to write a whole book to describe all of `ggplot2`'s functions and best practices. There are many out there and I suggest you read them if you want to get really, really good at it. Since this book is for researchers who probably want a few plots to illustrate their research, I'll focus on the basics and show you how to make your visualizations look professional.
+
+The easiest way to think about `ggplot2`'s syntax is to imagine that you have clear, transparent celluloid sheets of paper. Each one has something drawn on it. The bottom one defines the x and y axes:
+
+```{r 9.10, eval=FALSE}
+ggplot(data=bond,mapping=aes(x=year,y=gross,color=actor))
+```
+
+In the script above, we haven't actually plotted anything yet. All we're doing is defining the structure of the plot. We're specifying that the data is the Bond data set and we're "mapping" aesthetic parameters (`mapping=aes()`). Within `mapping=aes()`, we state that the x-axis as the year, the y-axis as revenue, and the color as actor.
+
+If you run the script above, all you'll see is a blank box:
+
+```{r 9.11, echo=FALSE}
+ggplot(data=bond,mapping=aes(x=year,y=gross,color=actor))
+```
+
+After we define those values, we can add new layer. This layer will provide the data viz we want. We want a scatterplot, so we'll use the `geom_point()` function:
+
+```{r 9.12}
+ggplot(data=bond,mapping=aes(x=year,y=gross,color=actor)) +
+   geom_point()
+```
+
+If you'll notice, I didn't need to specify any arguments in the `geom_point()` function above. That's because these functions **inherit** the arguments of the functions before it.
+
+If we want to, we can change this plot to a line plot by swapping out the `geom_point()` function with a `geom_line()` function:
+
+```{r 9.13}
+ggplot(data=bond,mapping=aes(x=year,y=gross,color=actor)) +
+   geom_line()
+```
+
+This isn't a very good plot though. We broke our actors out by color and no Bond actor plays the role across our entire time span. For that reason, the line broke apart. We can turn this into a single line by removing actor from the `aes()` function below:
+
+```{r 9.14}
+ggplot(data=bond,mapping=aes(x=year,y=gross)) +
+   geom_line()
+```
+
+Now we can see how revenue for Bond films has changed over the years, but we lost the ability to see the Bond actors. What if we want to see one line, but also see how individual actors perform?
+
+Simple! We just layer two visualizations on top of each other!
+
+```{r 9.15}
+ggplot(data=bond,mapping=aes(x=year,y=gross)) +
+   geom_line() +
+   geom_point(aes(color=actor))
+```
+
+Pay close attention to what we did in the last script. We used the `+` operator and defined two data visualizations: `geom_line()` and `geom_point()`. We defined color in the `geom_point()` function, rather than the `ggplot()` function. That prevented `geom_line()` from inheriting the color argument and breaking out line up again.
+
+Our current visualization isn't perfect though. I'd like to make the dots bigger so that we can better tell the actor. I can adjust that setting in the `geom_point()` function:
+
+```{r 9.15.1}
+ggplot(data=bond,mapping=aes(x=year,y=gross)) +
+   geom_line() +
+   geom_point(aes(color=actor),size=3)
+```
+
+Now I want you to remember something - you're **layering** these visualizations. That means you should consider the order when you build them.
+
+If you look at the script below, I have the `geom_point()` function before the `geom_line()` function. That means the line will sit on top of the points, which is less clear than our previous visualization.
+
+```{r 9.16}
+ggplot(data=bond,mapping=aes(x=year,y=gross)) +
+   geom_point(aes(color=actor),size=3) +
+   geom_line()
+```
+
+## How to Plot Common Data Visualizations in ggplot2
+
+Typically, the most common data visualizations you'll need to plot include:
+
+* scatter
+* bar
+* line
+* box-and-whiskers
+
+Some people would add pie charts, but there are well-documented reasons online about why pie charts (and doughnut charts) are ineffective as data visualizations. So I won't cover those.
+
+### How to Plot a Scatterplot
+
+This is one we've already covered in previous sections. You use the functions `ggplot2()` and `geom_point()` to create a scatterplot:
+
+```{r 9.17, eval=FALSE}
+ggplot(data=bond,mapping=aes(x=year,y=gross,color=actor)) +
+   geom_point(size=3)
+```
+
+### How to Plot a Bar Graph / Histogram
+
+There are a three functions available for plotting bar graphs:
+
+1. `geom_bar()`
+2. `geom_col()`
+3. `geom_histogram()`
+
+All three functions have some overlap in how you can use them to report figures.
+
+`geom_bar()` is useful for reporting count data by category For example, we may want to see how many times each actor portrayed the Bond character. To do this, you'll need to map the x-axis to actor and specify the `stat` argument as "count".
+
+```{r 9.18}
+ggplot(data=bond,mapping=aes(x=actor)) +
+   geom_bar(stat="count")
+```
+
+You can also use the `geom_bar()` to report a continuous variable. For example, you might want to see gross revenue by actor. If so, you'll need to specify the weight argument within the `aes()` function below.
+
+```{r 9.19}
+ggplot(data=bond,mapping=aes(x=actor)) +
+   geom_bar(aes(weight=gross))
+```
+
+You can also use `geom_col()` for something similar. `geom_col()` is a better fit for this type of visualization because it actually produces a *stacked* bar graph. It's also simpler code, in that you only need to define the `aes()` once.
+
+```{r 9.20}
+ggplot(data=bond,mapping=aes(x=actor,y=gross)) +
+   geom_col()
+```
+
+`geom_histogram()` displays a histogram, which is a special kind of bar chart used to display distribution of the data. 
+
+```{r 9.21}
+ggplot(data=mtcars,mapping=aes(hp)) +
+   geom_histogram(bins=12)
+```
+
+As you can see, you only need to specify one variable and the number of bins to get a working histogram.
+
+### How to Plot a Line Graph
+
+If you work with time-series data or something similar, the `geom_line()` function works well for connecting points. You can also use it to overlay two y-axes over one another, which I'll cover further down below.
+
+As we've shown before, here is how you create a line plot:
+
+```{r 9.22}
+ggplot(data=bond,mapping=aes(x=year,y=gross)) +
+   geom_line()
+```
+
+You can also break lines out into groups. Let's say for example that we wanted to see how Bond revenue changed for each actor as each of their movies were released. More specifically, let's say we want to see how Daniel Craig's second film compared to Sean Connery and Roger Moore. This will require some data transformation, as you can see below:
+
+```{r 9.23,messages=FALSE,warning=FALSE,message=FALSE}
+library(dplyr)
+bond_alter <- bond %>%
+   arrange(actor,year) %>%
+   group_by(actor) %>%
+   mutate(order=row_number(actor))
+
+ggplot(data=bond_alter,mapping=aes(x=order,y=gross,color=actor)) +
+   geom_line()
+```
+
+We can see in the plot below that Roger Moore started off strong, but his revenue decreased over time. Daniel Craig and Sean Connery consistently outperformed the rest though.
+
+### How to Plot a Box-and-Whiskers Plot
+
+To create a box-and-whiskers plot, you use the `geom_plot()` function:
+
+```{r 9.24}
+ggplot(data=bond,mapping=aes(x=actor,y=gross)) +
+   geom_boxplot()
+```
+
+In my career, I've learned to love box-and-whiskers plots. It's the best visualization that helps stakeholders who aren't statistics savvy appreciate variation. I assume it's because they had to learn how to read these plots in college. Whenever I try to introduce standard deviation as a key performance indicator, they usually don't understand why that's important. A box-and-whiskers plot, especially when you compare multiple plots, makes it easier for stakeholders to understand why it matters.
+
+As you could see in our previous visualization, there's wide variety in results for the Bond actors gross revenue. Pierce Brosnan generated consistent revenue. Roger Moore had a lower median than Brosnan, but had several films do better.
+
+### How to Improve Labels and Other Formatting Tips
+
+I've worked with many data viz tools and have also mentored a few people now. One thing I always like to tell people is that good data visualizations focus on "the little details." If you've noticed, most of these plots don't have the best labeling or coloring. Spending an extra 10-15 minutes on these little details makes your work look far more professional and will help your audience appreciate the insights you deliver.
+
+The first thing you should improve is the labels. Most data sets don't use proper English to describe field names. In our data set, *Actor* (capitalized) is spelled as *actor* (lower case).
+
+In larger data sets, we might have multiple fields with more descriptive names. In the Bond example, we could have *LeadActress*, *PrimaryAntagonistActor*, *SecondaryAntagonistActor*, etc. All of those would give us more flexibility in our analysis, but these names make poor labels on a plot.
+
+We can use the `labs()` function to solve this problem. If you look at the plot below, you can see that I give better labels to our plot:
+
+```{r 9.25}
+library(ggthemes)
+ggplot(data=bond,
+       mapping=aes(x=year,y=gross)) +
+   geom_point(size=3) +
+   labs(x="Year",
+        y="Gross Revenue (in millions)",
+        title="Gross Revenue for Bond Films")
+```
+
+There's one for the x and y-axis, as well as one for the title. As you can already tell, this labeling is far more descriptive and professional than past labels.
+
+Let's say we want to add color. As you recall, we simply add `color=actor` in the `aes()` function. And to change the legend title, we simply add `color="Actor Name"` to the `labs()` function:
+
+```{r 9.26}
+ggplot(data=bond,
+       mapping=aes(x=year,y=gross,color=actor)) +
+   geom_point(size=3) +
+   labs(x="Year",
+        y="Gross Revenue (in millions)",
+        title="Gross Revenue for Bond Films",
+        color="Actor Name")
+```
+
+You can also define the color codes you want to use for these plots. Personally, I'd suggest just using the templates I described in an earlier section to do this. The functions to perform these tasks get a bit confusing and the documentation isn't that great.
+
+With that said, I suggest you focus on `scale_manual()` functions for defining colors. Execute `?scale_manual` in your console to see this documentation on this.
+
+There's seven manual functions to data viz parameters:
+
+1. `scale_color_manual()`
+2. `scale_fill_manual()`
+3. `scale_size_manual()`
+4. `scale_shape_manual()`
+5. `scale_linetype_manual()`
+6. `scale_alpha_manual()`
+7. `scale_discrete_manual()`
+
+If you'll notice, this relates to the type of plot you'll use. Since we used a scatter plot and the only thing we changed was the color, we'll use the `scale_color_manual()` to dictate specific colors:
+
+```{r 9.27}
+ggplot(data=bond,
+       mapping=aes(x=year,y=gross,color=actor)) +
+   geom_point(size=3) +
+   labs(x="Year",
+        y="Gross Revenue (in millions)",
+        title="Gross Revenue for Bond Films",
+        color="Bond Actor") +
+   scale_color_manual(values=c("#d55e00","#cc79a7","#0072b2","#f0e442","#009e73","#d45e49"))
+```
+
+I'm not a fan of the gray background and the grids used in the default for `ggplot2`. You can use the `theme()` function to remove those:
+
+```{r 9.28}
+ggplot(data=bond,
+       mapping=aes(x=year,y=gross,color=actor)) +
+   geom_point(size=3) +
+   labs(x="Year",
+        y="Gross Revenue (in millions)",
+        title="Gross Revenue for Bond Films",
+        color="Bond Actor") +
+   scale_color_manual(values=c("#d55e00","#cc79a7","#0072b2","#f0e442","#009e73","#d45e49")) +
+   theme(panel.grid.major = element_blank(),
+         panel.grid.minor = element_blank(),
+         panel.background = element_blank(),
+         axis.line = element_line(color="black"))
+```
+
+As you can tell, it gets a bit tedious to remove all these default graphics. This is the trade-off with `ggplot2` in my mind. The syntax is intuitive, but improving the aesthetics isn't something I enjoy.
+
+For that reason, I suggest using the templated themes, such as the "pander" theme with `theme_pander()`:
+
+```{r 9.29}
+library(ggthemes)
+ggplot(data=bond,
+       mapping=aes(x=year,y=gross,color=actor)) +
+   geom_point(size=3) +
+   labs(x="Year",
+        y="Gross Revenue (in millions)",
+        title="Gross Revenue for Bond Films",
+        color="Bond Actor") +
+   theme_pander()
+```
+
+Much better! If you want, you can learn to build your own themes at this ![link](https://towardsdatascience.com/designing-custom-ggplot2-themes-65fb4b86d925).
+
+## Things to Remember
+
+* The popular data viz packages for R are `base`, `ggplot2`, and `plotly`
+* `base` is great for data exploration because it makes a good "guess" on what plot you want to see
+* `plotly` is great for its interactive capabilities and I recommend it for app development
+* `ggplot2` is best for researcher, statisticians, and data analysts
+* `ggplot2` has the most intuitive syntax
+* `ggplot2` "layers" visualizations
+* I recommend using themes for `ggplot2`

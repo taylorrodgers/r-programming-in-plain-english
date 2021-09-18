@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 10 How to Plot Data in R | R Programming in Plain English</title>
+  <meta name="description" content="A simple guide to R programming for those without programming experience" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 10 How to Plot Data in R | R Programming in Plain English" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A simple guide to R programming for those without programming experience" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 10 How to Plot Data in R | R Programming in Plain English" />
+  
+  <meta name="twitter:description" content="A simple guide to R programming for those without programming experience" />
+  
+
+<meta name="author" content="Taylor Rodgers" />
+
+
+<meta name="date" content="2021-09-18" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="importdata.html"/>
+<link rel="next" href="answers.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R Programming in Plain English</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About This Book</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#things-you-should-know-before-reading"><i class="fa fa-check"></i><b>1.1</b> Things You Should Know Before Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="whatisr.html"><a href="whatisr.html"><i class="fa fa-check"></i><b>2</b> What is R Programming?</a><ul>
+<li class="chapter" data-level="2.1" data-path="whatisr.html"><a href="whatisr.html#is-r-the-best-statistical-programming-language"><i class="fa fa-check"></i><b>2.1</b> Is R the Best Statistical Programming Language?</a></li>
+<li class="chapter" data-level="2.2" data-path="whatisr.html"><a href="whatisr.html#how-will-learning-r-versus-python-impact-my-job-opportunities"><i class="fa fa-check"></i><b>2.2</b> How Will Learning R versus Python Impact My Job Opportunities?</a></li>
+<li class="chapter" data-level="2.3" data-path="whatisr.html"><a href="whatisr.html#things-to-remember"><i class="fa fa-check"></i><b>2.3</b> Things to Remember</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>3</b> Getting Setup in R and RStudio</a><ul>
+<li class="chapter" data-level="3.1" data-path="setup.html"><a href="setup.html#how-to-download-r"><i class="fa fa-check"></i><b>3.1</b> How to Download R</a></li>
+<li class="chapter" data-level="3.2" data-path="setup.html"><a href="setup.html#understanding-base-rs-user-interface"><i class="fa fa-check"></i><b>3.2</b> Understanding Base R’s User Interface</a></li>
+<li class="chapter" data-level="3.3" data-path="setup.html"><a href="setup.html#limitations-of-r-base"><i class="fa fa-check"></i><b>3.3</b> Limitations of R Base</a></li>
+<li class="chapter" data-level="3.4" data-path="setup.html"><a href="setup.html#what-is-rstudio"><i class="fa fa-check"></i><b>3.4</b> What is RStudio?</a></li>
+<li class="chapter" data-level="3.5" data-path="setup.html"><a href="setup.html#how-to-download-rstudio"><i class="fa fa-check"></i><b>3.5</b> How to Download RStudio</a></li>
+<li class="chapter" data-level="3.6" data-path="setup.html"><a href="setup.html#understanding-rstudio-interface"><i class="fa fa-check"></i><b>3.6</b> Understanding RStudio Interface</a></li>
+<li class="chapter" data-level="3.7" data-path="setup.html"><a href="setup.html#things-to-remember-1"><i class="fa fa-check"></i><b>3.7</b> Things to Remember</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="objects.html"><a href="objects.html"><i class="fa fa-check"></i><b>4</b> R Objects Types</a><ul>
+<li class="chapter" data-level="4.1" data-path="objects.html"><a href="objects.html#why-do-objects-matter"><i class="fa fa-check"></i><b>4.1</b> Why Do Objects Matter?</a></li>
+<li class="chapter" data-level="4.2" data-path="objects.html"><a href="objects.html#understanding-object-types-makes-it-easier-to-transform-and-analyze"><i class="fa fa-check"></i><b>4.2</b> Understanding Object Types Makes It Easier to Transform and Analyze</a></li>
+<li class="chapter" data-level="4.3" data-path="objects.html"><a href="objects.html#the-basic-objects-to-remember"><i class="fa fa-check"></i><b>4.3</b> The Basic Objects to Remember</a></li>
+<li class="chapter" data-level="4.4" data-path="objects.html"><a href="objects.html#vectors"><i class="fa fa-check"></i><b>4.4</b> Vectors</a></li>
+<li class="chapter" data-level="4.5" data-path="objects.html"><a href="objects.html#matrices-and-arrays"><i class="fa fa-check"></i><b>4.5</b> Matrices and Arrays</a></li>
+<li class="chapter" data-level="4.6" data-path="objects.html"><a href="objects.html#data-frames"><i class="fa fa-check"></i><b>4.6</b> Data Frames</a></li>
+<li class="chapter" data-level="4.7" data-path="objects.html"><a href="objects.html#factors"><i class="fa fa-check"></i><b>4.7</b> Factors</a></li>
+<li class="chapter" data-level="4.8" data-path="objects.html"><a href="objects.html#lists"><i class="fa fa-check"></i><b>4.8</b> Lists</a></li>
+<li class="chapter" data-level="4.9" data-path="objects.html"><a href="objects.html#functions"><i class="fa fa-check"></i><b>4.9</b> Functions</a></li>
+<li class="chapter" data-level="4.10" data-path="objects.html"><a href="objects.html#things-to-remember-2"><i class="fa fa-check"></i><b>4.10</b> Things to Remember</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="baserfilter.html"><a href="baserfilter.html"><i class="fa fa-check"></i><b>5</b> How to Filter and Transform Data in Base R</a><ul>
+<li class="chapter" data-level="5.1" data-path="baserfilter.html"><a href="baserfilter.html#what-are-operators"><i class="fa fa-check"></i><b>5.1</b> What Are Operators?</a></li>
+<li class="chapter" data-level="5.2" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-and-transform-data-from-a-vector"><i class="fa fa-check"></i><b>5.2</b> How to Filter and Transform Data From a Vector</a></li>
+<li class="chapter" data-level="5.3" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-and-transform-data-from-a-matrix"><i class="fa fa-check"></i><b>5.3</b> How to Filter and Transform Data From a Matrix</a></li>
+<li class="chapter" data-level="5.4" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-and-transform-data-from-arrays"><i class="fa fa-check"></i><b>5.4</b> How to Filter and Transform Data from Arrays</a></li>
+<li class="chapter" data-level="5.5" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-and-transform-data-from-a-data-frame"><i class="fa fa-check"></i><b>5.5</b> How to Filter and Transform Data from a Data Frame</a></li>
+<li class="chapter" data-level="5.6" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-a-list"><i class="fa fa-check"></i><b>5.6</b> How to Filter a List</a></li>
+<li class="chapter" data-level="5.7" data-path="baserfilter.html"><a href="baserfilter.html#things-to-remember-3"><i class="fa fa-check"></i><b>5.7</b> Things to Remember</a></li>
+<li class="chapter" data-level="5.8" data-path="baserfilter.html"><a href="baserfilter.html#exercises"><i class="fa fa-check"></i><b>5.8</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="dplyr.html"><a href="dplyr.html"><i class="fa fa-check"></i><b>6</b> How to Filter and Transform Data with the Dplyr Package</a><ul>
+<li class="chapter" data-level="6.1" data-path="dplyr.html"><a href="dplyr.html#why-is-dplyr-so-popular"><i class="fa fa-check"></i><b>6.1</b> Why is <code>dplyr</code> So Popular?</a></li>
+<li class="chapter" data-level="6.2" data-path="dplyr.html"><a href="dplyr.html#its-still-worth-learning-base-r"><i class="fa fa-check"></i><b>6.2</b> It’s Still Worth Learning Base R</a></li>
+<li class="chapter" data-level="6.3" data-path="dplyr.html"><a href="dplyr.html#the-dplyr-syntax"><i class="fa fa-check"></i><b>6.3</b> The <code>dplyr</code> Syntax</a></li>
+<li class="chapter" data-level="6.4" data-path="dplyr.html"><a href="dplyr.html#understand-the-difference-between-selecting-and-filtering"><i class="fa fa-check"></i><b>6.4</b> Understand the Difference Between Selecting and Filtering</a></li>
+<li class="chapter" data-level="6.5" data-path="dplyr.html"><a href="dplyr.html#how-to-select-and-mutate-a-data-frame-with-dplyr-in-r"><i class="fa fa-check"></i><b>6.5</b> How to Select and Mutate a Data Frame with <code>dplyr</code> in R</a></li>
+<li class="chapter" data-level="6.6" data-path="dplyr.html"><a href="dplyr.html#how-to-filter-a-data-frame-with-dplyr-in-r"><i class="fa fa-check"></i><b>6.6</b> How to Filter a Data Frame with <code>dplyr</code> in R</a></li>
+<li class="chapter" data-level="6.7" data-path="dplyr.html"><a href="dplyr.html#how-to-summarize-and-group-data-with-dplyr-in-r"><i class="fa fa-check"></i><b>6.7</b> How to Summarize and Group Data with <code>dplyr</code> in R</a></li>
+<li class="chapter" data-level="6.8" data-path="dplyr.html"><a href="dplyr.html#things-to-remember-4"><i class="fa fa-check"></i><b>6.8</b> Things to Remember</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>7</b> Understanding and Using R Packages</a><ul>
+<li class="chapter" data-level="7.1" data-path="packages.html"><a href="packages.html#why-does-r-use-packages"><i class="fa fa-check"></i><b>7.1</b> Why Does R Use Packages?</a></li>
+<li class="chapter" data-level="7.2" data-path="packages.html"><a href="packages.html#how-to-access-r-packages"><i class="fa fa-check"></i><b>7.2</b> How to Access R Packages</a></li>
+<li class="chapter" data-level="7.3" data-path="packages.html"><a href="packages.html#how-to-install-and-load-a-package---the-easy-way"><i class="fa fa-check"></i><b>7.3</b> How to Install and Load a Package - The Easy Way</a></li>
+<li class="chapter" data-level="7.4" data-path="packages.html"><a href="packages.html#why-you-should-still-learn-to-install-and-load-packages-the-old-fashioned-way"><i class="fa fa-check"></i><b>7.4</b> Why You Should Still Learn to Install and Load Packages the “Old Fashioned” Way</a></li>
+<li class="chapter" data-level="7.5" data-path="packages.html"><a href="packages.html#how-to-install-and-load-r-packages---the-old-fashioned-way"><i class="fa fa-check"></i><b>7.5</b> How to Install and Load R Packages - The Old Fashioned Way</a></li>
+<li class="chapter" data-level="7.6" data-path="packages.html"><a href="packages.html#a-simple-trick-to-include-install-and-load-any-packages-needed"><i class="fa fa-check"></i><b>7.6</b> A Simple Trick to Include Install and Load Any Packages Needed</a></li>
+<li class="chapter" data-level="7.7" data-path="packages.html"><a href="packages.html#how-to-find-new-packages-to-install"><i class="fa fa-check"></i><b>7.7</b> How to Find New Packages to Install</a></li>
+<li class="chapter" data-level="7.8" data-path="packages.html"><a href="packages.html#how-to-find-documentation-on-packages"><i class="fa fa-check"></i><b>7.8</b> How to Find Documentation on Packages</a></li>
+<li class="chapter" data-level="7.9" data-path="packages.html"><a href="packages.html#things-to-remember-5"><i class="fa fa-check"></i><b>7.9</b> Things to Remember</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="function.html"><a href="function.html"><i class="fa fa-check"></i><b>8</b> How to Write Functions</a><ul>
+<li class="chapter" data-level="8.1" data-path="function.html"><a href="function.html#two-approaches-to-using-r-functions"><i class="fa fa-check"></i><b>8.1</b> Two Approaches to Using R Functions</a></li>
+<li class="chapter" data-level="8.2" data-path="function.html"><a href="function.html#why-you-should-learn-to-write-your-own-functions"><i class="fa fa-check"></i><b>8.2</b> Why You Should Learn to Write Your Own Functions</a></li>
+<li class="chapter" data-level="8.3" data-path="function.html"><a href="function.html#the-components-of-an-r-function"><i class="fa fa-check"></i><b>8.3</b> The Components of an R Function</a></li>
+<li class="chapter" data-level="8.4" data-path="function.html"><a href="function.html#required-versus-non-required-arguments"><i class="fa fa-check"></i><b>8.4</b> Required versus Non-Required Arguments</a></li>
+<li class="chapter" data-level="8.5" data-path="function.html"><a href="function.html#when-order-matters-for-arguments"><i class="fa fa-check"></i><b>8.5</b> When Order Matters for Arguments</a></li>
+<li class="chapter" data-level="8.6" data-path="function.html"><a href="function.html#how-to-write-your-own-function"><i class="fa fa-check"></i><b>8.6</b> How to Write Your Own Function</a></li>
+<li class="chapter" data-level="8.7" data-path="function.html"><a href="function.html#writing-functions-using-control-flows"><i class="fa fa-check"></i><b>8.7</b> Writing Functions Using Control Flows</a></li>
+<li class="chapter" data-level="8.8" data-path="function.html"><a href="function.html#applying-a-control-flow-to-our-summary-stats-function"><i class="fa fa-check"></i><b>8.8</b> Applying a Control Flow to Our Summary Stats Function</a></li>
+<li class="chapter" data-level="8.9" data-path="function.html"><a href="function.html#breaking-down-the-function-we-just-made"><i class="fa fa-check"></i><b>8.9</b> Breaking Down the Function We Just Made</a></li>
+<li class="chapter" data-level="8.10" data-path="function.html"><a href="function.html#things-to-remember-6"><i class="fa fa-check"></i><b>8.10</b> Things to Remember</a></li>
+<li class="chapter" data-level="8.11" data-path="function.html"><a href="function.html#exercises-1"><i class="fa fa-check"></i><b>8.11</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="importdata.html"><a href="importdata.html"><i class="fa fa-check"></i><b>9</b> Importing Data into R</a><ul>
+<li class="chapter" data-level="9.1" data-path="importdata.html"><a href="importdata.html#how-to-import-a-raw-data-file-the-easy-way"><i class="fa fa-check"></i><b>9.1</b> How to Import a Raw Data File the Easy Way</a></li>
+<li class="chapter" data-level="9.2" data-path="importdata.html"><a href="importdata.html#import-a-raw-data-file-the-hard-way"><i class="fa fa-check"></i><b>9.2</b> Import a Raw Data File the Hard Way</a></li>
+<li class="chapter" data-level="9.3" data-path="importdata.html"><a href="importdata.html#save-import-functions"><i class="fa fa-check"></i><b>9.3</b> Save Import Functions</a></li>
+<li class="chapter" data-level="9.4" data-path="importdata.html"><a href="importdata.html#connect-to-a-database"><i class="fa fa-check"></i><b>9.4</b> Connect to a Database</a></li>
+<li class="chapter" data-level="9.5" data-path="importdata.html"><a href="importdata.html#connect-to-an-api"><i class="fa fa-check"></i><b>9.5</b> Connect to an API</a></li>
+<li class="chapter" data-level="9.6" data-path="importdata.html"><a href="importdata.html#things-to-remember-7"><i class="fa fa-check"></i><b>9.6</b> Things to Remember</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="plotdata.html"><a href="plotdata.html"><i class="fa fa-check"></i><b>10</b> How to Plot Data in R</a><ul>
+<li class="chapter" data-level="10.1" data-path="plotdata.html"><a href="plotdata.html#which-r-plot-package-is-best"><i class="fa fa-check"></i><b>10.1</b> Which R Plot Package is Best?</a></li>
+<li class="chapter" data-level="10.2" data-path="plotdata.html"><a href="plotdata.html#so-which-data-viz-package-is-actually-the-best"><i class="fa fa-check"></i><b>10.2</b> So Which Data Viz Package is Actually the Best?</a></li>
+<li class="chapter" data-level="10.3" data-path="plotdata.html"><a href="plotdata.html#how-to-write-ggplot2-scripts"><i class="fa fa-check"></i><b>10.3</b> How to Write ggplot2 Scripts</a></li>
+<li class="chapter" data-level="10.4" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-common-data-visualizations-in-ggplot2"><i class="fa fa-check"></i><b>10.4</b> How to Plot Common Data Visualizations in ggplot2</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-a-scatterplot"><i class="fa fa-check"></i><b>10.4.1</b> How to Plot a Scatterplot</a></li>
+<li class="chapter" data-level="10.4.2" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-a-bar-graph-histogram"><i class="fa fa-check"></i><b>10.4.2</b> How to Plot a Bar Graph / Histogram</a></li>
+<li class="chapter" data-level="10.4.3" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-a-line-graph"><i class="fa fa-check"></i><b>10.4.3</b> How to Plot a Line Graph</a></li>
+<li class="chapter" data-level="10.4.4" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-a-box-and-whiskers-plot"><i class="fa fa-check"></i><b>10.4.4</b> How to Plot a Box-and-Whiskers Plot</a></li>
+<li class="chapter" data-level="10.4.5" data-path="plotdata.html"><a href="plotdata.html#how-to-improve-labels-and-other-formatting-tips"><i class="fa fa-check"></i><b>10.4.5</b> How to Improve Labels and Other Formatting Tips</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="plotdata.html"><a href="plotdata.html#things-to-remember-8"><i class="fa fa-check"></i><b>10.5</b> Things to Remember</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="answers.html"><a href="answers.html"><i class="fa fa-check"></i><b>11</b> Answer Key</a><ul>
+<li class="chapter" data-level="11.1" data-path="answers.html"><a href="answers.html#chapter-3"><i class="fa fa-check"></i><b>11.1</b> Chapter 3</a></li>
+<li class="chapter" data-level="11.2" data-path="answers.html"><a href="answers.html#chapter-5"><i class="fa fa-check"></i><b>11.2</b> Chapter 5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R Programming in Plain English</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="plotdata" class="section level1">
+<h1><span class="header-section-number">Chapter 10</span> How to Plot Data in R</h1>
+<p>Within R, there’s three popular methods for plotting data. The first uses the <code>plot</code> function in R base. The second uses the <code>ggplot2</code> package, which RStudio developed with their <code>tidyverse</code> package set. The third is <code>plot_ly</code>, which was developed by the “Plotly” company.</p>
+<p>The R base version of plot functions is much more subdued and uses simpler graphics. It typically looks something like this:</p>
+<p><img src="bookdown-demo_files/figure-html/9-1.png" width="672" /></p>
+<p><code>ggplot2</code> outputs something more like this:</p>
+<p><img src="bookdown-demo_files/figure-html/9.1-1.png" width="672" /></p>
+<p><code>plotly</code> outputs something similar to <code>ggplot2</code>, but has some built-in interactivity, such as tool tips:</p>
+<div id="htmlwidget-e85b520d848e4e24de23" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e85b520d848e4e24de23">{"x":{"visdat":{"a4e7b9035cb":["function () ","plotlyVisDat"]},"cur_data":"a4e7b9035cb","attrs":{"a4e7b9035cb":{"x":{},"y":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20]}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"Speed"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Dist"},"hovermode":"closest","showlegend":false},"source":"A","config":{"showSendToCloud":false},"data":[{"x":[4,4,7,7,8,9,10,10,10,11,11,12,12,12,12,13,13,13,13,14,14,14,14,15,15,15,16,16,17,17,17,18,18,18,18,19,19,19,20,20,20,20,20,22,23,24,24,24,24,25],"y":[2,10,4,22,16,10,18,26,34,17,28,14,20,24,28,26,34,34,46,26,36,60,80,20,26,54,32,40,32,40,50,42,56,76,84,36,46,68,32,48,52,56,64,66,54,70,92,93,120,85],"type":"scatter","mode":"markers","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p>People who build more elaborate data visualizations using R typically prefer <code>ggplot2</code> or <code>plotly</code>. Those two packages have more robust aesthetics and interactivity than R base plot functions.</p>
+<div id="which-r-plot-package-is-best" class="section level2">
+<h2><span class="header-section-number">10.1</span> Which R Plot Package is Best?</h2>
+<p>That question is a solid “it depends!” And it highlights one of R’s greatest strengths and weaknesses. It’s an open-source language, which has led to multiple packages providing similar purposes, but with subtle differences in functionality.</p>
+<p>I’d say the base plot package is definitely the “smarter” pacakge. And by that, I mean it often makes an educated guess on how to plot your data.</p>
+<p>For example, you can literally run the <code>plot()</code> function on linear regression models, single variables, and data frames, and the function makes a pretty good assumption of what plots you want to see. This is handy for exploratory data analysis.</p>
+<p>I would say the default aesthetics for the base package are not great. As you saw in the last section, ggplot2 and plotly add a bit more flare. That being said, most data viz tools are only as good as their developer. If you know how to use color, font selection, and the right data viz effectively, you can make the base plots look good. It just takes more work, in my experience.</p>
+<p>For example, I took our Bond data set and made a data viz with the base package. I changed the color, font, and other settings and managed to make it look pretty good. You can see the code and output below:</p>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="plotdata.html#cb237-1"></a>bond &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/taylorrodgers/bond/main/bond.csv&quot;</span>)</span>
+<span id="cb237-2"><a href="plotdata.html#cb237-2"></a>bond<span class="op">$</span>actor &lt;-<span class="st"> </span><span class="kw">factor</span>(bond<span class="op">$</span>actor)</span>
+<span id="cb237-3"><a href="plotdata.html#cb237-3"></a>bond_colors &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;#7fb7be&quot;</span>,<span class="st">&quot;#d3f3ee&quot;</span>,<span class="st">&quot;#dacc3e&quot;</span>,<span class="st">&quot;#bc2c1a&quot;</span>,<span class="st">&quot;#7d1538&quot;</span>,<span class="st">&quot;#454444&quot;</span>)</span>
+<span id="cb237-4"><a href="plotdata.html#cb237-4"></a>bond_colors &lt;-<span class="st"> </span>bond_colors[<span class="kw">as.numeric</span>(bond<span class="op">$</span>actor)]</span>
+<span id="cb237-5"><a href="plotdata.html#cb237-5"></a><span class="kw">plot</span>(bond<span class="op">$</span>year,</span>
+<span id="cb237-6"><a href="plotdata.html#cb237-6"></a>     bond<span class="op">$</span>gross,</span>
+<span id="cb237-7"><a href="plotdata.html#cb237-7"></a>     <span class="dt">bg=</span>bond_colors,</span>
+<span id="cb237-8"><a href="plotdata.html#cb237-8"></a>     <span class="dt">col=</span><span class="st">&quot;black&quot;</span>,</span>
+<span id="cb237-9"><a href="plotdata.html#cb237-9"></a>     <span class="dt">cex=</span><span class="dv">2</span>,</span>
+<span id="cb237-10"><a href="plotdata.html#cb237-10"></a>     <span class="dt">pch=</span><span class="dv">21</span>,</span>
+<span id="cb237-11"><a href="plotdata.html#cb237-11"></a>     <span class="dt">xlab=</span><span class="st">&quot;Year Released&quot;</span>,</span>
+<span id="cb237-12"><a href="plotdata.html#cb237-12"></a>     <span class="dt">ylab=</span><span class="st">&quot;Gross Revenue (in millions)&quot;</span>,</span>
+<span id="cb237-13"><a href="plotdata.html#cb237-13"></a>     <span class="dt">main=</span><span class="st">&quot;Gross Revenue for Bond Films&quot;</span>,</span>
+<span id="cb237-14"><a href="plotdata.html#cb237-14"></a>     <span class="dt">col.axis=</span><span class="st">&quot;#454444&quot;</span>,</span>
+<span id="cb237-15"><a href="plotdata.html#cb237-15"></a>     <span class="dt">col.main=</span><span class="st">&quot;#454444&quot;</span>,</span>
+<span id="cb237-16"><a href="plotdata.html#cb237-16"></a>     <span class="dt">col.lab=</span><span class="st">&quot;#454444&quot;</span>,</span>
+<span id="cb237-17"><a href="plotdata.html#cb237-17"></a>   <span class="dt">fg=</span><span class="st">&quot;#454444&quot;</span>,</span>
+<span id="cb237-18"><a href="plotdata.html#cb237-18"></a>   <span class="dt">family=</span><span class="st">&quot;Droid Sans&quot;</span></span>
+<span id="cb237-19"><a href="plotdata.html#cb237-19"></a>     ) </span>
+<span id="cb237-20"><a href="plotdata.html#cb237-20"></a><span class="kw">legend</span>(<span class="st">&quot;top&quot;</span>,<span class="dt">inset=</span><span class="fl">0.05</span>,</span>
+<span id="cb237-21"><a href="plotdata.html#cb237-21"></a>       <span class="dt">legend=</span><span class="kw">unique</span>(bond<span class="op">$</span>actor),</span>
+<span id="cb237-22"><a href="plotdata.html#cb237-22"></a>       <span class="dt">cex=</span>.<span class="dv">9</span>,<span class="dt">pch=</span><span class="dv">21</span>,<span class="dt">pt.cex=</span><span class="fl">1.2</span>,</span>
+<span id="cb237-23"><a href="plotdata.html#cb237-23"></a>       <span class="dt">pt.bg=</span><span class="kw">unique</span>(bond_colors))</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/9.3-1.png" width="672" /></p>
+<p>This wasn’t easy to do though. I had to do more research to figure out how to accomplish the visualizaiton above.</p>
+<p>I think <code>ggplot2</code> has a more intuitive syntax. For example, I produce a similar plot to the one with a much shorter script:</p>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="plotdata.html#cb238-1"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb238-2"><a href="plotdata.html#cb238-2"></a>bond &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/taylorrodgers/bond/main/bond.csv&quot;</span>)</span>
+<span id="cb238-3"><a href="plotdata.html#cb238-3"></a>bond<span class="op">$</span>actor &lt;-<span class="st"> </span><span class="kw">factor</span>(bond<span class="op">$</span>actor)</span>
+<span id="cb238-4"><a href="plotdata.html#cb238-4"></a></span>
+<span id="cb238-5"><a href="plotdata.html#cb238-5"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>bond,</span>
+<span id="cb238-6"><a href="plotdata.html#cb238-6"></a>       <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>gross,<span class="dt">color=</span>actor)) <span class="op">+</span></span>
+<span id="cb238-7"><a href="plotdata.html#cb238-7"></a><span class="st">   </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb238-8"><a href="plotdata.html#cb238-8"></a><span class="st">   </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb238-9"><a href="plotdata.html#cb238-9"></a>        <span class="dt">y=</span><span class="st">&quot;Gross Revenue (in millions)&quot;</span>,</span>
+<span id="cb238-10"><a href="plotdata.html#cb238-10"></a>        <span class="dt">title=</span><span class="st">&quot;Gross Revenue for Bond Films&quot;</span>) <span class="op">+</span></span>
+<span id="cb238-11"><a href="plotdata.html#cb238-11"></a><span class="st">   </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/9.4-1.png" width="672" /></p>
+<p>You probably noticed that this script is a lot shorter than the last one. It has a similar syntax to the <code>dplyr</code> package. It uses a <code>+</code> operator to add layers to the plot, similar to how <code>dplyr</code> uses <code>%&gt;%</code> to create a series of data transformations.</p>
+<p>And best of all, <code>ggplot2</code> plots look pretty good. It didn’t take too much work to produce a semi-professional looking graph.</p>
+<p>The only thing I don’t like about <code>ggplot2</code> is the default aesthetics. It looks better than base, but it just looks “busy” to me. I don’t like the gray background of the plot and I don’t like the lines. Most data viz professionals advise keeping your plots somewhat minimalistic.</p>
+<p>In order for me to make the plot less busy, I have to write a few additional lines of code:</p>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="plotdata.html#cb239-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>bond,</span>
+<span id="cb239-2"><a href="plotdata.html#cb239-2"></a>       <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>gross,<span class="dt">color=</span>actor)) <span class="op">+</span></span>
+<span id="cb239-3"><a href="plotdata.html#cb239-3"></a><span class="st">   </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb239-4"><a href="plotdata.html#cb239-4"></a><span class="st">   </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb239-5"><a href="plotdata.html#cb239-5"></a>        <span class="dt">y=</span><span class="st">&quot;Gross Revenue (in millions)&quot;</span>,</span>
+<span id="cb239-6"><a href="plotdata.html#cb239-6"></a>        <span class="dt">title=</span><span class="st">&quot;Gross Revenue for Bond Films&quot;</span>) <span class="op">+</span></span>
+<span id="cb239-7"><a href="plotdata.html#cb239-7"></a><span class="st">   </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb239-8"><a href="plotdata.html#cb239-8"></a>         <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(),</span>
+<span id="cb239-9"><a href="plotdata.html#cb239-9"></a>         <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),</span>
+<span id="cb239-10"><a href="plotdata.html#cb239-10"></a>         <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(),</span>
+<span id="cb239-11"><a href="plotdata.html#cb239-11"></a>         <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;grey&quot;</span>))</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/9.5-1.png" width="672" /></p>
+<p>This isn’t a big deal to add this, but it is tedious to do so. Thankfully, there are pre-built themes in the <code>ggthemes</code> package that you can use. They have themes that mimic the aesthetics of the <em>Wall Street Journal</em>, <em>The Economist</em>, <em>FiveThirtyEight</em>, and several other well-known data journalism outlets.</p>
+<p>Here’s <em>FiveThirtyEight</em>’s template below:</p>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="plotdata.html#cb240-1"></a><span class="kw">library</span>(ggthemes)</span>
+<span id="cb240-2"><a href="plotdata.html#cb240-2"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>bond,</span>
+<span id="cb240-3"><a href="plotdata.html#cb240-3"></a>       <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>gross,<span class="dt">color=</span>actor)) <span class="op">+</span></span>
+<span id="cb240-4"><a href="plotdata.html#cb240-4"></a><span class="st">   </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb240-5"><a href="plotdata.html#cb240-5"></a><span class="st">   </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb240-6"><a href="plotdata.html#cb240-6"></a>        <span class="dt">y=</span><span class="st">&quot;Gross Revenue (in millions)&quot;</span>,</span>
+<span id="cb240-7"><a href="plotdata.html#cb240-7"></a>        <span class="dt">title=</span><span class="st">&quot;Gross Revenue for Bond Films&quot;</span>) <span class="op">+</span></span>
+<span id="cb240-8"><a href="plotdata.html#cb240-8"></a><span class="st">   </span><span class="kw">theme_fivethirtyeight</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/9.6-1.png" width="672" /></p>
+<p>I personally like the <em>pander</em> theme most of all. It provides just enough detail to help the human eye without becoming too busy.</p>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="plotdata.html#cb241-1"></a><span class="kw">library</span>(ggthemes)</span>
+<span id="cb241-2"><a href="plotdata.html#cb241-2"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>bond,</span>
+<span id="cb241-3"><a href="plotdata.html#cb241-3"></a>       <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>gross,<span class="dt">color=</span>actor)) <span class="op">+</span></span>
+<span id="cb241-4"><a href="plotdata.html#cb241-4"></a><span class="st">   </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb241-5"><a href="plotdata.html#cb241-5"></a><span class="st">   </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb241-6"><a href="plotdata.html#cb241-6"></a>        <span class="dt">y=</span><span class="st">&quot;Gross Revenue (in millions)&quot;</span>,</span>
+<span id="cb241-7"><a href="plotdata.html#cb241-7"></a>        <span class="dt">title=</span><span class="st">&quot;Gross Revenue for Bond Films&quot;</span>) <span class="op">+</span></span>
+<span id="cb241-8"><a href="plotdata.html#cb241-8"></a><span class="st">   </span><span class="kw">theme_pander</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/9.7-1.png" width="672" /></p>
+<p><code>plotly</code> data viz strikes a good balance between intuitive syntax and great default visualizations. It also provides great resources for building interactive web-based applications. I’ve used it extensively now for building Shiny applications that engineers would use to make predictions. The fact that I can get real specific with event tracking and interactions makes it the best for developers.</p>
+<p>Here’s an example:</p>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="plotdata.html#cb242-1"></a><span class="kw">library</span>(plotly)</span>
+<span id="cb242-2"><a href="plotdata.html#cb242-2"></a><span class="kw">plot_ly</span>(<span class="dt">data=</span>bond,<span class="dt">x=</span><span class="op">~</span>year,<span class="dt">y=</span><span class="op">~</span>gross,<span class="dt">color=</span><span class="op">~</span>actor,<span class="dt">size=</span><span class="dv">10</span>)</span></code></pre></div>
+<div id="htmlwidget-96aacd38ef77a25c9344" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-96aacd38ef77a25c9344">{"x":{"visdat":{"a4e144b1d54":["function () ","plotlyVisDat"]},"cur_data":"a4e144b1d54","attrs":{"a4e144b1d54":{"x":{},"y":{},"color":{},"size":10,"alpha_stroke":1,"sizes":[10,100],"spans":[1,20]}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"year"},"yaxis":{"domain":[0,1],"automargin":true,"title":"gross"},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"x":[2012,2015,2006,2008],"y":[1108.561008,880.669186,669.789482,622.246378],"type":"scatter","mode":"markers","name":"Daniel Craig","marker":{"color":"rgba(102,194,165,1)","size":[55,55,55,55],"sizemode":"area","line":{"color":"rgba(102,194,165,1)"}},"textfont":{"color":"rgba(102,194,165,1)","size":55},"error_y":{"color":"rgba(102,194,165,1)","width":55},"error_x":{"color":"rgba(102,194,165,1)","width":55},"line":{"color":"rgba(102,194,165,1)","width":55},"xaxis":"x","yaxis":"y","frame":null},{"x":[1969],"y":[505.899782],"type":"scatter","mode":"markers","name":"George Lazenby","marker":{"color":"rgba(252,141,98,1)","size":[55],"sizemode":"area","line":{"color":"rgba(252,141,98,1)"}},"textfont":{"color":"rgba(252,141,98,1)","size":55},"error_y":{"color":"rgba(252,141,98,1)","width":55},"error_x":{"color":"rgba(252,141,98,1)","width":55},"line":{"color":"rgba(252,141,98,1)","width":55},"xaxis":"x","yaxis":"y","frame":null},{"x":[2002,1995,1999,1997],"y":[543.639638,529.548711,491.617153,478.946402],"type":"scatter","mode":"markers","name":"Pierce Brosnan","marker":{"color":"rgba(141,160,203,1)","size":[55,55,55,55],"sizemode":"area","line":{"color":"rgba(141,160,203,1)"}},"textfont":{"color":"rgba(141,160,203,1)","size":55},"error_y":{"color":"rgba(141,160,203,1)","width":55},"error_x":{"color":"rgba(141,160,203,1)","width":55},"line":{"color":"rgba(141,160,203,1)","width":55},"xaxis":"x","yaxis":"y","frame":null},{"x":[1973,1977,1979,1981,1974,1983,1985],"y":[825.110761,692.713752,655.8724,486.468881,448.249281,426.244352,321.172633],"type":"scatter","mode":"markers","name":"Roger Moore","marker":{"color":"rgba(231,138,195,1)","size":[55,55,55,55,55,55,55],"sizemode":"area","line":{"color":"rgba(231,138,195,1)"}},"textfont":{"color":"rgba(231,138,195,1)","size":55},"error_y":{"color":"rgba(231,138,195,1)","width":55},"error_x":{"color":"rgba(231,138,195,1)","width":55},"line":{"color":"rgba(231,138,195,1)","width":55},"xaxis":"x","yaxis":"y","frame":null},{"x":[1965,1964,1967,1971,1963,1962],"y":[1014.941117,912.257512,756.544419,648.514469,576.277964,440.759072],"type":"scatter","mode":"markers","name":"Sean Connery","marker":{"color":"rgba(166,216,84,1)","size":[55,55,55,55,55,55],"sizemode":"area","line":{"color":"rgba(166,216,84,1)"}},"textfont":{"color":"rgba(166,216,84,1)","size":55},"error_y":{"color":"rgba(166,216,84,1)","width":55},"error_x":{"color":"rgba(166,216,84,1)","width":55},"line":{"color":"rgba(166,216,84,1)","width":55},"xaxis":"x","yaxis":"y","frame":null},{"x":[1987,1989],"y":[381.088866,285.157191],"type":"scatter","mode":"markers","name":"Timothy Dalton","marker":{"color":"rgba(255,217,47,1)","size":[55,55],"sizemode":"area","line":{"color":"rgba(255,217,47,1)"}},"textfont":{"color":"rgba(255,217,47,1)","size":55},"error_y":{"color":"rgba(255,217,47,1)","width":55},"error_x":{"color":"rgba(255,217,47,1)","width":55},"line":{"color":"rgba(255,217,47,1)","width":55},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p><code>plotly</code> has a somewhat less intuitive syntax though. The functions become a hierarchy of <code>lists</code>. If you look at the code and output below, you’ll notice that I have to specify formatting options with lists:</p>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="plotdata.html#cb243-1"></a><span class="kw">library</span>(plotly)</span>
+<span id="cb243-2"><a href="plotdata.html#cb243-2"></a><span class="kw">plot_ly</span>(<span class="dt">data=</span>bond,<span class="dt">x=</span><span class="op">~</span>year,<span class="dt">y=</span><span class="op">~</span>gross,<span class="dt">color=</span><span class="op">~</span>actor,<span class="dt">size=</span><span class="dv">10</span>) <span class="op">%&gt;%</span></span>
+<span id="cb243-3"><a href="plotdata.html#cb243-3"></a><span class="st">        </span><span class="kw">layout</span>(<span class="dt">title=</span><span class="st">&quot;Gross Revenue for Bond Films&quot;</span>,</span>
+<span id="cb243-4"><a href="plotdata.html#cb243-4"></a>               <span class="dt">xaxis=</span><span class="kw">list</span>(<span class="dt">title=</span><span class="st">&quot;Year&quot;</span>),</span>
+<span id="cb243-5"><a href="plotdata.html#cb243-5"></a>               <span class="dt">yaxis=</span><span class="kw">list</span>(<span class="dt">title=</span><span class="st">&quot;Gross Revenue (in millions)&quot;</span>))</span></code></pre></div>
+<div id="htmlwidget-d0920fa8594bb7038e3d" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d0920fa8594bb7038e3d">{"x":{"visdat":{"a4e663efeab":["function () ","plotlyVisDat"]},"cur_data":"a4e663efeab","attrs":{"a4e663efeab":{"x":{},"y":{},"color":{},"size":10,"alpha_stroke":1,"sizes":[10,100],"spans":[1,20]}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Gross Revenue for Bond Films","xaxis":{"domain":[0,1],"automargin":true,"title":"Year"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Gross Revenue (in millions)"},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"x":[2012,2015,2006,2008],"y":[1108.561008,880.669186,669.789482,622.246378],"type":"scatter","mode":"markers","name":"Daniel Craig","marker":{"color":"rgba(102,194,165,1)","size":[55,55,55,55],"sizemode":"area","line":{"color":"rgba(102,194,165,1)"}},"textfont":{"color":"rgba(102,194,165,1)","size":55},"error_y":{"color":"rgba(102,194,165,1)","width":55},"error_x":{"color":"rgba(102,194,165,1)","width":55},"line":{"color":"rgba(102,194,165,1)","width":55},"xaxis":"x","yaxis":"y","frame":null},{"x":[1969],"y":[505.899782],"type":"scatter","mode":"markers","name":"George Lazenby","marker":{"color":"rgba(252,141,98,1)","size":[55],"sizemode":"area","line":{"color":"rgba(252,141,98,1)"}},"textfont":{"color":"rgba(252,141,98,1)","size":55},"error_y":{"color":"rgba(252,141,98,1)","width":55},"error_x":{"color":"rgba(252,141,98,1)","width":55},"line":{"color":"rgba(252,141,98,1)","width":55},"xaxis":"x","yaxis":"y","frame":null},{"x":[2002,1995,1999,1997],"y":[543.639638,529.548711,491.617153,478.946402],"type":"scatter","mode":"markers","name":"Pierce Brosnan","marker":{"color":"rgba(141,160,203,1)","size":[55,55,55,55],"sizemode":"area","line":{"color":"rgba(141,160,203,1)"}},"textfont":{"color":"rgba(141,160,203,1)","size":55},"error_y":{"color":"rgba(141,160,203,1)","width":55},"error_x":{"color":"rgba(141,160,203,1)","width":55},"line":{"color":"rgba(141,160,203,1)","width":55},"xaxis":"x","yaxis":"y","frame":null},{"x":[1973,1977,1979,1981,1974,1983,1985],"y":[825.110761,692.713752,655.8724,486.468881,448.249281,426.244352,321.172633],"type":"scatter","mode":"markers","name":"Roger Moore","marker":{"color":"rgba(231,138,195,1)","size":[55,55,55,55,55,55,55],"sizemode":"area","line":{"color":"rgba(231,138,195,1)"}},"textfont":{"color":"rgba(231,138,195,1)","size":55},"error_y":{"color":"rgba(231,138,195,1)","width":55},"error_x":{"color":"rgba(231,138,195,1)","width":55},"line":{"color":"rgba(231,138,195,1)","width":55},"xaxis":"x","yaxis":"y","frame":null},{"x":[1965,1964,1967,1971,1963,1962],"y":[1014.941117,912.257512,756.544419,648.514469,576.277964,440.759072],"type":"scatter","mode":"markers","name":"Sean Connery","marker":{"color":"rgba(166,216,84,1)","size":[55,55,55,55,55,55],"sizemode":"area","line":{"color":"rgba(166,216,84,1)"}},"textfont":{"color":"rgba(166,216,84,1)","size":55},"error_y":{"color":"rgba(166,216,84,1)","width":55},"error_x":{"color":"rgba(166,216,84,1)","width":55},"line":{"color":"rgba(166,216,84,1)","width":55},"xaxis":"x","yaxis":"y","frame":null},{"x":[1987,1989],"y":[381.088866,285.157191],"type":"scatter","mode":"markers","name":"Timothy Dalton","marker":{"color":"rgba(255,217,47,1)","size":[55,55],"sizemode":"area","line":{"color":"rgba(255,217,47,1)"}},"textfont":{"color":"rgba(255,217,47,1)","size":55},"error_y":{"color":"rgba(255,217,47,1)","width":55},"error_x":{"color":"rgba(255,217,47,1)","width":55},"line":{"color":"rgba(255,217,47,1)","width":55},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p>This syntax isn’t too hard to learn, but it does require some practice.</p>
+</div>
+<div id="so-which-data-viz-package-is-actually-the-best" class="section level2">
+<h2><span class="header-section-number">10.2</span> So Which Data Viz Package is Actually the Best?</h2>
+<p>Many data scientists would say the best method is the one you already know. As I said, if you understand the fundamentals of good data visualization, you can use any tool pretty well. And if you already know one of these methods (or know another tool like Tableau or PowerBI), I say go with that one.</p>
+<p>That said, I suggest <code>ggplot2</code> for those who conduct research. And I will focus on <code>ggplot2</code> exclusively for the remaining chapter.</p>
+<p>The reason I like <code>ggplot2</code> best is the readable syntax and the ability to use templates. It’s also one many other R programmers know and allows you to easily share your work with others.</p>
+</div>
+<div id="how-to-write-ggplot2-scripts" class="section level2">
+<h2><span class="header-section-number">10.3</span> How to Write ggplot2 Scripts</h2>
+<p>I would have to write a whole book to describe all of <code>ggplot2</code>’s functions and best practices. There are many out there and I suggest you read them if you want to get really, really good at it. Since this book is for researchers who probably want a few plots to illustrate their research, I’ll focus on the basics and show you how to make your visualizations look professional.</p>
+<p>The easiest way to think about <code>ggplot2</code>’s syntax is to imagine that you have clear, transparent celluloid sheets of paper. Each one has something drawn on it. The bottom one defines the x and y axes:</p>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="plotdata.html#cb244-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>bond,<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>gross,<span class="dt">color=</span>actor))</span></code></pre></div>
+<p>In the script above, we haven’t actually plotted anything yet. All we’re doing is defining the structure of the plot. We’re specifying that the data is the Bond data set and we’re “mapping” aesthetic parameters (<code>mapping=aes()</code>). Within <code>mapping=aes()</code>, we state that the x-axis as the year, the y-axis as revenue, and the color as actor.</p>
+<p>If you run the script above, all you’ll see is a blank box:</p>
+<p><img src="bookdown-demo_files/figure-html/9.11-1.png" width="672" /></p>
+<p>After we define those values, we can add new layer. This layer will provide the data viz we want. We want a scatterplot, so we’ll use the <code>geom_point()</code> function:</p>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="plotdata.html#cb245-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>bond,<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>gross,<span class="dt">color=</span>actor)) <span class="op">+</span></span>
+<span id="cb245-2"><a href="plotdata.html#cb245-2"></a><span class="st">   </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/9.12-1.png" width="672" /></p>
+<p>If you’ll notice, I didn’t need to specify any arguments in the <code>geom_point()</code> function above. That’s because these functions <strong>inherit</strong> the arguments of the functions before it.</p>
+<p>If we want to, we can change this plot to a line plot by swapping out the <code>geom_point()</code> function with a <code>geom_line()</code> function:</p>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="plotdata.html#cb246-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>bond,<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>gross,<span class="dt">color=</span>actor)) <span class="op">+</span></span>
+<span id="cb246-2"><a href="plotdata.html#cb246-2"></a><span class="st">   </span><span class="kw">geom_line</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/9.13-1.png" width="672" /></p>
+<p>This isn’t a very good plot though. We broke our actors out by color and no Bond actor plays the role across our entire time span. For that reason, the line broke apart. We can turn this into a single line by removing actor from the <code>aes()</code> function below:</p>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="plotdata.html#cb247-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>bond,<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>gross)) <span class="op">+</span></span>
+<span id="cb247-2"><a href="plotdata.html#cb247-2"></a><span class="st">   </span><span class="kw">geom_line</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/9.14-1.png" width="672" /></p>
+<p>Now we can see how revenue for Bond films has changed over the years, but we lost the ability to see the Bond actors. What if we want to see one line, but also see how individual actors perform?</p>
+<p>Simple! We just layer two visualizations on top of each other!</p>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="plotdata.html#cb248-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>bond,<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>gross)) <span class="op">+</span></span>
+<span id="cb248-2"><a href="plotdata.html#cb248-2"></a><span class="st">   </span><span class="kw">geom_line</span>() <span class="op">+</span></span>
+<span id="cb248-3"><a href="plotdata.html#cb248-3"></a><span class="st">   </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color=</span>actor))</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/9.15-1.png" width="672" /></p>
+<p>Pay close attention to what we did in the last script. We used the <code>+</code> operator and defined two data visualizations: <code>geom_line()</code> and <code>geom_point()</code>. We defined color in the <code>geom_point()</code> function, rather than the <code>ggplot()</code> function. That prevented <code>geom_line()</code> from inheriting the color argument and breaking out line up again.</p>
+<p>Our current visualization isn’t perfect though. I’d like to make the dots bigger so that we can better tell the actor. I can adjust that setting in the <code>geom_point()</code> function:</p>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="plotdata.html#cb249-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>bond,<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>gross)) <span class="op">+</span></span>
+<span id="cb249-2"><a href="plotdata.html#cb249-2"></a><span class="st">   </span><span class="kw">geom_line</span>() <span class="op">+</span></span>
+<span id="cb249-3"><a href="plotdata.html#cb249-3"></a><span class="st">   </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color=</span>actor),<span class="dt">size=</span><span class="dv">3</span>)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/9.15.1-1.png" width="672" /></p>
+<p>Now I want you to remember something - you’re <strong>layering</strong> these visualizations. That means you should consider the order when you build them.</p>
+<p>If you look at the script below, I have the <code>geom_point()</code> function before the <code>geom_line()</code> function. That means the line will sit on top of the points, which is less clear than our previous visualization.</p>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="plotdata.html#cb250-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>bond,<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>gross)) <span class="op">+</span></span>
+<span id="cb250-2"><a href="plotdata.html#cb250-2"></a><span class="st">   </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color=</span>actor),<span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb250-3"><a href="plotdata.html#cb250-3"></a><span class="st">   </span><span class="kw">geom_line</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/9.16-1.png" width="672" /></p>
+</div>
+<div id="how-to-plot-common-data-visualizations-in-ggplot2" class="section level2">
+<h2><span class="header-section-number">10.4</span> How to Plot Common Data Visualizations in ggplot2</h2>
+<p>Typically, the most common data visualizations you’ll need to plot include:</p>
+<ul>
+<li>scatter</li>
+<li>bar</li>
+<li>line</li>
+<li>box-and-whiskers</li>
+</ul>
+<p>Some people would add pie charts, but there are well-documented reasons online about why pie charts (and doughnut charts) are ineffective as data visualizations. So I won’t cover those.</p>
+<div id="how-to-plot-a-scatterplot" class="section level3">
+<h3><span class="header-section-number">10.4.1</span> How to Plot a Scatterplot</h3>
+<p>This is one we’ve already covered in previous sections. You use the functions <code>ggplot2()</code> and <code>geom_point()</code> to create a scatterplot:</p>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="plotdata.html#cb251-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>bond,<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>gross,<span class="dt">color=</span>actor)) <span class="op">+</span></span>
+<span id="cb251-2"><a href="plotdata.html#cb251-2"></a><span class="st">   </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">3</span>)</span></code></pre></div>
+</div>
+<div id="how-to-plot-a-bar-graph-histogram" class="section level3">
+<h3><span class="header-section-number">10.4.2</span> How to Plot a Bar Graph / Histogram</h3>
+<p>There are a three functions available for plotting bar graphs:</p>
+<ol style="list-style-type: decimal">
+<li><code>geom_bar()</code></li>
+<li><code>geom_col()</code></li>
+<li><code>geom_histogram()</code></li>
+</ol>
+<p>All three functions have some overlap in how you can use them to report figures.</p>
+<p><code>geom_bar()</code> is useful for reporting count data by category For example, we may want to see how many times each actor portrayed the Bond character. To do this, you’ll need to map the x-axis to actor and specify the <code>stat</code> argument as “count”.</p>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="plotdata.html#cb252-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>bond,<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>actor)) <span class="op">+</span></span>
+<span id="cb252-2"><a href="plotdata.html#cb252-2"></a><span class="st">   </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;count&quot;</span>)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/9.18-1.png" width="672" /></p>
+<p>You can also use the <code>geom_bar()</code> to report a continuous variable. For example, you might want to see gross revenue by actor. If so, you’ll need to specify the weight argument within the <code>aes()</code> function below.</p>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="plotdata.html#cb253-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>bond,<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>actor)) <span class="op">+</span></span>
+<span id="cb253-2"><a href="plotdata.html#cb253-2"></a><span class="st">   </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">weight=</span>gross))</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/9.19-1.png" width="672" /></p>
+<p>You can also use <code>geom_col()</code> for something similar. <code>geom_col()</code> is a better fit for this type of visualization because it actually produces a <em>stacked</em> bar graph. It’s also simpler code, in that you only need to define the <code>aes()</code> once.</p>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="plotdata.html#cb254-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>bond,<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>actor,<span class="dt">y=</span>gross)) <span class="op">+</span></span>
+<span id="cb254-2"><a href="plotdata.html#cb254-2"></a><span class="st">   </span><span class="kw">geom_col</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/9.20-1.png" width="672" /></p>
+<p><code>geom_histogram()</code> displays a histogram, which is a special kind of bar chart used to display distribution of the data.</p>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="plotdata.html#cb255-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>mtcars,<span class="dt">mapping=</span><span class="kw">aes</span>(hp)) <span class="op">+</span></span>
+<span id="cb255-2"><a href="plotdata.html#cb255-2"></a><span class="st">   </span><span class="kw">geom_histogram</span>(<span class="dt">bins=</span><span class="dv">12</span>)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/9.21-1.png" width="672" /></p>
+<p>As you can see, you only need to specify one variable and the number of bins to get a working histogram.</p>
+</div>
+<div id="how-to-plot-a-line-graph" class="section level3">
+<h3><span class="header-section-number">10.4.3</span> How to Plot a Line Graph</h3>
+<p>If you work with time-series data or something similar, the <code>geom_line()</code> function works well for connecting points. You can also use it to overlay two y-axes over one another, which I’ll cover further down below.</p>
+<p>As we’ve shown before, here is how you create a line plot:</p>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="plotdata.html#cb256-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>bond,<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>gross)) <span class="op">+</span></span>
+<span id="cb256-2"><a href="plotdata.html#cb256-2"></a><span class="st">   </span><span class="kw">geom_line</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/9.22-1.png" width="672" /></p>
+<p>You can also break lines out into groups. Let’s say for example that we wanted to see how Bond revenue changed for each actor as each of their movies were released. More specifically, let’s say we want to see how Daniel Craig’s second film compared to Sean Connery and Roger Moore. This will require some data transformation, as you can see below:</p>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="plotdata.html#cb257-1"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb257-2"><a href="plotdata.html#cb257-2"></a>bond_alter &lt;-<span class="st"> </span>bond <span class="op">%&gt;%</span></span>
+<span id="cb257-3"><a href="plotdata.html#cb257-3"></a><span class="st">   </span><span class="kw">arrange</span>(actor,year) <span class="op">%&gt;%</span></span>
+<span id="cb257-4"><a href="plotdata.html#cb257-4"></a><span class="st">   </span><span class="kw">group_by</span>(actor) <span class="op">%&gt;%</span></span>
+<span id="cb257-5"><a href="plotdata.html#cb257-5"></a><span class="st">   </span><span class="kw">mutate</span>(<span class="dt">order=</span><span class="kw">row_number</span>(actor))</span>
+<span id="cb257-6"><a href="plotdata.html#cb257-6"></a></span>
+<span id="cb257-7"><a href="plotdata.html#cb257-7"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>bond_alter,<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>order,<span class="dt">y=</span>gross,<span class="dt">color=</span>actor)) <span class="op">+</span></span>
+<span id="cb257-8"><a href="plotdata.html#cb257-8"></a><span class="st">   </span><span class="kw">geom_line</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/9.23-1.png" width="672" /></p>
+<p>We can see in the plot below that Roger Moore started off strong, but his revenue decreased over time. Daniel Craig and Sean Connery consistently outperformed the rest though.</p>
+</div>
+<div id="how-to-plot-a-box-and-whiskers-plot" class="section level3">
+<h3><span class="header-section-number">10.4.4</span> How to Plot a Box-and-Whiskers Plot</h3>
+<p>To create a box-and-whiskers plot, you use the <code>geom_plot()</code> function:</p>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="plotdata.html#cb258-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>bond,<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>actor,<span class="dt">y=</span>gross)) <span class="op">+</span></span>
+<span id="cb258-2"><a href="plotdata.html#cb258-2"></a><span class="st">   </span><span class="kw">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/9.24-1.png" width="672" /></p>
+<p>In my career, I’ve learned to love box-and-whiskers plots. It’s the best visualization that helps stakeholders who aren’t statistics savvy appreciate variation. I assume it’s because they had to learn how to read these plots in college. Whenever I try to introduce standard deviation as a key performance indicator, they usually don’t understand why that’s important. A box-and-whiskers plot, especially when you compare multiple plots, makes it easier for stakeholders to understand why it matters.</p>
+<p>As you could see in our previous visualization, there’s wide variety in results for the Bond actors gross revenue. Pierce Brosnan generated consistent revenue. Roger Moore had a lower median than Brosnan, but had several films do better.</p>
+</div>
+<div id="how-to-improve-labels-and-other-formatting-tips" class="section level3">
+<h3><span class="header-section-number">10.4.5</span> How to Improve Labels and Other Formatting Tips</h3>
+<p>I’ve worked with many data viz tools and have also mentored a few people now. One thing I always like to tell people is that good data visualizations focus on “the little details.” If you’ve noticed, most of these plots don’t have the best labeling or coloring. Spending an extra 10-15 minutes on these little details makes your work look far more professional and will help your audience appreciate the insights you deliver.</p>
+<p>The first thing you should improve is the labels. Most data sets don’t use proper English to describe field names. In our data set, <em>Actor</em> (capitalized) is spelled as <em>actor</em> (lower case).</p>
+<p>In larger data sets, we might have multiple fields with more descriptive names. In the Bond example, we could have <em>LeadActress</em>, <em>PrimaryAntagonistActor</em>, <em>SecondaryAntagonistActor</em>, etc. All of those would give us more flexibility in our analysis, but these names make poor labels on a plot.</p>
+<p>We can use the <code>labs()</code> function to solve this problem. If you look at the plot below, you can see that I give better labels to our plot:</p>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="plotdata.html#cb259-1"></a><span class="kw">library</span>(ggthemes)</span>
+<span id="cb259-2"><a href="plotdata.html#cb259-2"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>bond,</span>
+<span id="cb259-3"><a href="plotdata.html#cb259-3"></a>       <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>gross)) <span class="op">+</span></span>
+<span id="cb259-4"><a href="plotdata.html#cb259-4"></a><span class="st">   </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb259-5"><a href="plotdata.html#cb259-5"></a><span class="st">   </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb259-6"><a href="plotdata.html#cb259-6"></a>        <span class="dt">y=</span><span class="st">&quot;Gross Revenue (in millions)&quot;</span>,</span>
+<span id="cb259-7"><a href="plotdata.html#cb259-7"></a>        <span class="dt">title=</span><span class="st">&quot;Gross Revenue for Bond Films&quot;</span>)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/9.25-1.png" width="672" /></p>
+<p>There’s one for the x and y-axis, as well as one for the title. As you can already tell, this labeling is far more descriptive and professional than past labels.</p>
+<p>Let’s say we want to add color. As you recall, we simply add <code>color=actor</code> in the <code>aes()</code> function. And to change the legend title, we simply add <code>color="Actor Name"</code> to the <code>labs()</code> function:</p>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="plotdata.html#cb260-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>bond,</span>
+<span id="cb260-2"><a href="plotdata.html#cb260-2"></a>       <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>gross,<span class="dt">color=</span>actor)) <span class="op">+</span></span>
+<span id="cb260-3"><a href="plotdata.html#cb260-3"></a><span class="st">   </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb260-4"><a href="plotdata.html#cb260-4"></a><span class="st">   </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb260-5"><a href="plotdata.html#cb260-5"></a>        <span class="dt">y=</span><span class="st">&quot;Gross Revenue (in millions)&quot;</span>,</span>
+<span id="cb260-6"><a href="plotdata.html#cb260-6"></a>        <span class="dt">title=</span><span class="st">&quot;Gross Revenue for Bond Films&quot;</span>,</span>
+<span id="cb260-7"><a href="plotdata.html#cb260-7"></a>        <span class="dt">color=</span><span class="st">&quot;Actor Name&quot;</span>)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/9.26-1.png" width="672" /></p>
+<p>You can also define the color codes you want to use for these plots. Personally, I’d suggest just using the templates I described in an earlier section to do this. The functions to perform these tasks get a bit confusing and the documentation isn’t that great.</p>
+<p>With that said, I suggest you focus on <code>scale_manual()</code> functions for defining colors. Execute <code>?scale_manual</code> in your console to see this documentation on this.</p>
+<p>There’s seven manual functions to data viz parameters:</p>
+<ol style="list-style-type: decimal">
+<li><code>scale_color_manual()</code></li>
+<li><code>scale_fill_manual()</code></li>
+<li><code>scale_size_manual()</code></li>
+<li><code>scale_shape_manual()</code></li>
+<li><code>scale_linetype_manual()</code></li>
+<li><code>scale_alpha_manual()</code></li>
+<li><code>scale_discrete_manual()</code></li>
+</ol>
+<p>If you’ll notice, this relates to the type of plot you’ll use. Since we used a scatter plot and the only thing we changed was the color, we’ll use the <code>scale_color_manual()</code> to dictate specific colors:</p>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="plotdata.html#cb261-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>bond,</span>
+<span id="cb261-2"><a href="plotdata.html#cb261-2"></a>       <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>gross,<span class="dt">color=</span>actor)) <span class="op">+</span></span>
+<span id="cb261-3"><a href="plotdata.html#cb261-3"></a><span class="st">   </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb261-4"><a href="plotdata.html#cb261-4"></a><span class="st">   </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb261-5"><a href="plotdata.html#cb261-5"></a>        <span class="dt">y=</span><span class="st">&quot;Gross Revenue (in millions)&quot;</span>,</span>
+<span id="cb261-6"><a href="plotdata.html#cb261-6"></a>        <span class="dt">title=</span><span class="st">&quot;Gross Revenue for Bond Films&quot;</span>,</span>
+<span id="cb261-7"><a href="plotdata.html#cb261-7"></a>        <span class="dt">color=</span><span class="st">&quot;Bond Actor&quot;</span>) <span class="op">+</span></span>
+<span id="cb261-8"><a href="plotdata.html#cb261-8"></a><span class="st">   </span><span class="kw">scale_color_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;#d55e00&quot;</span>,<span class="st">&quot;#cc79a7&quot;</span>,<span class="st">&quot;#0072b2&quot;</span>,<span class="st">&quot;#f0e442&quot;</span>,<span class="st">&quot;#009e73&quot;</span>,<span class="st">&quot;#d45e49&quot;</span>))</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/9.27-1.png" width="672" /></p>
+<p>I’m not a fan of the gray background and the grids used in the default for <code>ggplot2</code>. You can use the <code>theme()</code> function to remove those:</p>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="plotdata.html#cb262-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>bond,</span>
+<span id="cb262-2"><a href="plotdata.html#cb262-2"></a>       <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>gross,<span class="dt">color=</span>actor)) <span class="op">+</span></span>
+<span id="cb262-3"><a href="plotdata.html#cb262-3"></a><span class="st">   </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb262-4"><a href="plotdata.html#cb262-4"></a><span class="st">   </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb262-5"><a href="plotdata.html#cb262-5"></a>        <span class="dt">y=</span><span class="st">&quot;Gross Revenue (in millions)&quot;</span>,</span>
+<span id="cb262-6"><a href="plotdata.html#cb262-6"></a>        <span class="dt">title=</span><span class="st">&quot;Gross Revenue for Bond Films&quot;</span>,</span>
+<span id="cb262-7"><a href="plotdata.html#cb262-7"></a>        <span class="dt">color=</span><span class="st">&quot;Bond Actor&quot;</span>) <span class="op">+</span></span>
+<span id="cb262-8"><a href="plotdata.html#cb262-8"></a><span class="st">   </span><span class="kw">scale_color_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;#d55e00&quot;</span>,<span class="st">&quot;#cc79a7&quot;</span>,<span class="st">&quot;#0072b2&quot;</span>,<span class="st">&quot;#f0e442&quot;</span>,<span class="st">&quot;#009e73&quot;</span>,<span class="st">&quot;#d45e49&quot;</span>)) <span class="op">+</span></span>
+<span id="cb262-9"><a href="plotdata.html#cb262-9"></a><span class="st">   </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(),</span>
+<span id="cb262-10"><a href="plotdata.html#cb262-10"></a>         <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),</span>
+<span id="cb262-11"><a href="plotdata.html#cb262-11"></a>         <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(),</span>
+<span id="cb262-12"><a href="plotdata.html#cb262-12"></a>         <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;black&quot;</span>))</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/9.28-1.png" width="672" /></p>
+<p>As you can tell, it gets a bit tedious to remove all these default graphics. This is the trade-off with <code>ggplot2</code> in my mind. The syntax is intuitive, but improving the aesthetics isn’t something I enjoy.</p>
+<p>For that reason, I suggest using the templated themes, such as the “pander” theme with <code>theme_pander()</code>:</p>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="plotdata.html#cb263-1"></a><span class="kw">library</span>(ggthemes)</span>
+<span id="cb263-2"><a href="plotdata.html#cb263-2"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>bond,</span>
+<span id="cb263-3"><a href="plotdata.html#cb263-3"></a>       <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>gross,<span class="dt">color=</span>actor)) <span class="op">+</span></span>
+<span id="cb263-4"><a href="plotdata.html#cb263-4"></a><span class="st">   </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb263-5"><a href="plotdata.html#cb263-5"></a><span class="st">   </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb263-6"><a href="plotdata.html#cb263-6"></a>        <span class="dt">y=</span><span class="st">&quot;Gross Revenue (in millions)&quot;</span>,</span>
+<span id="cb263-7"><a href="plotdata.html#cb263-7"></a>        <span class="dt">title=</span><span class="st">&quot;Gross Revenue for Bond Films&quot;</span>,</span>
+<span id="cb263-8"><a href="plotdata.html#cb263-8"></a>        <span class="dt">color=</span><span class="st">&quot;Bond Actor&quot;</span>) <span class="op">+</span></span>
+<span id="cb263-9"><a href="plotdata.html#cb263-9"></a><span class="st">   </span><span class="kw">theme_pander</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/9.29-1.png" width="672" /></p>
+<p>Much better! If you want, you can learn to build your own themes at this <img src="https://towardsdatascience.com/designing-custom-ggplot2-themes-65fb4b86d925" alt="link" />.</p>
+</div>
+</div>
+<div id="things-to-remember-8" class="section level2">
+<h2><span class="header-section-number">10.5</span> Things to Remember</h2>
+<ul>
+<li>The popular data viz packages for R are <code>base</code>, <code>ggplot2</code>, and <code>plotly</code></li>
+<li><code>base</code> is great for data exploration because it makes a good “guess” on what plot you want to see</li>
+<li><code>plotly</code> is great for its interactive capabilities and I recommend it for app development</li>
+<li><code>ggplot2</code> is best for researcher, statisticians, and data analysts</li>
+<li><code>ggplot2</code> has the most intuitive syntax</li>
+<li><code>ggplot2</code> “layers” visualizations</li>
+<li>I recommend using themes for <code>ggplot2</code></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="importdata.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="answers.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/09-plotdata.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

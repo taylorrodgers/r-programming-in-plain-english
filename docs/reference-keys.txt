@@ -3,6 +3,7 @@ about-this-book
 things-you-should-know-before-reading
 whatisr
 is-r-the-best-statistical-programming-language
+how-will-learning-r-versus-python-impact-my-job-opportunities
 things-to-remember
 setup
 how-to-download-r
@@ -51,6 +52,7 @@ a-simple-trick-to-include-install-and-load-any-packages-needed
 how-to-find-new-packages-to-install
 how-to-find-documentation-on-packages
 things-to-remember-5
+function
 two-approaches-to-using-r-functions
 why-you-should-learn-to-write-your-own-functions
 the-components-of-an-r-function
@@ -68,8 +70,18 @@ import-a-raw-data-file-the-hard-way
 save-import-functions
 connect-to-a-database
 connect-to-an-api
-why-api-connections-are-sometimes-overrated
 things-to-remember-7
+plotdata
+which-r-plot-package-is-best
+so-which-data-viz-package-is-actually-the-best
+how-to-write-ggplot2-scripts
+how-to-plot-common-data-visualizations-in-ggplot2
+how-to-plot-a-scatterplot
+how-to-plot-a-bar-graph-histogram
+how-to-plot-a-line-graph
+how-to-plot-a-box-and-whiskers-plot
+how-to-improve-labels-and-other-formatting-tips
+things-to-remember-8
 answers
 chapter-3
 chapter-5

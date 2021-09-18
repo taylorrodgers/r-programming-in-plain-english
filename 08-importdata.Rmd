@@ -154,22 +154,6 @@ Fortunately, there are R packages for the most common API connections out there.
 
 If you want to get practice with an API connection, you can read my article about connecting to the US Census Bureau's API at www.taylorrodgers.com.
 
-## Why API Connections Are Sometimes Overrated
-
-I think API connections are a bit overrated – at least when it comes to R programming. The reason relates to R’s strengths and weaknesses.
-
-In my professional experience, API connections are handy for ETL processes. Typically, you need to automate ETL processes. Not only for data science, but also general data reporting and application support.
-
-That means API connections often require a *production environment* – something R programming struggles with.
-
-One common example relates to Google Analytics. I’ve worked with a few marketing firms and it’s not uncommon for agencies to manage multiple websites. Even if you analyze that data as a data scientist, it’s more efficient to build a database first that houses all that data in a centralized, standardized location.
-
-R can connect to the Google Analytics API and analyze data, but it can't build production quality scripts that automate that process. Therefore, it'd be better to connect to the database that already aggregated the Google Analytics data for you.
-
-Now this doesn't mean API connections via R are useless. There are examples I've found that are more common to researchers. One example where I think connecting to an API makes sense is accessing public databases to conduct one-time analyses. A programmer spoke at my local R User Group about assisting his wife, who was an academic researcher, pull global news data from a public database online. It made sense in that context to connect to the API via R because you wouldn't have a use for that data again in the near future.
-
-Another example would be connecting to the US Census Bureau's API. I wrote a blog post on that some time ago. Downloading that raw data files from the US Census Bureau is a pain and the API, while also a bit overwhelming, still saves a lot of time. I don't see a scenario where it makes sense for an organization to automate data collection from the US Census Bureau, because that data isn't updated that often.
-
 ## Things to Remember
 
 * Import raw data through the **Import Dataset** button in the **Environment** tab in the upper-right pane

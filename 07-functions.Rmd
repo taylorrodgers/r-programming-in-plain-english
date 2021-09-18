@@ -3,7 +3,7 @@ output:
   pdf_document: default
   html_document: default
 ---
-# Functions {#functions}
+# How to Write Functions {#function}
 
 As I said a few chapters ago, R programming runs on objects. Most object types relate to the way data is stored and how it's handled. There's one object type, though, that's unique compared to the others. 
 

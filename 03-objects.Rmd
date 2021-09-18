@@ -393,4 +393,4 @@ We’ll go into more detail about functions in a later chapter because of their 
 
 ## Things to Remember
 * The key to understanding R is understanding objects
-* The object type changes the way you’ll read, transform, and product data
+* The object type changes the way you’ll read, transform, and produce data

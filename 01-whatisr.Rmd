@@ -20,7 +20,7 @@ And that's what's so great about the R programming language. It has a lot of fle
 
 One of those basics is **objects**. We'll cover this extensively in another chapter, but R is an *object-oriented* programming language. That means to succeed with it, you have to understand the object types and how they're used. 
 
-If that sounds overwhelming, don't worry. It's easier than you think. And focusing on these core components will go a long way to helping you succeed in R. As a matter of fact, I'd "guesstimate" that understanding R objects and packages will take care of 80% of your needs with this language.
+If that sounds overwhelming, don't worry. It's easier than you think. And focusing on these core components will go a long way to helping you succeed in R. As a matter of fact, I'd "guesstimate" that understanding these basics will take care of 80% of problems most R programming newbies experience.
 
 ## Is R the Best Statistical Programming Language?
 
@@ -44,7 +44,17 @@ I once worked with a company that ran all of its ETL (extract, transform, and lo
 
 Is Python better than R? I don’t know because I haven’t programmed much in Python. In my opinion, R is easier to learn for people who’ve already programmed in SQL, since it has a more direct syntax. Other people say that Python is easier to learn for programming newbies because it’s written more like the English language. I didn’t find that to be the case, myself.
 
-If you want to develop automated, enterprise level solutions, I do think Python is a better choice. Mostly because it makes it easier for computer engineers to work with you. But if your goal is statistical analysis and reproducible research, R is better in my mind.
+Some people also say that Python is better for enterprise-level or "production" grade solutions. I'm also less sure that's the case now. Since I started writing this book, I've helped administer data science tools. I've learned through experience that Python is a tough programming language to manage, from an administrative perspective. There are lots of little rules and nuances, such as the Linux OS you use, and the manner in which you install Python versions, packages, and environments.
+
+For those reasons, I suggest learning R. It's easier to download, easier to manage, and easier to learn in my experience.
+
+## How Will Learning R versus Python Impact My Job Opportunities?
+
+If you're worried that learning R over Python (or any other language) will hurt your job prospect, I have good news! 
+
+The job market for data science professionals is so strong that companies can't afford to be picky. For that reason, data science software companies are actually building their tools to use both R and Python. For example, RStudio allows Python and Jupyter (a Python-oriented app) allows R.
+
+This allows data scientists and other data professionals to use the language they know and companies to hire the best data scientist available - not the one who happens to know the specific programming language.
 
 ## Things to Remember
 
