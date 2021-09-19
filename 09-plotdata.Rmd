@@ -9,14 +9,14 @@ Within R, there’s three popular methods for plotting data. The first uses the 
 
 The R base version of plot functions is much more subdued and uses simpler graphics. It typically looks something like this:
 
-```{r 9, echo=FALSE}
+```{r 9, echo=FALSE, out.width='70%',fig.align='center'}
 cars <- cars
 plot(cars$speed,cars$dist,xlab="Speed",ylab="Dist")
 ```
 
 `ggplot2` outputs something more like this:
 
-```{r 9.1, echo=FALSE}
+```{r 9.1, echo=FALSE, out.width='70%',fig.align='center'}
 library(ggplot2)
 ggplot(cars,aes(x=speed,y=dist)) + 
    geom_point() + 
@@ -25,7 +25,7 @@ ggplot(cars,aes(x=speed,y=dist)) +
 
 `plotly` outputs something similar to `ggplot2`, but has some built-in interactivity, such as tool tips:
 
-```{r 9.2, echo=FALSE,message=FALSE}
+```{r 9.2, echo=FALSE,message=FALSE, out.width='70%',fig.align='center'}
 library(plotly)
 plot_ly(data=cars,x=~speed,y=~dist) %>% 
    layout(xaxis=list(title="Speed"),
@@ -46,7 +46,7 @@ I would say the default aesthetics for the base package are not great. As you sa
 
 For example, I took our Bond data set and made a data viz with the base package. I changed the color, font, and other settings and managed to make it look pretty good. You can see the code and output below:
 
-```{r 9.3}
+```{r 9.3, out.width='70%',fig.align='center'}
 bond <- read.csv("https://raw.githubusercontent.com/taylorrodgers/bond/main/bond.csv")
 bond$actor <- factor(bond$actor)
 bond_colors <- c("#7fb7be","#d3f3ee","#dacc3e","#bc2c1a","#7d1538","#454444")
@@ -76,7 +76,7 @@ This wasn't easy to do though. I had to do more research to figure out how to ac
 
 I think `ggplot2` has a more intuitive syntax. For example, I produce a similar plot to the one with a much shorter script:
 
-```{r 9.4}
+```{r 9.4, out.width='70%',fig.align='center'}
 library(ggplot2)
 bond <- read.csv("https://raw.githubusercontent.com/taylorrodgers/bond/main/bond.csv")
 bond$actor <- factor(bond$actor)
@@ -98,7 +98,7 @@ The only thing I don't like about `ggplot2` is the default aesthetics. It looks 
 
 In order for me to make the plot less busy, I have to write a few additional lines of code:
 
-```{r 9.5}
+```{r 9.5, out.width='70%',fig.align='center'}
 ggplot(data=bond,
        mapping=aes(x=year,y=gross,color=actor)) +
    geom_point(size=3) +
@@ -116,7 +116,7 @@ This isn't a big deal to add this, but it is tedious to do so. Thankfully, there
 
 Here's *FiveThirtyEight*'s template below:
 
-```{r 9.6}
+```{r 9.6, out.width='70%',fig.align='center'}
 library(ggthemes)
 ggplot(data=bond,
        mapping=aes(x=year,y=gross,color=actor)) +
@@ -129,7 +129,7 @@ ggplot(data=bond,
 
 I personally like the *pander* theme most of all. It provides just enough detail to help the human eye without becoming too busy.
 
-```{r 9.7}
+```{r 9.7, out.width='70%',fig.align='center'}
 library(ggthemes)
 ggplot(data=bond,
        mapping=aes(x=year,y=gross,color=actor)) +
@@ -143,14 +143,14 @@ ggplot(data=bond,
 `plotly` data viz strikes a good balance between intuitive syntax and great default visualizations. It also provides great resources for building interactive web-based applications. I've used it extensively now for building Shiny applications that engineers would use to make predictions. The fact that I can get real specific with event tracking and interactions makes it the best for developers.
 
 Here's an example:
-```{r 9.8,warning=FALSE,message=FALSE}
+```{r 9.8,warning=FALSE,message=FALSE, out.width='70%',fig.align='center'}
 library(plotly)
 plot_ly(data=bond,x=~year,y=~gross,color=~actor,size=10)
 ```
 
 `plotly` has a somewhat less intuitive syntax though. The functions become a hierarchy of `lists`. If you look at the code and output below, you'll notice that I have to specify formatting options with lists:
 
-```{r 9.9,warning=FALSE,message=FALSE}
+```{r 9.9,warning=FALSE,message=FALSE, out.width='70%',fig.align='center'}
 library(plotly)
 plot_ly(data=bond,x=~year,y=~gross,color=~actor,size=10) %>%
         layout(title="Gross Revenue for Bond Films",
@@ -174,7 +174,7 @@ I would have to write a whole book to describe all of `ggplot2`'s functions and 
 
 The easiest way to think about `ggplot2`'s syntax is to imagine that you have clear, transparent celluloid sheets of paper. Each one has something drawn on it. The bottom one defines the x and y axes:
 
-```{r 9.10, eval=FALSE}
+```{r 9.10, eval=FALSE, out.width='70%',fig.align='center'}
 ggplot(data=bond,mapping=aes(x=year,y=gross,color=actor))
 ```
 
@@ -182,13 +182,13 @@ In the script above, we haven't actually plotted anything yet. All we're doing i
 
 If you run the script above, all you'll see is a blank box:
 
-```{r 9.11, echo=FALSE}
+```{r 9.11, echo=FALSE, out.width='70%',fig.align='center'}
 ggplot(data=bond,mapping=aes(x=year,y=gross,color=actor))
 ```
 
 After we define those values, we can add new layer. This layer will provide the data viz we want. We want a scatterplot, so we'll use the `geom_point()` function:
 
-```{r 9.12}
+```{r 9.12, out.width='70%',fig.align='center'}
 ggplot(data=bond,mapping=aes(x=year,y=gross,color=actor)) +
    geom_point()
 ```
@@ -197,14 +197,14 @@ If you'll notice, I didn't need to specify any arguments in the `geom_point()` f
 
 If we want to, we can change this plot to a line plot by swapping out the `geom_point()` function with a `geom_line()` function:
 
-```{r 9.13}
+```{r 9.13, out.width='70%',fig.align='center'}
 ggplot(data=bond,mapping=aes(x=year,y=gross,color=actor)) +
    geom_line()
 ```
 
 This isn't a very good plot though. We broke our actors out by color and no Bond actor plays the role across our entire time span. For that reason, the line broke apart. We can turn this into a single line by removing actor from the `aes()` function below:
 
-```{r 9.14}
+```{r 9.14, out.width='70%',fig.align='center'}
 ggplot(data=bond,mapping=aes(x=year,y=gross)) +
    geom_line()
 ```
@@ -213,7 +213,7 @@ Now we can see how revenue for Bond films has changed over the years, but we los
 
 Simple! We just layer two visualizations on top of each other!
 
-```{r 9.15}
+```{r 9.15, out.width='70%',fig.align='center'}
 ggplot(data=bond,mapping=aes(x=year,y=gross)) +
    geom_line() +
    geom_point(aes(color=actor))
@@ -223,7 +223,7 @@ Pay close attention to what we did in the last script. We used the `+` operator 
 
 Our current visualization isn't perfect though. I'd like to make the dots bigger so that we can better tell the actor. I can adjust that setting in the `geom_point()` function:
 
-```{r 9.15.1}
+```{r 9.15.1, out.width='70%',fig.align='center'}
 ggplot(data=bond,mapping=aes(x=year,y=gross)) +
    geom_line() +
    geom_point(aes(color=actor),size=3)
@@ -233,7 +233,7 @@ Now I want you to remember something - you're **layering** these visualizations.
 
 If you look at the script below, I have the `geom_point()` function before the `geom_line()` function. That means the line will sit on top of the points, which is less clear than our previous visualization.
 
-```{r 9.16}
+```{r 9.16, out.width='70%',fig.align='center'}
 ggplot(data=bond,mapping=aes(x=year,y=gross)) +
    geom_point(aes(color=actor),size=3) +
    geom_line()
@@ -254,7 +254,7 @@ Some people would add pie charts, but there are well-documented reasons online a
 
 This is one we've already covered in previous sections. You use the functions `ggplot2()` and `geom_point()` to create a scatterplot:
 
-```{r 9.17, eval=FALSE}
+```{r 9.17, eval=FALSE, out.width='70%',fig.align='center'}
 ggplot(data=bond,mapping=aes(x=year,y=gross,color=actor)) +
    geom_point(size=3)
 ```
@@ -271,28 +271,28 @@ All three functions have some overlap in how you can use them to report figures.
 
 `geom_bar()` is useful for reporting count data by category For example, we may want to see how many times each actor portrayed the Bond character. To do this, you'll need to map the x-axis to actor and specify the `stat` argument as "count".
 
-```{r 9.18}
+```{r 9.18, out.width='70%',fig.align='center'}
 ggplot(data=bond,mapping=aes(x=actor)) +
    geom_bar(stat="count")
 ```
 
 You can also use the `geom_bar()` to report a continuous variable. For example, you might want to see gross revenue by actor. If so, you'll need to specify the weight argument within the `aes()` function below.
 
-```{r 9.19}
+```{r 9.19, out.width='70%',fig.align='center'}
 ggplot(data=bond,mapping=aes(x=actor)) +
    geom_bar(aes(weight=gross))
 ```
 
 You can also use `geom_col()` for something similar. `geom_col()` is a better fit for this type of visualization because it actually produces a *stacked* bar graph. It's also simpler code, in that you only need to define the `aes()` once.
 
-```{r 9.20}
+```{r 9.20, out.width='70%',fig.align='center'}
 ggplot(data=bond,mapping=aes(x=actor,y=gross)) +
    geom_col()
 ```
 
 `geom_histogram()` displays a histogram, which is a special kind of bar chart used to display distribution of the data. 
 
-```{r 9.21}
+```{r 9.21, out.width='70%',fig.align='center'}
 ggplot(data=mtcars,mapping=aes(hp)) +
    geom_histogram(bins=12)
 ```
@@ -305,14 +305,14 @@ If you work with time-series data or something similar, the `geom_line()` functi
 
 As we've shown before, here is how you create a line plot:
 
-```{r 9.22}
+```{r 9.22, out.width='70%',fig.align='center'}
 ggplot(data=bond,mapping=aes(x=year,y=gross)) +
    geom_line()
 ```
 
 You can also break lines out into groups. Let's say for example that we wanted to see how Bond revenue changed for each actor as each of their movies were released. More specifically, let's say we want to see how Daniel Craig's second film compared to Sean Connery and Roger Moore. This will require some data transformation, as you can see below:
 
-```{r 9.23,messages=FALSE,warning=FALSE,message=FALSE}
+```{r 9.23,warning=FALSE,message=FALSE, out.width='70%',fig.align='center'}
 library(dplyr)
 bond_alter <- bond %>%
    arrange(actor,year) %>%
@@ -329,7 +329,7 @@ We can see in the plot below that Roger Moore started off strong, but his revenu
 
 To create a box-and-whiskers plot, you use the `geom_plot()` function:
 
-```{r 9.24}
+```{r 9.24, out.width='70%',fig.align='center'}
 ggplot(data=bond,mapping=aes(x=actor,y=gross)) +
    geom_boxplot()
 ```
@@ -348,7 +348,7 @@ In larger data sets, we might have multiple fields with more descriptive names. 
 
 We can use the `labs()` function to solve this problem. If you look at the plot below, you can see that I give better labels to our plot:
 
-```{r 9.25}
+```{r 9.25, out.width='70%',fig.align='center'}
 library(ggthemes)
 ggplot(data=bond,
        mapping=aes(x=year,y=gross)) +
@@ -362,7 +362,7 @@ There's one for the x and y-axis, as well as one for the title. As you can alrea
 
 Let's say we want to add color. As you recall, we simply add `color=actor` in the `aes()` function. And to change the legend title, we simply add `color="Actor Name"` to the `labs()` function:
 
-```{r 9.26}
+```{r 9.26, out.width='70%',fig.align='center'}
 ggplot(data=bond,
        mapping=aes(x=year,y=gross,color=actor)) +
    geom_point(size=3) +
@@ -388,7 +388,7 @@ There's seven manual functions to data viz parameters:
 
 If you'll notice, this relates to the type of plot you'll use. Since we used a scatter plot and the only thing we changed was the color, we'll use the `scale_color_manual()` to dictate specific colors:
 
-```{r 9.27}
+```{r 9.27, out.width='70%',fig.align='center'}
 ggplot(data=bond,
        mapping=aes(x=year,y=gross,color=actor)) +
    geom_point(size=3) +
@@ -401,7 +401,7 @@ ggplot(data=bond,
 
 I'm not a fan of the gray background and the grids used in the default for `ggplot2`. You can use the `theme()` function to remove those:
 
-```{r 9.28}
+```{r 9.28, out.width='70%',fig.align='center'}
 ggplot(data=bond,
        mapping=aes(x=year,y=gross,color=actor)) +
    geom_point(size=3) +
@@ -420,7 +420,7 @@ As you can tell, it gets a bit tedious to remove all these default graphics. Thi
 
 For that reason, I suggest using the templated themes, such as the "pander" theme with `theme_pander()`:
 
-```{r 9.29}
+```{r 9.29, out.width='70%',fig.align='center'}
 library(ggthemes)
 ggplot(data=bond,
        mapping=aes(x=year,y=gross,color=actor)) +
