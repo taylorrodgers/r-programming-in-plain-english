@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 6 How to Filter and Transform Data with the Dplyr Package | R Programming in Plain English</title>
   <meta name="description" content="A simple guide to R programming for those without programming experience" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 6 How to Filter and Transform Data with the Dplyr Package | R Programming in Plain English" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Taylor Rodgers" />
 
 
-<meta name="date" content="2021-09-19" />
+<meta name="date" content="2021-12-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,9 @@
   
 <link rel="prev" href="baserfilter.html"/>
 <link rel="next" href="packages.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,30 +51,30 @@
 
 
 
-
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -92,7 +94,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -125,6 +127,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -141,15 +144,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">R Programming in Plain English</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About This Book</a><ul>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About This Book</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#things-you-should-know-before-reading"><i class="fa fa-check"></i><b>1.1</b> Things You Should Know Before Reading</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="whatisr.html"><a href="whatisr.html"><i class="fa fa-check"></i><b>2</b> What is R Programming?</a><ul>
+<li class="chapter" data-level="2" data-path="whatisr.html"><a href="whatisr.html"><i class="fa fa-check"></i><b>2</b> What is R Programming?</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="whatisr.html"><a href="whatisr.html#is-r-the-best-statistical-programming-language"><i class="fa fa-check"></i><b>2.1</b> Is R the Best Statistical Programming Language?</a></li>
 <li class="chapter" data-level="2.2" data-path="whatisr.html"><a href="whatisr.html#how-will-learning-r-versus-python-impact-my-job-opportunities"><i class="fa fa-check"></i><b>2.2</b> How Will Learning R versus Python Impact My Job Opportunities?</a></li>
 <li class="chapter" data-level="2.3" data-path="whatisr.html"><a href="whatisr.html#things-to-remember"><i class="fa fa-check"></i><b>2.3</b> Things to Remember</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>3</b> Getting Setup in R and RStudio</a><ul>
+<li class="chapter" data-level="3" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>3</b> Getting Setup in R and RStudio</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="setup.html"><a href="setup.html#how-to-download-r"><i class="fa fa-check"></i><b>3.1</b> How to Download R</a></li>
 <li class="chapter" data-level="3.2" data-path="setup.html"><a href="setup.html#understanding-base-rs-user-interface"><i class="fa fa-check"></i><b>3.2</b> Understanding Base R’s User Interface</a></li>
 <li class="chapter" data-level="3.3" data-path="setup.html"><a href="setup.html#limitations-of-r-base"><i class="fa fa-check"></i><b>3.3</b> Limitations of R Base</a></li>
@@ -158,7 +164,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.6" data-path="setup.html"><a href="setup.html#understanding-rstudio-interface"><i class="fa fa-check"></i><b>3.6</b> Understanding RStudio Interface</a></li>
 <li class="chapter" data-level="3.7" data-path="setup.html"><a href="setup.html#things-to-remember-1"><i class="fa fa-check"></i><b>3.7</b> Things to Remember</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="objects.html"><a href="objects.html"><i class="fa fa-check"></i><b>4</b> R Objects Types</a><ul>
+<li class="chapter" data-level="4" data-path="objects.html"><a href="objects.html"><i class="fa fa-check"></i><b>4</b> Object Types in R Programming</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="objects.html"><a href="objects.html#why-do-objects-matter"><i class="fa fa-check"></i><b>4.1</b> Why Do Objects Matter?</a></li>
 <li class="chapter" data-level="4.2" data-path="objects.html"><a href="objects.html#understanding-object-types-makes-it-easier-to-transform-and-analyze"><i class="fa fa-check"></i><b>4.2</b> Understanding Object Types Makes It Easier to Transform and Analyze</a></li>
 <li class="chapter" data-level="4.3" data-path="objects.html"><a href="objects.html#the-basic-objects-to-remember"><i class="fa fa-check"></i><b>4.3</b> The Basic Objects to Remember</a></li>
@@ -169,8 +176,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.8" data-path="objects.html"><a href="objects.html#lists"><i class="fa fa-check"></i><b>4.8</b> Lists</a></li>
 <li class="chapter" data-level="4.9" data-path="objects.html"><a href="objects.html#functions"><i class="fa fa-check"></i><b>4.9</b> Functions</a></li>
 <li class="chapter" data-level="4.10" data-path="objects.html"><a href="objects.html#things-to-remember-2"><i class="fa fa-check"></i><b>4.10</b> Things to Remember</a></li>
+<li class="chapter" data-level="4.11" data-path="objects.html"><a href="objects.html#exercises"><i class="fa fa-check"></i><b>4.11</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="baserfilter.html"><a href="baserfilter.html"><i class="fa fa-check"></i><b>5</b> How to Filter and Transform Data in Base R</a><ul>
+<li class="chapter" data-level="5" data-path="baserfilter.html"><a href="baserfilter.html"><i class="fa fa-check"></i><b>5</b> How to Filter and Transform Data in Base R</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="baserfilter.html"><a href="baserfilter.html#what-are-operators"><i class="fa fa-check"></i><b>5.1</b> What Are Operators?</a></li>
 <li class="chapter" data-level="5.2" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-and-transform-data-from-a-vector"><i class="fa fa-check"></i><b>5.2</b> How to Filter and Transform Data From a Vector</a></li>
 <li class="chapter" data-level="5.3" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-and-transform-data-from-a-matrix"><i class="fa fa-check"></i><b>5.3</b> How to Filter and Transform Data From a Matrix</a></li>
@@ -178,9 +187,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.5" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-and-transform-data-from-a-data-frame"><i class="fa fa-check"></i><b>5.5</b> How to Filter and Transform Data from a Data Frame</a></li>
 <li class="chapter" data-level="5.6" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-a-list"><i class="fa fa-check"></i><b>5.6</b> How to Filter a List</a></li>
 <li class="chapter" data-level="5.7" data-path="baserfilter.html"><a href="baserfilter.html#things-to-remember-3"><i class="fa fa-check"></i><b>5.7</b> Things to Remember</a></li>
-<li class="chapter" data-level="5.8" data-path="baserfilter.html"><a href="baserfilter.html#exercises"><i class="fa fa-check"></i><b>5.8</b> Exercises</a></li>
+<li class="chapter" data-level="5.8" data-path="baserfilter.html"><a href="baserfilter.html#exercises-1"><i class="fa fa-check"></i><b>5.8</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="dplyr.html"><a href="dplyr.html"><i class="fa fa-check"></i><b>6</b> How to Filter and Transform Data with the Dplyr Package</a><ul>
+<li class="chapter" data-level="6" data-path="dplyr.html"><a href="dplyr.html"><i class="fa fa-check"></i><b>6</b> How to Filter and Transform Data with the Dplyr Package</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="dplyr.html"><a href="dplyr.html#why-is-dplyr-so-popular"><i class="fa fa-check"></i><b>6.1</b> Why is <code>dplyr</code> So Popular?</a></li>
 <li class="chapter" data-level="6.2" data-path="dplyr.html"><a href="dplyr.html#its-still-worth-learning-base-r"><i class="fa fa-check"></i><b>6.2</b> It’s Still Worth Learning Base R</a></li>
 <li class="chapter" data-level="6.3" data-path="dplyr.html"><a href="dplyr.html#the-dplyr-syntax"><i class="fa fa-check"></i><b>6.3</b> The <code>dplyr</code> Syntax</a></li>
@@ -189,8 +199,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.6" data-path="dplyr.html"><a href="dplyr.html#how-to-filter-a-data-frame-with-dplyr-in-r"><i class="fa fa-check"></i><b>6.6</b> How to Filter a Data Frame with <code>dplyr</code> in R</a></li>
 <li class="chapter" data-level="6.7" data-path="dplyr.html"><a href="dplyr.html#how-to-summarize-and-group-data-with-dplyr-in-r"><i class="fa fa-check"></i><b>6.7</b> How to Summarize and Group Data with <code>dplyr</code> in R</a></li>
 <li class="chapter" data-level="6.8" data-path="dplyr.html"><a href="dplyr.html#things-to-remember-4"><i class="fa fa-check"></i><b>6.8</b> Things to Remember</a></li>
+<li class="chapter" data-level="6.9" data-path="dplyr.html"><a href="dplyr.html#exercises-2"><i class="fa fa-check"></i><b>6.9</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>7</b> Understanding and Using R Packages</a><ul>
+<li class="chapter" data-level="7" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>7</b> Understanding and Using R Packages</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="packages.html"><a href="packages.html#why-does-r-use-packages"><i class="fa fa-check"></i><b>7.1</b> Why Does R Use Packages?</a></li>
 <li class="chapter" data-level="7.2" data-path="packages.html"><a href="packages.html#how-to-access-r-packages"><i class="fa fa-check"></i><b>7.2</b> How to Access R Packages</a></li>
 <li class="chapter" data-level="7.3" data-path="packages.html"><a href="packages.html#how-to-install-and-load-a-package---the-easy-way"><i class="fa fa-check"></i><b>7.3</b> How to Install and Load a Package - The Easy Way</a></li>
@@ -200,8 +212,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.7" data-path="packages.html"><a href="packages.html#how-to-find-new-packages-to-install"><i class="fa fa-check"></i><b>7.7</b> How to Find New Packages to Install</a></li>
 <li class="chapter" data-level="7.8" data-path="packages.html"><a href="packages.html#how-to-find-documentation-on-packages"><i class="fa fa-check"></i><b>7.8</b> How to Find Documentation on Packages</a></li>
 <li class="chapter" data-level="7.9" data-path="packages.html"><a href="packages.html#things-to-remember-5"><i class="fa fa-check"></i><b>7.9</b> Things to Remember</a></li>
+<li class="chapter" data-level="7.10" data-path="packages.html"><a href="packages.html#exercises-3"><i class="fa fa-check"></i><b>7.10</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="function.html"><a href="function.html"><i class="fa fa-check"></i><b>8</b> How to Write Functions</a><ul>
+<li class="chapter" data-level="8" data-path="function.html"><a href="function.html"><i class="fa fa-check"></i><b>8</b> How to Write Functions</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="function.html"><a href="function.html#two-approaches-to-using-r-functions"><i class="fa fa-check"></i><b>8.1</b> Two Approaches to Using R Functions</a></li>
 <li class="chapter" data-level="8.2" data-path="function.html"><a href="function.html#why-you-should-learn-to-write-your-own-functions"><i class="fa fa-check"></i><b>8.2</b> Why You Should Learn to Write Your Own Functions</a></li>
 <li class="chapter" data-level="8.3" data-path="function.html"><a href="function.html#the-components-of-an-r-function"><i class="fa fa-check"></i><b>8.3</b> The Components of an R Function</a></li>
@@ -212,9 +226,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.8" data-path="function.html"><a href="function.html#applying-a-control-flow-to-our-summary-stats-function"><i class="fa fa-check"></i><b>8.8</b> Applying a Control Flow to Our Summary Stats Function</a></li>
 <li class="chapter" data-level="8.9" data-path="function.html"><a href="function.html#breaking-down-the-function-we-just-made"><i class="fa fa-check"></i><b>8.9</b> Breaking Down the Function We Just Made</a></li>
 <li class="chapter" data-level="8.10" data-path="function.html"><a href="function.html#things-to-remember-6"><i class="fa fa-check"></i><b>8.10</b> Things to Remember</a></li>
-<li class="chapter" data-level="8.11" data-path="function.html"><a href="function.html#exercises-1"><i class="fa fa-check"></i><b>8.11</b> Exercises</a></li>
+<li class="chapter" data-level="8.11" data-path="function.html"><a href="function.html#exercises-4"><i class="fa fa-check"></i><b>8.11</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="importdata.html"><a href="importdata.html"><i class="fa fa-check"></i><b>9</b> Importing Data into R</a><ul>
+<li class="chapter" data-level="9" data-path="importdata.html"><a href="importdata.html"><i class="fa fa-check"></i><b>9</b> Importing Data into R</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="importdata.html"><a href="importdata.html#how-to-import-a-raw-data-file-the-easy-way"><i class="fa fa-check"></i><b>9.1</b> How to Import a Raw Data File the Easy Way</a></li>
 <li class="chapter" data-level="9.2" data-path="importdata.html"><a href="importdata.html#import-a-raw-data-file-the-hard-way"><i class="fa fa-check"></i><b>9.2</b> Import a Raw Data File the Hard Way</a></li>
 <li class="chapter" data-level="9.3" data-path="importdata.html"><a href="importdata.html#save-import-functions"><i class="fa fa-check"></i><b>9.3</b> Save Import Functions</a></li>
@@ -222,11 +237,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.5" data-path="importdata.html"><a href="importdata.html#connect-to-an-api"><i class="fa fa-check"></i><b>9.5</b> Connect to an API</a></li>
 <li class="chapter" data-level="9.6" data-path="importdata.html"><a href="importdata.html#things-to-remember-7"><i class="fa fa-check"></i><b>9.6</b> Things to Remember</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="plotdata.html"><a href="plotdata.html"><i class="fa fa-check"></i><b>10</b> How to Plot Data in R</a><ul>
+<li class="chapter" data-level="10" data-path="plotdata.html"><a href="plotdata.html"><i class="fa fa-check"></i><b>10</b> How to Plot Data in R</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="plotdata.html"><a href="plotdata.html#which-r-plot-package-is-best"><i class="fa fa-check"></i><b>10.1</b> Which R Plot Package is Best?</a></li>
 <li class="chapter" data-level="10.2" data-path="plotdata.html"><a href="plotdata.html#so-which-data-viz-package-is-actually-the-best"><i class="fa fa-check"></i><b>10.2</b> So Which Data Viz Package is Actually the Best?</a></li>
 <li class="chapter" data-level="10.3" data-path="plotdata.html"><a href="plotdata.html#how-to-write-ggplot2-scripts"><i class="fa fa-check"></i><b>10.3</b> How to Write ggplot2 Scripts</a></li>
-<li class="chapter" data-level="10.4" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-common-data-visualizations-in-ggplot2"><i class="fa fa-check"></i><b>10.4</b> How to Plot Common Data Visualizations in ggplot2</a><ul>
+<li class="chapter" data-level="10.4" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-common-data-visualizations-in-ggplot2"><i class="fa fa-check"></i><b>10.4</b> How to Plot Common Data Visualizations in ggplot2</a>
+<ul>
 <li class="chapter" data-level="10.4.1" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-a-scatterplot"><i class="fa fa-check"></i><b>10.4.1</b> How to Plot a Scatterplot</a></li>
 <li class="chapter" data-level="10.4.2" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-a-bar-graph-histogram"><i class="fa fa-check"></i><b>10.4.2</b> How to Plot a Bar Graph / Histogram</a></li>
 <li class="chapter" data-level="10.4.3" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-a-line-graph"><i class="fa fa-check"></i><b>10.4.3</b> How to Plot a Line Graph</a></li>
@@ -234,10 +251,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.4.5" data-path="plotdata.html"><a href="plotdata.html#how-to-improve-labels-and-other-formatting-tips"><i class="fa fa-check"></i><b>10.4.5</b> How to Improve Labels and Other Formatting Tips</a></li>
 </ul></li>
 <li class="chapter" data-level="10.5" data-path="plotdata.html"><a href="plotdata.html#things-to-remember-8"><i class="fa fa-check"></i><b>10.5</b> Things to Remember</a></li>
+<li class="chapter" data-level="10.6" data-path="plotdata.html"><a href="plotdata.html#exercises-5"><i class="fa fa-check"></i><b>10.6</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="answers.html"><a href="answers.html"><i class="fa fa-check"></i><b>11</b> Answer Key</a><ul>
-<li class="chapter" data-level="11.1" data-path="answers.html"><a href="answers.html#chapter-3"><i class="fa fa-check"></i><b>11.1</b> Chapter 3</a></li>
-<li class="chapter" data-level="11.2" data-path="answers.html"><a href="answers.html#chapter-5"><i class="fa fa-check"></i><b>11.2</b> Chapter 5</a></li>
+<li class="chapter" data-level="11" data-path="statfunctions.html"><a href="statfunctions.html"><i class="fa fa-check"></i><b>11</b> Statistical Functions in R: Common Functions and How They Work</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="statfunctions.html"><a href="statfunctions.html#how-statistical-functions-work-in-r-programming"><i class="fa fa-check"></i><b>11.1</b> How Statistical Functions Work in R Programming</a></li>
+<li class="chapter" data-level="11.2" data-path="statfunctions.html"><a href="statfunctions.html#how-to-build-a-model-in-r-example-with-linear-regression"><i class="fa fa-check"></i><b>11.2</b> How to Build a Model in R (Example with Linear Regression)</a></li>
+<li class="chapter" data-level="11.3" data-path="statfunctions.html"><a href="statfunctions.html#how-to-review-common-model-performance-statistics"><i class="fa fa-check"></i><b>11.3</b> How to Review Common Model Performance Statistics</a></li>
+<li class="chapter" data-level="11.4" data-path="statfunctions.html"><a href="statfunctions.html#how-to-make-predictions-with-a-model"><i class="fa fa-check"></i><b>11.4</b> How to Make Predictions with a Model</a></li>
+<li class="chapter" data-level="11.5" data-path="statfunctions.html"><a href="statfunctions.html#how-to-save-your-model-to-use-later"><i class="fa fa-check"></i><b>11.5</b> How to Save Your Model to Use Later</a></li>
+<li class="chapter" data-level="11.6" data-path="statfunctions.html"><a href="statfunctions.html#how-to-add-multiple-parameters-to-a-model"><i class="fa fa-check"></i><b>11.6</b> How to Add Multiple Parameters to a Model</a></li>
+<li class="chapter" data-level="11.7" data-path="statfunctions.html"><a href="statfunctions.html#how-to-add-a-categorical-variable-to-a-model"><i class="fa fa-check"></i><b>11.7</b> How to Add a Categorical Variable to a Model</a></li>
+<li class="chapter" data-level="11.8" data-path="statfunctions.html"><a href="statfunctions.html#how-to-add-transformed-variables-to-a-model"><i class="fa fa-check"></i><b>11.8</b> How to Add Transformed Variables to a Model</a></li>
+<li class="chapter" data-level="11.9" data-path="statfunctions.html"><a href="statfunctions.html#how-to-add-variable-interactions-to-a-model"><i class="fa fa-check"></i><b>11.9</b> How to Add Variable Interactions to a Model</a></li>
+<li class="chapter" data-level="11.10" data-path="statfunctions.html"><a href="statfunctions.html#how-to-calculate-model-confidence-intervals"><i class="fa fa-check"></i><b>11.10</b> How to Calculate Model Confidence Intervals</a></li>
+<li class="chapter" data-level="11.11" data-path="statfunctions.html"><a href="statfunctions.html#how-to-calculate-analysis-of-variance-between-models"><i class="fa fa-check"></i><b>11.11</b> How to Calculate Analysis of Variance Between Models</a></li>
+<li class="chapter" data-level="11.12" data-path="statfunctions.html"><a href="statfunctions.html#other-common-model-types---logistical-regression"><i class="fa fa-check"></i><b>11.12</b> Other Common Model Types - Logistical Regression</a></li>
+<li class="chapter" data-level="11.13" data-path="statfunctions.html"><a href="statfunctions.html#other-common-model-types---anova-models"><i class="fa fa-check"></i><b>11.13</b> Other Common Model Types - Anova Models</a></li>
+<li class="chapter" data-level="11.14" data-path="statfunctions.html"><a href="statfunctions.html#things-to-remember-9"><i class="fa fa-check"></i><b>11.14</b> Things to Remember</a></li>
+<li class="chapter" data-level="11.15" data-path="statfunctions.html"><a href="statfunctions.html#exercises-6"><i class="fa fa-check"></i><b>11.15</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="answers.html"><a href="answers.html"><i class="fa fa-check"></i><b>12</b> Answer Key</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="answers.html"><a href="answers.html#chapter-4---object-types-in-r-programming"><i class="fa fa-check"></i><b>12.1</b> Chapter 4 - Object Types in R Programming</a></li>
+<li class="chapter" data-level="12.2" data-path="answers.html"><a href="answers.html#chapter-5---how-to-filter-and-transform-data-in-base-r"><i class="fa fa-check"></i><b>12.2</b> Chapter 5 - How to Filter and Transform Data in Base R</a></li>
+<li class="chapter" data-level="12.3" data-path="answers.html"><a href="answers.html#chapter-6---how-to-filter-and-transform-data-with-the-dplyr-package"><i class="fa fa-check"></i><b>12.3</b> Chapter 6 - How to Filter and Transform Data with the Dplyr Package</a></li>
+<li class="chapter" data-level="12.4" data-path="answers.html"><a href="answers.html#chapter-7---understanding-and-using-r-packages"><i class="fa fa-check"></i><b>12.4</b> Chapter 7 - Understanding and Using R Packages</a></li>
+<li class="chapter" data-level="12.5" data-path="answers.html"><a href="answers.html#chapter-8---how-to-write-functions"><i class="fa fa-check"></i><b>12.5</b> Chapter 8 - How to Write Functions</a></li>
+<li class="chapter" data-level="12.6" data-path="answers.html"><a href="answers.html#chapter-10---how-to-plot-data-in-r"><i class="fa fa-check"></i><b>12.6</b> Chapter 10 - How to Plot Data in R</a></li>
+<li class="chapter" data-level="12.7" data-path="answers.html"><a href="answers.html#chapter-11---statistical-functions-in-r"><i class="fa fa-check"></i><b>12.7</b> Chapter 11 - Statistical Functions in R</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -260,29 +302,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="dplyr" class="section level1">
+<div id="dplyr" class="section level1" number="6">
 <h1><span class="header-section-number">Chapter 6</span> How to Filter and Transform Data with the Dplyr Package</h1>
 <p>In the last chapter, I showed you how to use R base to filter and transform data. Personally, I still think this is the best way to manage data in R. However, there’s another popular package for data filtering and transformation – the <code>dplyr</code> package.</p>
 <p>The <code>dplyr</code> package (pronounced like “data plier”) was developed by Hadley Wickham to allow more intuitive data transformation. It falls under the tidyverse packages, which includes other popular R packages created by Mr. Wickham.</p>
-<div id="why-is-dplyr-so-popular" class="section level2">
+<div id="why-is-dplyr-so-popular" class="section level2" number="6.1">
 <h2><span class="header-section-number">6.1</span> Why is <code>dplyr</code> So Popular?</h2>
 <p><code>dplyr</code> is popular for its intuitive syntax for filtering and transforming data frames. If your programming background is with SQL, you’ll find it an easier transition to make.</p>
 <p><code>dplyr</code> is also highly readable compared to base R. That’s where I see the most value in it. You can send it over to another programmer and it’ll be easier for them to read what you’re doing with the data.</p>
 </div>
-<div id="its-still-worth-learning-base-r" class="section level2">
+<div id="its-still-worth-learning-base-r" class="section level2" number="6.2">
 <h2><span class="header-section-number">6.2</span> It’s Still Worth Learning Base R</h2>
 <p><code>dplyr</code>’s strengths are mostly limited to data frames, whereas base R can work with vectors, matrices, arrays, and lists. That makes it still worthwhile to study base R.</p>
-<p>This isn’t a knock against <code>dplyr</code>. Much of the work you’ll do requires a data frame and most R functions work with data frames fairly easily. But writing your own functions should be done with base R.</p>
+<p>This isn’t a knock against <code>dplyr</code>. Much of the work you’ll do requires a data frame and most R functions work with data frames fairly easily. But I have found that the functions I typically write (which we’ll cover later) work a lot better when you understand base R.</p>
 </div>
-<div id="the-dplyr-syntax" class="section level2">
+<div id="the-dplyr-syntax" class="section level2" number="6.3">
 <h2><span class="header-section-number">6.3</span> The <code>dplyr</code> Syntax</h2>
 <p>If you recall, filtering a data frame in base R looks like this:</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="dplyr.html#cb194-1"></a><span class="co">#If needed, you can reload the Bond data set with this script</span></span>
-<span id="cb194-2"><a href="dplyr.html#cb194-2"></a>bond &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/taylorrodgers/bond/main/bond.csv&quot;</span>)</span>
-<span id="cb194-3"><a href="dplyr.html#cb194-3"></a></span>
-<span id="cb194-4"><a href="dplyr.html#cb194-4"></a>bond[bond[<span class="st">&quot;year&quot;</span>]<span class="op">&gt;=</span><span class="dv">1990</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="dplyr.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="co">#If needed, you can reload the Bond data set with this script</span></span>
+<span id="cb198-2"><a href="dplyr.html#cb198-2" aria-hidden="true" tabindex="-1"></a>bond <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/taylorrodgers/bond/main/bond.csv&quot;</span>)</span>
+<span id="cb198-3"><a href="dplyr.html#cb198-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb198-4"><a href="dplyr.html#cb198-4" aria-hidden="true" tabindex="-1"></a>bond[bond[<span class="st">&quot;year&quot;</span>]<span class="sc">&gt;=</span><span class="dv">1990</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
 <p>That’s different in <code>dplyr</code>, which looks like this:</p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="dplyr.html#cb195-1"></a>bond <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(filmname,year,actor) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year<span class="op">&gt;=</span><span class="dv">1990</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="dplyr.html#cb199-1" aria-hidden="true" tabindex="-1"></a>bond <span class="sc">%&gt;%</span> <span class="fu">select</span>(filmname,year,actor) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year<span class="sc">&gt;=</span><span class="dv">1990</span>)</span></code></pre></div>
 <p>You can literally think of the <code>dplyr</code> syntax as a set of instructions to read one-by-one:</p>
 <ol style="list-style-type: decimal">
 <li>Hey data set named “Bond”… <code>bond %&gt;%</code></li>
@@ -291,30 +333,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>That’s a lot easier to understand than normal base R, ain’t it?</p>
 </div>
-<div id="understand-the-difference-between-selecting-and-filtering" class="section level2">
+<div id="understand-the-difference-between-selecting-and-filtering" class="section level2" number="6.4">
 <h2><span class="header-section-number">6.4</span> Understand the Difference Between Selecting and Filtering</h2>
 <p>With <code>dplyr</code>, it’s important to remember the difference between selecting and filtering.</p>
 <p>Selecting uses the <code>select()</code> function and reduces the <strong>columns</strong> to those you specify:</p>
 <p>In addition to <code>select()</code>, there’s also <code>mutate()</code> and <code>transmute()</code>, which serve similar purposes. We’ll cover those two functions in the next section.</p>
 <p>Filtering uses the <code>filter()</code> function and reduces the rows to those you specify.</p>
 </div>
-<div id="how-to-select-and-mutate-a-data-frame-with-dplyr-in-r" class="section level2">
+<div id="how-to-select-and-mutate-a-data-frame-with-dplyr-in-r" class="section level2" number="6.5">
 <h2><span class="header-section-number">6.5</span> How to Select and Mutate a Data Frame with <code>dplyr</code> in R</h2>
 <p>In dplyr, you can select columns using the <code>select()</code> function:</p>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="dplyr.html#cb196-1"></a>bond <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(actor,filmname,gross)</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="dplyr.html#cb200-1" aria-hidden="true" tabindex="-1"></a>bond <span class="sc">%&gt;%</span> <span class="fu">select</span>(actor,filmname,gross)</span></code></pre></div>
 <p>Executing the code above will only select the columns <em>actor</em>, <em>filmname</em>, and <em>gross.</em></p>
 <p>Sometimes you’ll need to transform or alter the data. That’s where <code>mutate()</code> comes in handy. <code>mutate()</code> will allow you to create new fields that alter existing ones. Confused?</p>
 <p>Execute the script below to see:</p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="dplyr.html#cb197-1"></a>bond <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">gross_millions=</span>gross<span class="op">*</span><span class="dv">1000000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="dplyr.html#cb201-1" aria-hidden="true" tabindex="-1"></a>bond <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">gross_millions=</span>gross<span class="sc">*</span><span class="dv">1000000</span>)</span></code></pre></div>
 <p>The <code>mutate()</code> function added a new column to the end called <em>gross_millions</em> with our new calculation.</p>
 <p>The one drawback to <code>mutate()</code> is that it allow you to select specified columns. Rather than add another <code>%&gt;% select()</code> to your code, you can use the <code>transmute()</code> function. <code>transmute()</code> basically combines the functionality of <code>mutate()</code> and <code>select()</code>. You can both define the columns you want to keep and mutate others.</p>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="dplyr.html#cb198-1"></a>bond <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">transmute</span>(actor,filmname,<span class="dt">gross=</span>gross<span class="op">*</span><span class="dv">1000000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="dplyr.html#cb202-1" aria-hidden="true" tabindex="-1"></a>bond <span class="sc">%&gt;%</span> <span class="fu">transmute</span>(actor,filmname,<span class="at">gross=</span>gross<span class="sc">*</span><span class="dv">1000000</span>)</span></code></pre></div>
 <p>I personally like <code>transmute()</code> for selecting columns. However, <code>select()</code> and <code>mutate()</code> are appropriate in some situations.</p>
 </div>
-<div id="how-to-filter-a-data-frame-with-dplyr-in-r" class="section level2">
+<div id="how-to-filter-a-data-frame-with-dplyr-in-r" class="section level2" number="6.6">
 <h2><span class="header-section-number">6.6</span> How to Filter a Data Frame with <code>dplyr</code> in R</h2>
 <p>To filter rows in a data frame, use the <code>filter()</code> function:</p>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="dplyr.html#cb199-1"></a>bond <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year<span class="op">&gt;=</span><span class="dv">1980</span> <span class="op">&amp;</span><span class="st"> </span>actor<span class="op">==</span><span class="st">&quot;Daniel Craig&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="dplyr.html#cb203-1" aria-hidden="true" tabindex="-1"></a>bond <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year<span class="sc">&gt;=</span><span class="dv">1980</span> <span class="sc">&amp;</span> actor<span class="sc">==</span><span class="st">&quot;Daniel Craig&quot;</span>)</span></code></pre></div>
 <p>If you noticed, we used the same operators as in base R. We can use any R operators as below:</p>
 <table>
 <caption><span id="tab:dplyr-fig8">Table 6.1: </span>R Operators</caption>
@@ -364,29 +406,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>You can apply any of these operators the <code>filter()</code> function:</p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="dplyr.html#cb200-1"></a>bond <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(actor <span class="op">==</span><span class="st"> &quot;Daniel Craig&quot;</span> <span class="op">|</span><span class="st"> </span>actor <span class="op">==</span><span class="st"> &quot;Sean Connery&quot;</span>)</span>
-<span id="cb200-2"><a href="dplyr.html#cb200-2"></a>bond <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(gross <span class="op">&gt;=</span><span class="st"> </span><span class="dv">700</span> <span class="op">&amp;</span><span class="st"> </span>year <span class="op">&lt;</span><span class="st"> </span><span class="dv">2000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="dplyr.html#cb204-1" aria-hidden="true" tabindex="-1"></a>bond <span class="sc">%&gt;%</span> <span class="fu">filter</span>(actor <span class="sc">==</span> <span class="st">&quot;Daniel Craig&quot;</span> <span class="sc">|</span> actor <span class="sc">==</span> <span class="st">&quot;Sean Connery&quot;</span>)</span>
+<span id="cb204-2"><a href="dplyr.html#cb204-2" aria-hidden="true" tabindex="-1"></a>bond <span class="sc">%&gt;%</span> <span class="fu">filter</span>(gross <span class="sc">&gt;=</span> <span class="dv">700</span> <span class="sc">&amp;</span> year <span class="sc">&lt;</span> <span class="dv">2000</span>)</span></code></pre></div>
 <p>Like in base R, you can also pass vectors in for dynamic filters:</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="dplyr.html#cb201-1"></a>actor_list &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Daniel Craig&quot;</span>,<span class="st">&quot;Sean Connery&quot;</span>,<span class="st">&quot;Timothy Dalton&quot;</span>)</span>
-<span id="cb201-2"><a href="dplyr.html#cb201-2"></a>bond <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(actor <span class="op">%in%</span><span class="st"> </span>actor_list)</span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="dplyr.html#cb205-1" aria-hidden="true" tabindex="-1"></a>actor_list <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Daniel Craig&quot;</span>,<span class="st">&quot;Sean Connery&quot;</span>,<span class="st">&quot;Timothy Dalton&quot;</span>)</span>
+<span id="cb205-2"><a href="dplyr.html#cb205-2" aria-hidden="true" tabindex="-1"></a>bond <span class="sc">%&gt;%</span> <span class="fu">filter</span>(actor <span class="sc">%in%</span> actor_list)</span></code></pre></div>
 </div>
-<div id="how-to-summarize-and-group-data-with-dplyr-in-r" class="section level2">
+<div id="how-to-summarize-and-group-data-with-dplyr-in-r" class="section level2" number="6.7">
 <h2><span class="header-section-number">6.7</span> How to Summarize and Group Data with <code>dplyr</code> in R</h2>
 <p>Probably the most useful thing about <code>dplyr</code> is the ability to create new data frames that group and summarize data found in the larger data set. This is the primary reason I like <code>dplyr</code>.</p>
 <p>Let’s say you wanted to take the Bond data set and find out the gross revenue mean and standard deviation for Daniel Craig and Sean Connery. To accomplish this in base R, you’d have to use the following code:</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="dplyr.html#cb202-1"></a><span class="kw">data.frame</span>(<span class="dt">actor_subselect=</span><span class="kw">c</span>(<span class="st">&quot;Daniel Craig&quot;</span>,<span class="st">&quot;Sean Connery&quot;</span>), </span>
-<span id="cb202-2"><a href="dplyr.html#cb202-2"></a>           <span class="dt">average_revenue=</span><span class="kw">c</span>(<span class="kw">mean</span>(bond[bond<span class="op">$</span>actor<span class="op">==</span><span class="st">&quot;Daniel Craig&quot;</span>,<span class="st">&quot;gross&quot;</span>]),</span>
-<span id="cb202-3"><a href="dplyr.html#cb202-3"></a>                             <span class="kw">mean</span>(bond[bond<span class="op">$</span>actor<span class="op">==</span><span class="st">&quot;Sean Connery&quot;</span>,<span class="st">&quot;gross&quot;</span>])),</span>
-<span id="cb202-4"><a href="dplyr.html#cb202-4"></a>           <span class="dt">sdev_revenue=</span><span class="kw">c</span>(<span class="kw">sd</span>(bond[bond<span class="op">$</span>actor<span class="op">==</span><span class="st">&quot;Daniel Craig&quot;</span>,<span class="st">&quot;gross&quot;</span>]),</span>
-<span id="cb202-5"><a href="dplyr.html#cb202-5"></a>                          <span class="kw">sd</span>(bond[bond<span class="op">$</span>actor<span class="op">==</span><span class="st">&quot;Sean Connery&quot;</span>,<span class="st">&quot;gross&quot;</span>])))</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="dplyr.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">actor_subselect=</span><span class="fu">c</span>(<span class="st">&quot;Daniel Craig&quot;</span>,<span class="st">&quot;Sean Connery&quot;</span>), </span>
+<span id="cb206-2"><a href="dplyr.html#cb206-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">average_revenue=</span><span class="fu">c</span>(<span class="fu">mean</span>(bond[bond<span class="sc">$</span>actor<span class="sc">==</span><span class="st">&quot;Daniel Craig&quot;</span>,<span class="st">&quot;gross&quot;</span>]),</span>
+<span id="cb206-3"><a href="dplyr.html#cb206-3" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">mean</span>(bond[bond<span class="sc">$</span>actor<span class="sc">==</span><span class="st">&quot;Sean Connery&quot;</span>,<span class="st">&quot;gross&quot;</span>])),</span>
+<span id="cb206-4"><a href="dplyr.html#cb206-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">sdev_revenue=</span><span class="fu">c</span>(<span class="fu">sd</span>(bond[bond<span class="sc">$</span>actor<span class="sc">==</span><span class="st">&quot;Daniel Craig&quot;</span>,<span class="st">&quot;gross&quot;</span>]),</span>
+<span id="cb206-5"><a href="dplyr.html#cb206-5" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">sd</span>(bond[bond<span class="sc">$</span>actor<span class="sc">==</span><span class="st">&quot;Sean Connery&quot;</span>,<span class="st">&quot;gross&quot;</span>])))</span></code></pre></div>
 <p>It’s not very simple, is it? Imagine having to do that for a much larger data set with even more actors!</p>
 <p><code>dplyr</code>’s <code>group_by()</code> and <code>summarize()</code> functions really cut down on this work. Here’s how we can accomplish the same thing as above:</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="dplyr.html#cb203-1"></a>bond <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(actor<span class="op">==</span><span class="st">&quot;Daniel Craig&quot;</span> <span class="op">|</span><span class="st"> </span>actor <span class="op">==</span><span class="st"> &quot;Sean Connery&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb203-2"><a href="dplyr.html#cb203-2"></a><span class="st">        </span><span class="kw">group_by</span>(actor) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb203-3"><a href="dplyr.html#cb203-3"></a><span class="st">        </span><span class="kw">summarize</span>(<span class="dt">average_revenue=</span><span class="kw">mean</span>(gross),<span class="dt">sdev_revenue=</span><span class="kw">sd</span>(gross))</span></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="dplyr.html#cb207-1" aria-hidden="true" tabindex="-1"></a>bond <span class="sc">%&gt;%</span> <span class="fu">filter</span>(actor<span class="sc">==</span><span class="st">&quot;Daniel Craig&quot;</span> <span class="sc">|</span> actor <span class="sc">==</span> <span class="st">&quot;Sean Connery&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb207-2"><a href="dplyr.html#cb207-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">group_by</span>(actor) <span class="sc">%&gt;%</span> </span>
+<span id="cb207-3"><a href="dplyr.html#cb207-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summarize</span>(<span class="at">average_revenue=</span><span class="fu">mean</span>(gross),<span class="at">sdev_revenue=</span><span class="fu">sd</span>(gross))</span></code></pre></div>
 <p>Now you’ll notice this script isn’t shorter than what we did earlier. However, it’s a lot easier to read. That’s the beauty of <code>dplyr</code>!</p>
 </div>
-<div id="things-to-remember-4" class="section level2">
+<div id="things-to-remember-4" class="section level2" number="6.8">
 <h2><span class="header-section-number">6.8</span> Things to Remember</h2>
 <ul>
 <li><code>dplyr</code> is a package that provides a more intuitive syntax for transforming and analyzing data frames in R</li>
@@ -394,6 +436,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Filter rows with <code>filter()</code> and the base R operators</li>
 <li>Provide summary statistics with <code>group_by()</code> and <code>summarize()</code> functions</li>
 </ul>
+</div>
+<div id="exercises-2" class="section level2" number="6.9">
+<h2><span class="header-section-number">6.9</span> Exercises</h2>
+<ol style="list-style-type: decimal">
+<li>Using the <strong>mtcars</strong> data set and the <code>dplyr</code> package, filter to cars that have a <strong>gear</strong> with the value of 4 <em>or</em> an <strong>hp</strong> greater than 115. (Hint: use <code>data(mtcars)</code> to load the data set.)</li>
+<li>Using the <strong>mtcars</strong> data set and the <code>dplyr</code> package, apply the same filter as the first question and select only the columns <strong>mpg</strong>, <strong>cyl</strong>, <strong>gear</strong>, and <strong>hp</strong>. (Note: the output will include the car models as row names by default. No need to remove those.)</li>
+<li>Using the <strong>mtcars</strong> data set and the <code>dplyr</code> package, create a new column that takes the natural log (<code>log()</code>) of <strong>mpg</strong> and name it <strong>mpg_log</strong>. Be sure to still select all the other columns mentioned in the second question <em>except</em> for <strong>mpg</strong>.</li>
+<li>Using the <strong>mtcars</strong> data set and the <code>dplyr</code> package, determine the average <strong>mpg</strong>, grouped by <strong>gear</strong>, and filtered to only <strong>wt</strong> greater than 2.</li>
+</ol>
 
 </div>
 </div>
@@ -407,7 +458,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -426,6 +476,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -446,6 +497,10 @@ gitbook.start({
 "text": null
 },
 "download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

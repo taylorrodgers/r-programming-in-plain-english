@@ -1,0 +1,222 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Answer Key {#answers}
+
+## Chapter 4 - Object Types in R Programming
+
+1. This object was an array.
+2. This object was a vector.
+3. This would output a vector.
+4. This would output a data frame.
+5. To output a factor, you would run the following code:
+```{r A2.1, results=FALSE}
+data(mtcars)
+factor(mtcars$gear)
+```
+
+## Chapter 5 - How to Filter and Transform Data in Base R 
+
+1. Filter the following vector to values greater than 2
+```{r A3.1, results=FALSE}
+  q1 <- seq(1,20,2)
+  q1[q1 > 2]
+```
+2. Filter the following vector to values between 20 and 30, but only for the first three entries that meet that criteria. (Hint: add `[n:n]` for the range of values after you determine which values meet that criteria)
+```{r A3.2, results=FALSE}
+  q2 <- round(rnorm(20,32,7),0)
+  q2 >= 20 & q2 <= 30
+  q2[q2 >= 20 & q2 <= 30][1:3]
+```
+3. Multiple the following matrices together.
+```{r A3.3, results=FALSE}
+  q3_1 <- matrix(round(seq(1,40,3.27),0),3)
+  q3_2 <- matrix(seq(1,8,1),4)
+  q3_1 %*% q3_2
+```
+4. Subtract 41 from every entry in the second column of the following matrix. Replace the column with those new values.
+```{r A3.4, eval=FALSE}
+  q4 <- matrix(seq(1,120,4),10,3)
+  q4
+  q4[,2] <- q4[,2] - 41
+  q4
+```
+5. Select the second row each matrix in the following array. Subtract 5 from those rows.
+```{r A3.5, eval=FALSE}
+  q5 <- array(data=c(matrix(seq(1,15,1),5,3),
+                  matrix(seq(4,60,4),5,3),
+                  matrix(seq(2,30,2),5,3)),
+                dim=c(5,3,3))
+  q5
+  q5[2,,]-5
+```
+6. Filter the following data frame to Bond films starring Roger Moore.
+```{r A3.6, eval=FALSE}
+  bond[bond["actor"]=="Roger Moore",]
+```
+7. Filter the following data frame to Bond films starring Sean Connery made after 1966.
+```{r A3.7, eval=FALSE}
+  bond[bond["actor"]=="Sean Connery" & bond["year"] > 1966,]
+```
+
+## Chapter 6 - How to Filter and Transform Data with the Dplyr Package
+
+1. You would use the `%>%` notation, `filter()` function, and the operates `|`, `==`, and `>` to accomplish this.
+```{r A6.1, eval=FALSE}
+data(mtcars)
+library(dplyr)
+mtcars %>% filter(gear==4 | hp > 115)
+```
+2. In addition to the same script as above, you would use the `select()` function to reduce the columns.
+```{r A6.2, eval=FALSE}
+data(mtcars)
+library(dplyr)
+mtcars %>% 
+  filter(gear==4 | hp > 115) %>%
+  select(mpg,cyl,gear,hp)
+```
+3. Instead of using `select()` in the previous script, you would use `transmute()`. This function allows you to both transform a column and select only those that are mentioned.
+```{r A6.3, eval=FALSE}
+data(mtcars)
+library(dplyr)
+mtcars %>% 
+  filter(gear==4 | hp > 115) %>%
+  transmute(mpg_log=log(mpg),cyl,gear,hp)
+```
+4. You would use the `filter()`, `group_by()`, and `summarize()` functions to pull this summary data.
+```{r A6.4, eval=FALSE}
+data(mtcars)
+library(dplyr)
+mtcars %>% 
+  filter(wt > 2) %>%
+  group_by(gear) %>%
+  summarize(avg_mpg=mean(mpg))
+```
+## Chapter 7 - Understanding and Using R Packages
+
+1. To install the `tidyverse` set of packages, run the script `install.packages("tidyverse")`.
+2. To load the `dplyr` package, run the script `load(dplyr)`.
+
+## Chapter 8 - How to Write Functions
+
+1. Modify the simply standard deviation function we wrote and change it to calculate mean. Do this without using the built-in `mean` function.
+```{r A5.1, eval=FALSE}
+  avg.simple <- function(data,field) {
+    field <- data[,paste(field)]
+    sum(field)/length(field)
+  }
+```
+2. Alter the `summary.group` function to include median, minimum, and maximum values.
+```{r A5.2, eval=FALSE}
+  summary.group <- function(data,group,field) {
+    groups <- levels(factor(data[,paste(group)]))
+    output <- data.frame(group=character(),
+                         mean=numeric(),
+                         sd=numeric(),
+                         median=numeric(),
+                         minimum=numeric(),
+                         maximum=numeric())
+    for(i in 1:length(groups)) {
+      subdata <- data[data[,paste(group)]==groups[i],
+                      paste(field)]
+      output[i,1:6] <- data.frame(groups[i],
+                                  mean(subdata),
+                                  sd(subdata),
+                                  median(subdata),
+                                  min(subdata),
+                                  max(subdata))
+      }
+    output
+  }
+```
+3. Write a function for the *Fibonacci Sequence*, which ends at a number you choose. You'll need to use a control flow to accomplish this and a default value for the end of the sequence. (Hint: You won't use the `for(var in seq) expr` control flow. Execute `?Control` to use a different version.)
+```{r A5.3, eval=FALSE}
+  fib <- function(end=55){
+    x <- c(0,1)
+    n <- length(x)
+    while(x[n]<end){
+      x[n+1] <- x[n]+x[n-1]
+      n <- length(x)
+    }
+    x
+  }
+```
+
+## Chapter 10 - How to Plot Data in R
+
+1. Use the `ggplot()`, `aes()`, and `geom_point()` functions to construct a plot.
+```{r A10.1, eval=FALSE}
+library(ggplot2)
+data(mtcars)
+ggplot(data=mtcars,
+        mapping=aes(x=hp,y=mpg)) +
+  geom_point(size=3)
+```
+2. Simply add `factor(cyl)` to the **color** argument in the `aes()` function.
+```{r A10.2, eval=FALSE}
+library(ggplot2)
+data(mtcars)
+ggplot(data=mtcars,
+        mapping=aes(x=hp,y=mpg,color=factor(cyl))) +
+  geom_point(size=3)
+```
+3. Use the **x**, **y**, and **color** arguments in the `labs()` function to use a more intuitive naming convention.
+```{r A10.3, eval=FALSE}
+library(ggplot2)
+data(mtcars)
+ggplot(data=mtcars,
+        mapping=aes(x=hp,y=mpg,color=factor(cyl))) +
+  geom_point(size=3) +
+  labs(x="Horsepower",
+       y="Miles Per Gallon",
+       color="Cylinders")
+```
+4. Use the **title** argument in the `labs()` function.
+```{r A10.4, eval=FALSE}
+library(ggplot2)
+data(mtcars)
+ggplot(data=mtcars,
+        mapping=aes(x=hp,y=mpg,color=factor(cyl))) +
+  geom_point(size=3) +
+  labs(x="Horsepower",
+       y="Miles Per Gallon",
+       color="Cylinders",
+       title="Car Performance")
+```
+5. Use the `theme_pew()` theme from the `ggthemes` package.
+```{r A10.5, eval=FALSE}
+library(ggplot2)
+library(ggthemes)
+data(mtcars)
+ggplot(data=mtcars,
+        mapping=aes(x=hp,y=mpg,color=factor(cyl))) +
+  geom_point(size=3) +
+  labs(x="Horsepower",
+       y="Miles Per Gallon",
+       color="Cylinders",
+       title="Car Performance") +
+  theme_few()
+```
+
+## Chapter 11 - Statistical Functions in R
+
+1. After loading your data with `data()`, use the `lm()` function to build a model.
+```{r A11.1,eval=FALSE}
+data(iris)
+PracticeModel <- lm(Petal.Length~Sepal.Length+Sepal.Width,data=iris)
+```
+2. Use the `summary()` function on your model to determine model performance, such as p-values.
+```{r A11.2,eval=FALSE}
+summary(PracticeModel)
+```
+3. Use the `predict()` function to make model predictions on a new data set.
+```{r A11.3,eval=FALSE}
+NewData <- data.frame(Sepal.Length=5,Sepal.Width=3.25)
+predict(PracticeModel,NewData)
+```
+4. Use the `confint()` function to determine the confident intervals for a model.
+```{r A11.4,eval=FALSE}
+confint(PracticeModel)
+```

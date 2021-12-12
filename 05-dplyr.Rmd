@@ -11,7 +11,7 @@ The `dplyr` package (pronounced like “data plier”) was developed by Hadley W
 ## It's Still Worth Learning Base R
 `dplyr`’s strengths are mostly limited to data frames, whereas base R can work with vectors, matrices, arrays, and lists. That makes it still worthwhile to study base R.
 
-This isn’t a knock against `dplyr`. Much of the work you’ll do requires a data frame and most R functions work with data frames fairly easily. But writing your own functions should be done with base R.
+This isn’t a knock against `dplyr`. Much of the work you’ll do requires a data frame and most R functions work with data frames fairly easily. But I have found that the functions I typically write (which we'll cover later) work a lot better when you understand base R.
 
 ## The `dplyr` Syntax
 If you recall, filtering a data frame in base R looks like this:
@@ -128,3 +128,12 @@ Now you’ll notice this script isn’t shorter than what we did earlier. Howeve
 * Select and create new columns with `select()`, `mutate()`, and `transmute()`
 * Filter rows with `filter()` and the base R operators
 * Provide summary statistics with `group_by()` and `summarize()` functions
+
+## Exercises
+
+1. Using the **mtcars** data set and the `dplyr` package, filter to cars that have a **gear** with the value of 4 *or* an **hp** greater than 115. (Hint: use `data(mtcars)` to load the data set.)
+2. Using the **mtcars** data set and the `dplyr` package, apply the same filter as the first question and select only the columns **mpg**, **cyl**, **gear**, and **hp**. (Note: the output will include the car models as row names by default. No need to remove those.)
+3. Using the **mtcars** data set and the `dplyr` package, create a new column that takes the natural log (`log()`) of **mpg** and name it **mpg_log**. Be sure to still select all the other columns mentioned in the second question *except* for **mpg**.
+4. Using the **mtcars** data set and the `dplyr` package, determine the average **mpg**, grouped by **gear**, and filtered to only **wt** greater than 2.
+
+

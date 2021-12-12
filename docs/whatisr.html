@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 What is R Programming? | R Programming in Plain English</title>
   <meta name="description" content="A simple guide to R programming for those without programming experience" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 What is R Programming? | R Programming in Plain English" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Taylor Rodgers" />
 
 
-<meta name="date" content="2021-09-19" />
+<meta name="date" content="2021-12-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,9 @@
   
 <link rel="prev" href="index.html"/>
 <link rel="next" href="setup.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,30 +51,30 @@
 
 
 
-
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -92,7 +94,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -125,6 +127,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -141,15 +144,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">R Programming in Plain English</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About This Book</a><ul>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About This Book</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#things-you-should-know-before-reading"><i class="fa fa-check"></i><b>1.1</b> Things You Should Know Before Reading</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="whatisr.html"><a href="whatisr.html"><i class="fa fa-check"></i><b>2</b> What is R Programming?</a><ul>
+<li class="chapter" data-level="2" data-path="whatisr.html"><a href="whatisr.html"><i class="fa fa-check"></i><b>2</b> What is R Programming?</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="whatisr.html"><a href="whatisr.html#is-r-the-best-statistical-programming-language"><i class="fa fa-check"></i><b>2.1</b> Is R the Best Statistical Programming Language?</a></li>
 <li class="chapter" data-level="2.2" data-path="whatisr.html"><a href="whatisr.html#how-will-learning-r-versus-python-impact-my-job-opportunities"><i class="fa fa-check"></i><b>2.2</b> How Will Learning R versus Python Impact My Job Opportunities?</a></li>
 <li class="chapter" data-level="2.3" data-path="whatisr.html"><a href="whatisr.html#things-to-remember"><i class="fa fa-check"></i><b>2.3</b> Things to Remember</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>3</b> Getting Setup in R and RStudio</a><ul>
+<li class="chapter" data-level="3" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>3</b> Getting Setup in R and RStudio</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="setup.html"><a href="setup.html#how-to-download-r"><i class="fa fa-check"></i><b>3.1</b> How to Download R</a></li>
 <li class="chapter" data-level="3.2" data-path="setup.html"><a href="setup.html#understanding-base-rs-user-interface"><i class="fa fa-check"></i><b>3.2</b> Understanding Base R’s User Interface</a></li>
 <li class="chapter" data-level="3.3" data-path="setup.html"><a href="setup.html#limitations-of-r-base"><i class="fa fa-check"></i><b>3.3</b> Limitations of R Base</a></li>
@@ -158,7 +164,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.6" data-path="setup.html"><a href="setup.html#understanding-rstudio-interface"><i class="fa fa-check"></i><b>3.6</b> Understanding RStudio Interface</a></li>
 <li class="chapter" data-level="3.7" data-path="setup.html"><a href="setup.html#things-to-remember-1"><i class="fa fa-check"></i><b>3.7</b> Things to Remember</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="objects.html"><a href="objects.html"><i class="fa fa-check"></i><b>4</b> R Objects Types</a><ul>
+<li class="chapter" data-level="4" data-path="objects.html"><a href="objects.html"><i class="fa fa-check"></i><b>4</b> Object Types in R Programming</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="objects.html"><a href="objects.html#why-do-objects-matter"><i class="fa fa-check"></i><b>4.1</b> Why Do Objects Matter?</a></li>
 <li class="chapter" data-level="4.2" data-path="objects.html"><a href="objects.html#understanding-object-types-makes-it-easier-to-transform-and-analyze"><i class="fa fa-check"></i><b>4.2</b> Understanding Object Types Makes It Easier to Transform and Analyze</a></li>
 <li class="chapter" data-level="4.3" data-path="objects.html"><a href="objects.html#the-basic-objects-to-remember"><i class="fa fa-check"></i><b>4.3</b> The Basic Objects to Remember</a></li>
@@ -169,8 +176,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.8" data-path="objects.html"><a href="objects.html#lists"><i class="fa fa-check"></i><b>4.8</b> Lists</a></li>
 <li class="chapter" data-level="4.9" data-path="objects.html"><a href="objects.html#functions"><i class="fa fa-check"></i><b>4.9</b> Functions</a></li>
 <li class="chapter" data-level="4.10" data-path="objects.html"><a href="objects.html#things-to-remember-2"><i class="fa fa-check"></i><b>4.10</b> Things to Remember</a></li>
+<li class="chapter" data-level="4.11" data-path="objects.html"><a href="objects.html#exercises"><i class="fa fa-check"></i><b>4.11</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="baserfilter.html"><a href="baserfilter.html"><i class="fa fa-check"></i><b>5</b> How to Filter and Transform Data in Base R</a><ul>
+<li class="chapter" data-level="5" data-path="baserfilter.html"><a href="baserfilter.html"><i class="fa fa-check"></i><b>5</b> How to Filter and Transform Data in Base R</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="baserfilter.html"><a href="baserfilter.html#what-are-operators"><i class="fa fa-check"></i><b>5.1</b> What Are Operators?</a></li>
 <li class="chapter" data-level="5.2" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-and-transform-data-from-a-vector"><i class="fa fa-check"></i><b>5.2</b> How to Filter and Transform Data From a Vector</a></li>
 <li class="chapter" data-level="5.3" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-and-transform-data-from-a-matrix"><i class="fa fa-check"></i><b>5.3</b> How to Filter and Transform Data From a Matrix</a></li>
@@ -178,9 +187,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.5" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-and-transform-data-from-a-data-frame"><i class="fa fa-check"></i><b>5.5</b> How to Filter and Transform Data from a Data Frame</a></li>
 <li class="chapter" data-level="5.6" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-a-list"><i class="fa fa-check"></i><b>5.6</b> How to Filter a List</a></li>
 <li class="chapter" data-level="5.7" data-path="baserfilter.html"><a href="baserfilter.html#things-to-remember-3"><i class="fa fa-check"></i><b>5.7</b> Things to Remember</a></li>
-<li class="chapter" data-level="5.8" data-path="baserfilter.html"><a href="baserfilter.html#exercises"><i class="fa fa-check"></i><b>5.8</b> Exercises</a></li>
+<li class="chapter" data-level="5.8" data-path="baserfilter.html"><a href="baserfilter.html#exercises-1"><i class="fa fa-check"></i><b>5.8</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="dplyr.html"><a href="dplyr.html"><i class="fa fa-check"></i><b>6</b> How to Filter and Transform Data with the Dplyr Package</a><ul>
+<li class="chapter" data-level="6" data-path="dplyr.html"><a href="dplyr.html"><i class="fa fa-check"></i><b>6</b> How to Filter and Transform Data with the Dplyr Package</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="dplyr.html"><a href="dplyr.html#why-is-dplyr-so-popular"><i class="fa fa-check"></i><b>6.1</b> Why is <code>dplyr</code> So Popular?</a></li>
 <li class="chapter" data-level="6.2" data-path="dplyr.html"><a href="dplyr.html#its-still-worth-learning-base-r"><i class="fa fa-check"></i><b>6.2</b> It’s Still Worth Learning Base R</a></li>
 <li class="chapter" data-level="6.3" data-path="dplyr.html"><a href="dplyr.html#the-dplyr-syntax"><i class="fa fa-check"></i><b>6.3</b> The <code>dplyr</code> Syntax</a></li>
@@ -189,8 +199,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.6" data-path="dplyr.html"><a href="dplyr.html#how-to-filter-a-data-frame-with-dplyr-in-r"><i class="fa fa-check"></i><b>6.6</b> How to Filter a Data Frame with <code>dplyr</code> in R</a></li>
 <li class="chapter" data-level="6.7" data-path="dplyr.html"><a href="dplyr.html#how-to-summarize-and-group-data-with-dplyr-in-r"><i class="fa fa-check"></i><b>6.7</b> How to Summarize and Group Data with <code>dplyr</code> in R</a></li>
 <li class="chapter" data-level="6.8" data-path="dplyr.html"><a href="dplyr.html#things-to-remember-4"><i class="fa fa-check"></i><b>6.8</b> Things to Remember</a></li>
+<li class="chapter" data-level="6.9" data-path="dplyr.html"><a href="dplyr.html#exercises-2"><i class="fa fa-check"></i><b>6.9</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>7</b> Understanding and Using R Packages</a><ul>
+<li class="chapter" data-level="7" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>7</b> Understanding and Using R Packages</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="packages.html"><a href="packages.html#why-does-r-use-packages"><i class="fa fa-check"></i><b>7.1</b> Why Does R Use Packages?</a></li>
 <li class="chapter" data-level="7.2" data-path="packages.html"><a href="packages.html#how-to-access-r-packages"><i class="fa fa-check"></i><b>7.2</b> How to Access R Packages</a></li>
 <li class="chapter" data-level="7.3" data-path="packages.html"><a href="packages.html#how-to-install-and-load-a-package---the-easy-way"><i class="fa fa-check"></i><b>7.3</b> How to Install and Load a Package - The Easy Way</a></li>
@@ -200,8 +212,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.7" data-path="packages.html"><a href="packages.html#how-to-find-new-packages-to-install"><i class="fa fa-check"></i><b>7.7</b> How to Find New Packages to Install</a></li>
 <li class="chapter" data-level="7.8" data-path="packages.html"><a href="packages.html#how-to-find-documentation-on-packages"><i class="fa fa-check"></i><b>7.8</b> How to Find Documentation on Packages</a></li>
 <li class="chapter" data-level="7.9" data-path="packages.html"><a href="packages.html#things-to-remember-5"><i class="fa fa-check"></i><b>7.9</b> Things to Remember</a></li>
+<li class="chapter" data-level="7.10" data-path="packages.html"><a href="packages.html#exercises-3"><i class="fa fa-check"></i><b>7.10</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="function.html"><a href="function.html"><i class="fa fa-check"></i><b>8</b> How to Write Functions</a><ul>
+<li class="chapter" data-level="8" data-path="function.html"><a href="function.html"><i class="fa fa-check"></i><b>8</b> How to Write Functions</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="function.html"><a href="function.html#two-approaches-to-using-r-functions"><i class="fa fa-check"></i><b>8.1</b> Two Approaches to Using R Functions</a></li>
 <li class="chapter" data-level="8.2" data-path="function.html"><a href="function.html#why-you-should-learn-to-write-your-own-functions"><i class="fa fa-check"></i><b>8.2</b> Why You Should Learn to Write Your Own Functions</a></li>
 <li class="chapter" data-level="8.3" data-path="function.html"><a href="function.html#the-components-of-an-r-function"><i class="fa fa-check"></i><b>8.3</b> The Components of an R Function</a></li>
@@ -212,9 +226,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.8" data-path="function.html"><a href="function.html#applying-a-control-flow-to-our-summary-stats-function"><i class="fa fa-check"></i><b>8.8</b> Applying a Control Flow to Our Summary Stats Function</a></li>
 <li class="chapter" data-level="8.9" data-path="function.html"><a href="function.html#breaking-down-the-function-we-just-made"><i class="fa fa-check"></i><b>8.9</b> Breaking Down the Function We Just Made</a></li>
 <li class="chapter" data-level="8.10" data-path="function.html"><a href="function.html#things-to-remember-6"><i class="fa fa-check"></i><b>8.10</b> Things to Remember</a></li>
-<li class="chapter" data-level="8.11" data-path="function.html"><a href="function.html#exercises-1"><i class="fa fa-check"></i><b>8.11</b> Exercises</a></li>
+<li class="chapter" data-level="8.11" data-path="function.html"><a href="function.html#exercises-4"><i class="fa fa-check"></i><b>8.11</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="importdata.html"><a href="importdata.html"><i class="fa fa-check"></i><b>9</b> Importing Data into R</a><ul>
+<li class="chapter" data-level="9" data-path="importdata.html"><a href="importdata.html"><i class="fa fa-check"></i><b>9</b> Importing Data into R</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="importdata.html"><a href="importdata.html#how-to-import-a-raw-data-file-the-easy-way"><i class="fa fa-check"></i><b>9.1</b> How to Import a Raw Data File the Easy Way</a></li>
 <li class="chapter" data-level="9.2" data-path="importdata.html"><a href="importdata.html#import-a-raw-data-file-the-hard-way"><i class="fa fa-check"></i><b>9.2</b> Import a Raw Data File the Hard Way</a></li>
 <li class="chapter" data-level="9.3" data-path="importdata.html"><a href="importdata.html#save-import-functions"><i class="fa fa-check"></i><b>9.3</b> Save Import Functions</a></li>
@@ -222,11 +237,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.5" data-path="importdata.html"><a href="importdata.html#connect-to-an-api"><i class="fa fa-check"></i><b>9.5</b> Connect to an API</a></li>
 <li class="chapter" data-level="9.6" data-path="importdata.html"><a href="importdata.html#things-to-remember-7"><i class="fa fa-check"></i><b>9.6</b> Things to Remember</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="plotdata.html"><a href="plotdata.html"><i class="fa fa-check"></i><b>10</b> How to Plot Data in R</a><ul>
+<li class="chapter" data-level="10" data-path="plotdata.html"><a href="plotdata.html"><i class="fa fa-check"></i><b>10</b> How to Plot Data in R</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="plotdata.html"><a href="plotdata.html#which-r-plot-package-is-best"><i class="fa fa-check"></i><b>10.1</b> Which R Plot Package is Best?</a></li>
 <li class="chapter" data-level="10.2" data-path="plotdata.html"><a href="plotdata.html#so-which-data-viz-package-is-actually-the-best"><i class="fa fa-check"></i><b>10.2</b> So Which Data Viz Package is Actually the Best?</a></li>
 <li class="chapter" data-level="10.3" data-path="plotdata.html"><a href="plotdata.html#how-to-write-ggplot2-scripts"><i class="fa fa-check"></i><b>10.3</b> How to Write ggplot2 Scripts</a></li>
-<li class="chapter" data-level="10.4" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-common-data-visualizations-in-ggplot2"><i class="fa fa-check"></i><b>10.4</b> How to Plot Common Data Visualizations in ggplot2</a><ul>
+<li class="chapter" data-level="10.4" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-common-data-visualizations-in-ggplot2"><i class="fa fa-check"></i><b>10.4</b> How to Plot Common Data Visualizations in ggplot2</a>
+<ul>
 <li class="chapter" data-level="10.4.1" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-a-scatterplot"><i class="fa fa-check"></i><b>10.4.1</b> How to Plot a Scatterplot</a></li>
 <li class="chapter" data-level="10.4.2" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-a-bar-graph-histogram"><i class="fa fa-check"></i><b>10.4.2</b> How to Plot a Bar Graph / Histogram</a></li>
 <li class="chapter" data-level="10.4.3" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-a-line-graph"><i class="fa fa-check"></i><b>10.4.3</b> How to Plot a Line Graph</a></li>
@@ -234,10 +251,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.4.5" data-path="plotdata.html"><a href="plotdata.html#how-to-improve-labels-and-other-formatting-tips"><i class="fa fa-check"></i><b>10.4.5</b> How to Improve Labels and Other Formatting Tips</a></li>
 </ul></li>
 <li class="chapter" data-level="10.5" data-path="plotdata.html"><a href="plotdata.html#things-to-remember-8"><i class="fa fa-check"></i><b>10.5</b> Things to Remember</a></li>
+<li class="chapter" data-level="10.6" data-path="plotdata.html"><a href="plotdata.html#exercises-5"><i class="fa fa-check"></i><b>10.6</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="answers.html"><a href="answers.html"><i class="fa fa-check"></i><b>11</b> Answer Key</a><ul>
-<li class="chapter" data-level="11.1" data-path="answers.html"><a href="answers.html#chapter-3"><i class="fa fa-check"></i><b>11.1</b> Chapter 3</a></li>
-<li class="chapter" data-level="11.2" data-path="answers.html"><a href="answers.html#chapter-5"><i class="fa fa-check"></i><b>11.2</b> Chapter 5</a></li>
+<li class="chapter" data-level="11" data-path="statfunctions.html"><a href="statfunctions.html"><i class="fa fa-check"></i><b>11</b> Statistical Functions in R: Common Functions and How They Work</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="statfunctions.html"><a href="statfunctions.html#how-statistical-functions-work-in-r-programming"><i class="fa fa-check"></i><b>11.1</b> How Statistical Functions Work in R Programming</a></li>
+<li class="chapter" data-level="11.2" data-path="statfunctions.html"><a href="statfunctions.html#how-to-build-a-model-in-r-example-with-linear-regression"><i class="fa fa-check"></i><b>11.2</b> How to Build a Model in R (Example with Linear Regression)</a></li>
+<li class="chapter" data-level="11.3" data-path="statfunctions.html"><a href="statfunctions.html#how-to-review-common-model-performance-statistics"><i class="fa fa-check"></i><b>11.3</b> How to Review Common Model Performance Statistics</a></li>
+<li class="chapter" data-level="11.4" data-path="statfunctions.html"><a href="statfunctions.html#how-to-make-predictions-with-a-model"><i class="fa fa-check"></i><b>11.4</b> How to Make Predictions with a Model</a></li>
+<li class="chapter" data-level="11.5" data-path="statfunctions.html"><a href="statfunctions.html#how-to-save-your-model-to-use-later"><i class="fa fa-check"></i><b>11.5</b> How to Save Your Model to Use Later</a></li>
+<li class="chapter" data-level="11.6" data-path="statfunctions.html"><a href="statfunctions.html#how-to-add-multiple-parameters-to-a-model"><i class="fa fa-check"></i><b>11.6</b> How to Add Multiple Parameters to a Model</a></li>
+<li class="chapter" data-level="11.7" data-path="statfunctions.html"><a href="statfunctions.html#how-to-add-a-categorical-variable-to-a-model"><i class="fa fa-check"></i><b>11.7</b> How to Add a Categorical Variable to a Model</a></li>
+<li class="chapter" data-level="11.8" data-path="statfunctions.html"><a href="statfunctions.html#how-to-add-transformed-variables-to-a-model"><i class="fa fa-check"></i><b>11.8</b> How to Add Transformed Variables to a Model</a></li>
+<li class="chapter" data-level="11.9" data-path="statfunctions.html"><a href="statfunctions.html#how-to-add-variable-interactions-to-a-model"><i class="fa fa-check"></i><b>11.9</b> How to Add Variable Interactions to a Model</a></li>
+<li class="chapter" data-level="11.10" data-path="statfunctions.html"><a href="statfunctions.html#how-to-calculate-model-confidence-intervals"><i class="fa fa-check"></i><b>11.10</b> How to Calculate Model Confidence Intervals</a></li>
+<li class="chapter" data-level="11.11" data-path="statfunctions.html"><a href="statfunctions.html#how-to-calculate-analysis-of-variance-between-models"><i class="fa fa-check"></i><b>11.11</b> How to Calculate Analysis of Variance Between Models</a></li>
+<li class="chapter" data-level="11.12" data-path="statfunctions.html"><a href="statfunctions.html#other-common-model-types---logistical-regression"><i class="fa fa-check"></i><b>11.12</b> Other Common Model Types - Logistical Regression</a></li>
+<li class="chapter" data-level="11.13" data-path="statfunctions.html"><a href="statfunctions.html#other-common-model-types---anova-models"><i class="fa fa-check"></i><b>11.13</b> Other Common Model Types - Anova Models</a></li>
+<li class="chapter" data-level="11.14" data-path="statfunctions.html"><a href="statfunctions.html#things-to-remember-9"><i class="fa fa-check"></i><b>11.14</b> Things to Remember</a></li>
+<li class="chapter" data-level="11.15" data-path="statfunctions.html"><a href="statfunctions.html#exercises-6"><i class="fa fa-check"></i><b>11.15</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="answers.html"><a href="answers.html"><i class="fa fa-check"></i><b>12</b> Answer Key</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="answers.html"><a href="answers.html#chapter-4---object-types-in-r-programming"><i class="fa fa-check"></i><b>12.1</b> Chapter 4 - Object Types in R Programming</a></li>
+<li class="chapter" data-level="12.2" data-path="answers.html"><a href="answers.html#chapter-5---how-to-filter-and-transform-data-in-base-r"><i class="fa fa-check"></i><b>12.2</b> Chapter 5 - How to Filter and Transform Data in Base R</a></li>
+<li class="chapter" data-level="12.3" data-path="answers.html"><a href="answers.html#chapter-6---how-to-filter-and-transform-data-with-the-dplyr-package"><i class="fa fa-check"></i><b>12.3</b> Chapter 6 - How to Filter and Transform Data with the Dplyr Package</a></li>
+<li class="chapter" data-level="12.4" data-path="answers.html"><a href="answers.html#chapter-7---understanding-and-using-r-packages"><i class="fa fa-check"></i><b>12.4</b> Chapter 7 - Understanding and Using R Packages</a></li>
+<li class="chapter" data-level="12.5" data-path="answers.html"><a href="answers.html#chapter-8---how-to-write-functions"><i class="fa fa-check"></i><b>12.5</b> Chapter 8 - How to Write Functions</a></li>
+<li class="chapter" data-level="12.6" data-path="answers.html"><a href="answers.html#chapter-10---how-to-plot-data-in-r"><i class="fa fa-check"></i><b>12.6</b> Chapter 10 - How to Plot Data in R</a></li>
+<li class="chapter" data-level="12.7" data-path="answers.html"><a href="answers.html#chapter-11---statistical-functions-in-r"><i class="fa fa-check"></i><b>12.7</b> Chapter 11 - Statistical Functions in R</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -260,7 +302,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="whatisr" class="section level1">
+<div id="whatisr" class="section level1" number="2">
 <h1><span class="header-section-number">Chapter 2</span> What is R Programming?</h1>
 <p>Before getting setup in R, you need to know what R programming is and what’s so special about it.</p>
 <p>R is a programming language built by statisticians for statistical analysis. It is well-suited towards running advanced analysis, building predictive models, machine learning, and even more routine data management.</p>
@@ -273,7 +315,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>And that’s what’s so great about the R programming language. It has a lot of flexibility. If you find one package confusing or challenging, you can probably find an easier one to perform the same task. Or you can build your own functions instead. The only thing is you have to understand the basics first.</p>
 <p>One of those basics is <strong>objects</strong>. We’ll cover this extensively in another chapter, but R is an <em>object-oriented</em> programming language. That means to succeed with it, you have to understand the object types and how they’re used.</p>
 <p>If that sounds overwhelming, don’t worry. It’s easier than you think. And focusing on these core components will go a long way to helping you succeed in R. As a matter of fact, I’d “guesstimate” that understanding these basics will take care of 80% of problems most R programming newbies experience.</p>
-<div id="is-r-the-best-statistical-programming-language" class="section level2">
+<div id="is-r-the-best-statistical-programming-language" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Is R the Best Statistical Programming Language?</h2>
 <p>That’s a matter of debate and boy do people debate it. The nice thing about R is that it’s free and open source and has a vibrant community that contributes to it. It’s also meant for statistics. So much of the base functionality is well-suited towards statisticians and researchers alike.</p>
 <p>The two big competitors to R are SAS and Python.</p>
@@ -288,13 +330,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Some people also say that Python is better for enterprise-level or “production” grade solutions. I’m also less sure that’s the case now. Since I started writing this book, I’ve helped administer data science tools. I’ve learned through experience that Python is a tough programming language to manage, from an administrative perspective. There are lots of little rules and nuances, such as the Linux OS you use, and the manner in which you install Python versions, packages, and environments.</p>
 <p>For those reasons, I suggest learning R. It’s easier to download, easier to manage, and easier to learn in my experience.</p>
 </div>
-<div id="how-will-learning-r-versus-python-impact-my-job-opportunities" class="section level2">
+<div id="how-will-learning-r-versus-python-impact-my-job-opportunities" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> How Will Learning R versus Python Impact My Job Opportunities?</h2>
 <p>If you’re worried that learning R over Python (or any other language) will hurt your job prospect, I have good news!</p>
 <p>The job market for data science professionals is so strong that companies can’t afford to be picky. For that reason, data science software companies are actually building their tools to use both R and Python. For example, RStudio allows Python and Jupyter (a Python-oriented app) allows R.</p>
 <p>This allows data scientists and other data professionals to use the language they know and companies to hire the best data scientist available - not the one who happens to know the specific programming language.</p>
 </div>
-<div id="things-to-remember" class="section level2">
+<div id="things-to-remember" class="section level2" number="2.3">
 <h2><span class="header-section-number">2.3</span> Things to Remember</h2>
 <ul>
 <li>R programming is a free and allows for advanced statistical programming</li>
@@ -314,7 +356,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -333,6 +374,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -353,6 +395,10 @@ gitbook.start({
 "text": null
 },
 "download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

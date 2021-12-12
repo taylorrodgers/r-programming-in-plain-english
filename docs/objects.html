@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 R Objects Types | R Programming in Plain English</title>
+  <title>Chapter 4 Object Types in R Programming | R Programming in Plain English</title>
   <meta name="description" content="A simple guide to R programming for those without programming experience" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 R Objects Types | R Programming in Plain English" />
+  <meta property="og:title" content="Chapter 4 Object Types in R Programming | R Programming in Plain English" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 R Objects Types | R Programming in Plain English" />
+  <meta name="twitter:title" content="Chapter 4 Object Types in R Programming | R Programming in Plain English" />
   
   <meta name="twitter:description" content="A simple guide to R programming for those without programming experience" />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Taylor Rodgers" />
 
 
-<meta name="date" content="2021-09-19" />
+<meta name="date" content="2021-12-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,9 @@
   
 <link rel="prev" href="setup.html"/>
 <link rel="next" href="baserfilter.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,30 +51,30 @@
 
 
 
-
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -92,7 +94,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -125,6 +127,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -141,15 +144,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">R Programming in Plain English</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About This Book</a><ul>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About This Book</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#things-you-should-know-before-reading"><i class="fa fa-check"></i><b>1.1</b> Things You Should Know Before Reading</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="whatisr.html"><a href="whatisr.html"><i class="fa fa-check"></i><b>2</b> What is R Programming?</a><ul>
+<li class="chapter" data-level="2" data-path="whatisr.html"><a href="whatisr.html"><i class="fa fa-check"></i><b>2</b> What is R Programming?</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="whatisr.html"><a href="whatisr.html#is-r-the-best-statistical-programming-language"><i class="fa fa-check"></i><b>2.1</b> Is R the Best Statistical Programming Language?</a></li>
 <li class="chapter" data-level="2.2" data-path="whatisr.html"><a href="whatisr.html#how-will-learning-r-versus-python-impact-my-job-opportunities"><i class="fa fa-check"></i><b>2.2</b> How Will Learning R versus Python Impact My Job Opportunities?</a></li>
 <li class="chapter" data-level="2.3" data-path="whatisr.html"><a href="whatisr.html#things-to-remember"><i class="fa fa-check"></i><b>2.3</b> Things to Remember</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>3</b> Getting Setup in R and RStudio</a><ul>
+<li class="chapter" data-level="3" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>3</b> Getting Setup in R and RStudio</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="setup.html"><a href="setup.html#how-to-download-r"><i class="fa fa-check"></i><b>3.1</b> How to Download R</a></li>
 <li class="chapter" data-level="3.2" data-path="setup.html"><a href="setup.html#understanding-base-rs-user-interface"><i class="fa fa-check"></i><b>3.2</b> Understanding Base R’s User Interface</a></li>
 <li class="chapter" data-level="3.3" data-path="setup.html"><a href="setup.html#limitations-of-r-base"><i class="fa fa-check"></i><b>3.3</b> Limitations of R Base</a></li>
@@ -158,7 +164,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.6" data-path="setup.html"><a href="setup.html#understanding-rstudio-interface"><i class="fa fa-check"></i><b>3.6</b> Understanding RStudio Interface</a></li>
 <li class="chapter" data-level="3.7" data-path="setup.html"><a href="setup.html#things-to-remember-1"><i class="fa fa-check"></i><b>3.7</b> Things to Remember</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="objects.html"><a href="objects.html"><i class="fa fa-check"></i><b>4</b> R Objects Types</a><ul>
+<li class="chapter" data-level="4" data-path="objects.html"><a href="objects.html"><i class="fa fa-check"></i><b>4</b> Object Types in R Programming</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="objects.html"><a href="objects.html#why-do-objects-matter"><i class="fa fa-check"></i><b>4.1</b> Why Do Objects Matter?</a></li>
 <li class="chapter" data-level="4.2" data-path="objects.html"><a href="objects.html#understanding-object-types-makes-it-easier-to-transform-and-analyze"><i class="fa fa-check"></i><b>4.2</b> Understanding Object Types Makes It Easier to Transform and Analyze</a></li>
 <li class="chapter" data-level="4.3" data-path="objects.html"><a href="objects.html#the-basic-objects-to-remember"><i class="fa fa-check"></i><b>4.3</b> The Basic Objects to Remember</a></li>
@@ -169,8 +176,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.8" data-path="objects.html"><a href="objects.html#lists"><i class="fa fa-check"></i><b>4.8</b> Lists</a></li>
 <li class="chapter" data-level="4.9" data-path="objects.html"><a href="objects.html#functions"><i class="fa fa-check"></i><b>4.9</b> Functions</a></li>
 <li class="chapter" data-level="4.10" data-path="objects.html"><a href="objects.html#things-to-remember-2"><i class="fa fa-check"></i><b>4.10</b> Things to Remember</a></li>
+<li class="chapter" data-level="4.11" data-path="objects.html"><a href="objects.html#exercises"><i class="fa fa-check"></i><b>4.11</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="baserfilter.html"><a href="baserfilter.html"><i class="fa fa-check"></i><b>5</b> How to Filter and Transform Data in Base R</a><ul>
+<li class="chapter" data-level="5" data-path="baserfilter.html"><a href="baserfilter.html"><i class="fa fa-check"></i><b>5</b> How to Filter and Transform Data in Base R</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="baserfilter.html"><a href="baserfilter.html#what-are-operators"><i class="fa fa-check"></i><b>5.1</b> What Are Operators?</a></li>
 <li class="chapter" data-level="5.2" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-and-transform-data-from-a-vector"><i class="fa fa-check"></i><b>5.2</b> How to Filter and Transform Data From a Vector</a></li>
 <li class="chapter" data-level="5.3" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-and-transform-data-from-a-matrix"><i class="fa fa-check"></i><b>5.3</b> How to Filter and Transform Data From a Matrix</a></li>
@@ -178,9 +187,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.5" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-and-transform-data-from-a-data-frame"><i class="fa fa-check"></i><b>5.5</b> How to Filter and Transform Data from a Data Frame</a></li>
 <li class="chapter" data-level="5.6" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-a-list"><i class="fa fa-check"></i><b>5.6</b> How to Filter a List</a></li>
 <li class="chapter" data-level="5.7" data-path="baserfilter.html"><a href="baserfilter.html#things-to-remember-3"><i class="fa fa-check"></i><b>5.7</b> Things to Remember</a></li>
-<li class="chapter" data-level="5.8" data-path="baserfilter.html"><a href="baserfilter.html#exercises"><i class="fa fa-check"></i><b>5.8</b> Exercises</a></li>
+<li class="chapter" data-level="5.8" data-path="baserfilter.html"><a href="baserfilter.html#exercises-1"><i class="fa fa-check"></i><b>5.8</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="dplyr.html"><a href="dplyr.html"><i class="fa fa-check"></i><b>6</b> How to Filter and Transform Data with the Dplyr Package</a><ul>
+<li class="chapter" data-level="6" data-path="dplyr.html"><a href="dplyr.html"><i class="fa fa-check"></i><b>6</b> How to Filter and Transform Data with the Dplyr Package</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="dplyr.html"><a href="dplyr.html#why-is-dplyr-so-popular"><i class="fa fa-check"></i><b>6.1</b> Why is <code>dplyr</code> So Popular?</a></li>
 <li class="chapter" data-level="6.2" data-path="dplyr.html"><a href="dplyr.html#its-still-worth-learning-base-r"><i class="fa fa-check"></i><b>6.2</b> It’s Still Worth Learning Base R</a></li>
 <li class="chapter" data-level="6.3" data-path="dplyr.html"><a href="dplyr.html#the-dplyr-syntax"><i class="fa fa-check"></i><b>6.3</b> The <code>dplyr</code> Syntax</a></li>
@@ -189,8 +199,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.6" data-path="dplyr.html"><a href="dplyr.html#how-to-filter-a-data-frame-with-dplyr-in-r"><i class="fa fa-check"></i><b>6.6</b> How to Filter a Data Frame with <code>dplyr</code> in R</a></li>
 <li class="chapter" data-level="6.7" data-path="dplyr.html"><a href="dplyr.html#how-to-summarize-and-group-data-with-dplyr-in-r"><i class="fa fa-check"></i><b>6.7</b> How to Summarize and Group Data with <code>dplyr</code> in R</a></li>
 <li class="chapter" data-level="6.8" data-path="dplyr.html"><a href="dplyr.html#things-to-remember-4"><i class="fa fa-check"></i><b>6.8</b> Things to Remember</a></li>
+<li class="chapter" data-level="6.9" data-path="dplyr.html"><a href="dplyr.html#exercises-2"><i class="fa fa-check"></i><b>6.9</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>7</b> Understanding and Using R Packages</a><ul>
+<li class="chapter" data-level="7" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>7</b> Understanding and Using R Packages</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="packages.html"><a href="packages.html#why-does-r-use-packages"><i class="fa fa-check"></i><b>7.1</b> Why Does R Use Packages?</a></li>
 <li class="chapter" data-level="7.2" data-path="packages.html"><a href="packages.html#how-to-access-r-packages"><i class="fa fa-check"></i><b>7.2</b> How to Access R Packages</a></li>
 <li class="chapter" data-level="7.3" data-path="packages.html"><a href="packages.html#how-to-install-and-load-a-package---the-easy-way"><i class="fa fa-check"></i><b>7.3</b> How to Install and Load a Package - The Easy Way</a></li>
@@ -200,8 +212,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.7" data-path="packages.html"><a href="packages.html#how-to-find-new-packages-to-install"><i class="fa fa-check"></i><b>7.7</b> How to Find New Packages to Install</a></li>
 <li class="chapter" data-level="7.8" data-path="packages.html"><a href="packages.html#how-to-find-documentation-on-packages"><i class="fa fa-check"></i><b>7.8</b> How to Find Documentation on Packages</a></li>
 <li class="chapter" data-level="7.9" data-path="packages.html"><a href="packages.html#things-to-remember-5"><i class="fa fa-check"></i><b>7.9</b> Things to Remember</a></li>
+<li class="chapter" data-level="7.10" data-path="packages.html"><a href="packages.html#exercises-3"><i class="fa fa-check"></i><b>7.10</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="function.html"><a href="function.html"><i class="fa fa-check"></i><b>8</b> How to Write Functions</a><ul>
+<li class="chapter" data-level="8" data-path="function.html"><a href="function.html"><i class="fa fa-check"></i><b>8</b> How to Write Functions</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="function.html"><a href="function.html#two-approaches-to-using-r-functions"><i class="fa fa-check"></i><b>8.1</b> Two Approaches to Using R Functions</a></li>
 <li class="chapter" data-level="8.2" data-path="function.html"><a href="function.html#why-you-should-learn-to-write-your-own-functions"><i class="fa fa-check"></i><b>8.2</b> Why You Should Learn to Write Your Own Functions</a></li>
 <li class="chapter" data-level="8.3" data-path="function.html"><a href="function.html#the-components-of-an-r-function"><i class="fa fa-check"></i><b>8.3</b> The Components of an R Function</a></li>
@@ -212,9 +226,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.8" data-path="function.html"><a href="function.html#applying-a-control-flow-to-our-summary-stats-function"><i class="fa fa-check"></i><b>8.8</b> Applying a Control Flow to Our Summary Stats Function</a></li>
 <li class="chapter" data-level="8.9" data-path="function.html"><a href="function.html#breaking-down-the-function-we-just-made"><i class="fa fa-check"></i><b>8.9</b> Breaking Down the Function We Just Made</a></li>
 <li class="chapter" data-level="8.10" data-path="function.html"><a href="function.html#things-to-remember-6"><i class="fa fa-check"></i><b>8.10</b> Things to Remember</a></li>
-<li class="chapter" data-level="8.11" data-path="function.html"><a href="function.html#exercises-1"><i class="fa fa-check"></i><b>8.11</b> Exercises</a></li>
+<li class="chapter" data-level="8.11" data-path="function.html"><a href="function.html#exercises-4"><i class="fa fa-check"></i><b>8.11</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="importdata.html"><a href="importdata.html"><i class="fa fa-check"></i><b>9</b> Importing Data into R</a><ul>
+<li class="chapter" data-level="9" data-path="importdata.html"><a href="importdata.html"><i class="fa fa-check"></i><b>9</b> Importing Data into R</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="importdata.html"><a href="importdata.html#how-to-import-a-raw-data-file-the-easy-way"><i class="fa fa-check"></i><b>9.1</b> How to Import a Raw Data File the Easy Way</a></li>
 <li class="chapter" data-level="9.2" data-path="importdata.html"><a href="importdata.html#import-a-raw-data-file-the-hard-way"><i class="fa fa-check"></i><b>9.2</b> Import a Raw Data File the Hard Way</a></li>
 <li class="chapter" data-level="9.3" data-path="importdata.html"><a href="importdata.html#save-import-functions"><i class="fa fa-check"></i><b>9.3</b> Save Import Functions</a></li>
@@ -222,11 +237,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.5" data-path="importdata.html"><a href="importdata.html#connect-to-an-api"><i class="fa fa-check"></i><b>9.5</b> Connect to an API</a></li>
 <li class="chapter" data-level="9.6" data-path="importdata.html"><a href="importdata.html#things-to-remember-7"><i class="fa fa-check"></i><b>9.6</b> Things to Remember</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="plotdata.html"><a href="plotdata.html"><i class="fa fa-check"></i><b>10</b> How to Plot Data in R</a><ul>
+<li class="chapter" data-level="10" data-path="plotdata.html"><a href="plotdata.html"><i class="fa fa-check"></i><b>10</b> How to Plot Data in R</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="plotdata.html"><a href="plotdata.html#which-r-plot-package-is-best"><i class="fa fa-check"></i><b>10.1</b> Which R Plot Package is Best?</a></li>
 <li class="chapter" data-level="10.2" data-path="plotdata.html"><a href="plotdata.html#so-which-data-viz-package-is-actually-the-best"><i class="fa fa-check"></i><b>10.2</b> So Which Data Viz Package is Actually the Best?</a></li>
 <li class="chapter" data-level="10.3" data-path="plotdata.html"><a href="plotdata.html#how-to-write-ggplot2-scripts"><i class="fa fa-check"></i><b>10.3</b> How to Write ggplot2 Scripts</a></li>
-<li class="chapter" data-level="10.4" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-common-data-visualizations-in-ggplot2"><i class="fa fa-check"></i><b>10.4</b> How to Plot Common Data Visualizations in ggplot2</a><ul>
+<li class="chapter" data-level="10.4" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-common-data-visualizations-in-ggplot2"><i class="fa fa-check"></i><b>10.4</b> How to Plot Common Data Visualizations in ggplot2</a>
+<ul>
 <li class="chapter" data-level="10.4.1" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-a-scatterplot"><i class="fa fa-check"></i><b>10.4.1</b> How to Plot a Scatterplot</a></li>
 <li class="chapter" data-level="10.4.2" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-a-bar-graph-histogram"><i class="fa fa-check"></i><b>10.4.2</b> How to Plot a Bar Graph / Histogram</a></li>
 <li class="chapter" data-level="10.4.3" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-a-line-graph"><i class="fa fa-check"></i><b>10.4.3</b> How to Plot a Line Graph</a></li>
@@ -234,10 +251,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.4.5" data-path="plotdata.html"><a href="plotdata.html#how-to-improve-labels-and-other-formatting-tips"><i class="fa fa-check"></i><b>10.4.5</b> How to Improve Labels and Other Formatting Tips</a></li>
 </ul></li>
 <li class="chapter" data-level="10.5" data-path="plotdata.html"><a href="plotdata.html#things-to-remember-8"><i class="fa fa-check"></i><b>10.5</b> Things to Remember</a></li>
+<li class="chapter" data-level="10.6" data-path="plotdata.html"><a href="plotdata.html#exercises-5"><i class="fa fa-check"></i><b>10.6</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="answers.html"><a href="answers.html"><i class="fa fa-check"></i><b>11</b> Answer Key</a><ul>
-<li class="chapter" data-level="11.1" data-path="answers.html"><a href="answers.html#chapter-3"><i class="fa fa-check"></i><b>11.1</b> Chapter 3</a></li>
-<li class="chapter" data-level="11.2" data-path="answers.html"><a href="answers.html#chapter-5"><i class="fa fa-check"></i><b>11.2</b> Chapter 5</a></li>
+<li class="chapter" data-level="11" data-path="statfunctions.html"><a href="statfunctions.html"><i class="fa fa-check"></i><b>11</b> Statistical Functions in R: Common Functions and How They Work</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="statfunctions.html"><a href="statfunctions.html#how-statistical-functions-work-in-r-programming"><i class="fa fa-check"></i><b>11.1</b> How Statistical Functions Work in R Programming</a></li>
+<li class="chapter" data-level="11.2" data-path="statfunctions.html"><a href="statfunctions.html#how-to-build-a-model-in-r-example-with-linear-regression"><i class="fa fa-check"></i><b>11.2</b> How to Build a Model in R (Example with Linear Regression)</a></li>
+<li class="chapter" data-level="11.3" data-path="statfunctions.html"><a href="statfunctions.html#how-to-review-common-model-performance-statistics"><i class="fa fa-check"></i><b>11.3</b> How to Review Common Model Performance Statistics</a></li>
+<li class="chapter" data-level="11.4" data-path="statfunctions.html"><a href="statfunctions.html#how-to-make-predictions-with-a-model"><i class="fa fa-check"></i><b>11.4</b> How to Make Predictions with a Model</a></li>
+<li class="chapter" data-level="11.5" data-path="statfunctions.html"><a href="statfunctions.html#how-to-save-your-model-to-use-later"><i class="fa fa-check"></i><b>11.5</b> How to Save Your Model to Use Later</a></li>
+<li class="chapter" data-level="11.6" data-path="statfunctions.html"><a href="statfunctions.html#how-to-add-multiple-parameters-to-a-model"><i class="fa fa-check"></i><b>11.6</b> How to Add Multiple Parameters to a Model</a></li>
+<li class="chapter" data-level="11.7" data-path="statfunctions.html"><a href="statfunctions.html#how-to-add-a-categorical-variable-to-a-model"><i class="fa fa-check"></i><b>11.7</b> How to Add a Categorical Variable to a Model</a></li>
+<li class="chapter" data-level="11.8" data-path="statfunctions.html"><a href="statfunctions.html#how-to-add-transformed-variables-to-a-model"><i class="fa fa-check"></i><b>11.8</b> How to Add Transformed Variables to a Model</a></li>
+<li class="chapter" data-level="11.9" data-path="statfunctions.html"><a href="statfunctions.html#how-to-add-variable-interactions-to-a-model"><i class="fa fa-check"></i><b>11.9</b> How to Add Variable Interactions to a Model</a></li>
+<li class="chapter" data-level="11.10" data-path="statfunctions.html"><a href="statfunctions.html#how-to-calculate-model-confidence-intervals"><i class="fa fa-check"></i><b>11.10</b> How to Calculate Model Confidence Intervals</a></li>
+<li class="chapter" data-level="11.11" data-path="statfunctions.html"><a href="statfunctions.html#how-to-calculate-analysis-of-variance-between-models"><i class="fa fa-check"></i><b>11.11</b> How to Calculate Analysis of Variance Between Models</a></li>
+<li class="chapter" data-level="11.12" data-path="statfunctions.html"><a href="statfunctions.html#other-common-model-types---logistical-regression"><i class="fa fa-check"></i><b>11.12</b> Other Common Model Types - Logistical Regression</a></li>
+<li class="chapter" data-level="11.13" data-path="statfunctions.html"><a href="statfunctions.html#other-common-model-types---anova-models"><i class="fa fa-check"></i><b>11.13</b> Other Common Model Types - Anova Models</a></li>
+<li class="chapter" data-level="11.14" data-path="statfunctions.html"><a href="statfunctions.html#things-to-remember-9"><i class="fa fa-check"></i><b>11.14</b> Things to Remember</a></li>
+<li class="chapter" data-level="11.15" data-path="statfunctions.html"><a href="statfunctions.html#exercises-6"><i class="fa fa-check"></i><b>11.15</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="answers.html"><a href="answers.html"><i class="fa fa-check"></i><b>12</b> Answer Key</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="answers.html"><a href="answers.html#chapter-4---object-types-in-r-programming"><i class="fa fa-check"></i><b>12.1</b> Chapter 4 - Object Types in R Programming</a></li>
+<li class="chapter" data-level="12.2" data-path="answers.html"><a href="answers.html#chapter-5---how-to-filter-and-transform-data-in-base-r"><i class="fa fa-check"></i><b>12.2</b> Chapter 5 - How to Filter and Transform Data in Base R</a></li>
+<li class="chapter" data-level="12.3" data-path="answers.html"><a href="answers.html#chapter-6---how-to-filter-and-transform-data-with-the-dplyr-package"><i class="fa fa-check"></i><b>12.3</b> Chapter 6 - How to Filter and Transform Data with the Dplyr Package</a></li>
+<li class="chapter" data-level="12.4" data-path="answers.html"><a href="answers.html#chapter-7---understanding-and-using-r-packages"><i class="fa fa-check"></i><b>12.4</b> Chapter 7 - Understanding and Using R Packages</a></li>
+<li class="chapter" data-level="12.5" data-path="answers.html"><a href="answers.html#chapter-8---how-to-write-functions"><i class="fa fa-check"></i><b>12.5</b> Chapter 8 - How to Write Functions</a></li>
+<li class="chapter" data-level="12.6" data-path="answers.html"><a href="answers.html#chapter-10---how-to-plot-data-in-r"><i class="fa fa-check"></i><b>12.6</b> Chapter 10 - How to Plot Data in R</a></li>
+<li class="chapter" data-level="12.7" data-path="answers.html"><a href="answers.html#chapter-11---statistical-functions-in-r"><i class="fa fa-check"></i><b>12.7</b> Chapter 11 - Statistical Functions in R</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -260,14 +302,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="objects" class="section level1">
-<h1><span class="header-section-number">Chapter 4</span> R Objects Types</h1>
+<div id="objects" class="section level1" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Object Types in R Programming</h1>
 <p>R uses <strong>objects</strong> to store and interact with data and there are various object types. That probably means little to you now, but understanding these differences will make R programming easier – whatever your R programming goals.</p>
 <p>In fact, I say it’s better to understand how these objects interact with one another over memorizing every base function and package out there.</p>
 <p>That’s different from the approach I took to learning R. When I learned R, I went straight to learning the base functions. You know, the cool stuff that does the regression analysis and confidence intervals and whatnot.</p>
 <p>That didn’t work out well for me. I was coming from a SQL background and thought data worked in a similar way with R.</p>
 <p>Had I started by learning the objects first, I would’ve saved a lot more time. I would’ve done less data manipulation in SQL or Excel and made simpler, more scalable R code.</p>
-<div id="why-do-objects-matter" class="section level2">
+<div id="why-do-objects-matter" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> Why Do Objects Matter?</h2>
 <p>Almost everything you program in R does one of the following:</p>
 <ul>
@@ -277,32 +319,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Calls upon a pre-existing object</li>
 </ul>
 <p>The simple code below utilizes five different object types:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="objects.html#cb5-1"></a><span class="kw">confint.lm</span>(happy_model)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="objects.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint.lm</span>(happy_model)</span></code></pre></div>
 <p>This code for calculating confidence intervals calls upon a base <strong>function</strong>, evaluates an existing <strong>list</strong>, creates several <strong>vectors</strong> and an <strong>array</strong> to perform the analysis, and then outputs a <strong>matrix</strong>. All five are objects. (You can see the function’s script by pasting <code>stats::confint.lm</code> in your console.)</p>
 <p>Understanding this will help you understand how R can seem to “guess” what it’s supposed to do based on the data inputs.</p>
 </div>
-<div id="understanding-object-types-makes-it-easier-to-transform-and-analyze" class="section level2">
+<div id="understanding-object-types-makes-it-easier-to-transform-and-analyze" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> Understanding Object Types Makes It Easier to Transform and Analyze</h2>
 <p>Pulling data from one object type is different than pulling data from another. This makes it confusing for people who learned about data through SQL, as opposed to other programming languages.</p>
 <p>For example, the following code will select most data types in SQL:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb6-1"><a href="objects.html#cb6-1"></a><span class="kw">SELECT</span></span>
-<span id="cb6-2"><a href="objects.html#cb6-2"></a>  Field1,</span>
-<span id="cb6-3"><a href="objects.html#cb6-3"></a>  Field2,</span>
-<span id="cb6-4"><a href="objects.html#cb6-4"></a>  Field3,</span>
-<span id="cb6-5"><a href="objects.html#cb6-5"></a>  Field4</span>
-<span id="cb6-6"><a href="objects.html#cb6-6"></a><span class="kw">FROM</span></span>
-<span id="cb6-7"><a href="objects.html#cb6-7"></a>  Data_Set</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb6-1"><a href="objects.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb6-2"><a href="objects.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  Field1,</span>
+<span id="cb6-3"><a href="objects.html#cb6-3" aria-hidden="true" tabindex="-1"></a>  Field2,</span>
+<span id="cb6-4"><a href="objects.html#cb6-4" aria-hidden="true" tabindex="-1"></a>  Field3,</span>
+<span id="cb6-5"><a href="objects.html#cb6-5" aria-hidden="true" tabindex="-1"></a>  Field4</span>
+<span id="cb6-6"><a href="objects.html#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span></span>
+<span id="cb6-7"><a href="objects.html#cb6-7" aria-hidden="true" tabindex="-1"></a>  Data_Set</span></code></pre></div>
 <p>That’s different from R. Data selection in R depends on the object type.</p>
 <p>For example, using the command <code>[6]</code> next to the object name will select a single value from a <strong>vector</strong> object…</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="objects.html#cb7-1"></a>money[<span class="dv">6</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="objects.html#cb7-1" aria-hidden="true" tabindex="-1"></a>money[<span class="dv">6</span>]</span></code></pre></div>
 <pre><code>## [1] 175</code></pre>
 <p>But that won’t work for a <strong>list</strong> object below…</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="objects.html#cb9-1"></a>happy_model[<span class="dv">6</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="objects.html#cb9-1" aria-hidden="true" tabindex="-1"></a>happy_model[<span class="dv">6</span>]</span></code></pre></div>
 <pre><code>## $assign
 ## [1] 0 1 2</code></pre>
 <p>To learn how to select, transform, and analyze data in R requires that you learn the underlying structure first. Once you do that, everything else makes more sense.</p>
 </div>
-<div id="the-basic-objects-to-remember" class="section level2">
+<div id="the-basic-objects-to-remember" class="section level2" number="4.3">
 <h2><span class="header-section-number">4.3</span> The Basic Objects to Remember</h2>
 <p>Down below are the common objects in R:</p>
 <ol style="list-style-type: decimal">
@@ -315,101 +357,102 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>We won’t talk about functions in this chapter since they need their own chapter to explain how they work.</p>
 </div>
-<div id="vectors" class="section level2">
+<div id="vectors" class="section level2" number="4.4">
 <h2><span class="header-section-number">4.4</span> Vectors</h2>
 <p>Vector is the most basic object within R and there are seven “modes” of vectors: logical, numeric, integer, complex, character, date, and raw.</p>
 <p>If that seems to be a lot to remember, don’t worry. I’d focus on remembering <strong>logical</strong>, <strong>numeric</strong>, and <strong>character</strong> right now. Those are the ones you’ll use most often. Others we’ll cover as needed.</p>
 <p>Vectors can only be one mode at a time. What that means in plain English is that R can’t have a word and a number in the same vector.</p>
 <p>You can use the code below to create and view a <strong>logical</strong> vector:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="objects.html#cb11-1"></a>v1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>,<span class="ot">FALSE</span>,<span class="ot">TRUE</span>)</span>
-<span id="cb11-2"><a href="objects.html#cb11-2"></a>v1</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="objects.html#cb11-1" aria-hidden="true" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span>)</span>
+<span id="cb11-2"><a href="objects.html#cb11-2" aria-hidden="true" tabindex="-1"></a>v1</span></code></pre></div>
 <pre><code>## [1]  TRUE FALSE  TRUE</code></pre>
 <p>What this code does is create a vector using the <code>c(input, input)</code> notation. It then assigns the vector the name <strong>v1</strong> using the <code>&lt;–</code> notation. (A shortcut to the <code>&lt;-</code> command is <strong>Option+“-”</strong>.)</p>
 <p>You build a <strong>character</strong> vector in the same way, only that you use <code>c("input", "input")</code> notation instead:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="objects.html#cb13-1"></a>v2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Hola&quot;</span>,<span class="st">&quot;Howdy&quot;</span>,<span class="st">&quot;Hello&quot;</span>)</span>
-<span id="cb13-2"><a href="objects.html#cb13-2"></a>v2</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="objects.html#cb13-1" aria-hidden="true" tabindex="-1"></a>v2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Hola&quot;</span>,<span class="st">&quot;Howdy&quot;</span>,<span class="st">&quot;Hello&quot;</span>)</span>
+<span id="cb13-2"><a href="objects.html#cb13-2" aria-hidden="true" tabindex="-1"></a>v2</span></code></pre></div>
 <pre><code>## [1] &quot;Hola&quot;  &quot;Howdy&quot; &quot;Hello&quot;</code></pre>
 <p>And a <strong>numeric</strong> vector (like the name suggests) looks like this:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="objects.html#cb15-1"></a>v3 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</span>
-<span id="cb15-2"><a href="objects.html#cb15-2"></a>v3</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="objects.html#cb15-1" aria-hidden="true" tabindex="-1"></a>v3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb15-2"><a href="objects.html#cb15-2" aria-hidden="true" tabindex="-1"></a>v3</span></code></pre></div>
 <pre><code>## [1] 1 2 3</code></pre>
 <p>The code above used the <code>c(n1:n2)</code> notation to create a range of values from n1 to n2, where n1 is 1 and n2 is 4. You can also use notations such as <code>c(n1, n2, n3, n4)</code> or like <code>c(n1:n4, n5:n6)</code>.</p>
 <p>Play around with the code below and see what kind numeric vectors you can make!</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="objects.html#cb17-1"></a>v4 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span><span class="op">:</span><span class="dv">6</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>)</span>
-<span id="cb17-2"><a href="objects.html#cb17-2"></a>v4</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="objects.html#cb17-1" aria-hidden="true" tabindex="-1"></a>v4 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>)</span>
+<span id="cb17-2"><a href="objects.html#cb17-2" aria-hidden="true" tabindex="-1"></a>v4</span></code></pre></div>
 <pre><code>##  [1] 4 5 6 1 2 3 4 5 6 7</code></pre>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="objects.html#cb19-1"></a>v5 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">4</span>)</span>
-<span id="cb19-2"><a href="objects.html#cb19-2"></a>v5</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="objects.html#cb19-1" aria-hidden="true" tabindex="-1"></a>v5 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">4</span>)</span>
+<span id="cb19-2"><a href="objects.html#cb19-2" aria-hidden="true" tabindex="-1"></a>v5</span></code></pre></div>
 <pre><code>## [1] 1 5 5 2 1 4</code></pre>
 <p>I said before that vectors can only be one “mode” or data type at a time. What that means is that if you attempt to mix numbers or a logical value with a character, it simply changes all values to a character.</p>
-<p>The code down below takes our previously made vectors, one a numeric and the other a character, and combines them into a single vector. As you can see by the quotation " " marks around the output, it’s changed all the numeric values into characters.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="objects.html#cb21-1"></a>v6 &lt;-<span class="st"> </span><span class="kw">c</span>(v2,v3)</span>
-<span id="cb21-2"><a href="objects.html#cb21-2"></a>v6</span></code></pre></div>
+<p>The code down below takes our previously made vectors, one a numeric and the other a character, and combines them into a single vector. As you can see by the quotation ” ” marks around the output, it’s changed all the numeric values into characters.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="objects.html#cb21-1" aria-hidden="true" tabindex="-1"></a>v6 <span class="ot">&lt;-</span> <span class="fu">c</span>(v2,v3)</span>
+<span id="cb21-2"><a href="objects.html#cb21-2" aria-hidden="true" tabindex="-1"></a>v6</span></code></pre></div>
 <pre><code>## [1] &quot;Hola&quot;  &quot;Howdy&quot; &quot;Hello&quot; &quot;1&quot;     &quot;2&quot;     &quot;3&quot;</code></pre>
 <p>The vector seems basic and not at all like the data sets you’ll be using. That might make you ask – will I even use vectors?</p>
 <p>Yes. Yes, you will.</p>
 <p>The more complex object, data frame, is comprised of individual vectors. (We’ll cover more about the data frame object later).</p>
 <p>Many functions will also <strong>output</strong> data in vector form or produce a list composed of vectors.</p>
 <p>Vectors are also useful as <strong>inputs</strong> into other functions, as well. If you look below, I used a function from the <code>censusapi</code> package. I create a vector beforehand and then use it as an input for the function below it.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="objects.html#cb23-1"></a>variable_list &lt;-<span class="st"> </span></span>
-<span id="cb23-2"><a href="objects.html#cb23-2"></a><span class="st">    </span><span class="kw">c</span>(<span class="st">&quot;B15001_003E&quot;</span>,<span class="st">&quot;B15001_004E&quot;</span>,<span class="st">&quot;B15001_005E&quot;</span>,</span>
-<span id="cb23-3"><a href="objects.html#cb23-3"></a>      <span class="st">&quot;B15001_044E&quot;</span>,<span class="st">&quot;B15001_045E&quot;</span>,<span class="st">&quot;B15001_046E&quot;</span>)</span>
-<span id="cb23-4"><a href="objects.html#cb23-4"></a><span class="kw">getCensus</span>(<span class="dt">name=</span><span class="st">&quot;acs/acs5&quot;</span>,</span>
-<span id="cb23-5"><a href="objects.html#cb23-5"></a>          <span class="dt">vintage=</span><span class="st">&quot;2018&quot;</span>,</span>
-<span id="cb23-6"><a href="objects.html#cb23-6"></a>          <span class="dt">vars=</span><span class="kw">c</span>(<span class="st">&quot;NAME&quot;</span>,variable_list),</span>
-<span id="cb23-7"><a href="objects.html#cb23-7"></a>          <span class="dt">region=</span><span class="st">&quot;state:*&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="objects.html#cb23-1" aria-hidden="true" tabindex="-1"></a>variable_list <span class="ot">&lt;-</span> </span>
+<span id="cb23-2"><a href="objects.html#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">&quot;B15001_003E&quot;</span>,<span class="st">&quot;B15001_004E&quot;</span>,<span class="st">&quot;B15001_005E&quot;</span>,</span>
+<span id="cb23-3"><a href="objects.html#cb23-3" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;B15001_044E&quot;</span>,<span class="st">&quot;B15001_045E&quot;</span>,<span class="st">&quot;B15001_046E&quot;</span>)</span>
+<span id="cb23-4"><a href="objects.html#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">getCensus</span>(<span class="at">name=</span><span class="st">&quot;acs/acs5&quot;</span>,</span>
+<span id="cb23-5"><a href="objects.html#cb23-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">vintage=</span><span class="st">&quot;2018&quot;</span>,</span>
+<span id="cb23-6"><a href="objects.html#cb23-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">vars=</span><span class="fu">c</span>(<span class="st">&quot;NAME&quot;</span>,variable_list),</span>
+<span id="cb23-7"><a href="objects.html#cb23-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">region=</span><span class="st">&quot;state:*&quot;</span>)</span></code></pre></div>
 <p>You can use vectors in this way on a larger scale. For example, if you write a long script with many functions and references, vectors allow you to create a set of parameters at the beginning.</p>
 </div>
-<div id="matrices-and-arrays" class="section level2">
+<div id="matrices-and-arrays" class="section level2" number="4.5">
 <h2><span class="header-section-number">4.5</span> Matrices and Arrays</h2>
 <p>Matrices and arrays in R are multi-dimensional vectors. Matrices have multiple rows and columns. Arrays have two or more dimensions. (More on that distinction in a bit).</p>
 <p>Like their vector counterpart, all matrix / array values must be the same mode or data type – not a mix. That means if you can’t have a numeric value alongside a character value.</p>
 <p>Here’s an example of a matrix:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="objects.html#cb24-1"></a>matrix1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">3</span>),<span class="dt">nrow=</span><span class="dv">2</span>,<span class="dt">ncol=</span><span class="dv">2</span>)</span>
-<span id="cb24-2"><a href="objects.html#cb24-2"></a>matrix1</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="objects.html#cb24-1" aria-hidden="true" tabindex="-1"></a>matrix1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">3</span>),<span class="at">nrow=</span><span class="dv">2</span>,<span class="at">ncol=</span><span class="dv">2</span>)</span>
+<span id="cb24-2"><a href="objects.html#cb24-2" aria-hidden="true" tabindex="-1"></a>matrix1</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    2    1
 ## [2,]    0    3</code></pre>
 <p>Why would R programmers want this? It comes back to the R’s use as a statistical programming language. For example, multiple linear regression often has combined variables, which involves multiplying two matrices together.</p>
 <p>Providing these two object types in R that are solely for numeric values makes this easier.</p>
 <p>For example, you can multiply these two matrices together with the <code>%*%</code> command and get the same results you would by using matrix algebra:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="objects.html#cb26-1"></a>matrix1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">3</span>),<span class="dt">nrow=</span><span class="dv">2</span>,<span class="dt">ncol=</span><span class="dv">2</span>)</span>
-<span id="cb26-2"><a href="objects.html#cb26-2"></a>matrix1</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="objects.html#cb26-1" aria-hidden="true" tabindex="-1"></a>matrix1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">3</span>),<span class="at">nrow=</span><span class="dv">2</span>,<span class="at">ncol=</span><span class="dv">2</span>)</span>
+<span id="cb26-2"><a href="objects.html#cb26-2" aria-hidden="true" tabindex="-1"></a>matrix1</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    2    1
 ## [2,]    0    3</code></pre>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="objects.html#cb28-1"></a>matrix2 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">7</span>),<span class="dt">nrow=</span><span class="dv">2</span>)</span>
-<span id="cb28-2"><a href="objects.html#cb28-2"></a>matrix2</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="objects.html#cb28-1" aria-hidden="true" tabindex="-1"></a>matrix2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">7</span>),<span class="at">nrow=</span><span class="dv">2</span>)</span>
+<span id="cb28-2"><a href="objects.html#cb28-2" aria-hidden="true" tabindex="-1"></a>matrix2</span></code></pre></div>
 <pre><code>##      [,1]
 ## [1,]    5
 ## [2,]    7</code></pre>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="objects.html#cb30-1"></a>matrix1 <span class="op">%*%</span><span class="st"> </span>matrix2 <span class="co">#multiplication</span></span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="objects.html#cb30-1" aria-hidden="true" tabindex="-1"></a>matrix1 <span class="sc">%*%</span> matrix2 <span class="co">#multiplication</span></span></code></pre></div>
 <pre><code>##      [,1]
 ## [1,]   17
 ## [2,]   21</code></pre>
-<p>That’s the same as if you did it yourself by hand.
-<span class="math display">\[
- \begin{bmatrix}
+That’s the same as if you did it yourself by hand.
+$$
+<span class="math display">\[\begin{bmatrix}
   2 &amp; 1\\
   0 &amp; 3 \\
  \end{bmatrix}
  \begin{bmatrix}
   5\\
   7\\
- \end{bmatrix}
- =
- \begin{bmatrix}
+ \end{bmatrix}\]</span>
+=
+<span class="math display">\[\begin{bmatrix}
   17\\
   21\\
- \end{bmatrix} \]</span></p>
+ \end{bmatrix}\]</span>
+<p>$$</p>
 <p>Unless you’re building the functions that calculate this, I doubt you’ll use matrices or arrays all that much. However, it’s handy to know what they are and how they can be used. They’re often the output of functions as well.</p>
 <p>Arrays are more complex than their simple 2-D counterpart. Instead of a single set of rows and columns, you’ll have multiple dimensions added on top.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="objects.html#cb32-1"></a>matrix3 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>),<span class="dt">nrow=</span><span class="dv">4</span>,<span class="dt">ncol=</span><span class="dv">2</span>)</span>
-<span id="cb32-2"><a href="objects.html#cb32-2"></a>matrix4 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">6</span>,<span class="dv">4</span>,<span class="dv">5</span>),<span class="dt">nrow=</span><span class="dv">4</span>,<span class="dt">ncol=</span><span class="dv">2</span>)</span>
-<span id="cb32-3"><a href="objects.html#cb32-3"></a>matrix5 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">2</span>),<span class="dt">nrow=</span><span class="dv">4</span>,<span class="dt">ncol=</span><span class="dv">2</span>)</span>
-<span id="cb32-4"><a href="objects.html#cb32-4"></a>array1 &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">c</span>(matrix3,matrix4,matrix5),</span>
-<span id="cb32-5"><a href="objects.html#cb32-5"></a>                <span class="dt">dim=</span><span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">3</span>))</span>
-<span id="cb32-6"><a href="objects.html#cb32-6"></a>array1</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="objects.html#cb32-1" aria-hidden="true" tabindex="-1"></a>matrix3 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>),<span class="at">nrow=</span><span class="dv">4</span>,<span class="at">ncol=</span><span class="dv">2</span>)</span>
+<span id="cb32-2"><a href="objects.html#cb32-2" aria-hidden="true" tabindex="-1"></a>matrix4 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">6</span>,<span class="dv">4</span>,<span class="dv">5</span>),<span class="at">nrow=</span><span class="dv">4</span>,<span class="at">ncol=</span><span class="dv">2</span>)</span>
+<span id="cb32-3"><a href="objects.html#cb32-3" aria-hidden="true" tabindex="-1"></a>matrix5 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">2</span>),<span class="at">nrow=</span><span class="dv">4</span>,<span class="at">ncol=</span><span class="dv">2</span>)</span>
+<span id="cb32-4"><a href="objects.html#cb32-4" aria-hidden="true" tabindex="-1"></a>array1 <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="fu">c</span>(matrix3,matrix4,matrix5),</span>
+<span id="cb32-5"><a href="objects.html#cb32-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">dim=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">3</span>))</span>
+<span id="cb32-6"><a href="objects.html#cb32-6" aria-hidden="true" tabindex="-1"></a>array1</span></code></pre></div>
 <pre><code>## , , 1
 ## 
 ##      [,1] [,2]
@@ -440,59 +483,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="1.30_Arrays_Stacked.png" width="15%" style="display: block; margin: auto;" /></p>
 <p>Since arrays with three dimensions are merely stacked matrices, that means each matrix within the array must have the same number of columns and rows.</p>
 </div>
-<div id="data-frames" class="section level2">
+<div id="data-frames" class="section level2" number="4.6">
 <h2><span class="header-section-number">4.6</span> Data Frames</h2>
 <p>Data frame is the object type that’s most similar to what you’d find in a SQL database. What I mean by that is that it’s organized and referenced by columns and can have many, many rows.</p>
 <p>And most importantly, it can contain both numeric and character values! (Earth shattering, I know!)</p>
 <p>I like to think of a data frame as a way to combine vectors. As a matter of fact, you can build a data frame doing just that.</p>
 <p>Take this code below and run it. You’ll see that we make individual vectors containing data on James Bond movies<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> and we then combine it into a data frame.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="objects.html#cb34-1"></a>filmname &lt;-<span class="st"> </span></span>
-<span id="cb34-2"><a href="objects.html#cb34-2"></a><span class="st">      </span><span class="kw">c</span>(<span class="st">&quot;Skyfall&quot;</span>,<span class="st">&quot;Thunderball&quot;</span>,<span class="st">&quot;Goldfinger&quot;</span>,</span>
-<span id="cb34-3"><a href="objects.html#cb34-3"></a>        <span class="st">&quot;Spectre&quot;</span>,<span class="st">&quot;Live and Let Die&quot;</span>,</span>
-<span id="cb34-4"><a href="objects.html#cb34-4"></a>        <span class="st">&quot;You Only Live Twice&quot;</span>,</span>
-<span id="cb34-5"><a href="objects.html#cb34-5"></a>        <span class="st">&quot;The Spy Who Loved Me&quot;</span>,<span class="st">&quot;Casino Royale&quot;</span>,</span>
-<span id="cb34-6"><a href="objects.html#cb34-6"></a>        <span class="st">&quot;Moonraker&quot;</span>,<span class="st">&quot;Diamonds Are Forever&quot;</span>,</span>
-<span id="cb34-7"><a href="objects.html#cb34-7"></a>        <span class="st">&quot;Quantum of Solace&quot;</span>,<span class="st">&quot;From Russia with Love&quot;</span>,</span>
-<span id="cb34-8"><a href="objects.html#cb34-8"></a>        <span class="st">&quot;Die Another Day&quot;</span>,<span class="st">&quot;Goldeneye&quot;</span>,</span>
-<span id="cb34-9"><a href="objects.html#cb34-9"></a>        <span class="st">&quot;On Her Majesty&#39;s Secret Service&quot;</span>,</span>
-<span id="cb34-10"><a href="objects.html#cb34-10"></a>        <span class="st">&quot;The World is Not Enough&quot;</span>,</span>
-<span id="cb34-11"><a href="objects.html#cb34-11"></a>        <span class="st">&quot;For Your Eyes Only&quot;</span>,<span class="st">&quot;Tomorrow Never Dies&quot;</span>,</span>
-<span id="cb34-12"><a href="objects.html#cb34-12"></a>        <span class="st">&quot;The Man with the Golden Gun&quot;</span>,</span>
-<span id="cb34-13"><a href="objects.html#cb34-13"></a>        <span class="st">&quot;Dr. No&quot;</span>,<span class="st">&quot;Octopussy&quot;</span>,</span>
-<span id="cb34-14"><a href="objects.html#cb34-14"></a>        <span class="st">&quot;The Living Daylights&quot;</span>,<span class="st">&quot;A View to a Kill&quot;</span>,</span>
-<span id="cb34-15"><a href="objects.html#cb34-15"></a>        <span class="st">&quot;Licence to Kill&quot;</span>)</span>
-<span id="cb34-16"><a href="objects.html#cb34-16"></a>year &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;2012&quot;</span>,<span class="st">&quot;1965&quot;</span>,<span class="st">&quot;1964&quot;</span>,<span class="st">&quot;2015&quot;</span>,</span>
-<span id="cb34-17"><a href="objects.html#cb34-17"></a>          <span class="st">&quot;1973&quot;</span>,<span class="st">&quot;1967&quot;</span>,<span class="st">&quot;1977&quot;</span>,<span class="st">&quot;2006&quot;</span>,</span>
-<span id="cb34-18"><a href="objects.html#cb34-18"></a>          <span class="st">&quot;1979&quot;</span>,<span class="st">&quot;1971&quot;</span>,<span class="st">&quot;2008&quot;</span>,<span class="st">&quot;1963&quot;</span>,</span>
-<span id="cb34-19"><a href="objects.html#cb34-19"></a>          <span class="st">&quot;2002&quot;</span>,<span class="st">&quot;1995&quot;</span>,<span class="st">&quot;1969&quot;</span>,<span class="st">&quot;1999&quot;</span>,</span>
-<span id="cb34-20"><a href="objects.html#cb34-20"></a>          <span class="st">&quot;1981&quot;</span>,<span class="st">&quot;1997&quot;</span>,<span class="st">&quot;1974&quot;</span>,<span class="st">&quot;1962&quot;</span>,</span>
-<span id="cb34-21"><a href="objects.html#cb34-21"></a>          <span class="st">&quot;1983&quot;</span>,<span class="st">&quot;1987&quot;</span>,<span class="st">&quot;1985&quot;</span>,<span class="st">&quot;1989&quot;</span>)</span>
-<span id="cb34-22"><a href="objects.html#cb34-22"></a>actor &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Daniel Craig&quot;</span>,<span class="st">&quot;Sean Connery&quot;</span>,</span>
-<span id="cb34-23"><a href="objects.html#cb34-23"></a>           <span class="st">&quot;Sean Connery&quot;</span>,<span class="st">&quot;Daniel Craig&quot;</span>,</span>
-<span id="cb34-24"><a href="objects.html#cb34-24"></a>           <span class="st">&quot;Roger Moore&quot;</span>,<span class="st">&quot;Sean Connery&quot;</span>,</span>
-<span id="cb34-25"><a href="objects.html#cb34-25"></a>           <span class="st">&quot;Roger Moore&quot;</span>,<span class="st">&quot;Daniel Craig&quot;</span>,</span>
-<span id="cb34-26"><a href="objects.html#cb34-26"></a>           <span class="st">&quot;Roger Moore&quot;</span>,<span class="st">&quot;Sean Connery&quot;</span>,</span>
-<span id="cb34-27"><a href="objects.html#cb34-27"></a>           <span class="st">&quot;Daniel Craig&quot;</span>,<span class="st">&quot;Sean Connery&quot;</span>,</span>
-<span id="cb34-28"><a href="objects.html#cb34-28"></a>           <span class="st">&quot;Pierce Brosnan&quot;</span>,<span class="st">&quot;Pierce Brosnan&quot;</span>,</span>
-<span id="cb34-29"><a href="objects.html#cb34-29"></a>           <span class="st">&quot;George Lazenby&quot;</span>,<span class="st">&quot;Pierce Brosnan&quot;</span>,</span>
-<span id="cb34-30"><a href="objects.html#cb34-30"></a>           <span class="st">&quot;Roger Moore&quot;</span>,<span class="st">&quot;Pierce Brosnan&quot;</span>,</span>
-<span id="cb34-31"><a href="objects.html#cb34-31"></a>           <span class="st">&quot;Roger Moore&quot;</span>,<span class="st">&quot;Sean Connery&quot;</span>,</span>
-<span id="cb34-32"><a href="objects.html#cb34-32"></a>           <span class="st">&quot;Roger Moore&quot;</span>,<span class="st">&quot;Timothy Dalton&quot;</span>,</span>
-<span id="cb34-33"><a href="objects.html#cb34-33"></a>           <span class="st">&quot;Roger Moore&quot;</span>,<span class="st">&quot;Timothy Dalton&quot;</span>)</span>
-<span id="cb34-34"><a href="objects.html#cb34-34"></a>gross &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1108561008</span>,<span class="dv">1014941117</span>,<span class="dv">912257512</span>,</span>
-<span id="cb34-35"><a href="objects.html#cb34-35"></a>           <span class="dv">880669186</span>,<span class="dv">825110761</span>,<span class="dv">756544419</span>,</span>
-<span id="cb34-36"><a href="objects.html#cb34-36"></a>           <span class="dv">692713752</span>,<span class="dv">669789482</span>,<span class="dv">655872400</span>,</span>
-<span id="cb34-37"><a href="objects.html#cb34-37"></a>           <span class="dv">648514469</span>,<span class="dv">622246378</span>,<span class="dv">576277964</span>,</span>
-<span id="cb34-38"><a href="objects.html#cb34-38"></a>           <span class="dv">543639638</span>,<span class="dv">529548711</span>,<span class="dv">505899782</span>,</span>
-<span id="cb34-39"><a href="objects.html#cb34-39"></a>           <span class="dv">491617153</span>,<span class="dv">486468881</span>,<span class="dv">478946402</span>,</span>
-<span id="cb34-40"><a href="objects.html#cb34-40"></a>           <span class="dv">448249281</span>,<span class="dv">440759072</span>,<span class="dv">426244352</span>,</span>
-<span id="cb34-41"><a href="objects.html#cb34-41"></a>           <span class="dv">381088866</span>,<span class="dv">321172633</span>,<span class="dv">285157191</span>)<span class="op">/</span><span class="dv">1000000</span></span>
-<span id="cb34-42"><a href="objects.html#cb34-42"></a>bond &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">filmname=</span>filmname,</span>
-<span id="cb34-43"><a href="objects.html#cb34-43"></a>                   <span class="dt">year=</span>year,</span>
-<span id="cb34-44"><a href="objects.html#cb34-44"></a>                   <span class="dt">actor=</span>actor,</span>
-<span id="cb34-45"><a href="objects.html#cb34-45"></a>                   <span class="dt">gross=</span>gross)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="objects.html#cb34-1" aria-hidden="true" tabindex="-1"></a>filmname <span class="ot">&lt;-</span> </span>
+<span id="cb34-2"><a href="objects.html#cb34-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(<span class="st">&quot;Skyfall&quot;</span>,<span class="st">&quot;Thunderball&quot;</span>,<span class="st">&quot;Goldfinger&quot;</span>,</span>
+<span id="cb34-3"><a href="objects.html#cb34-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;Spectre&quot;</span>,<span class="st">&quot;Live and Let Die&quot;</span>,</span>
+<span id="cb34-4"><a href="objects.html#cb34-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;You Only Live Twice&quot;</span>,</span>
+<span id="cb34-5"><a href="objects.html#cb34-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;The Spy Who Loved Me&quot;</span>,<span class="st">&quot;Casino Royale&quot;</span>,</span>
+<span id="cb34-6"><a href="objects.html#cb34-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;Moonraker&quot;</span>,<span class="st">&quot;Diamonds Are Forever&quot;</span>,</span>
+<span id="cb34-7"><a href="objects.html#cb34-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;Quantum of Solace&quot;</span>,<span class="st">&quot;From Russia with Love&quot;</span>,</span>
+<span id="cb34-8"><a href="objects.html#cb34-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;Die Another Day&quot;</span>,<span class="st">&quot;Goldeneye&quot;</span>,</span>
+<span id="cb34-9"><a href="objects.html#cb34-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;On Her Majesty&#39;s Secret Service&quot;</span>,</span>
+<span id="cb34-10"><a href="objects.html#cb34-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;The World is Not Enough&quot;</span>,</span>
+<span id="cb34-11"><a href="objects.html#cb34-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;For Your Eyes Only&quot;</span>,<span class="st">&quot;Tomorrow Never Dies&quot;</span>,</span>
+<span id="cb34-12"><a href="objects.html#cb34-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;The Man with the Golden Gun&quot;</span>,</span>
+<span id="cb34-13"><a href="objects.html#cb34-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;Dr. No&quot;</span>,<span class="st">&quot;Octopussy&quot;</span>,</span>
+<span id="cb34-14"><a href="objects.html#cb34-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;The Living Daylights&quot;</span>,<span class="st">&quot;A View to a Kill&quot;</span>,</span>
+<span id="cb34-15"><a href="objects.html#cb34-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;Licence to Kill&quot;</span>)</span>
+<span id="cb34-16"><a href="objects.html#cb34-16" aria-hidden="true" tabindex="-1"></a>year <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;2012&quot;</span>,<span class="st">&quot;1965&quot;</span>,<span class="st">&quot;1964&quot;</span>,<span class="st">&quot;2015&quot;</span>,</span>
+<span id="cb34-17"><a href="objects.html#cb34-17" aria-hidden="true" tabindex="-1"></a>          <span class="st">&quot;1973&quot;</span>,<span class="st">&quot;1967&quot;</span>,<span class="st">&quot;1977&quot;</span>,<span class="st">&quot;2006&quot;</span>,</span>
+<span id="cb34-18"><a href="objects.html#cb34-18" aria-hidden="true" tabindex="-1"></a>          <span class="st">&quot;1979&quot;</span>,<span class="st">&quot;1971&quot;</span>,<span class="st">&quot;2008&quot;</span>,<span class="st">&quot;1963&quot;</span>,</span>
+<span id="cb34-19"><a href="objects.html#cb34-19" aria-hidden="true" tabindex="-1"></a>          <span class="st">&quot;2002&quot;</span>,<span class="st">&quot;1995&quot;</span>,<span class="st">&quot;1969&quot;</span>,<span class="st">&quot;1999&quot;</span>,</span>
+<span id="cb34-20"><a href="objects.html#cb34-20" aria-hidden="true" tabindex="-1"></a>          <span class="st">&quot;1981&quot;</span>,<span class="st">&quot;1997&quot;</span>,<span class="st">&quot;1974&quot;</span>,<span class="st">&quot;1962&quot;</span>,</span>
+<span id="cb34-21"><a href="objects.html#cb34-21" aria-hidden="true" tabindex="-1"></a>          <span class="st">&quot;1983&quot;</span>,<span class="st">&quot;1987&quot;</span>,<span class="st">&quot;1985&quot;</span>,<span class="st">&quot;1989&quot;</span>)</span>
+<span id="cb34-22"><a href="objects.html#cb34-22" aria-hidden="true" tabindex="-1"></a>actor <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Daniel Craig&quot;</span>,<span class="st">&quot;Sean Connery&quot;</span>,</span>
+<span id="cb34-23"><a href="objects.html#cb34-23" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;Sean Connery&quot;</span>,<span class="st">&quot;Daniel Craig&quot;</span>,</span>
+<span id="cb34-24"><a href="objects.html#cb34-24" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;Roger Moore&quot;</span>,<span class="st">&quot;Sean Connery&quot;</span>,</span>
+<span id="cb34-25"><a href="objects.html#cb34-25" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;Roger Moore&quot;</span>,<span class="st">&quot;Daniel Craig&quot;</span>,</span>
+<span id="cb34-26"><a href="objects.html#cb34-26" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;Roger Moore&quot;</span>,<span class="st">&quot;Sean Connery&quot;</span>,</span>
+<span id="cb34-27"><a href="objects.html#cb34-27" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;Daniel Craig&quot;</span>,<span class="st">&quot;Sean Connery&quot;</span>,</span>
+<span id="cb34-28"><a href="objects.html#cb34-28" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;Pierce Brosnan&quot;</span>,<span class="st">&quot;Pierce Brosnan&quot;</span>,</span>
+<span id="cb34-29"><a href="objects.html#cb34-29" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;George Lazenby&quot;</span>,<span class="st">&quot;Pierce Brosnan&quot;</span>,</span>
+<span id="cb34-30"><a href="objects.html#cb34-30" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;Roger Moore&quot;</span>,<span class="st">&quot;Pierce Brosnan&quot;</span>,</span>
+<span id="cb34-31"><a href="objects.html#cb34-31" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;Roger Moore&quot;</span>,<span class="st">&quot;Sean Connery&quot;</span>,</span>
+<span id="cb34-32"><a href="objects.html#cb34-32" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;Roger Moore&quot;</span>,<span class="st">&quot;Timothy Dalton&quot;</span>,</span>
+<span id="cb34-33"><a href="objects.html#cb34-33" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;Roger Moore&quot;</span>,<span class="st">&quot;Timothy Dalton&quot;</span>)</span>
+<span id="cb34-34"><a href="objects.html#cb34-34" aria-hidden="true" tabindex="-1"></a>gross <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1108561008</span>,<span class="dv">1014941117</span>,<span class="dv">912257512</span>,</span>
+<span id="cb34-35"><a href="objects.html#cb34-35" aria-hidden="true" tabindex="-1"></a>           <span class="dv">880669186</span>,<span class="dv">825110761</span>,<span class="dv">756544419</span>,</span>
+<span id="cb34-36"><a href="objects.html#cb34-36" aria-hidden="true" tabindex="-1"></a>           <span class="dv">692713752</span>,<span class="dv">669789482</span>,<span class="dv">655872400</span>,</span>
+<span id="cb34-37"><a href="objects.html#cb34-37" aria-hidden="true" tabindex="-1"></a>           <span class="dv">648514469</span>,<span class="dv">622246378</span>,<span class="dv">576277964</span>,</span>
+<span id="cb34-38"><a href="objects.html#cb34-38" aria-hidden="true" tabindex="-1"></a>           <span class="dv">543639638</span>,<span class="dv">529548711</span>,<span class="dv">505899782</span>,</span>
+<span id="cb34-39"><a href="objects.html#cb34-39" aria-hidden="true" tabindex="-1"></a>           <span class="dv">491617153</span>,<span class="dv">486468881</span>,<span class="dv">478946402</span>,</span>
+<span id="cb34-40"><a href="objects.html#cb34-40" aria-hidden="true" tabindex="-1"></a>           <span class="dv">448249281</span>,<span class="dv">440759072</span>,<span class="dv">426244352</span>,</span>
+<span id="cb34-41"><a href="objects.html#cb34-41" aria-hidden="true" tabindex="-1"></a>           <span class="dv">381088866</span>,<span class="dv">321172633</span>,<span class="dv">285157191</span>)<span class="sc">/</span><span class="dv">1000000</span></span>
+<span id="cb34-42"><a href="objects.html#cb34-42" aria-hidden="true" tabindex="-1"></a>bond <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">filmname=</span>filmname,</span>
+<span id="cb34-43"><a href="objects.html#cb34-43" aria-hidden="true" tabindex="-1"></a>                   <span class="at">year=</span>year,</span>
+<span id="cb34-44"><a href="objects.html#cb34-44" aria-hidden="true" tabindex="-1"></a>                   <span class="at">actor=</span>actor,</span>
+<span id="cb34-45"><a href="objects.html#cb34-45" aria-hidden="true" tabindex="-1"></a>                   <span class="at">gross=</span>gross)</span></code></pre></div>
 <p>And if you use the <code>$</code> sign, as we discussed before, you can re-select the individual vectors back out of it.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="objects.html#cb35-1"></a>bond<span class="op">$</span>filmname</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="objects.html#cb35-1" aria-hidden="true" tabindex="-1"></a>bond<span class="sc">$</span>filmname</span></code></pre></div>
 <pre><code>##  [1] &quot;Skyfall&quot;                         &quot;Thunderball&quot;                    
 ##  [3] &quot;Goldfinger&quot;                      &quot;Spectre&quot;                        
 ##  [5] &quot;Live and Let Die&quot;                &quot;You Only Live Twice&quot;            
@@ -506,7 +549,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [21] &quot;Octopussy&quot;                       &quot;The Living Daylights&quot;           
 ## [23] &quot;A View to a Kill&quot;                &quot;Licence to Kill&quot;</code></pre>
 <p>If you want to select a single column and maintain the data frame object type, you have to use the following code:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="objects.html#cb37-1"></a>bond[<span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="objects.html#cb37-1" aria-hidden="true" tabindex="-1"></a>bond[<span class="dv">1</span>]</span></code></pre></div>
 <pre><code>##                           filmname
 ## 1                          Skyfall
 ## 2                      Thunderball
@@ -534,11 +577,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 24                 Licence to Kill</code></pre>
 <p>We’ll go into further detail about selecting, transforming, and analyzing data frames later on. The way you go about it depends on whether you want to make efficient code or you want to make “readable” code for other analysts.</p>
 </div>
-<div id="factors" class="section level2">
+<div id="factors" class="section level2" number="4.7">
 <h2><span class="header-section-number">4.7</span> Factors</h2>
 <p>Factors take vectors (or data frame columns) and create categories to group the values. Confused? It’s actually fairly simple.</p>
 <p>Think back to the data frame we built for the Bond films. If you use the code below, you’ll see the first six rows:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="objects.html#cb39-1"></a><span class="kw">head</span>(bond)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="objects.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bond)</span></code></pre></div>
 <pre><code>##              filmname year        actor     gross
 ## 1             Skyfall 2012 Daniel Craig 1108.5610
 ## 2         Thunderball 1965 Sean Connery 1014.9411
@@ -548,12 +591,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 6 You Only Live Twice 1967 Sean Connery  756.5444</code></pre>
 <p>Now let’s say you want a short list of the Bond actors. If you’ll notice in the data set, the actor names like “Daniel Craig” and “Sean Connery” are used repeatedly. These are basically ways to group the data frame with a common field name - the actor who played Bond.</p>
 <p>If we tried to get a list of these actors using the <code>levels()</code> function, it wouldn’t work.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="objects.html#cb41-1"></a><span class="kw">levels</span>(bond<span class="op">$</span>actor)</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="objects.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(bond<span class="sc">$</span>actor)</span></code></pre></div>
 <pre><code>## NULL</code></pre>
 <p>That’s because it hasn’t been <strong>factored</strong> yet.</p>
 <p>This is a real simply fix. Simply use the <code>factor()</code> function and assign it to the field name within the data frame. You can use the code below to do this.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="objects.html#cb43-1"></a>bond<span class="op">$</span>actor &lt;-<span class="st"> </span><span class="kw">factor</span>(bond<span class="op">$</span>actor)</span>
-<span id="cb43-2"><a href="objects.html#cb43-2"></a><span class="kw">levels</span>(bond<span class="op">$</span>actor)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="objects.html#cb43-1" aria-hidden="true" tabindex="-1"></a>bond<span class="sc">$</span>actor <span class="ot">&lt;-</span> <span class="fu">factor</span>(bond<span class="sc">$</span>actor)</span>
+<span id="cb43-2"><a href="objects.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(bond<span class="sc">$</span>actor)</span></code></pre></div>
 <pre><code>## [1] &quot;Daniel Craig&quot;   &quot;George Lazenby&quot; &quot;Pierce Brosnan&quot; &quot;Roger Moore&quot;   
 ## [5] &quot;Sean Connery&quot;   &quot;Timothy Dalton&quot;</code></pre>
 <p>And this will also show up in the environment tab in the top left.</p>
@@ -563,16 +606,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>For example, our Bond data frame may not include the actor name. It could simply have a number between 1 and 6 for the actor - with Sean Connery as 1 and Daniel Craig as 6. That means a regression analysis would’ve analyzed the actor as a continuous variable by default!</p>
 <p>This also comes up with experiments that analyze the impact of medicine. It’s not uncommon to label one drug as 1 and another drug as 2. That means you’d have to factor those drug codes so that your regression analysis reads them correctly.</p>
 </div>
-<div id="lists" class="section level2">
+<div id="lists" class="section level2" number="4.8">
 <h2><span class="header-section-number">4.8</span> Lists</h2>
 <p>Lists are objects that usually store other objects in a nice bundle. Those objects could be vectors, other lists, data frames, etc.</p>
 <p>Many of the more complex R base functions produce lists. A common one is produced by the <code>lm()</code> function.</p>
 <p>Use the code below to build a model with the James Bond data:</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="objects.html#cb45-1"></a>bondmodel &lt;-<span class="st"> </span><span class="kw">lm</span>(gross<span class="op">~</span>actor,<span class="dt">data=</span>bond)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="objects.html#cb45-1" aria-hidden="true" tabindex="-1"></a>bondmodel <span class="ot">&lt;-</span> <span class="fu">lm</span>(gross<span class="sc">~</span>actor,<span class="at">data=</span>bond)</span></code></pre></div>
 <p>Now you can see the list this produces in the environment tab. As you can see, there’s a lot in this list.</p>
 <p><img src="1.34_List.png" width="50%" style="display: block; margin: auto;" />
 You can also see what’s in the list using the following code:</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="objects.html#cb46-1"></a><span class="kw">names</span>(bondmodel)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="objects.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(bondmodel)</span></code></pre></div>
 <pre><code>##  [1] &quot;coefficients&quot;  &quot;residuals&quot;     &quot;effects&quot;       &quot;rank&quot;         
 ##  [5] &quot;fitted.values&quot; &quot;assign&quot;        &quot;qr&quot;            &quot;df.residual&quot;  
 ##  [9] &quot;contrasts&quot;     &quot;xlevels&quot;       &quot;call&quot;          &quot;terms&quot;        
@@ -580,36 +623,77 @@ You can also see what’s in the list using the following code:</p>
 <p>This gets to the crux of why it’s important to know when you’re dealing with a list. It changes the way you select components of that list.</p>
 <p>For example, let’s say you want just the coefficients from a model you had built.</p>
 <p>You can use the same <code>$</code> symbol as before.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="objects.html#cb48-1"></a>bondmodel<span class="op">$</span>coefficients</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="objects.html#cb48-1" aria-hidden="true" tabindex="-1"></a>bondmodel<span class="sc">$</span>coefficients</span></code></pre></div>
 <pre><code>##         (Intercept) actorGeorge Lazenby actorPierce Brosnan    actorRoger Moore 
 ##           820.31651          -314.41673          -309.37854          -269.48336 
 ##   actorSean Connery actorTimothy Dalton 
 ##           -95.43409          -487.19349</code></pre>
 <p>However, if you want to select a single coefficient, you have to use a number value afterwards:</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="objects.html#cb50-1"></a>bondmodel<span class="op">$</span>coefficients[<span class="dv">4</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="objects.html#cb50-1" aria-hidden="true" tabindex="-1"></a>bondmodel<span class="sc">$</span>coefficients[<span class="dv">4</span>]</span></code></pre></div>
 <pre><code>## actorRoger Moore 
 ##        -269.4834</code></pre>
 <p>That’s why it’s important to know if you’re pulling from a list or not. It changes the way that you select key parts of the data.</p>
 </div>
-<div id="functions" class="section level2">
+<div id="functions" class="section level2" number="4.9">
 <h2><span class="header-section-number">4.9</span> Functions</h2>
 <p>Functions are also an object. Most of the time, you’ll be using a built-in function that is in the R base code or in a package you loaded.</p>
 <p>However, you may find yourself building your own functions, which is handy if you don’t want to search for a pre-existing one or need something unique to your situation.</p>
 <p>We’ll go into more detail about functions in a later chapter because of their complexity.</p>
 </div>
-<div id="things-to-remember-2" class="section level2">
+<div id="things-to-remember-2" class="section level2" number="4.10">
 <h2><span class="header-section-number">4.10</span> Things to Remember</h2>
 <ul>
 <li>The key to understanding R is understanding objects</li>
 <li>The object type changes the way you’ll read, transform, and produce data</li>
 </ul>
+</div>
+<div id="exercises" class="section level2" number="4.11">
+<h2><span class="header-section-number">4.11</span> Exercises</h2>
+<p>Try and see if you can answer the following questions. Answers are in the back of the book!</p>
+<ol style="list-style-type: decimal">
+<li>Down below is the printed output of an object. What type of object is it?</li>
+</ol>
+<pre><code>## , , 1
+## 
+##           [,1]     [,2]
+## [1,] 15.864838 11.23700
+## [2,]  9.306884 22.23843
+## 
+## , , 2
+## 
+##          [,1]     [,2]
+## [1,] 23.72055 19.57388
+## [2,] 18.21969 21.93573
+## 
+## , , 3
+## 
+##           [,1]     [,2]
+## [1,]  9.503213 9.667211
+## [2,] 10.788929 9.026587</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Down below is the printed output of an object. What type of object is it?</li>
+</ol>
+<pre><code>## [1]  5.106328 11.586182  9.622173 15.599097</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>We want to select the column <strong>mpg</strong> from the data frame <strong>mtcars</strong>. Would the following code output a vector or data frame?</li>
+</ol>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="objects.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mtcars)</span>
+<span id="cb54-2"><a href="objects.html#cb54-2" aria-hidden="true" tabindex="-1"></a>mtcars<span class="sc">$</span>mpg</span></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>We want to select the column <strong>mpg</strong> from the data frame <strong>mtcars</strong>. Would the following code output a vector or data frame?</li>
+</ol>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="objects.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mtcars)</span>
+<span id="cb55-2"><a href="objects.html#cb55-2" aria-hidden="true" tabindex="-1"></a>mtcars[<span class="dv">1</span>]</span></code></pre></div>
+<ol start="5" style="list-style-type: decimal">
+<li>We want to select the column <strong>gear</strong> from the data frame <strong>mtcars</strong>, but we want to treat is as a categorical variable. How would you turn this column into a factor? (You can load the data set using <code>data(mtcars)</code>)</li>
+</ol>
 
 </div>
 </div>
 <div class="footnotes">
 <hr />
 <ol start="1">
-<li id="fn1"><p><span class="citation">(<span class="citeproc-not-found" data-reference-id="noauthor_james_nodate"><strong>???</strong></span>)</span><a href="objects.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p><span class="citation">(<a href="#ref-noauthor_james_nodate" role="doc-biblioref"><strong>noauthor_james_nodate?</strong></a>)</span><a href="objects.html#fnref1" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -622,7 +706,6 @@ You can also see what’s in the list using the following code:</p>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -641,6 +724,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -661,6 +745,10 @@ gitbook.start({
 "text": null
 },
 "download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

@@ -1,4 +1,4 @@
-# R Objects Types {#objects}
+# Object Types in R Programming {#objects}
 
 R uses **objects** to store and interact with data and there are various object types. That probably means little to you now, but understanding these differences will make R programming easier – whatever your R programming goals.
 
@@ -10,7 +10,7 @@ That didn’t work out well for me. I was coming from a SQL background and thoug
 
 Had I started by learning the objects first, I would’ve saved a lot more time. I would’ve done less data manipulation in SQL or Excel and made simpler, more scalable R code.
 
-## Why Do  Objects Matter?
+## Why Do Objects Matter?
 
 Almost everything you program in R does one of the following:
 
@@ -199,7 +199,9 @@ $$
  \begin{bmatrix}
   17\\
   21\\
- \end{bmatrix} $$
+ \end{bmatrix}
+ 
+$$
 
 Unless you’re building the functions that calculate this, I doubt you’ll use matrices or arrays all that much. However, it’s handy to know what they are and how they can be used. They’re often the output of functions as well.
 
@@ -392,5 +394,33 @@ However, you may find yourself building your own functions, which is handy if yo
 We’ll go into more detail about functions in a later chapter because of their complexity.
 
 ## Things to Remember
+
 * The key to understanding R is understanding objects
 * The object type changes the way you’ll read, transform, and produce data
+
+## Exercises
+
+Try and see if you can answer the following questions. Answers are in the back of the book!
+
+1. Down below is the printed output of an object. What type of object is it?
+```{r Q2.1, echo=FALSE}
+array(c(matrix(rnorm(4,15,4),nrow=2),matrix(rnorm(4,20,4),nrow=2),matrix(rnorm(4,10,2),nrow=2)),dim=c(2,2,3))
+```
+
+2. Down below is the printed output of an object. What type of object is it?
+```{r Q2.2, echo=FALSE}
+rnorm(4,15,4)
+```
+3. We want to select the column **mpg** from the data frame **mtcars**. Would the following code output a vector or data frame?
+```{r Q2.3, results=FALSE}
+data(mtcars)
+mtcars$mpg
+```
+
+4. We want to select the column **mpg** from the data frame **mtcars**. Would the following code output a vector or data frame?
+```{r Q2.4, results=FALSE}
+data(mtcars)
+mtcars[1]
+```
+
+5. We want to select the column **gear** from the data frame **mtcars**, but we want to treat is as a categorical variable.  How would you turn this column into a factor? (You can load the data set using `data(mtcars)`)

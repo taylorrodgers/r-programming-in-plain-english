@@ -418,7 +418,7 @@ ggplot(data=bond,
 
 As you can tell, it gets a bit tedious to remove all these default graphics. This is the trade-off with `ggplot2` in my mind. The syntax is intuitive, but improving the aesthetics isn't something I enjoy.
 
-For that reason, I suggest using the templated themes, such as the "pander" theme with `theme_pander()`:
+For that reason, I suggest using the templated themes, such as Few's "Practical Rules for Using Color in Charts" theme with `theme_few()` or the "pander" theme with `theme_pander()`:
 
 ```{r 9.29, out.width='70%',fig.align='center',fig.asp=.65}
 library(ggthemes)
@@ -443,3 +443,11 @@ Much better! If you want, you can learn to build your own themes at this ![link]
 * `ggplot2` has the most intuitive syntax
 * `ggplot2` "layers" visualizations
 * I recommend using themes for `ggplot2`
+
+## Exercises
+
+1. Using the **mtcars** data set and the `ggplot2` package, build a scatter plot with **hp** on the x-axis and **mpg** on the y-axis. (Hint: don't forget to use `library(ggplot2)` and `data(mtcars)` first.)
+2. Using the plot you made in the previous question, use color to distinguish the **cyl** for each point. Be sure to turn the **cyl** column into a factor first with `factor(cyl)`.
+3. Add more descriptive labeling to the x-axis, y-axis, and legend. For example, use "Horsepower" instead of "hp".
+4. Make the data viz title "Car Performance".
+5. Use the `theme_pew()` theme from the `ggthemes` package.

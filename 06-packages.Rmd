@@ -171,3 +171,8 @@ And you can look up individual functions from the package.
 * You can install and load packages using the **Packages** tab in RStudio or the `install.packages()` and `library()` commands
 * Whenever you research new functions on the internet, you will often see the package required in the top left or right hand corner
 * You can research packages using the **Help** tab in RStudio
+
+## Exercises
+
+1. Install the `tidyverse` set of packages. (Note: you only need to install "tidyverse" and it'll load multiple packages.)
+2. Load the `dplyr` package.
