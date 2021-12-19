@@ -1,380 +1,160 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 3 Getting Setup in R and RStudio | R Programming in Plain English</title>
-  <meta name="description" content="A simple guide to R programming for those without programming experience" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Chapter 3 Getting Setup in R and RStudio | R Programming in Plain English" />
-  <meta property="og:type" content="book" />
-  
-  
-  <meta property="og:description" content="A simple guide to R programming for those without programming experience" />
-  <meta name="github-repo" content="rstudio/bookdown-demo" />
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 3 Getting Setup in R and RStudio | R Programming in Plain English" />
-  
-  <meta name="twitter:description" content="A simple guide to R programming for those without programming experience" />
-  
-
-<meta name="author" content="Taylor Rodgers" />
-
-
-<meta name="date" content="2021-12-11" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="whatisr.html"/>
-<link rel="next" href="objects.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
-<script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
-
-
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-
-<link rel="stylesheet" href="style.css" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 3 Getting Setup in R and RStudio | R Programming in Plain English</title>
+<meta name="author" content="Taylor Rodgers">
+<meta name="description" content="This chapter will tell you how to download R and RStudio. It will also explain the differences between these two tools and how to navigate their user interfaces. If you have already setup these...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 3 Getting Setup in R and RStudio | R Programming in Plain English">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://github.com/taylorrodgers/taylorrodgers.github.io/setup.html">
+<meta property="og:image" content="https://github.com/taylorrodgers/taylorrodgers.github.io/BookCover.png">
+<meta property="og:description" content="This chapter will tell you how to download R and RStudio. It will also explain the differences between these two tools and how to navigate their user interfaces. If you have already setup these...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 3 Getting Setup in R and RStudio | R Programming in Plain English">
+<meta name="twitter:description" content="This chapter will tell you how to download R and RStudio. It will also explain the differences between these two tools and how to navigate their user interfaces. If you have already setup these...">
+<meta name="twitter:image" content="https://github.com/taylorrodgers/taylorrodgers.github.io/BookCover.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="https://fonts.googleapis.com/css2?family=Lato-Light&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato&amp;display=swap" rel="stylesheet">
+<script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><a href="./">R Programming in Plain English</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About This Book</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#things-you-should-know-before-reading"><i class="fa fa-check"></i><b>1.1</b> Things You Should Know Before Reading</a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="whatisr.html"><a href="whatisr.html"><i class="fa fa-check"></i><b>2</b> What is R Programming?</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="whatisr.html"><a href="whatisr.html#is-r-the-best-statistical-programming-language"><i class="fa fa-check"></i><b>2.1</b> Is R the Best Statistical Programming Language?</a></li>
-<li class="chapter" data-level="2.2" data-path="whatisr.html"><a href="whatisr.html#how-will-learning-r-versus-python-impact-my-job-opportunities"><i class="fa fa-check"></i><b>2.2</b> How Will Learning R versus Python Impact My Job Opportunities?</a></li>
-<li class="chapter" data-level="2.3" data-path="whatisr.html"><a href="whatisr.html#things-to-remember"><i class="fa fa-check"></i><b>2.3</b> Things to Remember</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>3</b> Getting Setup in R and RStudio</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="setup.html"><a href="setup.html#how-to-download-r"><i class="fa fa-check"></i><b>3.1</b> How to Download R</a></li>
-<li class="chapter" data-level="3.2" data-path="setup.html"><a href="setup.html#understanding-base-rs-user-interface"><i class="fa fa-check"></i><b>3.2</b> Understanding Base R’s User Interface</a></li>
-<li class="chapter" data-level="3.3" data-path="setup.html"><a href="setup.html#limitations-of-r-base"><i class="fa fa-check"></i><b>3.3</b> Limitations of R Base</a></li>
-<li class="chapter" data-level="3.4" data-path="setup.html"><a href="setup.html#what-is-rstudio"><i class="fa fa-check"></i><b>3.4</b> What is RStudio?</a></li>
-<li class="chapter" data-level="3.5" data-path="setup.html"><a href="setup.html#how-to-download-rstudio"><i class="fa fa-check"></i><b>3.5</b> How to Download RStudio</a></li>
-<li class="chapter" data-level="3.6" data-path="setup.html"><a href="setup.html#understanding-rstudio-interface"><i class="fa fa-check"></i><b>3.6</b> Understanding RStudio Interface</a></li>
-<li class="chapter" data-level="3.7" data-path="setup.html"><a href="setup.html#things-to-remember-1"><i class="fa fa-check"></i><b>3.7</b> Things to Remember</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="objects.html"><a href="objects.html"><i class="fa fa-check"></i><b>4</b> Object Types in R Programming</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="objects.html"><a href="objects.html#why-do-objects-matter"><i class="fa fa-check"></i><b>4.1</b> Why Do Objects Matter?</a></li>
-<li class="chapter" data-level="4.2" data-path="objects.html"><a href="objects.html#understanding-object-types-makes-it-easier-to-transform-and-analyze"><i class="fa fa-check"></i><b>4.2</b> Understanding Object Types Makes It Easier to Transform and Analyze</a></li>
-<li class="chapter" data-level="4.3" data-path="objects.html"><a href="objects.html#the-basic-objects-to-remember"><i class="fa fa-check"></i><b>4.3</b> The Basic Objects to Remember</a></li>
-<li class="chapter" data-level="4.4" data-path="objects.html"><a href="objects.html#vectors"><i class="fa fa-check"></i><b>4.4</b> Vectors</a></li>
-<li class="chapter" data-level="4.5" data-path="objects.html"><a href="objects.html#matrices-and-arrays"><i class="fa fa-check"></i><b>4.5</b> Matrices and Arrays</a></li>
-<li class="chapter" data-level="4.6" data-path="objects.html"><a href="objects.html#data-frames"><i class="fa fa-check"></i><b>4.6</b> Data Frames</a></li>
-<li class="chapter" data-level="4.7" data-path="objects.html"><a href="objects.html#factors"><i class="fa fa-check"></i><b>4.7</b> Factors</a></li>
-<li class="chapter" data-level="4.8" data-path="objects.html"><a href="objects.html#lists"><i class="fa fa-check"></i><b>4.8</b> Lists</a></li>
-<li class="chapter" data-level="4.9" data-path="objects.html"><a href="objects.html#functions"><i class="fa fa-check"></i><b>4.9</b> Functions</a></li>
-<li class="chapter" data-level="4.10" data-path="objects.html"><a href="objects.html#things-to-remember-2"><i class="fa fa-check"></i><b>4.10</b> Things to Remember</a></li>
-<li class="chapter" data-level="4.11" data-path="objects.html"><a href="objects.html#exercises"><i class="fa fa-check"></i><b>4.11</b> Exercises</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="baserfilter.html"><a href="baserfilter.html"><i class="fa fa-check"></i><b>5</b> How to Filter and Transform Data in Base R</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="baserfilter.html"><a href="baserfilter.html#what-are-operators"><i class="fa fa-check"></i><b>5.1</b> What Are Operators?</a></li>
-<li class="chapter" data-level="5.2" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-and-transform-data-from-a-vector"><i class="fa fa-check"></i><b>5.2</b> How to Filter and Transform Data From a Vector</a></li>
-<li class="chapter" data-level="5.3" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-and-transform-data-from-a-matrix"><i class="fa fa-check"></i><b>5.3</b> How to Filter and Transform Data From a Matrix</a></li>
-<li class="chapter" data-level="5.4" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-and-transform-data-from-arrays"><i class="fa fa-check"></i><b>5.4</b> How to Filter and Transform Data from Arrays</a></li>
-<li class="chapter" data-level="5.5" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-and-transform-data-from-a-data-frame"><i class="fa fa-check"></i><b>5.5</b> How to Filter and Transform Data from a Data Frame</a></li>
-<li class="chapter" data-level="5.6" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-a-list"><i class="fa fa-check"></i><b>5.6</b> How to Filter a List</a></li>
-<li class="chapter" data-level="5.7" data-path="baserfilter.html"><a href="baserfilter.html#things-to-remember-3"><i class="fa fa-check"></i><b>5.7</b> Things to Remember</a></li>
-<li class="chapter" data-level="5.8" data-path="baserfilter.html"><a href="baserfilter.html#exercises-1"><i class="fa fa-check"></i><b>5.8</b> Exercises</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="dplyr.html"><a href="dplyr.html"><i class="fa fa-check"></i><b>6</b> How to Filter and Transform Data with the Dplyr Package</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="dplyr.html"><a href="dplyr.html#why-is-dplyr-so-popular"><i class="fa fa-check"></i><b>6.1</b> Why is <code>dplyr</code> So Popular?</a></li>
-<li class="chapter" data-level="6.2" data-path="dplyr.html"><a href="dplyr.html#its-still-worth-learning-base-r"><i class="fa fa-check"></i><b>6.2</b> It’s Still Worth Learning Base R</a></li>
-<li class="chapter" data-level="6.3" data-path="dplyr.html"><a href="dplyr.html#the-dplyr-syntax"><i class="fa fa-check"></i><b>6.3</b> The <code>dplyr</code> Syntax</a></li>
-<li class="chapter" data-level="6.4" data-path="dplyr.html"><a href="dplyr.html#understand-the-difference-between-selecting-and-filtering"><i class="fa fa-check"></i><b>6.4</b> Understand the Difference Between Selecting and Filtering</a></li>
-<li class="chapter" data-level="6.5" data-path="dplyr.html"><a href="dplyr.html#how-to-select-and-mutate-a-data-frame-with-dplyr-in-r"><i class="fa fa-check"></i><b>6.5</b> How to Select and Mutate a Data Frame with <code>dplyr</code> in R</a></li>
-<li class="chapter" data-level="6.6" data-path="dplyr.html"><a href="dplyr.html#how-to-filter-a-data-frame-with-dplyr-in-r"><i class="fa fa-check"></i><b>6.6</b> How to Filter a Data Frame with <code>dplyr</code> in R</a></li>
-<li class="chapter" data-level="6.7" data-path="dplyr.html"><a href="dplyr.html#how-to-summarize-and-group-data-with-dplyr-in-r"><i class="fa fa-check"></i><b>6.7</b> How to Summarize and Group Data with <code>dplyr</code> in R</a></li>
-<li class="chapter" data-level="6.8" data-path="dplyr.html"><a href="dplyr.html#things-to-remember-4"><i class="fa fa-check"></i><b>6.8</b> Things to Remember</a></li>
-<li class="chapter" data-level="6.9" data-path="dplyr.html"><a href="dplyr.html#exercises-2"><i class="fa fa-check"></i><b>6.9</b> Exercises</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>7</b> Understanding and Using R Packages</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="packages.html"><a href="packages.html#why-does-r-use-packages"><i class="fa fa-check"></i><b>7.1</b> Why Does R Use Packages?</a></li>
-<li class="chapter" data-level="7.2" data-path="packages.html"><a href="packages.html#how-to-access-r-packages"><i class="fa fa-check"></i><b>7.2</b> How to Access R Packages</a></li>
-<li class="chapter" data-level="7.3" data-path="packages.html"><a href="packages.html#how-to-install-and-load-a-package---the-easy-way"><i class="fa fa-check"></i><b>7.3</b> How to Install and Load a Package - The Easy Way</a></li>
-<li class="chapter" data-level="7.4" data-path="packages.html"><a href="packages.html#why-you-should-still-learn-to-install-and-load-packages-the-old-fashioned-way"><i class="fa fa-check"></i><b>7.4</b> Why You Should Still Learn to Install and Load Packages the “Old Fashioned” Way</a></li>
-<li class="chapter" data-level="7.5" data-path="packages.html"><a href="packages.html#how-to-install-and-load-r-packages---the-old-fashioned-way"><i class="fa fa-check"></i><b>7.5</b> How to Install and Load R Packages - The Old Fashioned Way</a></li>
-<li class="chapter" data-level="7.6" data-path="packages.html"><a href="packages.html#a-simple-trick-to-include-install-and-load-any-packages-needed"><i class="fa fa-check"></i><b>7.6</b> A Simple Trick to Include Install and Load Any Packages Needed</a></li>
-<li class="chapter" data-level="7.7" data-path="packages.html"><a href="packages.html#how-to-find-new-packages-to-install"><i class="fa fa-check"></i><b>7.7</b> How to Find New Packages to Install</a></li>
-<li class="chapter" data-level="7.8" data-path="packages.html"><a href="packages.html#how-to-find-documentation-on-packages"><i class="fa fa-check"></i><b>7.8</b> How to Find Documentation on Packages</a></li>
-<li class="chapter" data-level="7.9" data-path="packages.html"><a href="packages.html#things-to-remember-5"><i class="fa fa-check"></i><b>7.9</b> Things to Remember</a></li>
-<li class="chapter" data-level="7.10" data-path="packages.html"><a href="packages.html#exercises-3"><i class="fa fa-check"></i><b>7.10</b> Exercises</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="function.html"><a href="function.html"><i class="fa fa-check"></i><b>8</b> How to Write Functions</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="function.html"><a href="function.html#two-approaches-to-using-r-functions"><i class="fa fa-check"></i><b>8.1</b> Two Approaches to Using R Functions</a></li>
-<li class="chapter" data-level="8.2" data-path="function.html"><a href="function.html#why-you-should-learn-to-write-your-own-functions"><i class="fa fa-check"></i><b>8.2</b> Why You Should Learn to Write Your Own Functions</a></li>
-<li class="chapter" data-level="8.3" data-path="function.html"><a href="function.html#the-components-of-an-r-function"><i class="fa fa-check"></i><b>8.3</b> The Components of an R Function</a></li>
-<li class="chapter" data-level="8.4" data-path="function.html"><a href="function.html#required-versus-non-required-arguments"><i class="fa fa-check"></i><b>8.4</b> Required versus Non-Required Arguments</a></li>
-<li class="chapter" data-level="8.5" data-path="function.html"><a href="function.html#when-order-matters-for-arguments"><i class="fa fa-check"></i><b>8.5</b> When Order Matters for Arguments</a></li>
-<li class="chapter" data-level="8.6" data-path="function.html"><a href="function.html#how-to-write-your-own-function"><i class="fa fa-check"></i><b>8.6</b> How to Write Your Own Function</a></li>
-<li class="chapter" data-level="8.7" data-path="function.html"><a href="function.html#writing-functions-using-control-flows"><i class="fa fa-check"></i><b>8.7</b> Writing Functions Using Control Flows</a></li>
-<li class="chapter" data-level="8.8" data-path="function.html"><a href="function.html#applying-a-control-flow-to-our-summary-stats-function"><i class="fa fa-check"></i><b>8.8</b> Applying a Control Flow to Our Summary Stats Function</a></li>
-<li class="chapter" data-level="8.9" data-path="function.html"><a href="function.html#breaking-down-the-function-we-just-made"><i class="fa fa-check"></i><b>8.9</b> Breaking Down the Function We Just Made</a></li>
-<li class="chapter" data-level="8.10" data-path="function.html"><a href="function.html#things-to-remember-6"><i class="fa fa-check"></i><b>8.10</b> Things to Remember</a></li>
-<li class="chapter" data-level="8.11" data-path="function.html"><a href="function.html#exercises-4"><i class="fa fa-check"></i><b>8.11</b> Exercises</a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="importdata.html"><a href="importdata.html"><i class="fa fa-check"></i><b>9</b> Importing Data into R</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="importdata.html"><a href="importdata.html#how-to-import-a-raw-data-file-the-easy-way"><i class="fa fa-check"></i><b>9.1</b> How to Import a Raw Data File the Easy Way</a></li>
-<li class="chapter" data-level="9.2" data-path="importdata.html"><a href="importdata.html#import-a-raw-data-file-the-hard-way"><i class="fa fa-check"></i><b>9.2</b> Import a Raw Data File the Hard Way</a></li>
-<li class="chapter" data-level="9.3" data-path="importdata.html"><a href="importdata.html#save-import-functions"><i class="fa fa-check"></i><b>9.3</b> Save Import Functions</a></li>
-<li class="chapter" data-level="9.4" data-path="importdata.html"><a href="importdata.html#connect-to-a-database"><i class="fa fa-check"></i><b>9.4</b> Connect to a Database</a></li>
-<li class="chapter" data-level="9.5" data-path="importdata.html"><a href="importdata.html#connect-to-an-api"><i class="fa fa-check"></i><b>9.5</b> Connect to an API</a></li>
-<li class="chapter" data-level="9.6" data-path="importdata.html"><a href="importdata.html#things-to-remember-7"><i class="fa fa-check"></i><b>9.6</b> Things to Remember</a></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="plotdata.html"><a href="plotdata.html"><i class="fa fa-check"></i><b>10</b> How to Plot Data in R</a>
-<ul>
-<li class="chapter" data-level="10.1" data-path="plotdata.html"><a href="plotdata.html#which-r-plot-package-is-best"><i class="fa fa-check"></i><b>10.1</b> Which R Plot Package is Best?</a></li>
-<li class="chapter" data-level="10.2" data-path="plotdata.html"><a href="plotdata.html#so-which-data-viz-package-is-actually-the-best"><i class="fa fa-check"></i><b>10.2</b> So Which Data Viz Package is Actually the Best?</a></li>
-<li class="chapter" data-level="10.3" data-path="plotdata.html"><a href="plotdata.html#how-to-write-ggplot2-scripts"><i class="fa fa-check"></i><b>10.3</b> How to Write ggplot2 Scripts</a></li>
-<li class="chapter" data-level="10.4" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-common-data-visualizations-in-ggplot2"><i class="fa fa-check"></i><b>10.4</b> How to Plot Common Data Visualizations in ggplot2</a>
-<ul>
-<li class="chapter" data-level="10.4.1" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-a-scatterplot"><i class="fa fa-check"></i><b>10.4.1</b> How to Plot a Scatterplot</a></li>
-<li class="chapter" data-level="10.4.2" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-a-bar-graph-histogram"><i class="fa fa-check"></i><b>10.4.2</b> How to Plot a Bar Graph / Histogram</a></li>
-<li class="chapter" data-level="10.4.3" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-a-line-graph"><i class="fa fa-check"></i><b>10.4.3</b> How to Plot a Line Graph</a></li>
-<li class="chapter" data-level="10.4.4" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-a-box-and-whiskers-plot"><i class="fa fa-check"></i><b>10.4.4</b> How to Plot a Box-and-Whiskers Plot</a></li>
-<li class="chapter" data-level="10.4.5" data-path="plotdata.html"><a href="plotdata.html#how-to-improve-labels-and-other-formatting-tips"><i class="fa fa-check"></i><b>10.4.5</b> How to Improve Labels and Other Formatting Tips</a></li>
-</ul></li>
-<li class="chapter" data-level="10.5" data-path="plotdata.html"><a href="plotdata.html#things-to-remember-8"><i class="fa fa-check"></i><b>10.5</b> Things to Remember</a></li>
-<li class="chapter" data-level="10.6" data-path="plotdata.html"><a href="plotdata.html#exercises-5"><i class="fa fa-check"></i><b>10.6</b> Exercises</a></li>
-</ul></li>
-<li class="chapter" data-level="11" data-path="statfunctions.html"><a href="statfunctions.html"><i class="fa fa-check"></i><b>11</b> Statistical Functions in R: Common Functions and How They Work</a>
-<ul>
-<li class="chapter" data-level="11.1" data-path="statfunctions.html"><a href="statfunctions.html#how-statistical-functions-work-in-r-programming"><i class="fa fa-check"></i><b>11.1</b> How Statistical Functions Work in R Programming</a></li>
-<li class="chapter" data-level="11.2" data-path="statfunctions.html"><a href="statfunctions.html#how-to-build-a-model-in-r-example-with-linear-regression"><i class="fa fa-check"></i><b>11.2</b> How to Build a Model in R (Example with Linear Regression)</a></li>
-<li class="chapter" data-level="11.3" data-path="statfunctions.html"><a href="statfunctions.html#how-to-review-common-model-performance-statistics"><i class="fa fa-check"></i><b>11.3</b> How to Review Common Model Performance Statistics</a></li>
-<li class="chapter" data-level="11.4" data-path="statfunctions.html"><a href="statfunctions.html#how-to-make-predictions-with-a-model"><i class="fa fa-check"></i><b>11.4</b> How to Make Predictions with a Model</a></li>
-<li class="chapter" data-level="11.5" data-path="statfunctions.html"><a href="statfunctions.html#how-to-save-your-model-to-use-later"><i class="fa fa-check"></i><b>11.5</b> How to Save Your Model to Use Later</a></li>
-<li class="chapter" data-level="11.6" data-path="statfunctions.html"><a href="statfunctions.html#how-to-add-multiple-parameters-to-a-model"><i class="fa fa-check"></i><b>11.6</b> How to Add Multiple Parameters to a Model</a></li>
-<li class="chapter" data-level="11.7" data-path="statfunctions.html"><a href="statfunctions.html#how-to-add-a-categorical-variable-to-a-model"><i class="fa fa-check"></i><b>11.7</b> How to Add a Categorical Variable to a Model</a></li>
-<li class="chapter" data-level="11.8" data-path="statfunctions.html"><a href="statfunctions.html#how-to-add-transformed-variables-to-a-model"><i class="fa fa-check"></i><b>11.8</b> How to Add Transformed Variables to a Model</a></li>
-<li class="chapter" data-level="11.9" data-path="statfunctions.html"><a href="statfunctions.html#how-to-add-variable-interactions-to-a-model"><i class="fa fa-check"></i><b>11.9</b> How to Add Variable Interactions to a Model</a></li>
-<li class="chapter" data-level="11.10" data-path="statfunctions.html"><a href="statfunctions.html#how-to-calculate-model-confidence-intervals"><i class="fa fa-check"></i><b>11.10</b> How to Calculate Model Confidence Intervals</a></li>
-<li class="chapter" data-level="11.11" data-path="statfunctions.html"><a href="statfunctions.html#how-to-calculate-analysis-of-variance-between-models"><i class="fa fa-check"></i><b>11.11</b> How to Calculate Analysis of Variance Between Models</a></li>
-<li class="chapter" data-level="11.12" data-path="statfunctions.html"><a href="statfunctions.html#other-common-model-types---logistical-regression"><i class="fa fa-check"></i><b>11.12</b> Other Common Model Types - Logistical Regression</a></li>
-<li class="chapter" data-level="11.13" data-path="statfunctions.html"><a href="statfunctions.html#other-common-model-types---anova-models"><i class="fa fa-check"></i><b>11.13</b> Other Common Model Types - Anova Models</a></li>
-<li class="chapter" data-level="11.14" data-path="statfunctions.html"><a href="statfunctions.html#things-to-remember-9"><i class="fa fa-check"></i><b>11.14</b> Things to Remember</a></li>
-<li class="chapter" data-level="11.15" data-path="statfunctions.html"><a href="statfunctions.html#exercises-6"><i class="fa fa-check"></i><b>11.15</b> Exercises</a></li>
-</ul></li>
-<li class="chapter" data-level="12" data-path="answers.html"><a href="answers.html"><i class="fa fa-check"></i><b>12</b> Answer Key</a>
-<ul>
-<li class="chapter" data-level="12.1" data-path="answers.html"><a href="answers.html#chapter-4---object-types-in-r-programming"><i class="fa fa-check"></i><b>12.1</b> Chapter 4 - Object Types in R Programming</a></li>
-<li class="chapter" data-level="12.2" data-path="answers.html"><a href="answers.html#chapter-5---how-to-filter-and-transform-data-in-base-r"><i class="fa fa-check"></i><b>12.2</b> Chapter 5 - How to Filter and Transform Data in Base R</a></li>
-<li class="chapter" data-level="12.3" data-path="answers.html"><a href="answers.html#chapter-6---how-to-filter-and-transform-data-with-the-dplyr-package"><i class="fa fa-check"></i><b>12.3</b> Chapter 6 - How to Filter and Transform Data with the Dplyr Package</a></li>
-<li class="chapter" data-level="12.4" data-path="answers.html"><a href="answers.html#chapter-7---understanding-and-using-r-packages"><i class="fa fa-check"></i><b>12.4</b> Chapter 7 - Understanding and Using R Packages</a></li>
-<li class="chapter" data-level="12.5" data-path="answers.html"><a href="answers.html#chapter-8---how-to-write-functions"><i class="fa fa-check"></i><b>12.5</b> Chapter 8 - How to Write Functions</a></li>
-<li class="chapter" data-level="12.6" data-path="answers.html"><a href="answers.html#chapter-10---how-to-plot-data-in-r"><i class="fa fa-check"></i><b>12.6</b> Chapter 10 - How to Plot Data in R</a></li>
-<li class="chapter" data-level="12.7" data-path="answers.html"><a href="answers.html#chapter-11---statistical-functions-in-r"><i class="fa fa-check"></i><b>12.7</b> Chapter 11 - Statistical Functions in R</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
-</ul>
-
-      </nav>
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">R Programming in Plain English</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
 
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R Programming in Plain English</a>
-          </h1>
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> About This Book</a></li>
+<li><a class="" href="whatisr.html"><span class="header-section-number">2</span> What is R Programming?</a></li>
+<li><a class="active" href="setup.html"><span class="header-section-number">3</span> Getting Setup in R and RStudio</a></li>
+<li><a class="" href="objects.html"><span class="header-section-number">4</span> Object Types in R Programming</a></li>
+<li><a class="" href="baserfilter.html"><span class="header-section-number">5</span> How to Filter and Transform Data in Base R</a></li>
+<li><a class="" href="dplyr.html"><span class="header-section-number">6</span> How to Filter and Transform Data with the Dplyr Package</a></li>
+<li><a class="" href="packages.html"><span class="header-section-number">7</span> Understanding and Using R Packages</a></li>
+<li><a class="" href="function.html"><span class="header-section-number">8</span> How to Write Functions</a></li>
+<li><a class="" href="importdata.html"><span class="header-section-number">9</span> Importing Data into R</a></li>
+<li><a class="" href="plotdata.html"><span class="header-section-number">10</span> How to Plot Data in R</a></li>
+<li><a class="" href="statfunctions.html"><span class="header-section-number">11</span> Statistical Functions in R: Common Functions and How They Work</a></li>
+<li><a class="" href="answers.html"><span class="header-section-number">12</span> Answer Key</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/taylorrodgers/taylorrodgers.github.io">View book source <i class="fab fa-github"></i></a></p>
         </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="setup" class="section level1" number="3">
-<h1><span class="header-section-number">Chapter 3</span> Getting Setup in R and RStudio</h1>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="setup" class="section level1" number="3">
+<h1>
+<span class="header-section-number">3</span> Getting Setup in R and RStudio<a class="anchor" aria-label="anchor" href="#setup"><i class="fas fa-link"></i></a>
+</h1>
 <p>This chapter will tell you how to download <strong>R</strong> and <strong>RStudio</strong>. It will also explain the differences between these two tools and how to navigate their user interfaces.</p>
 <p>If you have already setup these two tools, feel free to skip ahead to the next chapter. However, if you’re still unsure of how to navigate the tools, you may find certain sections useful.</p>
 <div id="how-to-download-r" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> How to Download R</h2>
+<h2>
+<span class="header-section-number">3.1</span> How to Download R<a class="anchor" aria-label="anchor" href="#how-to-download-r"><i class="fas fa-link"></i></a>
+</h2>
 <p>To download R, go to this website: <a href="https://www.r-project.org/" class="uri">https://www.r-project.org/</a></p>
 <p>You will then have to go through a series of options and screens to download R. Don’t worry. I’ll explain each of them along the way.</p>
 <p>First, you’ll select the “download R” link in the first paragraph.</p>
-<p><img src="1.1_R_Download.png" width="50%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="1.1_R_Download.png" width="50%" style="display: block; margin: auto;"></div>
 <p>Second, you’ll select a CRAN mirror. Select the one that’s closest to you. For example, I live in Lawrence, Kansas. That conveniently has a CRAN mirror in my own city. If you live in Melbourne, Australia, you’ll select the mirror hosted by the University of Melbourne.</p>
-<p><img src="1.2_CRAN_Selection.png" width="75%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="1.2_CRAN_Selection.png" width="75%" style="display: block; margin: auto;"></div>
 <p>Don’t worry. There’s not much difference to the user in these mirrors. It simply helps optimize your ability to download packages from a nearby source, rather than from some other country in the world. This isn’t a big deal for a small time programmer or researcher, but it’s beneficial for large scale operations to carefully choose their mirror.</p>
 <p>Third, you’ll select the option for your operating system:</p>
-<p><img src="1.3_Download_and_Install.png" width="65%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="1.3_Download_and_Install.png" width="65%" style="display: block; margin: auto;"></div>
 <p>That will take you to a page where you can select the latest release:</p>
-<p><img src="1.4_Download.png" width="75%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="1.4_Download.png" width="75%" style="display: block; margin: auto;"></div>
 <p>Download and install the latest release.</p>
 </div>
 <div id="understanding-base-rs-user-interface" class="section level2" number="3.2">
-<h2><span class="header-section-number">3.2</span> Understanding Base R’s User Interface</h2>
+<h2>
+<span class="header-section-number">3.2</span> Understanding Base R’s User Interface<a class="anchor" aria-label="anchor" href="#understanding-base-rs-user-interface"><i class="fas fa-link"></i></a>
+</h2>
 <p>I won’t focus too much on the R interface. We won’t use it much in this book. We’ll be using RStudio (more on that in a bit). However, go ahead and open up R. If you have a Mac, it will have this icon:</p>
-<p><img src="1.5_R_Logo.png" width="10%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="1.5_R_Logo.png" width="10%" style="display: block; margin: auto;"></div>
 <p>Once you open it, you should see the <strong>R console</strong>. The R console is where you type commands. You’ll continue to use the console in RStudio later.</p>
-<p><img src="1.6_R_Console.png" width="75%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="1.6_R_Console.png" width="75%" style="display: block; margin: auto;"></div>
 <p>Go ahead and input <code>2*2</code> to get a feel for it. You can hit <strong>Ctrl+Enter</strong> on a Windows version and <strong>Command+Enter</strong> on a Mac OS to run the command.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="setup.html#cb1-1" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span><span class="sc">*</span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="fl">2</span><span class="op">*</span><span class="fl">2</span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
 <p>As you notice, the R console doesn’t allow you to go back and edit previously executed commands.</p>
 <p>In order to save and edit a script, you’ll need to create a document. A document in this context is basically just a text file that saves the code you want to reference later.</p>
 <p>Go to the <strong>File menu</strong> and select <strong>New Document</strong>. You should have two windows afterwards like the screenshot below:</p>
-<p><img src="1.7_New_Document.png" width="75%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="1.7_New_Document.png" width="75%" style="display: block; margin: auto;"></div>
 <p>Go ahead and copy and paste this code into the document:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="setup.html#cb3-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;faraway&quot;</span>)</span>
-<span id="cb3-2"><a href="setup.html#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(faraway)</span>
-<span id="cb3-3"><a href="setup.html#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data</span>(hprice)</span>
-<span id="cb3-4"><a href="setup.html#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(hprice)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"faraway"</span><span class="op">)</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://people.bath.ac.uk/jjf23/">faraway</a></span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">hprice</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">hprice</span><span class="op">)</span></code></pre></div>
 <p>Highlight different parts of the code and hit <strong>Command-Enter</strong> or <strong>Ctrl-Enter</strong> and see how it interacts with the console. (It may ask you to re-select a CRAN mirror. Go ahead and re-select the one you used to download.)</p>
-<p><img src="1.8_Run_Code.png" width="75%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="1.8_Run_Code.png" width="75%" style="display: block; margin: auto;"></div>
 <p>Saving scripts this way allows you to modify your code and then re-execute it in the console.</p>
 <p>We’ll go into more detail about how to input and analyze data later.</p>
 <p>Go ahead and close R for now. No need to save anything.</p>
 </div>
 <div id="limitations-of-r-base" class="section level2" number="3.3">
-<h2><span class="header-section-number">3.3</span> Limitations of R Base</h2>
+<h2>
+<span class="header-section-number">3.3</span> Limitations of R Base<a class="anchor" aria-label="anchor" href="#limitations-of-r-base"><i class="fas fa-link"></i></a>
+</h2>
 <p>The R console in the base version is a simple interface. Sometimes this is nice because you don’t get overwhelmed with all the information displayed in RStudio, which we’ll cover in a second. If you need to run a few calculations and know your data set well, this is a good setup.</p>
 <p>The downside is that the console can’t display large amounts of data.</p>
 <p>If you look at the screen shot below, I attempted to review metadata from the US Census Bureau. As you can see, it’s all squished together because the R console can’t cleanly display it.</p>
-<p><img src="1.9_RConsole_Census.png" width="50%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="1.9_RConsole_Census.png" width="50%" style="display: block; margin: auto;"></div>
 <p>In order to use the R console for further analysis, I’d have to find a different way to view this data I created.</p>
 <p>That’s where RStudio comes in handy.</p>
 </div>
 <div id="what-is-rstudio" class="section level2" number="3.4">
-<h2><span class="header-section-number">3.4</span> What is RStudio?</h2>
+<h2>
+<span class="header-section-number">3.4</span> What is RStudio?<a class="anchor" aria-label="anchor" href="#what-is-rstudio"><i class="fas fa-link"></i></a>
+</h2>
 <p>If you don’t already feel totally confused and overwhelmed with understanding R and R packages – don’t worry. I’m about to make things even more confusing by introducing you to RStudio!</p>
 <p><strong>RStudio</strong> is an IDE (integrated development environment) that allows more interactivity and for you to visually keep track of what you’re doing.</p>
 <p>In simpler words, it’s a handy user interface for programming in R.</p>
-<p><img src="1.10_RStudio.png" width="75%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="1.10_RStudio.png" width="75%" style="display: block; margin: auto;"></div>
 <p>It’s far easier to both get started and understand the R programming language by using RStudio. It makes importing data and packages easier. It also makes it easier to manage and visually review what data and packages you have loaded. And lastly, it’s just plain nicer looking.</p>
 <p>This book will primarily use RStudio for examples. I suggest downloading it to get the best use of my material.</p>
 </div>
 <div id="how-to-download-rstudio" class="section level2" number="3.5">
-<h2><span class="header-section-number">3.5</span> How to Download RStudio</h2>
+<h2>
+<span class="header-section-number">3.5</span> How to Download RStudio<a class="anchor" aria-label="anchor" href="#how-to-download-rstudio"><i class="fas fa-link"></i></a>
+</h2>
 <p>To download RStudio, go to this website: <a href="https://rstudio.com/products/rstudio/download/" class="uri">https://rstudio.com/products/rstudio/download/</a></p>
 <p>Scroll down and you’ll see a big blue button to download the latest version of RStudio.</p>
-<p><img src="1.11_RStudio_Download.png" width="50%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="1.11_RStudio_Download.png" width="50%" style="display: block; margin: auto;"></div>
 <p>You can tell that RStudio was designed for the end-user in mind by how painless it is to download compared to base R.</p>
 <p>Go ahead and install it once the download finishes.</p>
 <p>You’ll see an icon like this appear in your applications folder. Go ahead and open it.</p>
-<p><img src="1.13.1_RStudio_Logo.png" width="10%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="1.13.1_RStudio_Logo.png" width="10%" style="display: block; margin: auto;"></div>
 </div>
 <div id="understanding-rstudio-interface" class="section level2" number="3.6">
-<h2><span class="header-section-number">3.6</span> Understanding RStudio Interface</h2>
+<h2>
+<span class="header-section-number">3.6</span> Understanding RStudio Interface<a class="anchor" aria-label="anchor" href="#understanding-rstudio-interface"><i class="fas fa-link"></i></a>
+</h2>
 <p>The RStudio interface is broken up into four panes. The default pane setting has the following:</p>
 <ol style="list-style-type: decimal">
 <li>Source</li>
@@ -382,127 +162,107 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Environment, History, and Connections</li>
 <li>Files, Plots, Package, Help, and Viewer</li>
 </ol>
-<p><img src="1.12_RStudio_Labels.png" width="75%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="1.12_RStudio_Labels.png" width="75%" style="display: block; margin: auto;"></div>
 <p>The <strong>source</strong> pane on the top left is a handy one.</p>
-<p><img src="1.13_RStudio_Source.png" width="75%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="1.13_RStudio_Source.png" width="75%" style="display: block; margin: auto;"></div>
 <p>This pane displays previously saved or new R scripts you wrote in the past.</p>
-<p><img src="1.14_Saved_Script.png" width="75%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="1.14_Saved_Script.png" width="75%" style="display: block; margin: auto;"></div>
 <p>You may not be able to see this pane yet. Especially if you’ve never opened or saved a script before. To view the source pane, go to the top menu and click <strong>File</strong>, <strong>New File</strong>, and then <strong>R Script</strong>.</p>
-<p><img src="1.14.1_New_R_Script.png" width="65%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="1.14.1_New_R_Script.png" width="65%" style="display: block; margin: auto;"></div>
 <p>The source pane can also show loaded data sets as well.</p>
-<p><img src="1.15_Data_Set.png" width="75%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="1.15_Data_Set.png" width="75%" style="display: block; margin: auto;"></div>
 <p>If you recall, I said base R had a limitation if you want to review extremely large data sets. This is where RStudio really comes in handy. Down below is the same Census data set that I attempted to view earlier:</p>
-<p><img src="1.16_API_LIst.png" width="75%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="1.16_API_LIst.png" width="75%" style="display: block; margin: auto;"></div>
 <p>And here is how it looked in base R:</p>
-<p><img src="1.9_RConsole_Census.png" width="75%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="1.9_RConsole_Census.png" width="75%" style="display: block; margin: auto;"></div>
 <p>The <strong>console</strong> pane on the bottom left is more or less the same as the base R console we reviewed earlier. It allows you to enter commands.</p>
-<p><img src="1.17_RStudio_Console.png" width="75%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="1.17_RStudio_Console.png" width="75%" style="display: block; margin: auto;"></div>
 <p>However, you won’t be able to save those commands as a script unless you write them in the source pane above. That’s similar to what we did with base R and that new document.</p>
-<p><img src="1.18_Console_Source_Comparison.png" width="75%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="1.18_Console_Source_Comparison.png" width="75%" style="display: block; margin: auto;"></div>
 <p>This pane also has a <strong>Terminal</strong> and an <strong>R Markdown</strong> tab (if you have the latter installed). The <strong>Terminal</strong> allows you to enter commands to interact with your computer. IT professionals use this frequently. You probably won’t.</p>
 <p><strong>R Markdown</strong> may not appear for you yet. I’ll explain what R Markdown in a later chapter, but this tab merely shows the log for producing an R Markdown export.</p>
 <p>The top right pane includes <strong>environment</strong>, <strong>history</strong>, and <strong>connections</strong> as tabular options.</p>
-<p><img src="1.19_RStudio_EnvironmentOthers.png" width="75%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="1.19_RStudio_EnvironmentOthers.png" width="75%" style="display: block; margin: auto;"></div>
 <p><strong>Environment</strong> is very handy and it’s something that sets RStudio apart from the base version. It shows <strong>objects</strong> with assigned names that are saved in your environment.</p>
-<p><img src="1.20_Environment_Tab.png" width="75%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="1.20_Environment_Tab.png" width="75%" style="display: block; margin: auto;"></div>
 <p>We’ll go into objects extensively in the next chapter. Along with packages, <em>they’re the most important component of R programming.</em> What you need to remember here is that the environment tab in this top right pane tells you what you have saved.</p>
 <p>The <strong>history</strong> section is one I don’t use too often, but I could see why some people would find it handy. It tells you what commands you’ve run during your R session. So anything you input in your console will show up here as a record.</p>
-<p><img src="1.21_History_Tab.png" width="75%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="1.21_History_Tab.png" width="75%" style="display: block; margin: auto;"></div>
 <p>The <strong>connection</strong> tab is useful for those who want to connect to a database or data warehouse.</p>
-<p><img src="1.22_Connections_Tab.png" width="75%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="1.22_Connections_Tab.png" width="75%" style="display: block; margin: auto;"></div>
 <p>If you’re a researcher, you may not use this much. If you work with databases in any capacity, this will make it easier to simply query data directly from the database, as opposed to importing it in via CSV files or spreadsheets.</p>
 <p>The bottom right pane is a very useful addition provided by RStudio. It contains a separate tab for <strong>files</strong>, <strong>plots</strong>, <strong>packages</strong>, <strong>help</strong>, and <strong>viewer</strong>.</p>
-<p><img src="1.23_RStudio_PackagesEtc.png" width="75%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="1.23_RStudio_PackagesEtc.png" width="75%" style="display: block; margin: auto;"></div>
 <p>I’m going to start with the <strong>packages</strong> tab. If you recall, I said that packages are what makes R such a useful programming language. It allows you to customize and import functions to suit your needs.</p>
-<p><img src="1.24_Packages.png" width="75%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="1.24_Packages.png" width="75%" style="display: block; margin: auto;"></div>
 <p>This is a useful little tab. If you open a previously saved script, you may find out that some functions need a package to execute. This tab can tell you whether you need to install that package or simply need to re-load it.</p>
 <p>I’ll have a whole chapter dedicated to finding packages, installing packages, and loading packages.</p>
 <p><strong>Plots</strong> is a tab that displays any plots you create using graphical commands. We’ll cover this in more detail in a later chapter.</p>
-<p><img src="1.25_Plots.png" width="75%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="1.25_Plots.png" width="75%" style="display: block; margin: auto;"></div>
 <p><strong>Help</strong> is a super helpful tab. You can find the extensive R documentation there that explains many of the functionality of R and how it operates. It also will display information you look up on packages and functions you download.</p>
-<p><img src="1.26_Help.png" width="75%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="1.26_Help.png" width="75%" style="display: block; margin: auto;"></div>
 <p>If you ever add a <code>?</code> before a function, it will display the documentation in the help section.</p>
 <p>Try adding the following command to the R console and see what happens:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="setup.html#cb4-1" aria-hidden="true" tabindex="-1"></a>  ?lm</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="op">?</span><span class="va">lm</span></code></pre></div>
 <p>Here’s what it should look like on your screen:</p>
-<p><img src="1.27_HelpLookup.png" width="75%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="1.27_HelpLookup.png" width="75%" style="display: block; margin: auto;"></div>
 <p>Don’t forget about this trick! It helps a lot!</p>
 <p>Lastly, we have the <strong>files</strong> and the <strong>viewer</strong> tab.</p>
-<p><img src="1.28_Files.png" width="75%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="1.28_Files.png" width="75%" style="display: block; margin: auto;"></div>
 <p>The <strong>files</strong> tab displays all the files you can open in RStudio for a given folder. This is helpful because you don’t have to specify a file path when loading files listed here.</p>
 <p>The <strong>viewer</strong> tab allows to display non-R related outputs, such as a website or JavaScript graphics.</p>
 </div>
 <div id="things-to-remember-1" class="section level2" number="3.7">
-<h2><span class="header-section-number">3.7</span> Things to Remember</h2>
+<h2>
+<span class="header-section-number">3.7</span> Things to Remember<a class="anchor" aria-label="anchor" href="#things-to-remember-1"><i class="fas fa-link"></i></a>
+</h2>
 <ul>
 <li>R packages contains new functions that allow you to use R for your own specific purposes</li>
 <li>RStudio is a more user friendly interface</li>
 </ul>
-
 </div>
 </div>
-            </section>
+  <div class="chapter-nav">
+<div class="prev"><a href="whatisr.html"><span class="header-section-number">2</span> What is R Programming?</a></div>
+<div class="next"><a href="objects.html"><span class="header-section-number">4</span> Object Types in R Programming</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#setup"><span class="header-section-number">3</span> Getting Setup in R and RStudio</a></li>
+<li><a class="nav-link" href="#how-to-download-r"><span class="header-section-number">3.1</span> How to Download R</a></li>
+<li><a class="nav-link" href="#understanding-base-rs-user-interface"><span class="header-section-number">3.2</span> Understanding Base R’s User Interface</a></li>
+<li><a class="nav-link" href="#limitations-of-r-base"><span class="header-section-number">3.3</span> Limitations of R Base</a></li>
+<li><a class="nav-link" href="#what-is-rstudio"><span class="header-section-number">3.4</span> What is RStudio?</a></li>
+<li><a class="nav-link" href="#how-to-download-rstudio"><span class="header-section-number">3.5</span> How to Download RStudio</a></li>
+<li><a class="nav-link" href="#understanding-rstudio-interface"><span class="header-section-number">3.6</span> Understanding RStudio Interface</a></li>
+<li><a class="nav-link" href="#things-to-remember-1"><span class="header-section-number">3.7</span> Things to Remember</a></li>
+</ul>
 
-          </div>
-        </div>
-      </div>
-<a href="whatisr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="objects.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/taylorrodgers/taylorrodgers.github.io/blob/main/02-setup.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/taylorrodgers/taylorrodgers.github.io/edit/main/02-setup.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>R Programming in Plain English</strong>" was written by Taylor Rodgers. It was last built on 2021-12-18.</p>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-setup.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
-});
-});
-</script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -514,7 +274,22 @@ gitbook.start({
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
 </script>
 </body>
-
 </html>
