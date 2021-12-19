@@ -1,17 +1,14 @@
---- 
-title: "R Programming in Plain English"
+---
+title:  "R Programming in Plain English"
 author: "Taylor Rodgers"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
-output: bookdown::gitbook
-documentclass: book
-bibliography: [book.bib, packages.bib]
-biblio-steyle: apalike
-link-citations: yes
-github-repo: rstudio/bookdown-demo
-description: "A simple guide to R programming for those without programming experience"
+output: bookdown::bs4_book
+url: https://github.com/taylorrodgers/taylorrodgers.github.io
+cover-image: BookCover.png
+description: |
+  A simple guide to R programming for those without programming experience.
 ---
-
 
 # About This Book
 

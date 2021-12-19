@@ -110,4 +110,3 @@ chapter-7---understanding-and-using-r-packages
 chapter-8---how-to-write-functions
 chapter-10---how-to-plot-data-in-r
 chapter-11---statistical-functions-in-r
-assigning-functions-outputs-a-name

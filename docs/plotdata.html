@@ -1,464 +1,249 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 10 How to Plot Data in R | R Programming in Plain English</title>
-  <meta name="description" content="A simple guide to R programming for those without programming experience" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Chapter 10 How to Plot Data in R | R Programming in Plain English" />
-  <meta property="og:type" content="book" />
-  
-  
-  <meta property="og:description" content="A simple guide to R programming for those without programming experience" />
-  <meta name="github-repo" content="rstudio/bookdown-demo" />
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 10 How to Plot Data in R | R Programming in Plain English" />
-  
-  <meta name="twitter:description" content="A simple guide to R programming for those without programming experience" />
-  
-
-<meta name="author" content="Taylor Rodgers" />
-
-
-<meta name="date" content="2021-12-11" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="importdata.html"/>
-<link rel="next" href="statfunctions.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
-<script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
-
-
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-
-<link rel="stylesheet" href="style.css" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 10 How to Plot Data in R | R Programming in Plain English</title>
+<meta name="author" content="Taylor Rodgers">
+<meta name="description" content="Within R, there’s three popular methods for plotting data. The first uses the plot function in R base. The second uses the ggplot2 package, which RStudio developed with their tidyverse package...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 10 How to Plot Data in R | R Programming in Plain English">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://github.com/taylorrodgers/taylorrodgers.github.io/plotdata.html">
+<meta property="og:image" content="https://github.com/taylorrodgers/taylorrodgers.github.io/BookCover.png">
+<meta property="og:description" content="Within R, there’s three popular methods for plotting data. The first uses the plot function in R base. The second uses the ggplot2 package, which RStudio developed with their tidyverse package...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 10 How to Plot Data in R | R Programming in Plain English">
+<meta name="twitter:description" content="Within R, there’s three popular methods for plotting data. The first uses the plot function in R base. The second uses the ggplot2 package, which RStudio developed with their tidyverse package...">
+<meta name="twitter:image" content="https://github.com/taylorrodgers/taylorrodgers.github.io/BookCover.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="https://fonts.googleapis.com/css2?family=Lato-Light&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato&amp;display=swap" rel="stylesheet">
+<script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><a href="./">R Programming in Plain English</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About This Book</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#things-you-should-know-before-reading"><i class="fa fa-check"></i><b>1.1</b> Things You Should Know Before Reading</a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="whatisr.html"><a href="whatisr.html"><i class="fa fa-check"></i><b>2</b> What is R Programming?</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="whatisr.html"><a href="whatisr.html#is-r-the-best-statistical-programming-language"><i class="fa fa-check"></i><b>2.1</b> Is R the Best Statistical Programming Language?</a></li>
-<li class="chapter" data-level="2.2" data-path="whatisr.html"><a href="whatisr.html#how-will-learning-r-versus-python-impact-my-job-opportunities"><i class="fa fa-check"></i><b>2.2</b> How Will Learning R versus Python Impact My Job Opportunities?</a></li>
-<li class="chapter" data-level="2.3" data-path="whatisr.html"><a href="whatisr.html#things-to-remember"><i class="fa fa-check"></i><b>2.3</b> Things to Remember</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>3</b> Getting Setup in R and RStudio</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="setup.html"><a href="setup.html#how-to-download-r"><i class="fa fa-check"></i><b>3.1</b> How to Download R</a></li>
-<li class="chapter" data-level="3.2" data-path="setup.html"><a href="setup.html#understanding-base-rs-user-interface"><i class="fa fa-check"></i><b>3.2</b> Understanding Base R’s User Interface</a></li>
-<li class="chapter" data-level="3.3" data-path="setup.html"><a href="setup.html#limitations-of-r-base"><i class="fa fa-check"></i><b>3.3</b> Limitations of R Base</a></li>
-<li class="chapter" data-level="3.4" data-path="setup.html"><a href="setup.html#what-is-rstudio"><i class="fa fa-check"></i><b>3.4</b> What is RStudio?</a></li>
-<li class="chapter" data-level="3.5" data-path="setup.html"><a href="setup.html#how-to-download-rstudio"><i class="fa fa-check"></i><b>3.5</b> How to Download RStudio</a></li>
-<li class="chapter" data-level="3.6" data-path="setup.html"><a href="setup.html#understanding-rstudio-interface"><i class="fa fa-check"></i><b>3.6</b> Understanding RStudio Interface</a></li>
-<li class="chapter" data-level="3.7" data-path="setup.html"><a href="setup.html#things-to-remember-1"><i class="fa fa-check"></i><b>3.7</b> Things to Remember</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="objects.html"><a href="objects.html"><i class="fa fa-check"></i><b>4</b> Object Types in R Programming</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="objects.html"><a href="objects.html#why-do-objects-matter"><i class="fa fa-check"></i><b>4.1</b> Why Do Objects Matter?</a></li>
-<li class="chapter" data-level="4.2" data-path="objects.html"><a href="objects.html#understanding-object-types-makes-it-easier-to-transform-and-analyze"><i class="fa fa-check"></i><b>4.2</b> Understanding Object Types Makes It Easier to Transform and Analyze</a></li>
-<li class="chapter" data-level="4.3" data-path="objects.html"><a href="objects.html#the-basic-objects-to-remember"><i class="fa fa-check"></i><b>4.3</b> The Basic Objects to Remember</a></li>
-<li class="chapter" data-level="4.4" data-path="objects.html"><a href="objects.html#vectors"><i class="fa fa-check"></i><b>4.4</b> Vectors</a></li>
-<li class="chapter" data-level="4.5" data-path="objects.html"><a href="objects.html#matrices-and-arrays"><i class="fa fa-check"></i><b>4.5</b> Matrices and Arrays</a></li>
-<li class="chapter" data-level="4.6" data-path="objects.html"><a href="objects.html#data-frames"><i class="fa fa-check"></i><b>4.6</b> Data Frames</a></li>
-<li class="chapter" data-level="4.7" data-path="objects.html"><a href="objects.html#factors"><i class="fa fa-check"></i><b>4.7</b> Factors</a></li>
-<li class="chapter" data-level="4.8" data-path="objects.html"><a href="objects.html#lists"><i class="fa fa-check"></i><b>4.8</b> Lists</a></li>
-<li class="chapter" data-level="4.9" data-path="objects.html"><a href="objects.html#functions"><i class="fa fa-check"></i><b>4.9</b> Functions</a></li>
-<li class="chapter" data-level="4.10" data-path="objects.html"><a href="objects.html#things-to-remember-2"><i class="fa fa-check"></i><b>4.10</b> Things to Remember</a></li>
-<li class="chapter" data-level="4.11" data-path="objects.html"><a href="objects.html#exercises"><i class="fa fa-check"></i><b>4.11</b> Exercises</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="baserfilter.html"><a href="baserfilter.html"><i class="fa fa-check"></i><b>5</b> How to Filter and Transform Data in Base R</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="baserfilter.html"><a href="baserfilter.html#what-are-operators"><i class="fa fa-check"></i><b>5.1</b> What Are Operators?</a></li>
-<li class="chapter" data-level="5.2" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-and-transform-data-from-a-vector"><i class="fa fa-check"></i><b>5.2</b> How to Filter and Transform Data From a Vector</a></li>
-<li class="chapter" data-level="5.3" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-and-transform-data-from-a-matrix"><i class="fa fa-check"></i><b>5.3</b> How to Filter and Transform Data From a Matrix</a></li>
-<li class="chapter" data-level="5.4" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-and-transform-data-from-arrays"><i class="fa fa-check"></i><b>5.4</b> How to Filter and Transform Data from Arrays</a></li>
-<li class="chapter" data-level="5.5" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-and-transform-data-from-a-data-frame"><i class="fa fa-check"></i><b>5.5</b> How to Filter and Transform Data from a Data Frame</a></li>
-<li class="chapter" data-level="5.6" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-a-list"><i class="fa fa-check"></i><b>5.6</b> How to Filter a List</a></li>
-<li class="chapter" data-level="5.7" data-path="baserfilter.html"><a href="baserfilter.html#things-to-remember-3"><i class="fa fa-check"></i><b>5.7</b> Things to Remember</a></li>
-<li class="chapter" data-level="5.8" data-path="baserfilter.html"><a href="baserfilter.html#exercises-1"><i class="fa fa-check"></i><b>5.8</b> Exercises</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="dplyr.html"><a href="dplyr.html"><i class="fa fa-check"></i><b>6</b> How to Filter and Transform Data with the Dplyr Package</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="dplyr.html"><a href="dplyr.html#why-is-dplyr-so-popular"><i class="fa fa-check"></i><b>6.1</b> Why is <code>dplyr</code> So Popular?</a></li>
-<li class="chapter" data-level="6.2" data-path="dplyr.html"><a href="dplyr.html#its-still-worth-learning-base-r"><i class="fa fa-check"></i><b>6.2</b> It’s Still Worth Learning Base R</a></li>
-<li class="chapter" data-level="6.3" data-path="dplyr.html"><a href="dplyr.html#the-dplyr-syntax"><i class="fa fa-check"></i><b>6.3</b> The <code>dplyr</code> Syntax</a></li>
-<li class="chapter" data-level="6.4" data-path="dplyr.html"><a href="dplyr.html#understand-the-difference-between-selecting-and-filtering"><i class="fa fa-check"></i><b>6.4</b> Understand the Difference Between Selecting and Filtering</a></li>
-<li class="chapter" data-level="6.5" data-path="dplyr.html"><a href="dplyr.html#how-to-select-and-mutate-a-data-frame-with-dplyr-in-r"><i class="fa fa-check"></i><b>6.5</b> How to Select and Mutate a Data Frame with <code>dplyr</code> in R</a></li>
-<li class="chapter" data-level="6.6" data-path="dplyr.html"><a href="dplyr.html#how-to-filter-a-data-frame-with-dplyr-in-r"><i class="fa fa-check"></i><b>6.6</b> How to Filter a Data Frame with <code>dplyr</code> in R</a></li>
-<li class="chapter" data-level="6.7" data-path="dplyr.html"><a href="dplyr.html#how-to-summarize-and-group-data-with-dplyr-in-r"><i class="fa fa-check"></i><b>6.7</b> How to Summarize and Group Data with <code>dplyr</code> in R</a></li>
-<li class="chapter" data-level="6.8" data-path="dplyr.html"><a href="dplyr.html#things-to-remember-4"><i class="fa fa-check"></i><b>6.8</b> Things to Remember</a></li>
-<li class="chapter" data-level="6.9" data-path="dplyr.html"><a href="dplyr.html#exercises-2"><i class="fa fa-check"></i><b>6.9</b> Exercises</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>7</b> Understanding and Using R Packages</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="packages.html"><a href="packages.html#why-does-r-use-packages"><i class="fa fa-check"></i><b>7.1</b> Why Does R Use Packages?</a></li>
-<li class="chapter" data-level="7.2" data-path="packages.html"><a href="packages.html#how-to-access-r-packages"><i class="fa fa-check"></i><b>7.2</b> How to Access R Packages</a></li>
-<li class="chapter" data-level="7.3" data-path="packages.html"><a href="packages.html#how-to-install-and-load-a-package---the-easy-way"><i class="fa fa-check"></i><b>7.3</b> How to Install and Load a Package - The Easy Way</a></li>
-<li class="chapter" data-level="7.4" data-path="packages.html"><a href="packages.html#why-you-should-still-learn-to-install-and-load-packages-the-old-fashioned-way"><i class="fa fa-check"></i><b>7.4</b> Why You Should Still Learn to Install and Load Packages the “Old Fashioned” Way</a></li>
-<li class="chapter" data-level="7.5" data-path="packages.html"><a href="packages.html#how-to-install-and-load-r-packages---the-old-fashioned-way"><i class="fa fa-check"></i><b>7.5</b> How to Install and Load R Packages - The Old Fashioned Way</a></li>
-<li class="chapter" data-level="7.6" data-path="packages.html"><a href="packages.html#a-simple-trick-to-include-install-and-load-any-packages-needed"><i class="fa fa-check"></i><b>7.6</b> A Simple Trick to Include Install and Load Any Packages Needed</a></li>
-<li class="chapter" data-level="7.7" data-path="packages.html"><a href="packages.html#how-to-find-new-packages-to-install"><i class="fa fa-check"></i><b>7.7</b> How to Find New Packages to Install</a></li>
-<li class="chapter" data-level="7.8" data-path="packages.html"><a href="packages.html#how-to-find-documentation-on-packages"><i class="fa fa-check"></i><b>7.8</b> How to Find Documentation on Packages</a></li>
-<li class="chapter" data-level="7.9" data-path="packages.html"><a href="packages.html#things-to-remember-5"><i class="fa fa-check"></i><b>7.9</b> Things to Remember</a></li>
-<li class="chapter" data-level="7.10" data-path="packages.html"><a href="packages.html#exercises-3"><i class="fa fa-check"></i><b>7.10</b> Exercises</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="function.html"><a href="function.html"><i class="fa fa-check"></i><b>8</b> How to Write Functions</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="function.html"><a href="function.html#two-approaches-to-using-r-functions"><i class="fa fa-check"></i><b>8.1</b> Two Approaches to Using R Functions</a></li>
-<li class="chapter" data-level="8.2" data-path="function.html"><a href="function.html#why-you-should-learn-to-write-your-own-functions"><i class="fa fa-check"></i><b>8.2</b> Why You Should Learn to Write Your Own Functions</a></li>
-<li class="chapter" data-level="8.3" data-path="function.html"><a href="function.html#the-components-of-an-r-function"><i class="fa fa-check"></i><b>8.3</b> The Components of an R Function</a></li>
-<li class="chapter" data-level="8.4" data-path="function.html"><a href="function.html#required-versus-non-required-arguments"><i class="fa fa-check"></i><b>8.4</b> Required versus Non-Required Arguments</a></li>
-<li class="chapter" data-level="8.5" data-path="function.html"><a href="function.html#when-order-matters-for-arguments"><i class="fa fa-check"></i><b>8.5</b> When Order Matters for Arguments</a></li>
-<li class="chapter" data-level="8.6" data-path="function.html"><a href="function.html#how-to-write-your-own-function"><i class="fa fa-check"></i><b>8.6</b> How to Write Your Own Function</a></li>
-<li class="chapter" data-level="8.7" data-path="function.html"><a href="function.html#writing-functions-using-control-flows"><i class="fa fa-check"></i><b>8.7</b> Writing Functions Using Control Flows</a></li>
-<li class="chapter" data-level="8.8" data-path="function.html"><a href="function.html#applying-a-control-flow-to-our-summary-stats-function"><i class="fa fa-check"></i><b>8.8</b> Applying a Control Flow to Our Summary Stats Function</a></li>
-<li class="chapter" data-level="8.9" data-path="function.html"><a href="function.html#breaking-down-the-function-we-just-made"><i class="fa fa-check"></i><b>8.9</b> Breaking Down the Function We Just Made</a></li>
-<li class="chapter" data-level="8.10" data-path="function.html"><a href="function.html#things-to-remember-6"><i class="fa fa-check"></i><b>8.10</b> Things to Remember</a></li>
-<li class="chapter" data-level="8.11" data-path="function.html"><a href="function.html#exercises-4"><i class="fa fa-check"></i><b>8.11</b> Exercises</a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="importdata.html"><a href="importdata.html"><i class="fa fa-check"></i><b>9</b> Importing Data into R</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="importdata.html"><a href="importdata.html#how-to-import-a-raw-data-file-the-easy-way"><i class="fa fa-check"></i><b>9.1</b> How to Import a Raw Data File the Easy Way</a></li>
-<li class="chapter" data-level="9.2" data-path="importdata.html"><a href="importdata.html#import-a-raw-data-file-the-hard-way"><i class="fa fa-check"></i><b>9.2</b> Import a Raw Data File the Hard Way</a></li>
-<li class="chapter" data-level="9.3" data-path="importdata.html"><a href="importdata.html#save-import-functions"><i class="fa fa-check"></i><b>9.3</b> Save Import Functions</a></li>
-<li class="chapter" data-level="9.4" data-path="importdata.html"><a href="importdata.html#connect-to-a-database"><i class="fa fa-check"></i><b>9.4</b> Connect to a Database</a></li>
-<li class="chapter" data-level="9.5" data-path="importdata.html"><a href="importdata.html#connect-to-an-api"><i class="fa fa-check"></i><b>9.5</b> Connect to an API</a></li>
-<li class="chapter" data-level="9.6" data-path="importdata.html"><a href="importdata.html#things-to-remember-7"><i class="fa fa-check"></i><b>9.6</b> Things to Remember</a></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="plotdata.html"><a href="plotdata.html"><i class="fa fa-check"></i><b>10</b> How to Plot Data in R</a>
-<ul>
-<li class="chapter" data-level="10.1" data-path="plotdata.html"><a href="plotdata.html#which-r-plot-package-is-best"><i class="fa fa-check"></i><b>10.1</b> Which R Plot Package is Best?</a></li>
-<li class="chapter" data-level="10.2" data-path="plotdata.html"><a href="plotdata.html#so-which-data-viz-package-is-actually-the-best"><i class="fa fa-check"></i><b>10.2</b> So Which Data Viz Package is Actually the Best?</a></li>
-<li class="chapter" data-level="10.3" data-path="plotdata.html"><a href="plotdata.html#how-to-write-ggplot2-scripts"><i class="fa fa-check"></i><b>10.3</b> How to Write ggplot2 Scripts</a></li>
-<li class="chapter" data-level="10.4" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-common-data-visualizations-in-ggplot2"><i class="fa fa-check"></i><b>10.4</b> How to Plot Common Data Visualizations in ggplot2</a>
-<ul>
-<li class="chapter" data-level="10.4.1" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-a-scatterplot"><i class="fa fa-check"></i><b>10.4.1</b> How to Plot a Scatterplot</a></li>
-<li class="chapter" data-level="10.4.2" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-a-bar-graph-histogram"><i class="fa fa-check"></i><b>10.4.2</b> How to Plot a Bar Graph / Histogram</a></li>
-<li class="chapter" data-level="10.4.3" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-a-line-graph"><i class="fa fa-check"></i><b>10.4.3</b> How to Plot a Line Graph</a></li>
-<li class="chapter" data-level="10.4.4" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-a-box-and-whiskers-plot"><i class="fa fa-check"></i><b>10.4.4</b> How to Plot a Box-and-Whiskers Plot</a></li>
-<li class="chapter" data-level="10.4.5" data-path="plotdata.html"><a href="plotdata.html#how-to-improve-labels-and-other-formatting-tips"><i class="fa fa-check"></i><b>10.4.5</b> How to Improve Labels and Other Formatting Tips</a></li>
-</ul></li>
-<li class="chapter" data-level="10.5" data-path="plotdata.html"><a href="plotdata.html#things-to-remember-8"><i class="fa fa-check"></i><b>10.5</b> Things to Remember</a></li>
-<li class="chapter" data-level="10.6" data-path="plotdata.html"><a href="plotdata.html#exercises-5"><i class="fa fa-check"></i><b>10.6</b> Exercises</a></li>
-</ul></li>
-<li class="chapter" data-level="11" data-path="statfunctions.html"><a href="statfunctions.html"><i class="fa fa-check"></i><b>11</b> Statistical Functions in R: Common Functions and How They Work</a>
-<ul>
-<li class="chapter" data-level="11.1" data-path="statfunctions.html"><a href="statfunctions.html#how-statistical-functions-work-in-r-programming"><i class="fa fa-check"></i><b>11.1</b> How Statistical Functions Work in R Programming</a></li>
-<li class="chapter" data-level="11.2" data-path="statfunctions.html"><a href="statfunctions.html#how-to-build-a-model-in-r-example-with-linear-regression"><i class="fa fa-check"></i><b>11.2</b> How to Build a Model in R (Example with Linear Regression)</a></li>
-<li class="chapter" data-level="11.3" data-path="statfunctions.html"><a href="statfunctions.html#how-to-review-common-model-performance-statistics"><i class="fa fa-check"></i><b>11.3</b> How to Review Common Model Performance Statistics</a></li>
-<li class="chapter" data-level="11.4" data-path="statfunctions.html"><a href="statfunctions.html#how-to-make-predictions-with-a-model"><i class="fa fa-check"></i><b>11.4</b> How to Make Predictions with a Model</a></li>
-<li class="chapter" data-level="11.5" data-path="statfunctions.html"><a href="statfunctions.html#how-to-save-your-model-to-use-later"><i class="fa fa-check"></i><b>11.5</b> How to Save Your Model to Use Later</a></li>
-<li class="chapter" data-level="11.6" data-path="statfunctions.html"><a href="statfunctions.html#how-to-add-multiple-parameters-to-a-model"><i class="fa fa-check"></i><b>11.6</b> How to Add Multiple Parameters to a Model</a></li>
-<li class="chapter" data-level="11.7" data-path="statfunctions.html"><a href="statfunctions.html#how-to-add-a-categorical-variable-to-a-model"><i class="fa fa-check"></i><b>11.7</b> How to Add a Categorical Variable to a Model</a></li>
-<li class="chapter" data-level="11.8" data-path="statfunctions.html"><a href="statfunctions.html#how-to-add-transformed-variables-to-a-model"><i class="fa fa-check"></i><b>11.8</b> How to Add Transformed Variables to a Model</a></li>
-<li class="chapter" data-level="11.9" data-path="statfunctions.html"><a href="statfunctions.html#how-to-add-variable-interactions-to-a-model"><i class="fa fa-check"></i><b>11.9</b> How to Add Variable Interactions to a Model</a></li>
-<li class="chapter" data-level="11.10" data-path="statfunctions.html"><a href="statfunctions.html#how-to-calculate-model-confidence-intervals"><i class="fa fa-check"></i><b>11.10</b> How to Calculate Model Confidence Intervals</a></li>
-<li class="chapter" data-level="11.11" data-path="statfunctions.html"><a href="statfunctions.html#how-to-calculate-analysis-of-variance-between-models"><i class="fa fa-check"></i><b>11.11</b> How to Calculate Analysis of Variance Between Models</a></li>
-<li class="chapter" data-level="11.12" data-path="statfunctions.html"><a href="statfunctions.html#other-common-model-types---logistical-regression"><i class="fa fa-check"></i><b>11.12</b> Other Common Model Types - Logistical Regression</a></li>
-<li class="chapter" data-level="11.13" data-path="statfunctions.html"><a href="statfunctions.html#other-common-model-types---anova-models"><i class="fa fa-check"></i><b>11.13</b> Other Common Model Types - Anova Models</a></li>
-<li class="chapter" data-level="11.14" data-path="statfunctions.html"><a href="statfunctions.html#things-to-remember-9"><i class="fa fa-check"></i><b>11.14</b> Things to Remember</a></li>
-<li class="chapter" data-level="11.15" data-path="statfunctions.html"><a href="statfunctions.html#exercises-6"><i class="fa fa-check"></i><b>11.15</b> Exercises</a></li>
-</ul></li>
-<li class="chapter" data-level="12" data-path="answers.html"><a href="answers.html"><i class="fa fa-check"></i><b>12</b> Answer Key</a>
-<ul>
-<li class="chapter" data-level="12.1" data-path="answers.html"><a href="answers.html#chapter-4---object-types-in-r-programming"><i class="fa fa-check"></i><b>12.1</b> Chapter 4 - Object Types in R Programming</a></li>
-<li class="chapter" data-level="12.2" data-path="answers.html"><a href="answers.html#chapter-5---how-to-filter-and-transform-data-in-base-r"><i class="fa fa-check"></i><b>12.2</b> Chapter 5 - How to Filter and Transform Data in Base R</a></li>
-<li class="chapter" data-level="12.3" data-path="answers.html"><a href="answers.html#chapter-6---how-to-filter-and-transform-data-with-the-dplyr-package"><i class="fa fa-check"></i><b>12.3</b> Chapter 6 - How to Filter and Transform Data with the Dplyr Package</a></li>
-<li class="chapter" data-level="12.4" data-path="answers.html"><a href="answers.html#chapter-7---understanding-and-using-r-packages"><i class="fa fa-check"></i><b>12.4</b> Chapter 7 - Understanding and Using R Packages</a></li>
-<li class="chapter" data-level="12.5" data-path="answers.html"><a href="answers.html#chapter-8---how-to-write-functions"><i class="fa fa-check"></i><b>12.5</b> Chapter 8 - How to Write Functions</a></li>
-<li class="chapter" data-level="12.6" data-path="answers.html"><a href="answers.html#chapter-10---how-to-plot-data-in-r"><i class="fa fa-check"></i><b>12.6</b> Chapter 10 - How to Plot Data in R</a></li>
-<li class="chapter" data-level="12.7" data-path="answers.html"><a href="answers.html#chapter-11---statistical-functions-in-r"><i class="fa fa-check"></i><b>12.7</b> Chapter 11 - Statistical Functions in R</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
-</ul>
-
-      </nav>
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">R Programming in Plain English</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
 
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R Programming in Plain English</a>
-          </h1>
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> About This Book</a></li>
+<li><a class="" href="whatisr.html"><span class="header-section-number">2</span> What is R Programming?</a></li>
+<li><a class="" href="setup.html"><span class="header-section-number">3</span> Getting Setup in R and RStudio</a></li>
+<li><a class="" href="objects.html"><span class="header-section-number">4</span> Object Types in R Programming</a></li>
+<li><a class="" href="baserfilter.html"><span class="header-section-number">5</span> How to Filter and Transform Data in Base R</a></li>
+<li><a class="" href="dplyr.html"><span class="header-section-number">6</span> How to Filter and Transform Data with the Dplyr Package</a></li>
+<li><a class="" href="packages.html"><span class="header-section-number">7</span> Understanding and Using R Packages</a></li>
+<li><a class="" href="function.html"><span class="header-section-number">8</span> How to Write Functions</a></li>
+<li><a class="" href="importdata.html"><span class="header-section-number">9</span> Importing Data into R</a></li>
+<li><a class="active" href="plotdata.html"><span class="header-section-number">10</span> How to Plot Data in R</a></li>
+<li><a class="" href="statfunctions.html"><span class="header-section-number">11</span> Statistical Functions in R: Common Functions and How They Work</a></li>
+<li><a class="" href="answers.html"><span class="header-section-number">12</span> Answer Key</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/taylorrodgers/taylorrodgers.github.io">View book source <i class="fab fa-github"></i></a></p>
         </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="plotdata" class="section level1" number="10">
-<h1><span class="header-section-number">Chapter 10</span> How to Plot Data in R</h1>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="plotdata" class="section level1" number="10">
+<h1>
+<span class="header-section-number">10</span> How to Plot Data in R<a class="anchor" aria-label="anchor" href="#plotdata"><i class="fas fa-link"></i></a>
+</h1>
 <p>Within R, there’s three popular methods for plotting data. The first uses the <code>plot</code> function in R base. The second uses the <code>ggplot2</code> package, which RStudio developed with their <code>tidyverse</code> package set. The third is <code>plot_ly</code>, which was developed by the “Plotly” company.</p>
 <p>The R base version of plot functions is much more subdued and uses simpler graphics. It typically looks something like this:</p>
-<p><img src="bookdown-demo_files/figure-html/9-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/9-1.png" width="70%" style="display: block; margin: auto;"></div>
 <p><code>ggplot2</code> outputs something more like this:</p>
-<p><img src="bookdown-demo_files/figure-html/9.1-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/9.1-1.png" width="70%" style="display: block; margin: auto;"></div>
 <p><code>plotly</code> outputs something similar to <code>ggplot2</code>, but has some built-in interactivity, such as tool tips:</p>
 <div id="htmlwidget-6ab2a427f3bbf16d7f3d" style="width:70%;height:436.8px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-6ab2a427f3bbf16d7f3d">{"x":{"visdat":{"f9b7f783b01":["function () ","plotlyVisDat"]},"cur_data":"f9b7f783b01","attrs":{"f9b7f783b01":{"x":{},"y":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20]}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"Speed"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Dist"},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[4,4,7,7,8,9,10,10,10,11,11,12,12,12,12,13,13,13,13,14,14,14,14,15,15,15,16,16,17,17,17,18,18,18,18,19,19,19,20,20,20,20,20,22,23,24,24,24,24,25],"y":[2,10,4,22,16,10,18,26,34,17,28,14,20,24,28,26,34,34,46,26,36,60,80,20,26,54,32,40,32,40,50,42,56,76,84,36,46,68,32,48,52,56,64,66,54,70,92,93,120,85],"type":"scatter","mode":"markers","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
-<p>People who build more elaborate data visualizations using R typically prefer <code>ggplot2</code> or <code>plotly</code>. Those two packages have more robust aesthetics and interactivity than R base plot functions.</p>
+<script type="application/json" data-for="htmlwidget-6ab2a427f3bbf16d7f3d">{"x":{"visdat":{"421a25e51f73":["function () ","plotlyVisDat"]},"cur_data":"421a25e51f73","attrs":{"421a25e51f73":{"x":{},"y":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20]}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"Speed"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Dist"},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[4,4,7,7,8,9,10,10,10,11,11,12,12,12,12,13,13,13,13,14,14,14,14,15,15,15,16,16,17,17,17,18,18,18,18,19,19,19,20,20,20,20,20,22,23,24,24,24,24,25],"y":[2,10,4,22,16,10,18,26,34,17,28,14,20,24,28,26,34,34,46,26,36,60,80,20,26,54,32,40,32,40,50,42,56,76,84,36,46,68,32,48,52,56,64,66,54,70,92,93,120,85],"type":"scatter","mode":"markers","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script><p>People who build more elaborate data visualizations using R typically prefer <code>ggplot2</code> or <code>plotly</code>. Those two packages have more robust aesthetics and interactivity than R base plot functions.</p>
 <div id="which-r-plot-package-is-best" class="section level2" number="10.1">
-<h2><span class="header-section-number">10.1</span> Which R Plot Package is Best?</h2>
+<h2>
+<span class="header-section-number">10.1</span> Which R Plot Package is Best?<a class="anchor" aria-label="anchor" href="#which-r-plot-package-is-best"><i class="fas fa-link"></i></a>
+</h2>
 <p>That question is a solid “it depends!” And it highlights one of R’s greatest strengths and weaknesses. It’s an open-source language, which has led to multiple packages providing similar purposes, but with subtle differences in functionality.</p>
 <p>I’d say the base plot package is definitely the “smarter” pacakge. And by that, I mean it often makes an educated guess on how to plot your data.</p>
-<p>For example, you can literally run the <code>plot()</code> function on linear regression models, single variables, and data frames, and the function makes a pretty good assumption of what plots you want to see. This is handy for exploratory data analysis.</p>
+<p>For example, you can literally run the <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> function on linear regression models, single variables, and data frames, and the function makes a pretty good assumption of what plots you want to see. This is handy for exploratory data analysis.</p>
 <p>I would say the default aesthetics for the base package are not great. As you saw in the last section, ggplot2 and plotly add a bit more flare. That being said, most data viz tools are only as good as their developer. If you know how to use color, font selection, and the right data viz effectively, you can make the base plots look good. It just takes more work, in my experience.</p>
 <p>For example, I took our Bond data set and made a data viz with the base package. I changed the color, font, and other settings and managed to make it look pretty good. You can see the code and output below:</p>
-<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="plotdata.html#cb241-1" aria-hidden="true" tabindex="-1"></a>bond <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/taylorrodgers/bond/main/bond.csv&quot;</span>)</span>
-<span id="cb241-2"><a href="plotdata.html#cb241-2" aria-hidden="true" tabindex="-1"></a>bond<span class="sc">$</span>actor <span class="ot">&lt;-</span> <span class="fu">factor</span>(bond<span class="sc">$</span>actor)</span>
-<span id="cb241-3"><a href="plotdata.html#cb241-3" aria-hidden="true" tabindex="-1"></a>bond_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;#7fb7be&quot;</span>,<span class="st">&quot;#d3f3ee&quot;</span>,<span class="st">&quot;#dacc3e&quot;</span>,<span class="st">&quot;#bc2c1a&quot;</span>,<span class="st">&quot;#7d1538&quot;</span>,<span class="st">&quot;#454444&quot;</span>)</span>
-<span id="cb241-4"><a href="plotdata.html#cb241-4" aria-hidden="true" tabindex="-1"></a>bond_colors <span class="ot">&lt;-</span> bond_colors[<span class="fu">as.numeric</span>(bond<span class="sc">$</span>actor)]</span>
-<span id="cb241-5"><a href="plotdata.html#cb241-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(bond<span class="sc">$</span>year,</span>
-<span id="cb241-6"><a href="plotdata.html#cb241-6" aria-hidden="true" tabindex="-1"></a>     bond<span class="sc">$</span>gross,</span>
-<span id="cb241-7"><a href="plotdata.html#cb241-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">bg=</span>bond_colors,</span>
-<span id="cb241-8"><a href="plotdata.html#cb241-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="st">&quot;black&quot;</span>,</span>
-<span id="cb241-9"><a href="plotdata.html#cb241-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex=</span><span class="dv">2</span>,</span>
-<span id="cb241-10"><a href="plotdata.html#cb241-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch=</span><span class="dv">21</span>,</span>
-<span id="cb241-11"><a href="plotdata.html#cb241-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;Year Released&quot;</span>,</span>
-<span id="cb241-12"><a href="plotdata.html#cb241-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;Gross Revenue (in millions)&quot;</span>,</span>
-<span id="cb241-13"><a href="plotdata.html#cb241-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;Gross Revenue for Bond Films&quot;</span>,</span>
-<span id="cb241-14"><a href="plotdata.html#cb241-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">col.axis=</span><span class="st">&quot;#454444&quot;</span>,</span>
-<span id="cb241-15"><a href="plotdata.html#cb241-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">col.main=</span><span class="st">&quot;#454444&quot;</span>,</span>
-<span id="cb241-16"><a href="plotdata.html#cb241-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">col.lab=</span><span class="st">&quot;#454444&quot;</span>,</span>
-<span id="cb241-17"><a href="plotdata.html#cb241-17" aria-hidden="true" tabindex="-1"></a>   <span class="at">fg=</span><span class="st">&quot;#454444&quot;</span>,</span>
-<span id="cb241-18"><a href="plotdata.html#cb241-18" aria-hidden="true" tabindex="-1"></a>   <span class="at">family=</span><span class="st">&quot;Droid Sans&quot;</span></span>
-<span id="cb241-19"><a href="plotdata.html#cb241-19" aria-hidden="true" tabindex="-1"></a>     ) </span>
-<span id="cb241-20"><a href="plotdata.html#cb241-20" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;top&quot;</span>,<span class="at">inset=</span><span class="fl">0.05</span>,</span>
-<span id="cb241-21"><a href="plotdata.html#cb241-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend=</span><span class="fu">unique</span>(bond<span class="sc">$</span>actor),</span>
-<span id="cb241-22"><a href="plotdata.html#cb241-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex=</span>.<span class="dv">9</span>,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">pt.cex=</span><span class="fl">1.2</span>,</span>
-<span id="cb241-23"><a href="plotdata.html#cb241-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">pt.bg=</span><span class="fu">unique</span>(bond_colors))</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/9.3-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">bond</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/taylorrodgers/bond/main/bond.csv"</span><span class="op">)</span>
+<span class="va">bond</span><span class="op">$</span><span class="va">actor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">bond</span><span class="op">$</span><span class="va">actor</span><span class="op">)</span>
+<span class="va">bond_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#7fb7be"</span>,<span class="st">"#d3f3ee"</span>,<span class="st">"#dacc3e"</span>,<span class="st">"#bc2c1a"</span>,<span class="st">"#7d1538"</span>,<span class="st">"#454444"</span><span class="op">)</span>
+<span class="va">bond_colors</span> <span class="op">&lt;-</span> <span class="va">bond_colors</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">bond</span><span class="op">$</span><span class="va">actor</span><span class="op">)</span><span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">bond</span><span class="op">$</span><span class="va">year</span>,
+     <span class="va">bond</span><span class="op">$</span><span class="va">gross</span>,
+     bg<span class="op">=</span><span class="va">bond_colors</span>,
+     col<span class="op">=</span><span class="st">"black"</span>,
+     cex<span class="op">=</span><span class="fl">2</span>,
+     pch<span class="op">=</span><span class="fl">21</span>,
+     xlab<span class="op">=</span><span class="st">"Year Released"</span>,
+     ylab<span class="op">=</span><span class="st">"Gross Revenue (in millions)"</span>,
+     main<span class="op">=</span><span class="st">"Gross Revenue for Bond Films"</span>,
+     col.axis<span class="op">=</span><span class="st">"#454444"</span>,
+     col.main<span class="op">=</span><span class="st">"#454444"</span>,
+     col.lab<span class="op">=</span><span class="st">"#454444"</span>,
+   fg<span class="op">=</span><span class="st">"#454444"</span>,
+   family<span class="op">=</span><span class="st">"Droid Sans"</span>
+     <span class="op">)</span> 
+<span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"top"</span>,inset<span class="op">=</span><span class="fl">0.05</span>,
+       legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">bond</span><span class="op">$</span><span class="va">actor</span><span class="op">)</span>,
+       cex<span class="op">=</span><span class="fl">.9</span>,pch<span class="op">=</span><span class="fl">21</span>,pt.cex<span class="op">=</span><span class="fl">1.2</span>,
+       pt.bg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">bond_colors</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/9.3-1.png" width="70%" style="display: block; margin: auto;"></div>
 <p>This wasn’t easy to do though. I had to do more research to figure out how to accomplish the visualizaiton above.</p>
 <p>I think <code>ggplot2</code> has a more intuitive syntax. For example, I produce a similar plot to the one with a much shorter script:</p>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="plotdata.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb242-2"><a href="plotdata.html#cb242-2" aria-hidden="true" tabindex="-1"></a>bond <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/taylorrodgers/bond/main/bond.csv&quot;</span>)</span>
-<span id="cb242-3"><a href="plotdata.html#cb242-3" aria-hidden="true" tabindex="-1"></a>bond<span class="sc">$</span>actor <span class="ot">&lt;-</span> <span class="fu">factor</span>(bond<span class="sc">$</span>actor)</span>
-<span id="cb242-4"><a href="plotdata.html#cb242-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb242-5"><a href="plotdata.html#cb242-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>bond,</span>
-<span id="cb242-6"><a href="plotdata.html#cb242-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>gross,<span class="at">color=</span>actor)) <span class="sc">+</span></span>
-<span id="cb242-7"><a href="plotdata.html#cb242-7" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb242-8"><a href="plotdata.html#cb242-8" aria-hidden="true" tabindex="-1"></a>   <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Year&quot;</span>,</span>
-<span id="cb242-9"><a href="plotdata.html#cb242-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">y=</span><span class="st">&quot;Gross Revenue (in millions)&quot;</span>,</span>
-<span id="cb242-10"><a href="plotdata.html#cb242-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">title=</span><span class="st">&quot;Gross Revenue for Bond Films&quot;</span>) <span class="sc">+</span></span>
-<span id="cb242-11"><a href="plotdata.html#cb242-11" aria-hidden="true" tabindex="-1"></a>   <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/9.4-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<span class="va">bond</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/taylorrodgers/bond/main/bond.csv"</span><span class="op">)</span>
+<span class="va">bond</span><span class="op">$</span><span class="va">actor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">bond</span><span class="op">$</span><span class="va">actor</span><span class="op">)</span>
+
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">bond</span>,
+       mapping<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">year</span>,y<span class="op">=</span><span class="va">gross</span>,color<span class="op">=</span><span class="va">actor</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">3</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Year"</span>,
+        y<span class="op">=</span><span class="st">"Gross Revenue (in millions)"</span>,
+        title<span class="op">=</span><span class="st">"Gross Revenue for Bond Films"</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/9.4-1.png" width="70%" style="display: block; margin: auto;"></div>
 <p>You probably noticed that this script is a lot shorter than the last one. It has a similar syntax to the <code>dplyr</code> package. It uses a <code>+</code> operator to add layers to the plot, similar to how <code>dplyr</code> uses <code>%&gt;%</code> to create a series of data transformations.</p>
 <p>And best of all, <code>ggplot2</code> plots look pretty good. It didn’t take too much work to produce a semi-professional looking graph.</p>
 <p>The only thing I don’t like about <code>ggplot2</code> is the default aesthetics. It looks better than base, but it just looks “busy” to me. I don’t like the gray background of the plot and I don’t like the lines. Most data viz professionals advise keeping your plots somewhat minimalistic.</p>
 <p>In order for me to make the plot less busy, I have to write a few additional lines of code:</p>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="plotdata.html#cb243-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>bond,</span>
-<span id="cb243-2"><a href="plotdata.html#cb243-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>gross,<span class="at">color=</span>actor)) <span class="sc">+</span></span>
-<span id="cb243-3"><a href="plotdata.html#cb243-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb243-4"><a href="plotdata.html#cb243-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Year&quot;</span>,</span>
-<span id="cb243-5"><a href="plotdata.html#cb243-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">y=</span><span class="st">&quot;Gross Revenue (in millions)&quot;</span>,</span>
-<span id="cb243-6"><a href="plotdata.html#cb243-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">title=</span><span class="st">&quot;Gross Revenue for Bond Films&quot;</span>) <span class="sc">+</span></span>
-<span id="cb243-7"><a href="plotdata.html#cb243-7" aria-hidden="true" tabindex="-1"></a>   <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
-<span id="cb243-8"><a href="plotdata.html#cb243-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb243-9"><a href="plotdata.html#cb243-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb243-10"><a href="plotdata.html#cb243-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">panel.background =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb243-11"><a href="plotdata.html#cb243-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color=</span><span class="st">&quot;grey&quot;</span>))</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/9.5-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">bond</span>,
+       mapping<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">year</span>,y<span class="op">=</span><span class="va">gross</span>,color<span class="op">=</span><span class="va">actor</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">3</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Year"</span>,
+        y<span class="op">=</span><span class="st">"Gross Revenue (in millions)"</span>,
+        title<span class="op">=</span><span class="st">"Gross Revenue for Bond Films"</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,
+         panel.grid.major <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,
+         panel.grid.minor <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,
+         panel.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,
+         axis.line <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span><span class="op">(</span>color<span class="op">=</span><span class="st">"grey"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/9.5-1.png" width="70%" style="display: block; margin: auto;"></div>
 <p>This isn’t a big deal to add this, but it is tedious to do so. Thankfully, there are pre-built themes in the <code>ggthemes</code> package that you can use. They have themes that mimic the aesthetics of the <em>Wall Street Journal</em>, <em>The Economist</em>, <em>FiveThirtyEight</em>, and several other well-known data journalism outlets.</p>
 <p>Here’s <em>FiveThirtyEight</em>’s template below:</p>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="plotdata.html#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
-<span id="cb244-2"><a href="plotdata.html#cb244-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>bond,</span>
-<span id="cb244-3"><a href="plotdata.html#cb244-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>gross,<span class="at">color=</span>actor)) <span class="sc">+</span></span>
-<span id="cb244-4"><a href="plotdata.html#cb244-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb244-5"><a href="plotdata.html#cb244-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Year&quot;</span>,</span>
-<span id="cb244-6"><a href="plotdata.html#cb244-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">y=</span><span class="st">&quot;Gross Revenue (in millions)&quot;</span>,</span>
-<span id="cb244-7"><a href="plotdata.html#cb244-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">title=</span><span class="st">&quot;Gross Revenue for Bond Films&quot;</span>) <span class="sc">+</span></span>
-<span id="cb244-8"><a href="plotdata.html#cb244-8" aria-hidden="true" tabindex="-1"></a>   <span class="fu">theme_fivethirtyeight</span>()</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/9.6-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb244"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jrnold/ggthemes">ggthemes</a></span><span class="op">)</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">bond</span>,
+       mapping<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">year</span>,y<span class="op">=</span><span class="va">gross</span>,color<span class="op">=</span><span class="va">actor</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">3</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Year"</span>,
+        y<span class="op">=</span><span class="st">"Gross Revenue (in millions)"</span>,
+        title<span class="op">=</span><span class="st">"Gross Revenue for Bond Films"</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://rdrr.io/pkg/ggthemes/man/theme_fivethirtyeight.html">theme_fivethirtyeight</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/9.6-1.png" width="70%" style="display: block; margin: auto;"></div>
 <p>I personally like the <em>pander</em> theme most of all. It provides just enough detail to help the human eye without becoming too busy.</p>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="plotdata.html#cb245-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
-<span id="cb245-2"><a href="plotdata.html#cb245-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>bond,</span>
-<span id="cb245-3"><a href="plotdata.html#cb245-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>gross,<span class="at">color=</span>actor)) <span class="sc">+</span></span>
-<span id="cb245-4"><a href="plotdata.html#cb245-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb245-5"><a href="plotdata.html#cb245-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Year&quot;</span>,</span>
-<span id="cb245-6"><a href="plotdata.html#cb245-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">y=</span><span class="st">&quot;Gross Revenue (in millions)&quot;</span>,</span>
-<span id="cb245-7"><a href="plotdata.html#cb245-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">title=</span><span class="st">&quot;Gross Revenue for Bond Films&quot;</span>) <span class="sc">+</span></span>
-<span id="cb245-8"><a href="plotdata.html#cb245-8" aria-hidden="true" tabindex="-1"></a>   <span class="fu">theme_pander</span>()</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/9.7-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb245"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jrnold/ggthemes">ggthemes</a></span><span class="op">)</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">bond</span>,
+       mapping<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">year</span>,y<span class="op">=</span><span class="va">gross</span>,color<span class="op">=</span><span class="va">actor</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">3</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Year"</span>,
+        y<span class="op">=</span><span class="st">"Gross Revenue (in millions)"</span>,
+        title<span class="op">=</span><span class="st">"Gross Revenue for Bond Films"</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://rdrr.io/pkg/ggthemes/man/theme_pander.html">theme_pander</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/9.7-1.png" width="70%" style="display: block; margin: auto;"></div>
 <p><code>plotly</code> data viz strikes a good balance between intuitive syntax and great default visualizations. It also provides great resources for building interactive web-based applications. I’ve used it extensively now for building Shiny applications that engineers would use to make predictions. The fact that I can get real specific with event tracking and interactions makes it the best for developers.</p>
 <p>Here’s an example:</p>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="plotdata.html#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
-<span id="cb246-2"><a href="plotdata.html#cb246-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ly</span>(<span class="at">data=</span>bond,<span class="at">x=</span><span class="sc">~</span>year,<span class="at">y=</span><span class="sc">~</span>gross,<span class="at">color=</span><span class="sc">~</span>actor,<span class="at">size=</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://plotly-r.com">plotly</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/plotly/man/plot_ly.html">plot_ly</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">bond</span>,x<span class="op">=</span><span class="op">~</span><span class="va">year</span>,y<span class="op">=</span><span class="op">~</span><span class="va">gross</span>,color<span class="op">=</span><span class="op">~</span><span class="va">actor</span>,size<span class="op">=</span><span class="fl">10</span><span class="op">)</span></code></pre></div>
 <div id="htmlwidget-c7015f8ef8e4be8f9879" style="width:70%;height:436.8px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-c7015f8ef8e4be8f9879">{"x":{"visdat":{"f9b7130828e":["function () ","plotlyVisDat"]},"cur_data":"f9b7130828e","attrs":{"f9b7130828e":{"x":{},"y":{},"color":{},"size":10,"alpha_stroke":1,"sizes":[10,100],"spans":[1,20]}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"year"},"yaxis":{"domain":[0,1],"automargin":true,"title":"gross"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[2012,2015,2006,2008],"y":[1108.561008,880.669186,669.789482,622.246378],"type":"scatter","mode":"markers","name":"Daniel Craig","marker":{"color":"rgba(102,194,165,1)","size":[55,55,55,55],"sizemode":"area","line":{"color":"rgba(102,194,165,1)"}},"textfont":{"color":"rgba(102,194,165,1)","size":55},"error_y":{"color":"rgba(102,194,165,1)","width":55},"error_x":{"color":"rgba(102,194,165,1)","width":55},"line":{"color":"rgba(102,194,165,1)","width":55},"xaxis":"x","yaxis":"y","frame":null},{"x":[1969],"y":[505.899782],"type":"scatter","mode":"markers","name":"George Lazenby","marker":{"color":"rgba(252,141,98,1)","size":[55],"sizemode":"area","line":{"color":"rgba(252,141,98,1)"}},"textfont":{"color":"rgba(252,141,98,1)","size":55},"error_y":{"color":"rgba(252,141,98,1)","width":55},"error_x":{"color":"rgba(252,141,98,1)","width":55},"line":{"color":"rgba(252,141,98,1)","width":55},"xaxis":"x","yaxis":"y","frame":null},{"x":[2002,1995,1999,1997],"y":[543.639638,529.548711,491.617153,478.946402],"type":"scatter","mode":"markers","name":"Pierce Brosnan","marker":{"color":"rgba(141,160,203,1)","size":[55,55,55,55],"sizemode":"area","line":{"color":"rgba(141,160,203,1)"}},"textfont":{"color":"rgba(141,160,203,1)","size":55},"error_y":{"color":"rgba(141,160,203,1)","width":55},"error_x":{"color":"rgba(141,160,203,1)","width":55},"line":{"color":"rgba(141,160,203,1)","width":55},"xaxis":"x","yaxis":"y","frame":null},{"x":[1973,1977,1979,1981,1974,1983,1985],"y":[825.110761,692.713752,655.8724,486.468881,448.249281,426.244352,321.172633],"type":"scatter","mode":"markers","name":"Roger Moore","marker":{"color":"rgba(231,138,195,1)","size":[55,55,55,55,55,55,55],"sizemode":"area","line":{"color":"rgba(231,138,195,1)"}},"textfont":{"color":"rgba(231,138,195,1)","size":55},"error_y":{"color":"rgba(231,138,195,1)","width":55},"error_x":{"color":"rgba(231,138,195,1)","width":55},"line":{"color":"rgba(231,138,195,1)","width":55},"xaxis":"x","yaxis":"y","frame":null},{"x":[1965,1964,1967,1971,1963,1962],"y":[1014.941117,912.257512,756.544419,648.514469,576.277964,440.759072],"type":"scatter","mode":"markers","name":"Sean Connery","marker":{"color":"rgba(166,216,84,1)","size":[55,55,55,55,55,55],"sizemode":"area","line":{"color":"rgba(166,216,84,1)"}},"textfont":{"color":"rgba(166,216,84,1)","size":55},"error_y":{"color":"rgba(166,216,84,1)","width":55},"error_x":{"color":"rgba(166,216,84,1)","width":55},"line":{"color":"rgba(166,216,84,1)","width":55},"xaxis":"x","yaxis":"y","frame":null},{"x":[1987,1989],"y":[381.088866,285.157191],"type":"scatter","mode":"markers","name":"Timothy Dalton","marker":{"color":"rgba(255,217,47,1)","size":[55,55],"sizemode":"area","line":{"color":"rgba(255,217,47,1)"}},"textfont":{"color":"rgba(255,217,47,1)","size":55},"error_y":{"color":"rgba(255,217,47,1)","width":55},"error_x":{"color":"rgba(255,217,47,1)","width":55},"line":{"color":"rgba(255,217,47,1)","width":55},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
-<p><code>plotly</code> has a somewhat less intuitive syntax though. The functions become a hierarchy of <code>lists</code>. If you look at the code and output below, you’ll notice that I have to specify formatting options with lists:</p>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="plotdata.html#cb247-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
-<span id="cb247-2"><a href="plotdata.html#cb247-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ly</span>(<span class="at">data=</span>bond,<span class="at">x=</span><span class="sc">~</span>year,<span class="at">y=</span><span class="sc">~</span>gross,<span class="at">color=</span><span class="sc">~</span>actor,<span class="at">size=</span><span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb247-3"><a href="plotdata.html#cb247-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">layout</span>(<span class="at">title=</span><span class="st">&quot;Gross Revenue for Bond Films&quot;</span>,</span>
-<span id="cb247-4"><a href="plotdata.html#cb247-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">xaxis=</span><span class="fu">list</span>(<span class="at">title=</span><span class="st">&quot;Year&quot;</span>),</span>
-<span id="cb247-5"><a href="plotdata.html#cb247-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">yaxis=</span><span class="fu">list</span>(<span class="at">title=</span><span class="st">&quot;Gross Revenue (in millions)&quot;</span>))</span></code></pre></div>
+<script type="application/json" data-for="htmlwidget-c7015f8ef8e4be8f9879">{"x":{"visdat":{"421a61cbb5be":["function () ","plotlyVisDat"]},"cur_data":"421a61cbb5be","attrs":{"421a61cbb5be":{"x":{},"y":{},"color":{},"size":10,"alpha_stroke":1,"sizes":[10,100],"spans":[1,20]}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"year"},"yaxis":{"domain":[0,1],"automargin":true,"title":"gross"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[2012,2015,2006,2008],"y":[1108.561008,880.669186,669.789482,622.246378],"type":"scatter","mode":"markers","name":"Daniel Craig","marker":{"color":"rgba(102,194,165,1)","size":[55,55,55,55],"sizemode":"area","line":{"color":"rgba(102,194,165,1)"}},"textfont":{"color":"rgba(102,194,165,1)","size":55},"error_y":{"color":"rgba(102,194,165,1)","width":55},"error_x":{"color":"rgba(102,194,165,1)","width":55},"line":{"color":"rgba(102,194,165,1)","width":55},"xaxis":"x","yaxis":"y","frame":null},{"x":[1969],"y":[505.899782],"type":"scatter","mode":"markers","name":"George Lazenby","marker":{"color":"rgba(252,141,98,1)","size":[55],"sizemode":"area","line":{"color":"rgba(252,141,98,1)"}},"textfont":{"color":"rgba(252,141,98,1)","size":55},"error_y":{"color":"rgba(252,141,98,1)","width":55},"error_x":{"color":"rgba(252,141,98,1)","width":55},"line":{"color":"rgba(252,141,98,1)","width":55},"xaxis":"x","yaxis":"y","frame":null},{"x":[2002,1995,1999,1997],"y":[543.639638,529.548711,491.617153,478.946402],"type":"scatter","mode":"markers","name":"Pierce Brosnan","marker":{"color":"rgba(141,160,203,1)","size":[55,55,55,55],"sizemode":"area","line":{"color":"rgba(141,160,203,1)"}},"textfont":{"color":"rgba(141,160,203,1)","size":55},"error_y":{"color":"rgba(141,160,203,1)","width":55},"error_x":{"color":"rgba(141,160,203,1)","width":55},"line":{"color":"rgba(141,160,203,1)","width":55},"xaxis":"x","yaxis":"y","frame":null},{"x":[1973,1977,1979,1981,1974,1983,1985],"y":[825.110761,692.713752,655.8724,486.468881,448.249281,426.244352,321.172633],"type":"scatter","mode":"markers","name":"Roger Moore","marker":{"color":"rgba(231,138,195,1)","size":[55,55,55,55,55,55,55],"sizemode":"area","line":{"color":"rgba(231,138,195,1)"}},"textfont":{"color":"rgba(231,138,195,1)","size":55},"error_y":{"color":"rgba(231,138,195,1)","width":55},"error_x":{"color":"rgba(231,138,195,1)","width":55},"line":{"color":"rgba(231,138,195,1)","width":55},"xaxis":"x","yaxis":"y","frame":null},{"x":[1965,1964,1967,1971,1963,1962],"y":[1014.941117,912.257512,756.544419,648.514469,576.277964,440.759072],"type":"scatter","mode":"markers","name":"Sean Connery","marker":{"color":"rgba(166,216,84,1)","size":[55,55,55,55,55,55],"sizemode":"area","line":{"color":"rgba(166,216,84,1)"}},"textfont":{"color":"rgba(166,216,84,1)","size":55},"error_y":{"color":"rgba(166,216,84,1)","width":55},"error_x":{"color":"rgba(166,216,84,1)","width":55},"line":{"color":"rgba(166,216,84,1)","width":55},"xaxis":"x","yaxis":"y","frame":null},{"x":[1987,1989],"y":[381.088866,285.157191],"type":"scatter","mode":"markers","name":"Timothy Dalton","marker":{"color":"rgba(255,217,47,1)","size":[55,55],"sizemode":"area","line":{"color":"rgba(255,217,47,1)"}},"textfont":{"color":"rgba(255,217,47,1)","size":55},"error_y":{"color":"rgba(255,217,47,1)","width":55},"error_x":{"color":"rgba(255,217,47,1)","width":55},"line":{"color":"rgba(255,217,47,1)","width":55},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script><p><code>plotly</code> has a somewhat less intuitive syntax though. The functions become a hierarchy of <code>lists</code>. If you look at the code and output below, you’ll notice that I have to specify formatting options with lists:</p>
+<div class="sourceCode" id="cb247"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://plotly-r.com">plotly</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/plotly/man/plot_ly.html">plot_ly</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">bond</span>,x<span class="op">=</span><span class="op">~</span><span class="va">year</span>,y<span class="op">=</span><span class="op">~</span><span class="va">gross</span>,color<span class="op">=</span><span class="op">~</span><span class="va">actor</span>,size<span class="op">=</span><span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+        <span class="fu"><a href="https://rdrr.io/pkg/plotly/man/layout.html">layout</a></span><span class="op">(</span>title<span class="op">=</span><span class="st">"Gross Revenue for Bond Films"</span>,
+               xaxis<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>title<span class="op">=</span><span class="st">"Year"</span><span class="op">)</span>,
+               yaxis<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>title<span class="op">=</span><span class="st">"Gross Revenue (in millions)"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div id="htmlwidget-041ad5f1fdd671339125" style="width:70%;height:436.8px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-041ad5f1fdd671339125">{"x":{"visdat":{"f9b1dd69539":["function () ","plotlyVisDat"]},"cur_data":"f9b1dd69539","attrs":{"f9b1dd69539":{"x":{},"y":{},"color":{},"size":10,"alpha_stroke":1,"sizes":[10,100],"spans":[1,20]}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Gross Revenue for Bond Films","xaxis":{"domain":[0,1],"automargin":true,"title":"Year"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Gross Revenue (in millions)"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[2012,2015,2006,2008],"y":[1108.561008,880.669186,669.789482,622.246378],"type":"scatter","mode":"markers","name":"Daniel Craig","marker":{"color":"rgba(102,194,165,1)","size":[55,55,55,55],"sizemode":"area","line":{"color":"rgba(102,194,165,1)"}},"textfont":{"color":"rgba(102,194,165,1)","size":55},"error_y":{"color":"rgba(102,194,165,1)","width":55},"error_x":{"color":"rgba(102,194,165,1)","width":55},"line":{"color":"rgba(102,194,165,1)","width":55},"xaxis":"x","yaxis":"y","frame":null},{"x":[1969],"y":[505.899782],"type":"scatter","mode":"markers","name":"George Lazenby","marker":{"color":"rgba(252,141,98,1)","size":[55],"sizemode":"area","line":{"color":"rgba(252,141,98,1)"}},"textfont":{"color":"rgba(252,141,98,1)","size":55},"error_y":{"color":"rgba(252,141,98,1)","width":55},"error_x":{"color":"rgba(252,141,98,1)","width":55},"line":{"color":"rgba(252,141,98,1)","width":55},"xaxis":"x","yaxis":"y","frame":null},{"x":[2002,1995,1999,1997],"y":[543.639638,529.548711,491.617153,478.946402],"type":"scatter","mode":"markers","name":"Pierce Brosnan","marker":{"color":"rgba(141,160,203,1)","size":[55,55,55,55],"sizemode":"area","line":{"color":"rgba(141,160,203,1)"}},"textfont":{"color":"rgba(141,160,203,1)","size":55},"error_y":{"color":"rgba(141,160,203,1)","width":55},"error_x":{"color":"rgba(141,160,203,1)","width":55},"line":{"color":"rgba(141,160,203,1)","width":55},"xaxis":"x","yaxis":"y","frame":null},{"x":[1973,1977,1979,1981,1974,1983,1985],"y":[825.110761,692.713752,655.8724,486.468881,448.249281,426.244352,321.172633],"type":"scatter","mode":"markers","name":"Roger Moore","marker":{"color":"rgba(231,138,195,1)","size":[55,55,55,55,55,55,55],"sizemode":"area","line":{"color":"rgba(231,138,195,1)"}},"textfont":{"color":"rgba(231,138,195,1)","size":55},"error_y":{"color":"rgba(231,138,195,1)","width":55},"error_x":{"color":"rgba(231,138,195,1)","width":55},"line":{"color":"rgba(231,138,195,1)","width":55},"xaxis":"x","yaxis":"y","frame":null},{"x":[1965,1964,1967,1971,1963,1962],"y":[1014.941117,912.257512,756.544419,648.514469,576.277964,440.759072],"type":"scatter","mode":"markers","name":"Sean Connery","marker":{"color":"rgba(166,216,84,1)","size":[55,55,55,55,55,55],"sizemode":"area","line":{"color":"rgba(166,216,84,1)"}},"textfont":{"color":"rgba(166,216,84,1)","size":55},"error_y":{"color":"rgba(166,216,84,1)","width":55},"error_x":{"color":"rgba(166,216,84,1)","width":55},"line":{"color":"rgba(166,216,84,1)","width":55},"xaxis":"x","yaxis":"y","frame":null},{"x":[1987,1989],"y":[381.088866,285.157191],"type":"scatter","mode":"markers","name":"Timothy Dalton","marker":{"color":"rgba(255,217,47,1)","size":[55,55],"sizemode":"area","line":{"color":"rgba(255,217,47,1)"}},"textfont":{"color":"rgba(255,217,47,1)","size":55},"error_y":{"color":"rgba(255,217,47,1)","width":55},"error_x":{"color":"rgba(255,217,47,1)","width":55},"line":{"color":"rgba(255,217,47,1)","width":55},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
-<p>This syntax isn’t too hard to learn, but it does require some practice.</p>
+<script type="application/json" data-for="htmlwidget-041ad5f1fdd671339125">{"x":{"visdat":{"421a11a44832":["function () ","plotlyVisDat"]},"cur_data":"421a11a44832","attrs":{"421a11a44832":{"x":{},"y":{},"color":{},"size":10,"alpha_stroke":1,"sizes":[10,100],"spans":[1,20]}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Gross Revenue for Bond Films","xaxis":{"domain":[0,1],"automargin":true,"title":"Year"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Gross Revenue (in millions)"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[2012,2015,2006,2008],"y":[1108.561008,880.669186,669.789482,622.246378],"type":"scatter","mode":"markers","name":"Daniel Craig","marker":{"color":"rgba(102,194,165,1)","size":[55,55,55,55],"sizemode":"area","line":{"color":"rgba(102,194,165,1)"}},"textfont":{"color":"rgba(102,194,165,1)","size":55},"error_y":{"color":"rgba(102,194,165,1)","width":55},"error_x":{"color":"rgba(102,194,165,1)","width":55},"line":{"color":"rgba(102,194,165,1)","width":55},"xaxis":"x","yaxis":"y","frame":null},{"x":[1969],"y":[505.899782],"type":"scatter","mode":"markers","name":"George Lazenby","marker":{"color":"rgba(252,141,98,1)","size":[55],"sizemode":"area","line":{"color":"rgba(252,141,98,1)"}},"textfont":{"color":"rgba(252,141,98,1)","size":55},"error_y":{"color":"rgba(252,141,98,1)","width":55},"error_x":{"color":"rgba(252,141,98,1)","width":55},"line":{"color":"rgba(252,141,98,1)","width":55},"xaxis":"x","yaxis":"y","frame":null},{"x":[2002,1995,1999,1997],"y":[543.639638,529.548711,491.617153,478.946402],"type":"scatter","mode":"markers","name":"Pierce Brosnan","marker":{"color":"rgba(141,160,203,1)","size":[55,55,55,55],"sizemode":"area","line":{"color":"rgba(141,160,203,1)"}},"textfont":{"color":"rgba(141,160,203,1)","size":55},"error_y":{"color":"rgba(141,160,203,1)","width":55},"error_x":{"color":"rgba(141,160,203,1)","width":55},"line":{"color":"rgba(141,160,203,1)","width":55},"xaxis":"x","yaxis":"y","frame":null},{"x":[1973,1977,1979,1981,1974,1983,1985],"y":[825.110761,692.713752,655.8724,486.468881,448.249281,426.244352,321.172633],"type":"scatter","mode":"markers","name":"Roger Moore","marker":{"color":"rgba(231,138,195,1)","size":[55,55,55,55,55,55,55],"sizemode":"area","line":{"color":"rgba(231,138,195,1)"}},"textfont":{"color":"rgba(231,138,195,1)","size":55},"error_y":{"color":"rgba(231,138,195,1)","width":55},"error_x":{"color":"rgba(231,138,195,1)","width":55},"line":{"color":"rgba(231,138,195,1)","width":55},"xaxis":"x","yaxis":"y","frame":null},{"x":[1965,1964,1967,1971,1963,1962],"y":[1014.941117,912.257512,756.544419,648.514469,576.277964,440.759072],"type":"scatter","mode":"markers","name":"Sean Connery","marker":{"color":"rgba(166,216,84,1)","size":[55,55,55,55,55,55],"sizemode":"area","line":{"color":"rgba(166,216,84,1)"}},"textfont":{"color":"rgba(166,216,84,1)","size":55},"error_y":{"color":"rgba(166,216,84,1)","width":55},"error_x":{"color":"rgba(166,216,84,1)","width":55},"line":{"color":"rgba(166,216,84,1)","width":55},"xaxis":"x","yaxis":"y","frame":null},{"x":[1987,1989],"y":[381.088866,285.157191],"type":"scatter","mode":"markers","name":"Timothy Dalton","marker":{"color":"rgba(255,217,47,1)","size":[55,55],"sizemode":"area","line":{"color":"rgba(255,217,47,1)"}},"textfont":{"color":"rgba(255,217,47,1)","size":55},"error_y":{"color":"rgba(255,217,47,1)","width":55},"error_x":{"color":"rgba(255,217,47,1)","width":55},"line":{"color":"rgba(255,217,47,1)","width":55},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script><p>This syntax isn’t too hard to learn, but it does require some practice.</p>
 </div>
 <div id="so-which-data-viz-package-is-actually-the-best" class="section level2" number="10.2">
-<h2><span class="header-section-number">10.2</span> So Which Data Viz Package is Actually the Best?</h2>
+<h2>
+<span class="header-section-number">10.2</span> So Which Data Viz Package is Actually the Best?<a class="anchor" aria-label="anchor" href="#so-which-data-viz-package-is-actually-the-best"><i class="fas fa-link"></i></a>
+</h2>
 <p>Many data scientists would say the best method is the one you already know. As I said, if you understand the fundamentals of good data visualization, you can use any tool pretty well. And if you already know one of these methods (or know another tool like Tableau or PowerBI), I say go with that one.</p>
 <p>That said, I suggest <code>ggplot2</code> for those who conduct research. And I will focus on <code>ggplot2</code> exclusively for the remaining chapter.</p>
 <p>The reason I like <code>ggplot2</code> best is the readable syntax and the ability to use templates. It’s also one many other R programmers know and allows you to easily share your work with others.</p>
 </div>
 <div id="how-to-write-ggplot2-scripts" class="section level2" number="10.3">
-<h2><span class="header-section-number">10.3</span> How to Write ggplot2 Scripts</h2>
+<h2>
+<span class="header-section-number">10.3</span> How to Write ggplot2 Scripts<a class="anchor" aria-label="anchor" href="#how-to-write-ggplot2-scripts"><i class="fas fa-link"></i></a>
+</h2>
 <p>I would have to write a whole book to describe all of <code>ggplot2</code>’s functions and best practices. There are many out there and I suggest you read them if you want to get really, really good at it. Since this book is for researchers who probably want a few plots to illustrate their research, I’ll focus on the basics and show you how to make your visualizations look professional.</p>
 <p>The easiest way to think about <code>ggplot2</code>’s syntax is to imagine that you have clear, transparent celluloid sheets of paper. Each one has something drawn on it. The bottom one defines the x and y axes:</p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="plotdata.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>bond,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>gross,<span class="at">color=</span>actor))</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">bond</span>,mapping<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">year</span>,y<span class="op">=</span><span class="va">gross</span>,color<span class="op">=</span><span class="va">actor</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>In the script above, we haven’t actually plotted anything yet. All we’re doing is defining the structure of the plot. We’re specifying that the data is the Bond data set and we’re “mapping” aesthetic parameters (<code>mapping=aes()</code>). Within <code>mapping=aes()</code>, we state that the x-axis as the year, the y-axis as revenue, and the color as actor.</p>
 <p>If you run the script above, all you’ll see is a blank box:</p>
-<p><img src="bookdown-demo_files/figure-html/9.11-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p>After we define those values, we can add new layer. This layer will provide the data viz we want. We want a scatterplot, so we’ll use the <code>geom_point()</code> function:</p>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="plotdata.html#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>bond,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>gross,<span class="at">color=</span>actor)) <span class="sc">+</span></span>
-<span id="cb249-2"><a href="plotdata.html#cb249-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/9.12-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p>If you’ll notice, I didn’t need to specify any arguments in the <code>geom_point()</code> function above. That’s because these functions <strong>inherit</strong> the arguments of the functions before it.</p>
-<p>If we want to, we can change this plot to a line plot by swapping out the <code>geom_point()</code> function with a <code>geom_line()</code> function:</p>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="plotdata.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>bond,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>gross,<span class="at">color=</span>actor)) <span class="sc">+</span></span>
-<span id="cb250-2"><a href="plotdata.html#cb250-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_line</span>()</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/9.13-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p>This isn’t a very good plot though. We broke our actors out by color and no Bond actor plays the role across our entire time span. For that reason, the line broke apart. We can turn this into a single line by removing actor from the <code>aes()</code> function below:</p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="plotdata.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>bond,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>gross)) <span class="sc">+</span></span>
-<span id="cb251-2"><a href="plotdata.html#cb251-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_line</span>()</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/9.14-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/9.11-1.png" width="70%" style="display: block; margin: auto;"></div>
+<p>After we define those values, we can add new layer. This layer will provide the data viz we want. We want a scatterplot, so we’ll use the <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code> function:</p>
+<div class="sourceCode" id="cb249"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">bond</span>,mapping<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">year</span>,y<span class="op">=</span><span class="va">gross</span>,color<span class="op">=</span><span class="va">actor</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/9.12-1.png" width="70%" style="display: block; margin: auto;"></div>
+<p>If you’ll notice, I didn’t need to specify any arguments in the <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code> function above. That’s because these functions <strong>inherit</strong> the arguments of the functions before it.</p>
+<p>If we want to, we can change this plot to a line plot by swapping out the <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code> function with a <code><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line()</a></code> function:</p>
+<div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">bond</span>,mapping<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">year</span>,y<span class="op">=</span><span class="va">gross</span>,color<span class="op">=</span><span class="va">actor</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/9.13-1.png" width="70%" style="display: block; margin: auto;"></div>
+<p>This isn’t a very good plot though. We broke our actors out by color and no Bond actor plays the role across our entire time span. For that reason, the line broke apart. We can turn this into a single line by removing actor from the <code><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes()</a></code> function below:</p>
+<div class="sourceCode" id="cb251"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">bond</span>,mapping<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">year</span>,y<span class="op">=</span><span class="va">gross</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/9.14-1.png" width="70%" style="display: block; margin: auto;"></div>
 <p>Now we can see how revenue for Bond films has changed over the years, but we lost the ability to see the Bond actors. What if we want to see one line, but also see how individual actors perform?</p>
 <p>Simple! We just layer two visualizations on top of each other!</p>
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="plotdata.html#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>bond,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>gross)) <span class="sc">+</span></span>
-<span id="cb252-2"><a href="plotdata.html#cb252-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb252-3"><a href="plotdata.html#cb252-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color=</span>actor))</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/9.15-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p>Pay close attention to what we did in the last script. We used the <code>+</code> operator and defined two data visualizations: <code>geom_line()</code> and <code>geom_point()</code>. We defined color in the <code>geom_point()</code> function, rather than the <code>ggplot()</code> function. That prevented <code>geom_line()</code> from inheriting the color argument and breaking out line up again.</p>
-<p>Our current visualization isn’t perfect though. I’d like to make the dots bigger so that we can better tell the actor. I can adjust that setting in the <code>geom_point()</code> function:</p>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="plotdata.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>bond,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>gross)) <span class="sc">+</span></span>
-<span id="cb253-2"><a href="plotdata.html#cb253-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb253-3"><a href="plotdata.html#cb253-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color=</span>actor),<span class="at">size=</span><span class="dv">3</span>)</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/9.15.1-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">bond</span>,mapping<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">year</span>,y<span class="op">=</span><span class="va">gross</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="va">actor</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/9.15-1.png" width="70%" style="display: block; margin: auto;"></div>
+<p>Pay close attention to what we did in the last script. We used the <code>+</code> operator and defined two data visualizations: <code><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line()</a></code> and <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code>. We defined color in the <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code> function, rather than the <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> function. That prevented <code><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line()</a></code> from inheriting the color argument and breaking out line up again.</p>
+<p>Our current visualization isn’t perfect though. I’d like to make the dots bigger so that we can better tell the actor. I can adjust that setting in the <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code> function:</p>
+<div class="sourceCode" id="cb253"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">bond</span>,mapping<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">year</span>,y<span class="op">=</span><span class="va">gross</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="va">actor</span><span class="op">)</span>,size<span class="op">=</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/9.15.1-1.png" width="70%" style="display: block; margin: auto;"></div>
 <p>Now I want you to remember something - you’re <strong>layering</strong> these visualizations. That means you should consider the order when you build them.</p>
-<p>If you look at the script below, I have the <code>geom_point()</code> function before the <code>geom_line()</code> function. That means the line will sit on top of the points, which is less clear than our previous visualization.</p>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="plotdata.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>bond,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>gross)) <span class="sc">+</span></span>
-<span id="cb254-2"><a href="plotdata.html#cb254-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color=</span>actor),<span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb254-3"><a href="plotdata.html#cb254-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_line</span>()</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/9.16-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>If you look at the script below, I have the <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code> function before the <code><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line()</a></code> function. That means the line will sit on top of the points, which is less clear than our previous visualization.</p>
+<div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">bond</span>,mapping<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">year</span>,y<span class="op">=</span><span class="va">gross</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="va">actor</span><span class="op">)</span>,size<span class="op">=</span><span class="fl">3</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/9.16-1.png" width="70%" style="display: block; margin: auto;"></div>
 </div>
 <div id="how-to-plot-common-data-visualizations-in-ggplot2" class="section level2" number="10.4">
-<h2><span class="header-section-number">10.4</span> How to Plot Common Data Visualizations in ggplot2</h2>
+<h2>
+<span class="header-section-number">10.4</span> How to Plot Common Data Visualizations in ggplot2<a class="anchor" aria-label="anchor" href="#how-to-plot-common-data-visualizations-in-ggplot2"><i class="fas fa-link"></i></a>
+</h2>
 <p>Typically, the most common data visualizations you’ll need to plot include:</p>
 <ul>
 <li>scatter</li>
@@ -468,227 +253,245 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Some people would add pie charts, but there are well-documented reasons online about why pie charts (and doughnut charts) are ineffective as data visualizations. So I won’t cover those.</p>
 <div id="how-to-plot-a-scatterplot" class="section level3" number="10.4.1">
-<h3><span class="header-section-number">10.4.1</span> How to Plot a Scatterplot</h3>
-<p>This is one we’ve already covered in previous sections. You use the functions <code>ggplot2()</code> and <code>geom_point()</code> to create a scatterplot:</p>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="plotdata.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>bond,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>gross,<span class="at">color=</span>actor)) <span class="sc">+</span></span>
-<span id="cb255-2"><a href="plotdata.html#cb255-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">3</span>)</span></code></pre></div>
+<h3>
+<span class="header-section-number">10.4.1</span> How to Plot a Scatterplot<a class="anchor" aria-label="anchor" href="#how-to-plot-a-scatterplot"><i class="fas fa-link"></i></a>
+</h3>
+<p>This is one we’ve already covered in previous sections. You use the functions <code><a href="https://ggplot2.tidyverse.org/reference/ggplot2-package.html">ggplot2()</a></code> and <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code> to create a scatterplot:</p>
+<div class="sourceCode" id="cb255"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">bond</span>,mapping<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">year</span>,y<span class="op">=</span><span class="va">gross</span>,color<span class="op">=</span><span class="va">actor</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="how-to-plot-a-bar-graph-histogram" class="section level3" number="10.4.2">
-<h3><span class="header-section-number">10.4.2</span> How to Plot a Bar Graph / Histogram</h3>
+<h3>
+<span class="header-section-number">10.4.2</span> How to Plot a Bar Graph / Histogram<a class="anchor" aria-label="anchor" href="#how-to-plot-a-bar-graph-histogram"><i class="fas fa-link"></i></a>
+</h3>
 <p>There are a three functions available for plotting bar graphs:</p>
 <ol style="list-style-type: decimal">
-<li><code>geom_bar()</code></li>
-<li><code>geom_col()</code></li>
-<li><code>geom_histogram()</code></li>
+<li><code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar()</a></code></li>
+<li><code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col()</a></code></li>
+<li><code><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram()</a></code></li>
 </ol>
 <p>All three functions have some overlap in how you can use them to report figures.</p>
-<p><code>geom_bar()</code> is useful for reporting count data by category For example, we may want to see how many times each actor portrayed the Bond character. To do this, you’ll need to map the x-axis to actor and specify the <code>stat</code> argument as “count.”</p>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="plotdata.html#cb256-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>bond,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>actor)) <span class="sc">+</span></span>
-<span id="cb256-2"><a href="plotdata.html#cb256-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;count&quot;</span>)</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/9.18-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p>You can also use the <code>geom_bar()</code> to report a continuous variable. For example, you might want to see gross revenue by actor. If so, you’ll need to specify the weight argument within the <code>aes()</code> function below.</p>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="plotdata.html#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>bond,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>actor)) <span class="sc">+</span></span>
-<span id="cb257-2"><a href="plotdata.html#cb257-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">weight=</span>gross))</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/9.19-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p>You can also use <code>geom_col()</code> for something similar. <code>geom_col()</code> is a better fit for this type of visualization because it actually produces a <em>stacked</em> bar graph. It’s also simpler code, in that you only need to define the <code>aes()</code> once.</p>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="plotdata.html#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>bond,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>actor,<span class="at">y=</span>gross)) <span class="sc">+</span></span>
-<span id="cb258-2"><a href="plotdata.html#cb258-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_col</span>()</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/9.20-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p><code>geom_histogram()</code> displays a histogram, which is a special kind of bar chart used to display distribution of the data.</p>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="plotdata.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mtcars,<span class="at">mapping=</span><span class="fu">aes</span>(hp)) <span class="sc">+</span></span>
-<span id="cb259-2"><a href="plotdata.html#cb259-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">12</span>)</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/9.21-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar()</a></code> is useful for reporting count data by category For example, we may want to see how many times each actor portrayed the Bond character. To do this, you’ll need to map the x-axis to actor and specify the <code>stat</code> argument as “count”.</p>
+<div class="sourceCode" id="cb256"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">bond</span>,mapping<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">actor</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat<span class="op">=</span><span class="st">"count"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/9.18-1.png" width="70%" style="display: block; margin: auto;"></div>
+<p>You can also use the <code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar()</a></code> to report a continuous variable. For example, you might want to see gross revenue by actor. If so, you’ll need to specify the weight argument within the <code><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes()</a></code> function below.</p>
+<div class="sourceCode" id="cb257"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">bond</span>,mapping<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">actor</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>weight<span class="op">=</span><span class="va">gross</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/9.19-1.png" width="70%" style="display: block; margin: auto;"></div>
+<p>You can also use <code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col()</a></code> for something similar. <code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col()</a></code> is a better fit for this type of visualization because it actually produces a <em>stacked</em> bar graph. It’s also simpler code, in that you only need to define the <code><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes()</a></code> once.</p>
+<div class="sourceCode" id="cb258"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">bond</span>,mapping<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">actor</span>,y<span class="op">=</span><span class="va">gross</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/9.20-1.png" width="70%" style="display: block; margin: auto;"></div>
+<p><code><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram()</a></code> displays a histogram, which is a special kind of bar chart used to display distribution of the data.</p>
+<div class="sourceCode" id="cb259"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">mtcars</span>,mapping<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">hp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>bins<span class="op">=</span><span class="fl">12</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/9.21-1.png" width="70%" style="display: block; margin: auto;"></div>
 <p>As you can see, you only need to specify one variable and the number of bins to get a working histogram.</p>
 </div>
 <div id="how-to-plot-a-line-graph" class="section level3" number="10.4.3">
-<h3><span class="header-section-number">10.4.3</span> How to Plot a Line Graph</h3>
-<p>If you work with time-series data or something similar, the <code>geom_line()</code> function works well for connecting points. You can also use it to overlay two y-axes over one another, which I’ll cover further down below.</p>
+<h3>
+<span class="header-section-number">10.4.3</span> How to Plot a Line Graph<a class="anchor" aria-label="anchor" href="#how-to-plot-a-line-graph"><i class="fas fa-link"></i></a>
+</h3>
+<p>If you work with time-series data or something similar, the <code><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line()</a></code> function works well for connecting points. You can also use it to overlay two y-axes over one another, which I’ll cover further down below.</p>
 <p>As we’ve shown before, here is how you create a line plot:</p>
-<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="plotdata.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>bond,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>gross)) <span class="sc">+</span></span>
-<span id="cb260-2"><a href="plotdata.html#cb260-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_line</span>()</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/9.22-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb260"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">bond</span>,mapping<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">year</span>,y<span class="op">=</span><span class="va">gross</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/9.22-1.png" width="70%" style="display: block; margin: auto;"></div>
 <p>You can also break lines out into groups. Let’s say for example that we wanted to see how Bond revenue changed for each actor as each of their movies were released. More specifically, let’s say we want to see how Daniel Craig’s second film compared to Sean Connery and Roger Moore. This will require some data transformation, as you can see below:</p>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="plotdata.html#cb261-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb261-2"><a href="plotdata.html#cb261-2" aria-hidden="true" tabindex="-1"></a>bond_alter <span class="ot">&lt;-</span> bond <span class="sc">%&gt;%</span></span>
-<span id="cb261-3"><a href="plotdata.html#cb261-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">arrange</span>(actor,year) <span class="sc">%&gt;%</span></span>
-<span id="cb261-4"><a href="plotdata.html#cb261-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">group_by</span>(actor) <span class="sc">%&gt;%</span></span>
-<span id="cb261-5"><a href="plotdata.html#cb261-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mutate</span>(<span class="at">order=</span><span class="fu">row_number</span>(actor))</span>
-<span id="cb261-6"><a href="plotdata.html#cb261-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb261-7"><a href="plotdata.html#cb261-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>bond_alter,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>order,<span class="at">y=</span>gross,<span class="at">color=</span>actor)) <span class="sc">+</span></span>
-<span id="cb261-8"><a href="plotdata.html#cb261-8" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_line</span>()</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/9.23-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb261"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<span class="va">bond_alter</span> <span class="op">&lt;-</span> <span class="va">bond</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">actor</span>,<span class="va">year</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">actor</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>order<span class="op">=</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/ranking.html">row_number</a></span><span class="op">(</span><span class="va">actor</span><span class="op">)</span><span class="op">)</span>
+
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">bond_alter</span>,mapping<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">order</span>,y<span class="op">=</span><span class="va">gross</span>,color<span class="op">=</span><span class="va">actor</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/9.23-1.png" width="70%" style="display: block; margin: auto;"></div>
 <p>We can see in the plot below that Roger Moore started off strong, but his revenue decreased over time. Daniel Craig and Sean Connery consistently outperformed the rest though.</p>
 </div>
 <div id="how-to-plot-a-box-and-whiskers-plot" class="section level3" number="10.4.4">
-<h3><span class="header-section-number">10.4.4</span> How to Plot a Box-and-Whiskers Plot</h3>
+<h3>
+<span class="header-section-number">10.4.4</span> How to Plot a Box-and-Whiskers Plot<a class="anchor" aria-label="anchor" href="#how-to-plot-a-box-and-whiskers-plot"><i class="fas fa-link"></i></a>
+</h3>
 <p>To create a box-and-whiskers plot, you use the <code>geom_plot()</code> function:</p>
-<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="plotdata.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>bond,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>actor,<span class="at">y=</span>gross)) <span class="sc">+</span></span>
-<span id="cb262-2"><a href="plotdata.html#cb262-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_boxplot</span>()</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/9.24-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb262"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">bond</span>,mapping<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">actor</span>,y<span class="op">=</span><span class="va">gross</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/9.24-1.png" width="70%" style="display: block; margin: auto;"></div>
 <p>In my career, I’ve learned to love box-and-whiskers plots. It’s the best visualization that helps stakeholders who aren’t statistics savvy appreciate variation. I assume it’s because they had to learn how to read these plots in college. Whenever I try to introduce standard deviation as a key performance indicator, they usually don’t understand why that’s important. A box-and-whiskers plot, especially when you compare multiple plots, makes it easier for stakeholders to understand why it matters.</p>
 <p>As you could see in our previous visualization, there’s wide variety in results for the Bond actors gross revenue. Pierce Brosnan generated consistent revenue. Roger Moore had a lower median than Brosnan, but had several films do better.</p>
 </div>
 <div id="how-to-improve-labels-and-other-formatting-tips" class="section level3" number="10.4.5">
-<h3><span class="header-section-number">10.4.5</span> How to Improve Labels and Other Formatting Tips</h3>
+<h3>
+<span class="header-section-number">10.4.5</span> How to Improve Labels and Other Formatting Tips<a class="anchor" aria-label="anchor" href="#how-to-improve-labels-and-other-formatting-tips"><i class="fas fa-link"></i></a>
+</h3>
 <p>I’ve worked with many data viz tools and have also mentored a few people now. One thing I always like to tell people is that good data visualizations focus on “the little details.” If you’ve noticed, most of these plots don’t have the best labeling or coloring. Spending an extra 10-15 minutes on these little details makes your work look far more professional and will help your audience appreciate the insights you deliver.</p>
 <p>The first thing you should improve is the labels. Most data sets don’t use proper English to describe field names. In our data set, <em>Actor</em> (capitalized) is spelled as <em>actor</em> (lower case).</p>
 <p>In larger data sets, we might have multiple fields with more descriptive names. In the Bond example, we could have <em>LeadActress</em>, <em>PrimaryAntagonistActor</em>, <em>SecondaryAntagonistActor</em>, etc. All of those would give us more flexibility in our analysis, but these names make poor labels on a plot.</p>
-<p>We can use the <code>labs()</code> function to solve this problem. If you look at the plot below, you can see that I give better labels to our plot:</p>
-<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="plotdata.html#cb263-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
-<span id="cb263-2"><a href="plotdata.html#cb263-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>bond,</span>
-<span id="cb263-3"><a href="plotdata.html#cb263-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>gross)) <span class="sc">+</span></span>
-<span id="cb263-4"><a href="plotdata.html#cb263-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb263-5"><a href="plotdata.html#cb263-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Year&quot;</span>,</span>
-<span id="cb263-6"><a href="plotdata.html#cb263-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">y=</span><span class="st">&quot;Gross Revenue (in millions)&quot;</span>,</span>
-<span id="cb263-7"><a href="plotdata.html#cb263-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">title=</span><span class="st">&quot;Gross Revenue for Bond Films&quot;</span>)</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/9.25-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>We can use the <code><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs()</a></code> function to solve this problem. If you look at the plot below, you can see that I give better labels to our plot:</p>
+<div class="sourceCode" id="cb263"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jrnold/ggthemes">ggthemes</a></span><span class="op">)</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">bond</span>,
+       mapping<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">year</span>,y<span class="op">=</span><span class="va">gross</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">3</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Year"</span>,
+        y<span class="op">=</span><span class="st">"Gross Revenue (in millions)"</span>,
+        title<span class="op">=</span><span class="st">"Gross Revenue for Bond Films"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/9.25-1.png" width="70%" style="display: block; margin: auto;"></div>
 <p>There’s one for the x and y-axis, as well as one for the title. As you can already tell, this labeling is far more descriptive and professional than past labels.</p>
-<p>Let’s say we want to add color. As you recall, we simply add <code>color=actor</code> in the <code>aes()</code> function. And to change the legend title, we simply add <code>color="Actor Name"</code> to the <code>labs()</code> function:</p>
-<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="plotdata.html#cb264-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>bond,</span>
-<span id="cb264-2"><a href="plotdata.html#cb264-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>gross,<span class="at">color=</span>actor)) <span class="sc">+</span></span>
-<span id="cb264-3"><a href="plotdata.html#cb264-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb264-4"><a href="plotdata.html#cb264-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Year&quot;</span>,</span>
-<span id="cb264-5"><a href="plotdata.html#cb264-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">y=</span><span class="st">&quot;Gross Revenue (in millions)&quot;</span>,</span>
-<span id="cb264-6"><a href="plotdata.html#cb264-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">title=</span><span class="st">&quot;Gross Revenue for Bond Films&quot;</span>,</span>
-<span id="cb264-7"><a href="plotdata.html#cb264-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">color=</span><span class="st">&quot;Actor Name&quot;</span>)</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/9.26-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>Let’s say we want to add color. As you recall, we simply add <code>color=actor</code> in the <code><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes()</a></code> function. And to change the legend title, we simply add <code>color="Actor Name"</code> to the <code><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs()</a></code> function:</p>
+<div class="sourceCode" id="cb264"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">bond</span>,
+       mapping<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">year</span>,y<span class="op">=</span><span class="va">gross</span>,color<span class="op">=</span><span class="va">actor</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">3</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Year"</span>,
+        y<span class="op">=</span><span class="st">"Gross Revenue (in millions)"</span>,
+        title<span class="op">=</span><span class="st">"Gross Revenue for Bond Films"</span>,
+        color<span class="op">=</span><span class="st">"Actor Name"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/9.26-1.png" width="70%" style="display: block; margin: auto;"></div>
 <p>You can also define the color codes you want to use for these plots. Personally, I’d suggest just using the templates I described in an earlier section to do this. The functions to perform these tasks get a bit confusing and the documentation isn’t that great.</p>
 <p>With that said, I suggest you focus on <code>scale_manual()</code> functions for defining colors. Execute <code>?scale_manual</code> in your console to see this documentation on this.</p>
 <p>There’s seven manual functions to data viz parameters:</p>
 <ol style="list-style-type: decimal">
-<li><code>scale_color_manual()</code></li>
-<li><code>scale_fill_manual()</code></li>
-<li><code>scale_size_manual()</code></li>
-<li><code>scale_shape_manual()</code></li>
-<li><code>scale_linetype_manual()</code></li>
-<li><code>scale_alpha_manual()</code></li>
-<li><code>scale_discrete_manual()</code></li>
+<li><code><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual()</a></code></li>
+<li><code><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual()</a></code></li>
+<li><code><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_size_manual()</a></code></li>
+<li><code><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_shape_manual()</a></code></li>
+<li><code><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_linetype_manual()</a></code></li>
+<li><code><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_alpha_manual()</a></code></li>
+<li><code><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_discrete_manual()</a></code></li>
 </ol>
-<p>If you’ll notice, this relates to the type of plot you’ll use. Since we used a scatter plot and the only thing we changed was the color, we’ll use the <code>scale_color_manual()</code> to dictate specific colors:</p>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="plotdata.html#cb265-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>bond,</span>
-<span id="cb265-2"><a href="plotdata.html#cb265-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>gross,<span class="at">color=</span>actor)) <span class="sc">+</span></span>
-<span id="cb265-3"><a href="plotdata.html#cb265-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb265-4"><a href="plotdata.html#cb265-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Year&quot;</span>,</span>
-<span id="cb265-5"><a href="plotdata.html#cb265-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">y=</span><span class="st">&quot;Gross Revenue (in millions)&quot;</span>,</span>
-<span id="cb265-6"><a href="plotdata.html#cb265-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">title=</span><span class="st">&quot;Gross Revenue for Bond Films&quot;</span>,</span>
-<span id="cb265-7"><a href="plotdata.html#cb265-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">color=</span><span class="st">&quot;Bond Actor&quot;</span>) <span class="sc">+</span></span>
-<span id="cb265-8"><a href="plotdata.html#cb265-8" aria-hidden="true" tabindex="-1"></a>   <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;#d55e00&quot;</span>,<span class="st">&quot;#cc79a7&quot;</span>,<span class="st">&quot;#0072b2&quot;</span>,<span class="st">&quot;#f0e442&quot;</span>,<span class="st">&quot;#009e73&quot;</span>,<span class="st">&quot;#d45e49&quot;</span>))</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/9.27-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p>I’m not a fan of the gray background and the grids used in the default for <code>ggplot2</code>. You can use the <code>theme()</code> function to remove those:</p>
-<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="plotdata.html#cb266-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>bond,</span>
-<span id="cb266-2"><a href="plotdata.html#cb266-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>gross,<span class="at">color=</span>actor)) <span class="sc">+</span></span>
-<span id="cb266-3"><a href="plotdata.html#cb266-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb266-4"><a href="plotdata.html#cb266-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Year&quot;</span>,</span>
-<span id="cb266-5"><a href="plotdata.html#cb266-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">y=</span><span class="st">&quot;Gross Revenue (in millions)&quot;</span>,</span>
-<span id="cb266-6"><a href="plotdata.html#cb266-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">title=</span><span class="st">&quot;Gross Revenue for Bond Films&quot;</span>,</span>
-<span id="cb266-7"><a href="plotdata.html#cb266-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">color=</span><span class="st">&quot;Bond Actor&quot;</span>) <span class="sc">+</span></span>
-<span id="cb266-8"><a href="plotdata.html#cb266-8" aria-hidden="true" tabindex="-1"></a>   <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;#d55e00&quot;</span>,<span class="st">&quot;#cc79a7&quot;</span>,<span class="st">&quot;#0072b2&quot;</span>,<span class="st">&quot;#f0e442&quot;</span>,<span class="st">&quot;#009e73&quot;</span>,<span class="st">&quot;#d45e49&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb266-9"><a href="plotdata.html#cb266-9" aria-hidden="true" tabindex="-1"></a>   <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb266-10"><a href="plotdata.html#cb266-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb266-11"><a href="plotdata.html#cb266-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">panel.background =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb266-12"><a href="plotdata.html#cb266-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>))</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/9.28-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>If you’ll notice, this relates to the type of plot you’ll use. Since we used a scatter plot and the only thing we changed was the color, we’ll use the <code><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual()</a></code> to dictate specific colors:</p>
+<div class="sourceCode" id="cb265"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">bond</span>,
+       mapping<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">year</span>,y<span class="op">=</span><span class="va">gross</span>,color<span class="op">=</span><span class="va">actor</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">3</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Year"</span>,
+        y<span class="op">=</span><span class="st">"Gross Revenue (in millions)"</span>,
+        title<span class="op">=</span><span class="st">"Gross Revenue for Bond Films"</span>,
+        color<span class="op">=</span><span class="st">"Bond Actor"</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#d55e00"</span>,<span class="st">"#cc79a7"</span>,<span class="st">"#0072b2"</span>,<span class="st">"#f0e442"</span>,<span class="st">"#009e73"</span>,<span class="st">"#d45e49"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/9.27-1.png" width="70%" style="display: block; margin: auto;"></div>
+<p>I’m not a fan of the gray background and the grids used in the default for <code>ggplot2</code>. You can use the <code><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme()</a></code> function to remove those:</p>
+<div class="sourceCode" id="cb266"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">bond</span>,
+       mapping<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">year</span>,y<span class="op">=</span><span class="va">gross</span>,color<span class="op">=</span><span class="va">actor</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">3</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Year"</span>,
+        y<span class="op">=</span><span class="st">"Gross Revenue (in millions)"</span>,
+        title<span class="op">=</span><span class="st">"Gross Revenue for Bond Films"</span>,
+        color<span class="op">=</span><span class="st">"Bond Actor"</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#d55e00"</span>,<span class="st">"#cc79a7"</span>,<span class="st">"#0072b2"</span>,<span class="st">"#f0e442"</span>,<span class="st">"#009e73"</span>,<span class="st">"#d45e49"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>panel.grid.major <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,
+         panel.grid.minor <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,
+         panel.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,
+         axis.line <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span><span class="op">(</span>color<span class="op">=</span><span class="st">"black"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/9.28-1.png" width="70%" style="display: block; margin: auto;"></div>
 <p>As you can tell, it gets a bit tedious to remove all these default graphics. This is the trade-off with <code>ggplot2</code> in my mind. The syntax is intuitive, but improving the aesthetics isn’t something I enjoy.</p>
-<p>For that reason, I suggest using the templated themes, such as Few’s “Practical Rules for Using Color in Charts” theme with <code>theme_few()</code> or the “pander” theme with <code>theme_pander()</code>:</p>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="plotdata.html#cb267-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
-<span id="cb267-2"><a href="plotdata.html#cb267-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>bond,</span>
-<span id="cb267-3"><a href="plotdata.html#cb267-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>gross,<span class="at">color=</span>actor)) <span class="sc">+</span></span>
-<span id="cb267-4"><a href="plotdata.html#cb267-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb267-5"><a href="plotdata.html#cb267-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Year&quot;</span>,</span>
-<span id="cb267-6"><a href="plotdata.html#cb267-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">y=</span><span class="st">&quot;Gross Revenue (in millions)&quot;</span>,</span>
-<span id="cb267-7"><a href="plotdata.html#cb267-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">title=</span><span class="st">&quot;Gross Revenue for Bond Films&quot;</span>,</span>
-<span id="cb267-8"><a href="plotdata.html#cb267-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">color=</span><span class="st">&quot;Bond Actor&quot;</span>) <span class="sc">+</span></span>
-<span id="cb267-9"><a href="plotdata.html#cb267-9" aria-hidden="true" tabindex="-1"></a>   <span class="fu">theme_pander</span>()</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/9.29-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p>Much better! If you want, you can learn to build your own themes at this <img src="https://towardsdatascience.com/designing-custom-ggplot2-themes-65fb4b86d925" alt="link" />.</p>
+<p>For that reason, I suggest using the templated themes, such as Few’s “Practical Rules for Using Color in Charts” theme with <code><a href="https://rdrr.io/pkg/ggthemes/man/theme_few.html">theme_few()</a></code> or the “pander” theme with <code><a href="https://rdrr.io/pkg/ggthemes/man/theme_pander.html">theme_pander()</a></code>:</p>
+<div class="sourceCode" id="cb267"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jrnold/ggthemes">ggthemes</a></span><span class="op">)</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">bond</span>,
+       mapping<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">year</span>,y<span class="op">=</span><span class="va">gross</span>,color<span class="op">=</span><span class="va">actor</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">3</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Year"</span>,
+        y<span class="op">=</span><span class="st">"Gross Revenue (in millions)"</span>,
+        title<span class="op">=</span><span class="st">"Gross Revenue for Bond Films"</span>,
+        color<span class="op">=</span><span class="st">"Bond Actor"</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://rdrr.io/pkg/ggthemes/man/theme_pander.html">theme_pander</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/9.29-1.png" width="70%" style="display: block; margin: auto;"></div>
+<div class="inline-figure">Much better! If you want, you can learn to build your own themes at this <img src="https://towardsdatascience.com/designing-custom-ggplot2-themes-65fb4b86d925" alt="link">.</div>
 </div>
 </div>
 <div id="things-to-remember-8" class="section level2" number="10.5">
-<h2><span class="header-section-number">10.5</span> Things to Remember</h2>
+<h2>
+<span class="header-section-number">10.5</span> Things to Remember<a class="anchor" aria-label="anchor" href="#things-to-remember-8"><i class="fas fa-link"></i></a>
+</h2>
 <ul>
-<li>The popular data viz packages for R are <code>base</code>, <code>ggplot2</code>, and <code>plotly</code></li>
-<li><code>base</code> is great for data exploration because it makes a good “guess” on what plot you want to see</li>
-<li><code>plotly</code> is great for its interactive capabilities and I recommend it for app development</li>
-<li><code>ggplot2</code> is best for researcher, statisticians, and data analysts</li>
-<li><code>ggplot2</code> has the most intuitive syntax</li>
-<li><code>ggplot2</code> “layers” visualizations</li>
-<li>I recommend using themes for <code>ggplot2</code></li>
+<li>The popular data viz packages for R are <code>base</code>, <code>ggplot2</code>, and <code>plotly</code>
+</li>
+<li>
+<code>base</code> is great for data exploration because it makes a good “guess” on what plot you want to see</li>
+<li>
+<code>plotly</code> is great for its interactive capabilities and I recommend it for app development</li>
+<li>
+<code>ggplot2</code> is best for researcher, statisticians, and data analysts</li>
+<li>
+<code>ggplot2</code> has the most intuitive syntax</li>
+<li>
+<code>ggplot2</code> “layers” visualizations</li>
+<li>I recommend using themes for <code>ggplot2</code>
+</li>
 </ul>
 </div>
 <div id="exercises-5" class="section level2" number="10.6">
-<h2><span class="header-section-number">10.6</span> Exercises</h2>
+<h2>
+<span class="header-section-number">10.6</span> Exercises<a class="anchor" aria-label="anchor" href="#exercises-5"><i class="fas fa-link"></i></a>
+</h2>
 <ol style="list-style-type: decimal">
-<li>Using the <strong>mtcars</strong> data set and the <code>ggplot2</code> package, build a scatter plot with <strong>hp</strong> on the x-axis and <strong>mpg</strong> on the y-axis. (Hint: don’t forget to use <code>library(ggplot2)</code> and <code>data(mtcars)</code> first.)</li>
+<li>Using the <strong>mtcars</strong> data set and the <code>ggplot2</code> package, build a scatter plot with <strong>hp</strong> on the x-axis and <strong>mpg</strong> on the y-axis. (Hint: don’t forget to use <code><a href="https://ggplot2.tidyverse.org">library(ggplot2)</a></code> and <code>data(mtcars)</code> first.)</li>
 <li>Using the plot you made in the previous question, use color to distinguish the <strong>cyl</strong> for each point. Be sure to turn the <strong>cyl</strong> column into a factor first with <code>factor(cyl)</code>.</li>
-<li>Add more descriptive labeling to the x-axis, y-axis, and legend. For example, use “Horsepower” instead of “hp.”</li>
-<li>Make the data viz title “Car Performance.”</li>
+<li>Add more descriptive labeling to the x-axis, y-axis, and legend. For example, use “Horsepower” instead of “hp”.</li>
+<li>Make the data viz title “Car Performance”.</li>
 <li>Use the <code>theme_pew()</code> theme from the <code>ggthemes</code> package.</li>
 </ol>
-
 </div>
 </div>
-            </section>
+  <div class="chapter-nav">
+<div class="prev"><a href="importdata.html"><span class="header-section-number">9</span> Importing Data into R</a></div>
+<div class="next"><a href="statfunctions.html"><span class="header-section-number">11</span> Statistical Functions in R: Common Functions and How They Work</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#plotdata"><span class="header-section-number">10</span> How to Plot Data in R</a></li>
+<li><a class="nav-link" href="#which-r-plot-package-is-best"><span class="header-section-number">10.1</span> Which R Plot Package is Best?</a></li>
+<li><a class="nav-link" href="#so-which-data-viz-package-is-actually-the-best"><span class="header-section-number">10.2</span> So Which Data Viz Package is Actually the Best?</a></li>
+<li><a class="nav-link" href="#how-to-write-ggplot2-scripts"><span class="header-section-number">10.3</span> How to Write ggplot2 Scripts</a></li>
+<li>
+<a class="nav-link" href="#how-to-plot-common-data-visualizations-in-ggplot2"><span class="header-section-number">10.4</span> How to Plot Common Data Visualizations in ggplot2</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#how-to-plot-a-scatterplot"><span class="header-section-number">10.4.1</span> How to Plot a Scatterplot</a></li>
+<li><a class="nav-link" href="#how-to-plot-a-bar-graph-histogram"><span class="header-section-number">10.4.2</span> How to Plot a Bar Graph / Histogram</a></li>
+<li><a class="nav-link" href="#how-to-plot-a-line-graph"><span class="header-section-number">10.4.3</span> How to Plot a Line Graph</a></li>
+<li><a class="nav-link" href="#how-to-plot-a-box-and-whiskers-plot"><span class="header-section-number">10.4.4</span> How to Plot a Box-and-Whiskers Plot</a></li>
+<li><a class="nav-link" href="#how-to-improve-labels-and-other-formatting-tips"><span class="header-section-number">10.4.5</span> How to Improve Labels and Other Formatting Tips</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#things-to-remember-8"><span class="header-section-number">10.5</span> Things to Remember</a></li>
+<li><a class="nav-link" href="#exercises-5"><span class="header-section-number">10.6</span> Exercises</a></li>
+</ul>
 
-          </div>
-        </div>
-      </div>
-<a href="importdata.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="statfunctions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/taylorrodgers/taylorrodgers.github.io/blob/main/09-plotdata.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/taylorrodgers/taylorrodgers.github.io/edit/main/09-plotdata.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>R Programming in Plain English</strong>" was written by Taylor Rodgers. It was last built on 2021-12-18.</p>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/09-plotdata.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
-});
-});
-</script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -700,7 +503,22 @@ gitbook.start({
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
 </script>
 </body>
-
 </html>

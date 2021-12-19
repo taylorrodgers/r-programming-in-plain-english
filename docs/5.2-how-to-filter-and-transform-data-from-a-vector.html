@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="5.2 How to Filter and Transform Data From a Vector | R Programming in Plain English" />
+<meta property="og:type" content="book" />
+
+
+<meta property="og:description" content="A simple guide to R programming for those without programming experience" />
+<meta name="github-repo" content="rstudio/bookdown-demo" />
+
+<meta name="author" content="Taylor Rodgers" />
+
+<meta name="date" content="2021-12-18" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<meta name="description" content="A simple guide to R programming for those without programming experience">
+
+<title>5.2 How to Filter and Transform Data From a Vector | R Programming in Plain English</title>
+
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+/* show arrow before summary tag as in bootstrap
+TODO: remove if boostrap in updated in html_document (rmarkdown#1485) */
+details > summary {
+  display: list-item;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container-fluid main-container">
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li><a href="index.html#about-this-book"><span class="toc-section-number">1</span> About This Book</a>
+<ul>
+<li><a href="1.1-things-you-should-know-before-reading.html#things-you-should-know-before-reading"><span class="toc-section-number">1.1</span> Things You Should Know Before Reading</a></li>
+</ul></li>
+<li><a href="2-whatisr.html#whatisr"><span class="toc-section-number">2</span> What is R Programming?</a>
+<ul>
+<li><a href="2.1-is-r-the-best-statistical-programming-language.html#is-r-the-best-statistical-programming-language"><span class="toc-section-number">2.1</span> Is R the Best Statistical Programming Language?</a></li>
+<li><a href="2.2-how-will-learning-r-versus-python-impact-my-job-opportunities.html#how-will-learning-r-versus-python-impact-my-job-opportunities"><span class="toc-section-number">2.2</span> How Will Learning R versus Python Impact My Job Opportunities?</a></li>
+<li><a href="2.3-things-to-remember.html#things-to-remember"><span class="toc-section-number">2.3</span> Things to Remember</a></li>
+</ul></li>
+<li><a href="3-setup.html#setup"><span class="toc-section-number">3</span> Getting Setup in R and RStudio</a>
+<ul>
+<li><a href="3.1-how-to-download-r.html#how-to-download-r"><span class="toc-section-number">3.1</span> How to Download R</a></li>
+<li><a href="3.2-understanding-base-rs-user-interface.html#understanding-base-rs-user-interface"><span class="toc-section-number">3.2</span> Understanding Base R’s User Interface</a></li>
+<li><a href="3.3-limitations-of-r-base.html#limitations-of-r-base"><span class="toc-section-number">3.3</span> Limitations of R Base</a></li>
+<li><a href="3.4-what-is-rstudio.html#what-is-rstudio"><span class="toc-section-number">3.4</span> What is RStudio?</a></li>
+<li><a href="3.5-how-to-download-rstudio.html#how-to-download-rstudio"><span class="toc-section-number">3.5</span> How to Download RStudio</a></li>
+<li><a href="3.6-understanding-rstudio-interface.html#understanding-rstudio-interface"><span class="toc-section-number">3.6</span> Understanding RStudio Interface</a></li>
+<li><a href="3.7-things-to-remember-1.html#things-to-remember-1"><span class="toc-section-number">3.7</span> Things to Remember</a></li>
+</ul></li>
+<li><a href="4-objects.html#objects"><span class="toc-section-number">4</span> Object Types in R Programming</a>
+<ul>
+<li><a href="4.1-why-do-objects-matter.html#why-do-objects-matter"><span class="toc-section-number">4.1</span> Why Do Objects Matter?</a></li>
+<li><a href="4.2-understanding-object-types-makes-it-easier-to-transform-and-analyze.html#understanding-object-types-makes-it-easier-to-transform-and-analyze"><span class="toc-section-number">4.2</span> Understanding Object Types Makes It Easier to Transform and Analyze</a></li>
+<li><a href="4.3-the-basic-objects-to-remember.html#the-basic-objects-to-remember"><span class="toc-section-number">4.3</span> The Basic Objects to Remember</a></li>
+<li><a href="4.4-vectors.html#vectors"><span class="toc-section-number">4.4</span> Vectors</a></li>
+<li><a href="4.5-matrices-and-arrays.html#matrices-and-arrays"><span class="toc-section-number">4.5</span> Matrices and Arrays</a></li>
+<li><a href="4.6-data-frames.html#data-frames"><span class="toc-section-number">4.6</span> Data Frames</a></li>
+<li><a href="4.7-factors.html#factors"><span class="toc-section-number">4.7</span> Factors</a></li>
+<li><a href="4.8-lists.html#lists"><span class="toc-section-number">4.8</span> Lists</a></li>
+<li><a href="4.9-functions.html#functions"><span class="toc-section-number">4.9</span> Functions</a></li>
+<li><a href="4.10-things-to-remember-2.html#things-to-remember-2"><span class="toc-section-number">4.10</span> Things to Remember</a></li>
+<li><a href="4.11-exercises.html#exercises"><span class="toc-section-number">4.11</span> Exercises</a></li>
+</ul></li>
+<li><a href="5-baserfilter.html#baserfilter"><span class="toc-section-number">5</span> How to Filter and Transform Data in Base R</a>
+<ul>
+<li><a href="5.1-what-are-operators.html#what-are-operators"><span class="toc-section-number">5.1</span> What Are Operators?</a></li>
+<li><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#how-to-filter-and-transform-data-from-a-vector"><span class="toc-section-number">5.2</span> How to Filter and Transform Data From a Vector</a></li>
+<li><a href="5.3-how-to-filter-and-transform-data-from-a-matrix.html#how-to-filter-and-transform-data-from-a-matrix"><span class="toc-section-number">5.3</span> How to Filter and Transform Data From a Matrix</a></li>
+<li><a href="5.4-how-to-filter-and-transform-data-from-arrays.html#how-to-filter-and-transform-data-from-arrays"><span class="toc-section-number">5.4</span> How to Filter and Transform Data from Arrays</a></li>
+<li><a href="5.5-how-to-filter-and-transform-data-from-a-data-frame.html#how-to-filter-and-transform-data-from-a-data-frame"><span class="toc-section-number">5.5</span> How to Filter and Transform Data from a Data Frame</a></li>
+<li><a href="5.6-how-to-filter-a-list.html#how-to-filter-a-list"><span class="toc-section-number">5.6</span> How to Filter a List</a></li>
+<li><a href="5.7-things-to-remember-3.html#things-to-remember-3"><span class="toc-section-number">5.7</span> Things to Remember</a></li>
+<li><a href="5.8-exercises-1.html#exercises-1"><span class="toc-section-number">5.8</span> Exercises</a></li>
+</ul></li>
+<li><a href="6-dplyr.html#dplyr"><span class="toc-section-number">6</span> How to Filter and Transform Data with the Dplyr Package</a>
+<ul>
+<li><a href="6.1-why-is-dplyr-so-popular.html#why-is-dplyr-so-popular"><span class="toc-section-number">6.1</span> Why is <code>dplyr</code> So Popular?</a></li>
+<li><a href="6.2-its-still-worth-learning-base-r.html#its-still-worth-learning-base-r"><span class="toc-section-number">6.2</span> It’s Still Worth Learning Base R</a></li>
+<li><a href="6.3-the-dplyr-syntax.html#the-dplyr-syntax"><span class="toc-section-number">6.3</span> The <code>dplyr</code> Syntax</a></li>
+<li><a href="6.4-understand-the-difference-between-selecting-and-filtering.html#understand-the-difference-between-selecting-and-filtering"><span class="toc-section-number">6.4</span> Understand the Difference Between Selecting and Filtering</a></li>
+<li><a href="6.5-how-to-select-and-mutate-a-data-frame-with-dplyr-in-r.html#how-to-select-and-mutate-a-data-frame-with-dplyr-in-r"><span class="toc-section-number">6.5</span> How to Select and Mutate a Data Frame with <code>dplyr</code> in R</a></li>
+<li><a href="6.6-how-to-filter-a-data-frame-with-dplyr-in-r.html#how-to-filter-a-data-frame-with-dplyr-in-r"><span class="toc-section-number">6.6</span> How to Filter a Data Frame with <code>dplyr</code> in R</a></li>
+<li><a href="6.7-how-to-summarize-and-group-data-with-dplyr-in-r.html#how-to-summarize-and-group-data-with-dplyr-in-r"><span class="toc-section-number">6.7</span> How to Summarize and Group Data with <code>dplyr</code> in R</a></li>
+<li><a href="6.8-things-to-remember-4.html#things-to-remember-4"><span class="toc-section-number">6.8</span> Things to Remember</a></li>
+<li><a href="6.9-exercises-2.html#exercises-2"><span class="toc-section-number">6.9</span> Exercises</a></li>
+</ul></li>
+<li><a href="7-packages.html#packages"><span class="toc-section-number">7</span> Understanding and Using R Packages</a>
+<ul>
+<li><a href="7.1-why-does-r-use-packages.html#why-does-r-use-packages"><span class="toc-section-number">7.1</span> Why Does R Use Packages?</a></li>
+<li><a href="7.2-how-to-access-r-packages.html#how-to-access-r-packages"><span class="toc-section-number">7.2</span> How to Access R Packages</a></li>
+<li><a href="7.3-how-to-install-and-load-a-package---the-easy-way.html#how-to-install-and-load-a-package---the-easy-way"><span class="toc-section-number">7.3</span> How to Install and Load a Package - The Easy Way</a></li>
+<li><a href="7.4-why-you-should-still-learn-to-install-and-load-packages-the-old-fashioned-way.html#why-you-should-still-learn-to-install-and-load-packages-the-old-fashioned-way"><span class="toc-section-number">7.4</span> Why You Should Still Learn to Install and Load Packages the “Old Fashioned” Way</a></li>
+<li><a href="7.5-how-to-install-and-load-r-packages---the-old-fashioned-way.html#how-to-install-and-load-r-packages---the-old-fashioned-way"><span class="toc-section-number">7.5</span> How to Install and Load R Packages - The Old Fashioned Way</a></li>
+<li><a href="7.6-a-simple-trick-to-include-install-and-load-any-packages-needed.html#a-simple-trick-to-include-install-and-load-any-packages-needed"><span class="toc-section-number">7.6</span> A Simple Trick to Include Install and Load Any Packages Needed</a></li>
+<li><a href="7.7-how-to-find-new-packages-to-install.html#how-to-find-new-packages-to-install"><span class="toc-section-number">7.7</span> How to Find New Packages to Install</a></li>
+<li><a href="7.8-how-to-find-documentation-on-packages.html#how-to-find-documentation-on-packages"><span class="toc-section-number">7.8</span> How to Find Documentation on Packages</a></li>
+<li><a href="7.9-things-to-remember-5.html#things-to-remember-5"><span class="toc-section-number">7.9</span> Things to Remember</a></li>
+<li><a href="7.10-exercises-3.html#exercises-3"><span class="toc-section-number">7.10</span> Exercises</a></li>
+</ul></li>
+<li><a href="8-function.html#function"><span class="toc-section-number">8</span> How to Write Functions</a>
+<ul>
+<li><a href="8.1-two-approaches-to-using-r-functions.html#two-approaches-to-using-r-functions"><span class="toc-section-number">8.1</span> Two Approaches to Using R Functions</a></li>
+<li><a href="8.2-why-you-should-learn-to-write-your-own-functions.html#why-you-should-learn-to-write-your-own-functions"><span class="toc-section-number">8.2</span> Why You Should Learn to Write Your Own Functions</a></li>
+<li><a href="8.3-the-components-of-an-r-function.html#the-components-of-an-r-function"><span class="toc-section-number">8.3</span> The Components of an R Function</a></li>
+<li><a href="8.4-required-versus-non-required-arguments.html#required-versus-non-required-arguments"><span class="toc-section-number">8.4</span> Required versus Non-Required Arguments</a></li>
+<li><a href="8.5-when-order-matters-for-arguments.html#when-order-matters-for-arguments"><span class="toc-section-number">8.5</span> When Order Matters for Arguments</a></li>
+<li><a href="8.6-how-to-write-your-own-function.html#how-to-write-your-own-function"><span class="toc-section-number">8.6</span> How to Write Your Own Function</a></li>
+<li><a href="8.7-writing-functions-using-control-flows.html#writing-functions-using-control-flows"><span class="toc-section-number">8.7</span> Writing Functions Using Control Flows</a></li>
+<li><a href="8.8-applying-a-control-flow-to-our-summary-stats-function.html#applying-a-control-flow-to-our-summary-stats-function"><span class="toc-section-number">8.8</span> Applying a Control Flow to Our Summary Stats Function</a></li>
+<li><a href="8.9-breaking-down-the-function-we-just-made.html#breaking-down-the-function-we-just-made"><span class="toc-section-number">8.9</span> Breaking Down the Function We Just Made</a></li>
+<li><a href="8.10-things-to-remember-6.html#things-to-remember-6"><span class="toc-section-number">8.10</span> Things to Remember</a></li>
+<li><a href="8.11-exercises-4.html#exercises-4"><span class="toc-section-number">8.11</span> Exercises</a></li>
+</ul></li>
+<li><a href="9-importdata.html#importdata"><span class="toc-section-number">9</span> Importing Data into R</a>
+<ul>
+<li><a href="9.1-how-to-import-a-raw-data-file-the-easy-way.html#how-to-import-a-raw-data-file-the-easy-way"><span class="toc-section-number">9.1</span> How to Import a Raw Data File the Easy Way</a></li>
+<li><a href="9.2-import-a-raw-data-file-the-hard-way.html#import-a-raw-data-file-the-hard-way"><span class="toc-section-number">9.2</span> Import a Raw Data File the Hard Way</a></li>
+<li><a href="9.3-save-import-functions.html#save-import-functions"><span class="toc-section-number">9.3</span> Save Import Functions</a></li>
+<li><a href="9.4-connect-to-a-database.html#connect-to-a-database"><span class="toc-section-number">9.4</span> Connect to a Database</a></li>
+<li><a href="9.5-connect-to-an-api.html#connect-to-an-api"><span class="toc-section-number">9.5</span> Connect to an API</a></li>
+<li><a href="9.6-things-to-remember-7.html#things-to-remember-7"><span class="toc-section-number">9.6</span> Things to Remember</a></li>
+</ul></li>
+<li><a href="10-plotdata.html#plotdata"><span class="toc-section-number">10</span> How to Plot Data in R</a>
+<ul>
+<li><a href="10.1-which-r-plot-package-is-best.html#which-r-plot-package-is-best"><span class="toc-section-number">10.1</span> Which R Plot Package is Best?</a></li>
+<li><a href="10.2-so-which-data-viz-package-is-actually-the-best.html#so-which-data-viz-package-is-actually-the-best"><span class="toc-section-number">10.2</span> So Which Data Viz Package is Actually the Best?</a></li>
+<li><a href="10.3-how-to-write-ggplot2-scripts.html#how-to-write-ggplot2-scripts"><span class="toc-section-number">10.3</span> How to Write ggplot2 Scripts</a></li>
+<li><a href="10.4-how-to-plot-common-data-visualizations-in-ggplot2.html#how-to-plot-common-data-visualizations-in-ggplot2"><span class="toc-section-number">10.4</span> How to Plot Common Data Visualizations in ggplot2</a>
+<ul>
+<li><a href="10.4-how-to-plot-common-data-visualizations-in-ggplot2.html#how-to-plot-a-scatterplot"><span class="toc-section-number">10.4.1</span> How to Plot a Scatterplot</a></li>
+<li><a href="10.4-how-to-plot-common-data-visualizations-in-ggplot2.html#how-to-plot-a-bar-graph-histogram"><span class="toc-section-number">10.4.2</span> How to Plot a Bar Graph / Histogram</a></li>
+<li><a href="10.4-how-to-plot-common-data-visualizations-in-ggplot2.html#how-to-plot-a-line-graph"><span class="toc-section-number">10.4.3</span> How to Plot a Line Graph</a></li>
+<li><a href="10.4-how-to-plot-common-data-visualizations-in-ggplot2.html#how-to-plot-a-box-and-whiskers-plot"><span class="toc-section-number">10.4.4</span> How to Plot a Box-and-Whiskers Plot</a></li>
+<li><a href="10.4-how-to-plot-common-data-visualizations-in-ggplot2.html#how-to-improve-labels-and-other-formatting-tips"><span class="toc-section-number">10.4.5</span> How to Improve Labels and Other Formatting Tips</a></li>
+</ul></li>
+<li><a href="10.5-things-to-remember-8.html#things-to-remember-8"><span class="toc-section-number">10.5</span> Things to Remember</a></li>
+<li><a href="10.6-exercises-5.html#exercises-5"><span class="toc-section-number">10.6</span> Exercises</a></li>
+</ul></li>
+<li><a href="11-statfunctions.html#statfunctions"><span class="toc-section-number">11</span> Statistical Functions in R: Common Functions and How They Work</a>
+<ul>
+<li><a href="11.1-how-statistical-functions-work-in-r-programming.html#how-statistical-functions-work-in-r-programming"><span class="toc-section-number">11.1</span> How Statistical Functions Work in R Programming</a></li>
+<li><a href="11.2-how-to-build-a-model-in-r-example-with-linear-regression.html#how-to-build-a-model-in-r-example-with-linear-regression"><span class="toc-section-number">11.2</span> How to Build a Model in R (Example with Linear Regression)</a></li>
+<li><a href="11.3-how-to-review-common-model-performance-statistics.html#how-to-review-common-model-performance-statistics"><span class="toc-section-number">11.3</span> How to Review Common Model Performance Statistics</a></li>
+<li><a href="11.4-how-to-make-predictions-with-a-model.html#how-to-make-predictions-with-a-model"><span class="toc-section-number">11.4</span> How to Make Predictions with a Model</a></li>
+<li><a href="11.5-how-to-save-your-model-to-use-later.html#how-to-save-your-model-to-use-later"><span class="toc-section-number">11.5</span> How to Save Your Model to Use Later</a></li>
+<li><a href="11.6-how-to-add-multiple-parameters-to-a-model.html#how-to-add-multiple-parameters-to-a-model"><span class="toc-section-number">11.6</span> How to Add Multiple Parameters to a Model</a></li>
+<li><a href="11.7-how-to-add-a-categorical-variable-to-a-model.html#how-to-add-a-categorical-variable-to-a-model"><span class="toc-section-number">11.7</span> How to Add a Categorical Variable to a Model</a></li>
+<li><a href="11.8-how-to-add-transformed-variables-to-a-model.html#how-to-add-transformed-variables-to-a-model"><span class="toc-section-number">11.8</span> How to Add Transformed Variables to a Model</a></li>
+<li><a href="11.9-how-to-add-variable-interactions-to-a-model.html#how-to-add-variable-interactions-to-a-model"><span class="toc-section-number">11.9</span> How to Add Variable Interactions to a Model</a></li>
+<li><a href="11.10-how-to-calculate-model-confidence-intervals.html#how-to-calculate-model-confidence-intervals"><span class="toc-section-number">11.10</span> How to Calculate Model Confidence Intervals</a></li>
+<li><a href="11.11-how-to-calculate-analysis-of-variance-between-models.html#how-to-calculate-analysis-of-variance-between-models"><span class="toc-section-number">11.11</span> How to Calculate Analysis of Variance Between Models</a></li>
+<li><a href="11.12-other-common-model-types---logistical-regression.html#other-common-model-types---logistical-regression"><span class="toc-section-number">11.12</span> Other Common Model Types - Logistical Regression</a></li>
+<li><a href="11.13-other-common-model-types---anova-models.html#other-common-model-types---anova-models"><span class="toc-section-number">11.13</span> Other Common Model Types - Anova Models</a></li>
+<li><a href="11.14-things-to-remember-9.html#things-to-remember-9"><span class="toc-section-number">11.14</span> Things to Remember</a></li>
+<li><a href="11.15-exercises-6.html#exercises-6"><span class="toc-section-number">11.15</span> Exercises</a></li>
+</ul></li>
+<li><a href="12-answers.html#answers"><span class="toc-section-number">12</span> Answer Key</a>
+<ul>
+<li><a href="12.1-chapter-4---object-types-in-r-programming.html#chapter-4---object-types-in-r-programming"><span class="toc-section-number">12.1</span> Chapter 4 - Object Types in R Programming</a></li>
+<li><a href="12.2-chapter-5---how-to-filter-and-transform-data-in-base-r.html#chapter-5---how-to-filter-and-transform-data-in-base-r"><span class="toc-section-number">12.2</span> Chapter 5 - How to Filter and Transform Data in Base R</a></li>
+<li><a href="12.3-chapter-6---how-to-filter-and-transform-data-with-the-dplyr-package.html#chapter-6---how-to-filter-and-transform-data-with-the-dplyr-package"><span class="toc-section-number">12.3</span> Chapter 6 - How to Filter and Transform Data with the Dplyr Package</a></li>
+<li><a href="12.4-chapter-7---understanding-and-using-r-packages.html#chapter-7---understanding-and-using-r-packages"><span class="toc-section-number">12.4</span> Chapter 7 - Understanding and Using R Packages</a></li>
+<li><a href="12.5-chapter-8---how-to-write-functions.html#chapter-8---how-to-write-functions"><span class="toc-section-number">12.5</span> Chapter 8 - How to Write Functions</a></li>
+<li><a href="12.6-chapter-10---how-to-plot-data-in-r.html#chapter-10---how-to-plot-data-in-r"><span class="toc-section-number">12.6</span> Chapter 10 - How to Plot Data in R</a></li>
+<li><a href="12.7-chapter-11---statistical-functions-in-r.html#chapter-11---statistical-functions-in-r"><span class="toc-section-number">12.7</span> Chapter 11 - Statistical Functions in R</a></li>
+</ul></li>
+<li><a href="references.html#references">References</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="how-to-filter-and-transform-data-from-a-vector" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> How to Filter and Transform Data From a Vector</h2>
+<p>Vectors are the easiest object type to filter. Same with transforming the data within them.</p>
+<p>If you want to reference or view the entire vector, you simply enter the name you assigned the object:</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb56-1" aria-hidden="true" tabindex="-1"></a>v5 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">4</span>)</span>
+<span id="cb56-2"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb56-2" aria-hidden="true" tabindex="-1"></a>v5</span></code></pre></div>
+<pre><code>## [1] 1 5 5 2 1 4</code></pre>
+<p>(Remember: the <code>&lt;-</code> command allows you to name any object. You can use <strong>Option+“-”</strong> as a short-cut for <code>&lt;-</code>.)</p>
+<p>You also can select a single entry from a vector using the <code>[n]</code> notation:</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb58-1" aria-hidden="true" tabindex="-1"></a>v5 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">4</span>)</span>
+<span id="cb58-2"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb58-2" aria-hidden="true" tabindex="-1"></a>v5[<span class="dv">3</span>]</span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<p>As you can see, the script above selected the third value from the vector.</p>
+<p>You can select a range of entries by using the <code>[n:n]</code> notation.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb60-1" aria-hidden="true" tabindex="-1"></a>v5 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">4</span>)</span>
+<span id="cb60-2"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb60-2" aria-hidden="true" tabindex="-1"></a>v5[<span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>]</span></code></pre></div>
+<pre><code>## [1] 5 2</code></pre>
+<p>And, as we’ve seen before, you can create a new vector by referencing old vectors!</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb62-1" aria-hidden="true" tabindex="-1"></a>v2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Hola&quot;</span>,<span class="st">&quot;Howdy&quot;</span>,<span class="st">&quot;Hello&quot;</span>)</span>
+<span id="cb62-2"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb62-2" aria-hidden="true" tabindex="-1"></a>v7 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>)</span>
+<span id="cb62-3"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb62-3" aria-hidden="true" tabindex="-1"></a>v8 <span class="ot">&lt;-</span> <span class="fu">c</span>(v2,v7)</span>
+<span id="cb62-4"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb62-4" aria-hidden="true" tabindex="-1"></a>v8</span></code></pre></div>
+<pre><code>## [1] &quot;Hola&quot;  &quot;Howdy&quot; &quot;Hello&quot; &quot;2&quot;     &quot;3&quot;     &quot;4&quot;</code></pre>
+<p>You can also use other base R functions to filter data.</p>
+<p>For example, you may want to see the minimum or maximum value in a vector. You can use the <code>max()</code> and <code>min()</code> command to do so.</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb64-1" aria-hidden="true" tabindex="-1"></a>v5</span></code></pre></div>
+<pre><code>## [1] 1 5 5 2 1 4</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(v5) <span class="co"># Max value</span></span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(v5) <span class="co"># Min value</span></span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p>And you can use logical operators as well. In the example below, I use the <code>&gt;=</code> and <code>&amp;</code> operators to filter values:</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb70-1" aria-hidden="true" tabindex="-1"></a>v5 <span class="sc">&gt;=</span> <span class="dv">2</span> <span class="co"># Values greater than 2</span></span></code></pre></div>
+<pre><code>## [1] FALSE  TRUE  TRUE  TRUE FALSE  TRUE</code></pre>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb72-1" aria-hidden="true" tabindex="-1"></a>v5 <span class="sc">&gt;=</span> <span class="dv">3</span> <span class="sc">&amp;</span> v5 <span class="sc">&lt;=</span> <span class="dv">5</span> <span class="co"># Values between 3 and 5</span></span></code></pre></div>
+<pre><code>## [1] FALSE  TRUE  TRUE FALSE FALSE  TRUE</code></pre>
+<p>We can also use the <code>|</code> operator to find values that meet a criteria. For example, I filter the vector below to “Hola” and “Howdy.”</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb74-1" aria-hidden="true" tabindex="-1"></a>v2</span></code></pre></div>
+<pre><code>## [1] &quot;Hola&quot;  &quot;Howdy&quot; &quot;Hello&quot;</code></pre>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb76-1" aria-hidden="true" tabindex="-1"></a>v2 <span class="sc">==</span> <span class="st">&quot;Hola&quot;</span> <span class="sc">|</span> v2 <span class="sc">==</span> <span class="st">&quot;Howdy&quot;</span></span></code></pre></div>
+<pre><code>## [1]  TRUE  TRUE FALSE</code></pre>
+<p>You probably noticed that these logical operators only return a TRUE or FALSE statement. That makes sense since it is a <em>logical</em> argument that’s evaluated. However, we may want to see the actual values that meet the argument. This isn’t important in an example like this, but it does come up later on for more complex objects.</p>
+<p>To show the actual values where the logical argument is true, you use the <code>object_name[argument]</code> notation. In the next few examples, I filter the vectors down to values that meet the arguments used in the last few examples:</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb78-1" aria-hidden="true" tabindex="-1"></a>v5[v5<span class="sc">&gt;=</span><span class="dv">2</span>]</span></code></pre></div>
+<pre><code>## [1] 5 5 2 4</code></pre>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb80-1" aria-hidden="true" tabindex="-1"></a>v5[v5 <span class="sc">&gt;=</span> <span class="dv">3</span> <span class="sc">&amp;</span> v5 <span class="sc">&lt;=</span> <span class="dv">5</span>]</span></code></pre></div>
+<pre><code>## [1] 5 5 4</code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb82-1" aria-hidden="true" tabindex="-1"></a>v2[v2 <span class="sc">==</span> <span class="st">&quot;Hola&quot;</span> <span class="sc">|</span> v2 <span class="sc">==</span> <span class="st">&quot;Howdy&quot;</span>]</span></code></pre></div>
+<pre><code>## [1] &quot;Hola&quot;  &quot;Howdy&quot;</code></pre>
+<p>In the examples above, I simply took the logical argument and plugged it into the brackets.</p>
+<p>You can also change data easily when it comes to numeric vectors. For example, down below is a vector of box office revenue for James Bond films. Copy and paste this script into your R console and execute:</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb84-1" aria-hidden="true" tabindex="-1"></a>gross <span class="ot">&lt;-</span> </span>
+<span id="cb84-2"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb84-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">1108561008</span>,<span class="dv">1014941117</span>,<span class="dv">912257512</span>,<span class="dv">880669186</span>,</span>
+<span id="cb84-3"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb84-3" aria-hidden="true" tabindex="-1"></a>    <span class="dv">825110761</span>,<span class="dv">756544419</span>,<span class="dv">692713752</span>,<span class="dv">669789482</span>,</span>
+<span id="cb84-4"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb84-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">655872400</span>,<span class="dv">648514469</span>,<span class="dv">622246378</span>,<span class="dv">576277964</span>,</span>
+<span id="cb84-5"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb84-5" aria-hidden="true" tabindex="-1"></a>    <span class="dv">543639638</span>,<span class="dv">529548711</span>,<span class="dv">505899782</span>,<span class="dv">491617153</span>,</span>
+<span id="cb84-6"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb84-6" aria-hidden="true" tabindex="-1"></a>    <span class="dv">486468881</span>,<span class="dv">478946402</span>,<span class="dv">448249281</span>,<span class="dv">440759072</span>,</span>
+<span id="cb84-7"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb84-7" aria-hidden="true" tabindex="-1"></a>    <span class="dv">426244352</span>,<span class="dv">381088866</span>,<span class="dv">321172633</span>,<span class="dv">285157191</span>)</span>
+<span id="cb84-8"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb84-8" aria-hidden="true" tabindex="-1"></a>gross</span></code></pre></div>
+<p>As you can see, the values are very large. To make our analysis easier, we can use an <em>arithmetic</em> operator I showed earlier. In this scenario, I want to make the values smaller. So I’m going to divide it using the <code>/</code> operator.</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb85-1" aria-hidden="true" tabindex="-1"></a>gross<span class="sc">/</span><span class="dv">1000000</span></span></code></pre></div>
+<p>You can also calculate individual values this way too.</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb86-1" aria-hidden="true" tabindex="-1"></a>gross[<span class="dv">4</span>]  </span></code></pre></div>
+<pre><code>## [1] 880669186</code></pre>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb88-1" aria-hidden="true" tabindex="-1"></a>gross[<span class="dv">4</span>]<span class="sc">/</span><span class="dv">100000</span></span></code></pre></div>
+<pre><code>## [1] 8806.692</code></pre>
+<p>And you can re-assign the value to a particular part of a vector using the methods we described above and the <code>&lt;-</code> notation. For example, we can see below how we re-assign values based on the location.</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb90-1" aria-hidden="true" tabindex="-1"></a>v8 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">4</span>) <span class="co"># Creates the original vector</span></span>
+<span id="cb90-2"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb90-2" aria-hidden="true" tabindex="-1"></a>v8[<span class="dv">6</span>] <span class="ot">&lt;-</span> <span class="dv">8</span> <span class="co"># Replaces the sixth value with an 8</span></span>
+<span id="cb90-3"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb90-3" aria-hidden="true" tabindex="-1"></a>v8[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">1</span>) <span class="co"># Replaces the first three values</span></span>
+<span id="cb90-4"><a href="5.2-how-to-filter-and-transform-data-from-a-vector.html#cb90-4" aria-hidden="true" tabindex="-1"></a>v8</span></code></pre></div>
+<pre><code>## [1] 4 3 1 2 1 8</code></pre>
+</div>
+<p style="text-align: center;">
+<a href="5.1-what-are-operators.html"><button class="btn btn-default">Previous</button></a>
+<a href="5.3-how-to-filter-and-transform-data-from-a-matrix.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+</body>
+</html>
