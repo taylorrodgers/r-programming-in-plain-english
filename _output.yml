@@ -14,12 +14,11 @@ bookdown::bs4_book:
     primary: "#096B72"
     base_font:
       google:
-        family: "Lato-Light"
-        local: false
+        family: Lato
+        wght: 300
     heading_font:
       google:
-        family: "Lato"
-        local: false
+        family: Lato
   repo:
     base: https://github.com/taylorrodgers/taylorrodgers.github.io
     branch: main
