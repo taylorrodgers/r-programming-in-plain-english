@@ -3,7 +3,7 @@ about-this-book
 things-you-should-know-before-reading
 whatisr
 is-r-the-best-statistical-programming-language
-how-will-learning-r-versus-python-impact-my-job-opportunities
+will-learning-r-over-python-impact-job-opportunities
 things-to-remember
 setup
 how-to-download-r
@@ -12,6 +12,7 @@ limitations-of-r-base
 what-is-rstudio
 how-to-download-rstudio
 understanding-rstudio-interface
+useful-project-organization-tip
 things-to-remember-1
 objects
 why-do-objects-matter

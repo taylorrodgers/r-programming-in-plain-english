@@ -29,7 +29,7 @@ happy_model <- lm(happy~money+work,data=happy)
 money <- happy$money
 ```
 ```{r 2.2, results=FALSE}
-confint.lm(happy_model)
+  confint.lm(happy_model)
 ```
 
 This code for calculating confidence intervals calls upon a base **function**, evaluates an existing **list**, creates several **vectors** and an **array** to perform the analysis, and then outputs a **matrix**. All five are objects. (You can see the function's script by pasting `stats::confint.lm` in your console.)
@@ -43,13 +43,13 @@ Pulling data from one object type is different than pulling data from another. T
 For example, the following code will select most data types in SQL:
 
 ```{sql 2.3, eval=FALSE}
-SELECT
-  Field1,
-  Field2,
-  Field3,
-  Field4
-FROM
-  Data_Set
+  SELECT
+    Field1,
+    Field2,
+    Field3,
+    Field4
+  FROM
+    Data_Set
 ```
 
 
@@ -58,13 +58,13 @@ That’s different from R. Data selection in R depends on the object type.
 For example, using the command `[6]` next to the object name will select a single value from a **vector** object...
 
 ```{r 2.4}
-money[6]
+  money[6]
 ```
 
 But that won’t work for a **list** object below...
 
 ```{r 2.5}
-happy_model[6]
+  happy_model[6]
 ```
 
 To learn how to select, transform, and analyze data in R requires that you learn the underlying structure first. Once you do that, everything else makes more sense.
@@ -93,8 +93,8 @@ Vectors can only be one mode at a time. What that means in plain English is that
 You can use the code below to create and view a **logical** vector:
 
 ```{r 2.6}
-v1 <- c(TRUE,FALSE,TRUE)
-v1
+  v1 <- c(TRUE,FALSE,TRUE)
+  v1
 ```
 
 What this code does is create a vector using the `c(input, input)` notation. It then assigns the vector the name **v1** using the `<–` notation. (A shortcut to the `<-` command is **Option+"-"**.)
@@ -102,15 +102,15 @@ What this code does is create a vector using the `c(input, input)` notation. It 
 You build a **character** vector in the same way, only that you use `c("input", "input")` notation instead:
 
 ```{r 2.7}
-v2 <- c("Hola","Howdy","Hello")
-v2
+  v2 <- c("Hola","Howdy","Hello")
+  v2
 ```
 
 And a **numeric** vector (like the name suggests) looks like this:
 
 ```{r 2.8}
-v3 <- c(1:3)
-v3
+  v3 <- c(1:3)
+  v3
 ```
 
 The code above used the `c(n1:n2)` notation to create a range of values from n1 to n2, where n1 is 1 and n2 is 4. You can also use notations such as `c(n1, n2, n3, n4)` or like `c(n1:n4, n5:n6)`.
@@ -118,13 +118,13 @@ The code above used the `c(n1:n2)` notation to create a range of values from n1 
 Play around with the code below and see what kind numeric vectors you can make!
 
 ```{r 2.9}
-v4 <- c(4:6,1:7)
-v4
+  v4 <- c(4:6,1:7)
+  v4
 ```
 
 ```{r 2.10}
-v5 <- c(1,5,5,2,1,4)
-v5
+  v5 <- c(1,5,5,2,1,4)
+  v5
 ```
 
 I said before that vectors can only be one "mode" or data type at a time. What that means is that if you attempt to mix numbers or a logical value with a character, it simply changes all values to a character.
@@ -132,8 +132,8 @@ I said before that vectors can only be one "mode" or data type at a time. What t
 The code down below takes our previously made vectors, one a numeric and the other a character, and combines them into a single vector. As you can see by the quotation " " marks around the output, it's changed all the numeric values into characters.
 
 ```{r 2.11}
-v6 <- c(v2,v3)
-v6
+  v6 <- c(v2,v3)
+  v6
 ```
 
 The vector seems basic and not at all like the data sets you’ll be using. That might make you ask – will I even use vectors?
@@ -147,13 +147,12 @@ Many functions will also **output** data in vector form or produce a list compos
 Vectors are also useful as **inputs** into other functions, as well. If you look below, I used a function from the `censusapi` package. I create a vector beforehand and then use it as an input for the function below it.
 
 ```{r 2.12, eval=FALSE}
-variable_list <- 
-    c("B15001_003E","B15001_004E","B15001_005E",
-      "B15001_044E","B15001_045E","B15001_046E")
-getCensus(name="acs/acs5",
-          vintage="2018",
-          vars=c("NAME",variable_list),
-          region="state:*")
+  variable_list <- c("B15001_003E","B15001_004E","B15001_005E",
+                     "B15001_044E","B15001_045E","B15001_046E")
+  getCensus(name="acs/acs5",
+            vintage="2018",
+            vars=c("NAME",variable_list),
+            region="state:*")
 ```
 
 You can use vectors in this way on a larger scale. For example, if you write a long script with many functions and references, vectors allow you to create a set of parameters at the beginning.
@@ -167,8 +166,8 @@ Like their vector counterpart, all matrix / array values must be the same mode o
 Here’s an example of a matrix:
 
 ```{r 2.13}
-matrix1 <- matrix(c(2,0,1,3),nrow=2,ncol=2)
-matrix1
+  matrix1 <- matrix(c(2,0,1,3),nrow=2,ncol=2)
+  matrix1
 ```
 
 Why would R programmers want this? It comes back to the R’s use as a statistical programming language. For example, multiple linear regression often has combined variables, which involves multiplying two matrices together.
@@ -178,11 +177,11 @@ Providing these two object types in R that are solely for numeric values makes t
 For example, you can multiply these two matrices together with the `%*%` command and get the same results you would by using matrix algebra:
 
 ```{r 2.14}
-matrix1 <- matrix(c(2,0,1,3),nrow=2,ncol=2)
-matrix1
-matrix2 <- matrix(c(5,7),nrow=2)
-matrix2
-matrix1 %*% matrix2 #multiplication
+  matrix1 <- matrix(c(2,0,1,3),nrow=2,ncol=2)
+  matrix1
+  matrix2 <- matrix(c(5,7),nrow=2)
+  matrix2
+  matrix1 %*% matrix2 #multiplication
 ```
 
 That's the same as if you did it yourself by hand.
@@ -200,7 +199,6 @@ $$
   17\\
   21\\
  \end{bmatrix}
- 
 $$
 
 Unless you’re building the functions that calculate this, I doubt you’ll use matrices or arrays all that much. However, it’s handy to know what they are and how they can be used. They’re often the output of functions as well.
@@ -208,25 +206,25 @@ Unless you’re building the functions that calculate this, I doubt you’ll use
 Arrays are more complex than their simple 2-D counterpart. Instead of a single set of rows and columns, you’ll have multiple dimensions added on top.
 
 ```{r 2.15}
-matrix3 <- matrix(c(2,0,1,4,5,2,3,4),nrow=4,ncol=2)
-matrix4 <- matrix(c(4,3,5,2,1,6,4,5),nrow=4,ncol=2)
-matrix5 <- matrix(c(1,3,1,2,3,5,6,2),nrow=4,ncol=2)
-array1 <- array(c(matrix3,matrix4,matrix5),
-                dim=c(4,2,3))
-array1
+  matrix3 <- matrix(c(2,0,1,4,5,2,3,4),nrow=4,ncol=2)
+  matrix4 <- matrix(c(4,3,5,2,1,6,4,5),nrow=4,ncol=2)
+  matrix5 <- matrix(c(1,3,1,2,3,5,6,2),nrow=4,ncol=2)
+  array1 <- array(c(matrix3,matrix4,matrix5),
+                  dim=c(4,2,3))
+  array1
 ```
 
 If the output up above looks like gibberish, don't worry – most people think it's confusing when they first see it. That's because the R user interface doesn't make it visually intuitive as to how the array operates.
 
 Let's use a picture to visualize this instead. Think of it as if each matrix as a separate entity within the array:
 
-```{r 2.16, echo=FALSE,fig.align="center",out.width="50%"}
+```{r 2.16, echo=FALSE,fig.align="center",out.width="75%"}
 knitr::include_graphics("1.29_Arrays_Flat.png",dpi=300)
 ```
 
 What the array does is simply *stack* them on top of each other:
 
-```{r 2.17, echo=FALSE,fig.align="center",out.width="15%"}
+```{r 2.17, echo=FALSE,fig.align="center",out.width="25%"}
 knitr::include_graphics("1.30_Arrays_Stacked.png",dpi=300)
 ```
 
@@ -243,63 +241,62 @@ I like to think of a data frame as a way to combine vectors. As a matter of fact
 Take this code below and run it. You’ll see that we make individual vectors containing data on James Bond movies^[@noauthor_james_nodate] and we then combine it into a data frame.
 
 ```{r 2.18}
-filmname <- 
-      c("Skyfall","Thunderball","Goldfinger",
-        "Spectre","Live and Let Die",
-        "You Only Live Twice",
-        "The Spy Who Loved Me","Casino Royale",
-        "Moonraker","Diamonds Are Forever",
-        "Quantum of Solace","From Russia with Love",
-        "Die Another Day","Goldeneye",
-        "On Her Majesty's Secret Service",
-        "The World is Not Enough",
-        "For Your Eyes Only","Tomorrow Never Dies",
-        "The Man with the Golden Gun",
-        "Dr. No","Octopussy",
-        "The Living Daylights","A View to a Kill",
-        "Licence to Kill")
-year <- c("2012","1965","1964","2015",
-          "1973","1967","1977","2006",
-          "1979","1971","2008","1963",
-          "2002","1995","1969","1999",
-          "1981","1997","1974","1962",
-          "1983","1987","1985","1989")
-actor <- c("Daniel Craig","Sean Connery",
-           "Sean Connery","Daniel Craig",
-           "Roger Moore","Sean Connery",
-           "Roger Moore","Daniel Craig",
-           "Roger Moore","Sean Connery",
-           "Daniel Craig","Sean Connery",
-           "Pierce Brosnan","Pierce Brosnan",
-           "George Lazenby","Pierce Brosnan",
-           "Roger Moore","Pierce Brosnan",
-           "Roger Moore","Sean Connery",
-           "Roger Moore","Timothy Dalton",
-           "Roger Moore","Timothy Dalton")
-gross <- c(1108561008,1014941117,912257512,
-           880669186,825110761,756544419,
-           692713752,669789482,655872400,
-           648514469,622246378,576277964,
-           543639638,529548711,505899782,
-           491617153,486468881,478946402,
-           448249281,440759072,426244352,
-           381088866,321172633,285157191)/1000000
-bond <- data.frame(filmname=filmname,
-                   year=year,
-                   actor=actor,
-                   gross=gross)
+  filmname <- c("Skyfall","Thunderball","Goldfinger",
+                "Spectre","Live and Let Die",
+                "You Only Live Twice",
+                "The Spy Who Loved Me","Casino Royale",
+                "Moonraker","Diamonds Are Forever",
+                "Quantum of Solace","From Russia with Love",
+                "Die Another Day","Goldeneye",
+                "On Her Majesty's Secret Service",
+                "The World is Not Enough",
+                "For Your Eyes Only","Tomorrow Never Dies",
+                "The Man with the Golden Gun",
+                "Dr. No","Octopussy",
+                "The Living Daylights","A View to a Kill",
+                "Licence to Kill")
+  year <- c("2012","1965","1964","2015",
+            "1973","1967","1977","2006",
+            "1979","1971","2008","1963",
+            "2002","1995","1969","1999",
+            "1981","1997","1974","1962",
+            "1983","1987","1985","1989")
+  actor <- c("Daniel Craig","Sean Connery",
+             "Sean Connery","Daniel Craig",
+             "Roger Moore","Sean Connery",
+             "Roger Moore","Daniel Craig",
+             "Roger Moore","Sean Connery",
+             "Daniel Craig","Sean Connery",
+             "Pierce Brosnan","Pierce Brosnan",
+             "George Lazenby","Pierce Brosnan",
+             "Roger Moore","Pierce Brosnan",
+             "Roger Moore","Sean Connery",
+             "Roger Moore","Timothy Dalton",
+             "Roger Moore","Timothy Dalton")
+  gross <- c(1108561008,1014941117,912257512,
+             880669186,825110761,756544419,
+             692713752,669789482,655872400,
+             648514469,622246378,576277964,
+             543639638,529548711,505899782,
+             491617153,486468881,478946402,
+             448249281,440759072,426244352,
+             381088866,321172633,285157191)/1000000
+  bond <- data.frame(filmname=filmname,
+                     year=year,
+                     actor=actor,
+                     gross=gross)
 ```
 
 And if you use the `$` sign, as we discussed before, you can re-select the individual vectors back out of it.
 
 ```{r 2.19}
-bond$filmname
+  bond$filmname
 ```
 
 If you want to select a single column and maintain the data frame object type, you have to use the following code:
 
 ```{r 2.20}
-bond[1]
+  bond[1]
 ```
 
 We’ll go into further detail about selecting, transforming, and analyzing data frames later on. The way you go about it depends on whether you want to make efficient code or you want to make “readable” code for other analysts.
@@ -311,7 +308,7 @@ Factors take vectors (or data frame columns) and create categories to group the 
 Think back to the data frame we built for the Bond films. If you use the code below, you’ll see the first six rows:
 
 ```{r 2.21}
-head(bond)
+  head(bond)
 ```
 
 Now let's say you want a short list of the Bond actors. If you'll notice in the data set, the actor names like "Daniel Craig" and "Sean Connery" are used repeatedly. These are basically ways to group the data frame with a common field name - the actor who played Bond.
@@ -319,7 +316,7 @@ Now let's say you want a short list of the Bond actors. If you'll notice in the 
 If we tried to get a list of these actors using the `levels()` function, it wouldn't work.
 
 ```{r 2.21.1}
-levels(bond$actor)
+  levels(bond$actor)
 ```
 
 That's because it hasn't been **factored** yet.
@@ -327,8 +324,8 @@ That's because it hasn't been **factored** yet.
 This is a real simply fix. Simply use the `factor()` function and assign it to the field name within the data frame. You can use the code below to do this.
 
 ```{r 2.22.2}
-bond$actor <- factor(bond$actor)
-levels(bond$actor)
+  bond$actor <- factor(bond$actor)
+  levels(bond$actor)
 ```
 And this will also show up in the environment tab in the top left.
 
@@ -353,7 +350,7 @@ Many of the more complex R base functions produce lists. A common one is produce
 Use the code below to build a model with the James Bond data:
 
 ```{r 2.31, results=FALSE}
-bondmodel <- lm(gross~actor,data=bond)
+  bondmodel <- lm(gross~actor,data=bond)
 ```
 
 Now you can see the list this produces in the environment tab. As you can see, there's a lot in this list.
@@ -364,7 +361,7 @@ knitr::include_graphics("1.34_List.png",dpi=150)
 You can also see what's in the list using the following code:
 
 ```{r 2.33}
-names(bondmodel)
+  names(bondmodel)
 ```
 
 This gets to the crux of why it’s important to know when you’re dealing with a list. It changes the way you select components of that list.
@@ -374,13 +371,13 @@ For example, let’s say you want just the coefficients from a model you had bui
 You can use the same `$` symbol as before.
 
 ```{r 2.34.1}
-bondmodel$coefficients
+  bondmodel$coefficients
 ```
 
 However, if you want to select a single coefficient, you have to use a number value afterwards:
 
 ```{r 2.35}
-bondmodel$coefficients[4]
+  bondmodel$coefficients[4]
 ```
 
 That’s why it’s important to know if you’re pulling from a list or not. It changes the way that you select key parts of the data.
@@ -404,23 +401,23 @@ Try and see if you can answer the following questions. Answers are in the back o
 
 1. Down below is the printed output of an object. What type of object is it?
 ```{r Q2.1, echo=FALSE}
-array(c(matrix(rnorm(4,15,4),nrow=2),matrix(rnorm(4,20,4),nrow=2),matrix(rnorm(4,10,2),nrow=2)),dim=c(2,2,3))
+  array(c(matrix(rnorm(4,15,4),nrow=2),matrix(rnorm(4,20,4),nrow=2),matrix(rnorm(4,10,2),nrow=2)),dim=c(2,2,3))
 ```
 
 2. Down below is the printed output of an object. What type of object is it?
 ```{r Q2.2, echo=FALSE}
-rnorm(4,15,4)
+  rnorm(4,15,4)
 ```
 3. We want to select the column **mpg** from the data frame **mtcars**. Would the following code output a vector or data frame?
 ```{r Q2.3, results=FALSE}
-data(mtcars)
-mtcars$mpg
+  data(mtcars)
+  mtcars$mpg
 ```
 
 4. We want to select the column **mpg** from the data frame **mtcars**. Would the following code output a vector or data frame?
 ```{r Q2.4, results=FALSE}
-data(mtcars)
-mtcars[1]
+  data(mtcars)
+  mtcars[1]
 ```
 
 5. We want to select the column **gear** from the data frame **mtcars**, but we want to treat is as a categorical variable.  How would you turn this column into a factor? (You can load the data set using `data(mtcars)`)

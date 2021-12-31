@@ -47,10 +47,10 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html"><span class="header-section-number">1</span> About This Book</a></li>
 <li><a class="" href="whatisr.html"><span class="header-section-number">2</span> What is R Programming?</a></li>
-<li><a class="" href="setup.html"><span class="header-section-number">3</span> Getting Setup in R and RStudio</a></li>
+<li><a class="" href="setup.html"><span class="header-section-number">3</span> How to Get Started with R and RStudio</a></li>
 <li><a class="active" href="objects.html"><span class="header-section-number">4</span> Object Types in R Programming</a></li>
 <li><a class="" href="baserfilter.html"><span class="header-section-number">5</span> How to Filter and Transform Data in Base R</a></li>
-<li><a class="" href="dplyr.html"><span class="header-section-number">6</span> How to Filter and Transform Data with the Dplyr Package</a></li>
+<li><a class="" href="dplyr.html"><span class="header-section-number">6</span> How to Filter and Transform Data with the dplyr Package</a></li>
 <li><a class="" href="packages.html"><span class="header-section-number">7</span> Understanding and Using R Packages</a></li>
 <li><a class="" href="function.html"><span class="header-section-number">8</span> How to Write Functions</a></li>
 <li><a class="" href="importdata.html"><span class="header-section-number">9</span> Importing Data into R</a></li>
@@ -86,8 +86,8 @@
 <li>Calls upon a pre-existing object</li>
 </ul>
 <p>The simple code below utilizes five different object types:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/confint.html">confint.lm</a></span><span class="op">(</span><span class="va">happy_model</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/r/stats/confint.html">confint.lm</a></span><span class="op">(</span><span class="va">happy_model</span><span class="op">)</span></code></pre></div>
 <p>This code for calculating confidence intervals calls upon a base <strong>function</strong>, evaluates an existing <strong>list</strong>, creates several <strong>vectors</strong> and an <strong>array</strong> to perform the analysis, and then outputs a <strong>matrix</strong>. All five are objects. (You can see the function’s script by pasting <code><a href="https://rdrr.io/r/stats/confint.html">stats::confint.lm</a></code> in your console.)</p>
 <p>Understanding this will help you understand how R can seem to “guess” what it’s supposed to do based on the data inputs.</p>
 </div>
@@ -97,21 +97,21 @@
 </h2>
 <p>Pulling data from one object type is different than pulling data from another. This makes it confusing for people who learned about data through SQL, as opposed to other programming languages.</p>
 <p>For example, the following code will select most data types in SQL:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb6-1"><a href="objects.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
-<span id="cb6-2"><a href="objects.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  Field1,</span>
-<span id="cb6-3"><a href="objects.html#cb6-3" aria-hidden="true" tabindex="-1"></a>  Field2,</span>
-<span id="cb6-4"><a href="objects.html#cb6-4" aria-hidden="true" tabindex="-1"></a>  Field3,</span>
-<span id="cb6-5"><a href="objects.html#cb6-5" aria-hidden="true" tabindex="-1"></a>  Field4</span>
-<span id="cb6-6"><a href="objects.html#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span></span>
-<span id="cb6-7"><a href="objects.html#cb6-7" aria-hidden="true" tabindex="-1"></a>  Data_Set</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb4-1"><a href="objects.html#cb4-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span></span>
+<span id="cb4-2"><a href="objects.html#cb4-2" aria-hidden="true" tabindex="-1"></a>    Field1,</span>
+<span id="cb4-3"><a href="objects.html#cb4-3" aria-hidden="true" tabindex="-1"></a>    Field2,</span>
+<span id="cb4-4"><a href="objects.html#cb4-4" aria-hidden="true" tabindex="-1"></a>    Field3,</span>
+<span id="cb4-5"><a href="objects.html#cb4-5" aria-hidden="true" tabindex="-1"></a>    Field4</span>
+<span id="cb4-6"><a href="objects.html#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span></span>
+<span id="cb4-7"><a href="objects.html#cb4-7" aria-hidden="true" tabindex="-1"></a>    Data_Set</span></code></pre></div>
 <p>That’s different from R. Data selection in R depends on the object type.</p>
 <p>For example, using the command <code>[6]</code> next to the object name will select a single value from a <strong>vector</strong> object…</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">money</span><span class="op">[</span><span class="fl">6</span><span class="op">]</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">money</span><span class="op">[</span><span class="fl">6</span><span class="op">]</span></code></pre></div>
 <pre><code>## [1] 175</code></pre>
 <p>But that won’t work for a <strong>list</strong> object below…</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">happy_model</span><span class="op">[</span><span class="fl">6</span><span class="op">]</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">happy_model</span><span class="op">[</span><span class="fl">6</span><span class="op">]</span></code></pre></div>
 <pre><code>## $assign
 ## [1] 0 1 2</code></pre>
 <p>To learn how to select, transform, and analyze data in R requires that you learn the underlying structure first. Once you do that, everything else makes more sense.</p>
@@ -139,50 +139,49 @@
 <p>If that seems to be a lot to remember, don’t worry. I’d focus on remembering <strong>logical</strong>, <strong>numeric</strong>, and <strong>character</strong> right now. Those are the ones you’ll use most often. Others we’ll cover as needed.</p>
 <p>Vectors can only be one mode at a time. What that means in plain English is that R can’t have a word and a number in the same vector.</p>
 <p>You can use the code below to create and view a <strong>logical</strong> vector:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">v1</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span><span class="op">)</span>
+  <span class="va">v1</span></code></pre></div>
 <pre><code>## [1]  TRUE FALSE  TRUE</code></pre>
 <p>What this code does is create a vector using the <code>c(input, input)</code> notation. It then assigns the vector the name <strong>v1</strong> using the <code>&lt;–</code> notation. (A shortcut to the <code>&lt;-</code> command is <strong>Option+“-”</strong>.)</p>
 <p>You build a <strong>character</strong> vector in the same way, only that you use <code>c("input", "input")</code> notation instead:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">v2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Hola"</span>,<span class="st">"Howdy"</span>,<span class="st">"Hello"</span><span class="op">)</span>
-<span class="va">v2</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">v2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Hola"</span>,<span class="st">"Howdy"</span>,<span class="st">"Hello"</span><span class="op">)</span>
+  <span class="va">v2</span></code></pre></div>
 <pre><code>## [1] "Hola"  "Howdy" "Hello"</code></pre>
 <p>And a <strong>numeric</strong> vector (like the name suggests) looks like this:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">v3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>
-<span class="va">v3</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">v3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>
+  <span class="va">v3</span></code></pre></div>
 <pre><code>## [1] 1 2 3</code></pre>
 <p>The code above used the <code>c(n1:n2)</code> notation to create a range of values from n1 to n2, where n1 is 1 and n2 is 4. You can also use notations such as <code>c(n1, n2, n3, n4)</code> or like <code>c(n1:n4, n5:n6)</code>.</p>
 <p>Play around with the code below and see what kind numeric vectors you can make!</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">v4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">6</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span>
-<span class="va">v4</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">v4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">6</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span>
+  <span class="va">v4</span></code></pre></div>
 <pre><code>##  [1] 4 5 6 1 2 3 4 5 6 7</code></pre>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">v5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">4</span><span class="op">)</span>
-<span class="va">v5</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">v5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">4</span><span class="op">)</span>
+  <span class="va">v5</span></code></pre></div>
 <pre><code>## [1] 1 5 5 2 1 4</code></pre>
 <p>I said before that vectors can only be one “mode” or data type at a time. What that means is that if you attempt to mix numbers or a logical value with a character, it simply changes all values to a character.</p>
 <p>The code down below takes our previously made vectors, one a numeric and the other a character, and combines them into a single vector. As you can see by the quotation ” ” marks around the output, it’s changed all the numeric values into characters.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">v6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">v2</span>,<span class="va">v3</span><span class="op">)</span>
-<span class="va">v6</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">v6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">v2</span>,<span class="va">v3</span><span class="op">)</span>
+  <span class="va">v6</span></code></pre></div>
 <pre><code>## [1] "Hola"  "Howdy" "Hello" "1"     "2"     "3"</code></pre>
 <p>The vector seems basic and not at all like the data sets you’ll be using. That might make you ask – will I even use vectors?</p>
 <p>Yes. Yes, you will.</p>
 <p>The more complex object, data frame, is comprised of individual vectors. (We’ll cover more about the data frame object later).</p>
 <p>Many functions will also <strong>output</strong> data in vector form or produce a list composed of vectors.</p>
 <p>Vectors are also useful as <strong>inputs</strong> into other functions, as well. If you look below, I used a function from the <code>censusapi</code> package. I create a vector beforehand and then use it as an input for the function below it.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">variable_list</span> <span class="op">&lt;-</span> 
-    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"B15001_003E"</span>,<span class="st">"B15001_004E"</span>,<span class="st">"B15001_005E"</span>,
-      <span class="st">"B15001_044E"</span>,<span class="st">"B15001_045E"</span>,<span class="st">"B15001_046E"</span><span class="op">)</span>
-<span class="fu">getCensus</span><span class="op">(</span>name<span class="op">=</span><span class="st">"acs/acs5"</span>,
-          vintage<span class="op">=</span><span class="st">"2018"</span>,
-          vars<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"NAME"</span>,<span class="va">variable_list</span><span class="op">)</span>,
-          region<span class="op">=</span><span class="st">"state:*"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">variable_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"B15001_003E"</span>,<span class="st">"B15001_004E"</span>,<span class="st">"B15001_005E"</span>,
+                     <span class="st">"B15001_044E"</span>,<span class="st">"B15001_045E"</span>,<span class="st">"B15001_046E"</span><span class="op">)</span>
+  <span class="fu">getCensus</span><span class="op">(</span>name<span class="op">=</span><span class="st">"acs/acs5"</span>,
+            vintage<span class="op">=</span><span class="st">"2018"</span>,
+            vars<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"NAME"</span>,<span class="va">variable_list</span><span class="op">)</span>,
+            region<span class="op">=</span><span class="st">"state:*"</span><span class="op">)</span></code></pre></div>
 <p>You can use vectors in this way on a larger scale. For example, if you write a long script with many functions and references, vectors allow you to create a set of parameters at the beginning.</p>
 </div>
 <div id="matrices-and-arrays" class="section level2" number="4.5">
@@ -192,57 +191,57 @@
 <p>Matrices and arrays in R are multi-dimensional vectors. Matrices have multiple rows and columns. Arrays have two or more dimensions. (More on that distinction in a bit).</p>
 <p>Like their vector counterpart, all matrix / array values must be the same mode or data type – not a mix. That means if you can’t have a numeric value alongside a character value.</p>
 <p>Here’s an example of a matrix:</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matrix1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">2</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-<span class="va">matrix1</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">matrix1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">2</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+  <span class="va">matrix1</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    2    1
 ## [2,]    0    3</code></pre>
 <p>Why would R programmers want this? It comes back to the R’s use as a statistical programming language. For example, multiple linear regression often has combined variables, which involves multiplying two matrices together.</p>
 <p>Providing these two object types in R that are solely for numeric values makes this easier.</p>
 <p>For example, you can multiply these two matrices together with the <code>%*%</code> command and get the same results you would by using matrix algebra:</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matrix1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">2</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-<span class="va">matrix1</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">matrix1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">2</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+  <span class="va">matrix1</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    2    1
 ## [2,]    0    3</code></pre>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matrix2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">7</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-<span class="va">matrix2</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">matrix2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">7</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+  <span class="va">matrix2</span></code></pre></div>
 <pre><code>##      [,1]
 ## [1,]    5
 ## [2,]    7</code></pre>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matrix1</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">matrix2</span> <span class="co">#multiplication</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">matrix1</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">matrix2</span> <span class="co">#multiplication</span></code></pre></div>
 <pre><code>##      [,1]
 ## [1,]   17
 ## [2,]   21</code></pre>
-That’s the same as if you did it yourself by hand.
-$$
-<span class="math display">\[\begin{bmatrix}
+<p>That’s the same as if you did it yourself by hand.
+<span class="math display">\[
+ \begin{bmatrix}
   2 &amp; 1\\
   0 &amp; 3 \\
  \end{bmatrix}
  \begin{bmatrix}
   5\\
   7\\
- \end{bmatrix}\]</span>
-=
-<span class="math display">\[\begin{bmatrix}
+ \end{bmatrix}
+ =
+ \begin{bmatrix}
   17\\
   21\\
- \end{bmatrix}\]</span>
-<p>$$</p>
+ \end{bmatrix}
+\]</span></p>
 <p>Unless you’re building the functions that calculate this, I doubt you’ll use matrices or arrays all that much. However, it’s handy to know what they are and how they can be used. They’re often the output of functions as well.</p>
 <p>Arrays are more complex than their simple 2-D counterpart. Instead of a single set of rows and columns, you’ll have multiple dimensions added on top.</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matrix3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">4</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-<span class="va">matrix4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">6</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">4</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-<span class="va">matrix5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">2</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">4</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-<span class="va">array1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">matrix3</span>,<span class="va">matrix4</span>,<span class="va">matrix5</span><span class="op">)</span>,
-                dim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>
-<span class="va">array1</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">matrix3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">4</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+  <span class="va">matrix4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">6</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">4</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+  <span class="va">matrix5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">2</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">4</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+  <span class="va">array1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">matrix3</span>,<span class="va">matrix4</span>,<span class="va">matrix5</span><span class="op">)</span>,
+                  dim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">array1</span></code></pre></div>
 <pre><code>## , , 1
 ## 
 ##      [,1] [,2]
@@ -268,9 +267,9 @@ $$
 ## [4,]    2    2</code></pre>
 <p>If the output up above looks like gibberish, don’t worry – most people think it’s confusing when they first see it. That’s because the R user interface doesn’t make it visually intuitive as to how the array operates.</p>
 <p>Let’s use a picture to visualize this instead. Think of it as if each matrix as a separate entity within the array:</p>
-<div class="inline-figure"><img src="1.29_Arrays_Flat.png" width="50%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="1.29_Arrays_Flat.png" width="75%" style="display: block; margin: auto;"></div>
 <p>What the array does is simply <em>stack</em> them on top of each other:</p>
-<div class="inline-figure"><img src="1.30_Arrays_Stacked.png" width="15%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="1.30_Arrays_Stacked.png" width="25%" style="display: block; margin: auto;"></div>
 <p>Since arrays with three dimensions are merely stacked matrices, that means each matrix within the array must have the same number of columns and rows.</p>
 </div>
 <div id="data-frames" class="section level2" number="4.6">
@@ -281,55 +280,54 @@ $$
 <p>And most importantly, it can contain both numeric and character values! (Earth shattering, I know!)</p>
 <p>I like to think of a data frame as a way to combine vectors. As a matter of fact, you can build a data frame doing just that.</p>
 <p>Take this code below and run it. You’ll see that we make individual vectors containing data on James Bond movies<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;span class="citation"&gt;@noauthor_james_nodate&lt;/span&gt;&lt;/p&gt;'><sup>1</sup></a> and we then combine it into a data frame.</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">filmname</span> <span class="op">&lt;-</span> 
-      <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Skyfall"</span>,<span class="st">"Thunderball"</span>,<span class="st">"Goldfinger"</span>,
-        <span class="st">"Spectre"</span>,<span class="st">"Live and Let Die"</span>,
-        <span class="st">"You Only Live Twice"</span>,
-        <span class="st">"The Spy Who Loved Me"</span>,<span class="st">"Casino Royale"</span>,
-        <span class="st">"Moonraker"</span>,<span class="st">"Diamonds Are Forever"</span>,
-        <span class="st">"Quantum of Solace"</span>,<span class="st">"From Russia with Love"</span>,
-        <span class="st">"Die Another Day"</span>,<span class="st">"Goldeneye"</span>,
-        <span class="st">"On Her Majesty's Secret Service"</span>,
-        <span class="st">"The World is Not Enough"</span>,
-        <span class="st">"For Your Eyes Only"</span>,<span class="st">"Tomorrow Never Dies"</span>,
-        <span class="st">"The Man with the Golden Gun"</span>,
-        <span class="st">"Dr. No"</span>,<span class="st">"Octopussy"</span>,
-        <span class="st">"The Living Daylights"</span>,<span class="st">"A View to a Kill"</span>,
-        <span class="st">"Licence to Kill"</span><span class="op">)</span>
-<span class="va">year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"2012"</span>,<span class="st">"1965"</span>,<span class="st">"1964"</span>,<span class="st">"2015"</span>,
-          <span class="st">"1973"</span>,<span class="st">"1967"</span>,<span class="st">"1977"</span>,<span class="st">"2006"</span>,
-          <span class="st">"1979"</span>,<span class="st">"1971"</span>,<span class="st">"2008"</span>,<span class="st">"1963"</span>,
-          <span class="st">"2002"</span>,<span class="st">"1995"</span>,<span class="st">"1969"</span>,<span class="st">"1999"</span>,
-          <span class="st">"1981"</span>,<span class="st">"1997"</span>,<span class="st">"1974"</span>,<span class="st">"1962"</span>,
-          <span class="st">"1983"</span>,<span class="st">"1987"</span>,<span class="st">"1985"</span>,<span class="st">"1989"</span><span class="op">)</span>
-<span class="va">actor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Daniel Craig"</span>,<span class="st">"Sean Connery"</span>,
-           <span class="st">"Sean Connery"</span>,<span class="st">"Daniel Craig"</span>,
-           <span class="st">"Roger Moore"</span>,<span class="st">"Sean Connery"</span>,
-           <span class="st">"Roger Moore"</span>,<span class="st">"Daniel Craig"</span>,
-           <span class="st">"Roger Moore"</span>,<span class="st">"Sean Connery"</span>,
-           <span class="st">"Daniel Craig"</span>,<span class="st">"Sean Connery"</span>,
-           <span class="st">"Pierce Brosnan"</span>,<span class="st">"Pierce Brosnan"</span>,
-           <span class="st">"George Lazenby"</span>,<span class="st">"Pierce Brosnan"</span>,
-           <span class="st">"Roger Moore"</span>,<span class="st">"Pierce Brosnan"</span>,
-           <span class="st">"Roger Moore"</span>,<span class="st">"Sean Connery"</span>,
-           <span class="st">"Roger Moore"</span>,<span class="st">"Timothy Dalton"</span>,
-           <span class="st">"Roger Moore"</span>,<span class="st">"Timothy Dalton"</span><span class="op">)</span>
-<span class="va">gross</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1108561008</span>,<span class="fl">1014941117</span>,<span class="fl">912257512</span>,
-           <span class="fl">880669186</span>,<span class="fl">825110761</span>,<span class="fl">756544419</span>,
-           <span class="fl">692713752</span>,<span class="fl">669789482</span>,<span class="fl">655872400</span>,
-           <span class="fl">648514469</span>,<span class="fl">622246378</span>,<span class="fl">576277964</span>,
-           <span class="fl">543639638</span>,<span class="fl">529548711</span>,<span class="fl">505899782</span>,
-           <span class="fl">491617153</span>,<span class="fl">486468881</span>,<span class="fl">478946402</span>,
-           <span class="fl">448249281</span>,<span class="fl">440759072</span>,<span class="fl">426244352</span>,
-           <span class="fl">381088866</span>,<span class="fl">321172633</span>,<span class="fl">285157191</span><span class="op">)</span><span class="op">/</span><span class="fl">1000000</span>
-<span class="va">bond</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>filmname<span class="op">=</span><span class="va">filmname</span>,
-                   year<span class="op">=</span><span class="va">year</span>,
-                   actor<span class="op">=</span><span class="va">actor</span>,
-                   gross<span class="op">=</span><span class="va">gross</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">filmname</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Skyfall"</span>,<span class="st">"Thunderball"</span>,<span class="st">"Goldfinger"</span>,
+                <span class="st">"Spectre"</span>,<span class="st">"Live and Let Die"</span>,
+                <span class="st">"You Only Live Twice"</span>,
+                <span class="st">"The Spy Who Loved Me"</span>,<span class="st">"Casino Royale"</span>,
+                <span class="st">"Moonraker"</span>,<span class="st">"Diamonds Are Forever"</span>,
+                <span class="st">"Quantum of Solace"</span>,<span class="st">"From Russia with Love"</span>,
+                <span class="st">"Die Another Day"</span>,<span class="st">"Goldeneye"</span>,
+                <span class="st">"On Her Majesty's Secret Service"</span>,
+                <span class="st">"The World is Not Enough"</span>,
+                <span class="st">"For Your Eyes Only"</span>,<span class="st">"Tomorrow Never Dies"</span>,
+                <span class="st">"The Man with the Golden Gun"</span>,
+                <span class="st">"Dr. No"</span>,<span class="st">"Octopussy"</span>,
+                <span class="st">"The Living Daylights"</span>,<span class="st">"A View to a Kill"</span>,
+                <span class="st">"Licence to Kill"</span><span class="op">)</span>
+  <span class="va">year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"2012"</span>,<span class="st">"1965"</span>,<span class="st">"1964"</span>,<span class="st">"2015"</span>,
+            <span class="st">"1973"</span>,<span class="st">"1967"</span>,<span class="st">"1977"</span>,<span class="st">"2006"</span>,
+            <span class="st">"1979"</span>,<span class="st">"1971"</span>,<span class="st">"2008"</span>,<span class="st">"1963"</span>,
+            <span class="st">"2002"</span>,<span class="st">"1995"</span>,<span class="st">"1969"</span>,<span class="st">"1999"</span>,
+            <span class="st">"1981"</span>,<span class="st">"1997"</span>,<span class="st">"1974"</span>,<span class="st">"1962"</span>,
+            <span class="st">"1983"</span>,<span class="st">"1987"</span>,<span class="st">"1985"</span>,<span class="st">"1989"</span><span class="op">)</span>
+  <span class="va">actor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Daniel Craig"</span>,<span class="st">"Sean Connery"</span>,
+             <span class="st">"Sean Connery"</span>,<span class="st">"Daniel Craig"</span>,
+             <span class="st">"Roger Moore"</span>,<span class="st">"Sean Connery"</span>,
+             <span class="st">"Roger Moore"</span>,<span class="st">"Daniel Craig"</span>,
+             <span class="st">"Roger Moore"</span>,<span class="st">"Sean Connery"</span>,
+             <span class="st">"Daniel Craig"</span>,<span class="st">"Sean Connery"</span>,
+             <span class="st">"Pierce Brosnan"</span>,<span class="st">"Pierce Brosnan"</span>,
+             <span class="st">"George Lazenby"</span>,<span class="st">"Pierce Brosnan"</span>,
+             <span class="st">"Roger Moore"</span>,<span class="st">"Pierce Brosnan"</span>,
+             <span class="st">"Roger Moore"</span>,<span class="st">"Sean Connery"</span>,
+             <span class="st">"Roger Moore"</span>,<span class="st">"Timothy Dalton"</span>,
+             <span class="st">"Roger Moore"</span>,<span class="st">"Timothy Dalton"</span><span class="op">)</span>
+  <span class="va">gross</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1108561008</span>,<span class="fl">1014941117</span>,<span class="fl">912257512</span>,
+             <span class="fl">880669186</span>,<span class="fl">825110761</span>,<span class="fl">756544419</span>,
+             <span class="fl">692713752</span>,<span class="fl">669789482</span>,<span class="fl">655872400</span>,
+             <span class="fl">648514469</span>,<span class="fl">622246378</span>,<span class="fl">576277964</span>,
+             <span class="fl">543639638</span>,<span class="fl">529548711</span>,<span class="fl">505899782</span>,
+             <span class="fl">491617153</span>,<span class="fl">486468881</span>,<span class="fl">478946402</span>,
+             <span class="fl">448249281</span>,<span class="fl">440759072</span>,<span class="fl">426244352</span>,
+             <span class="fl">381088866</span>,<span class="fl">321172633</span>,<span class="fl">285157191</span><span class="op">)</span><span class="op">/</span><span class="fl">1000000</span>
+  <span class="va">bond</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>filmname<span class="op">=</span><span class="va">filmname</span>,
+                     year<span class="op">=</span><span class="va">year</span>,
+                     actor<span class="op">=</span><span class="va">actor</span>,
+                     gross<span class="op">=</span><span class="va">gross</span><span class="op">)</span></code></pre></div>
 <p>And if you use the <code>$</code> sign, as we discussed before, you can re-select the individual vectors back out of it.</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bond</span><span class="op">$</span><span class="va">filmname</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">bond</span><span class="op">$</span><span class="va">filmname</span></code></pre></div>
 <pre><code>##  [1] "Skyfall"                         "Thunderball"                    
 ##  [3] "Goldfinger"                      "Spectre"                        
 ##  [5] "Live and Let Die"                "You Only Live Twice"            
@@ -343,8 +341,8 @@ $$
 ## [21] "Octopussy"                       "The Living Daylights"           
 ## [23] "A View to a Kill"                "Licence to Kill"</code></pre>
 <p>If you want to select a single column and maintain the data frame object type, you have to use the following code:</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bond</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">bond</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></code></pre></div>
 <pre><code>##                           filmname
 ## 1                          Skyfall
 ## 2                      Thunderball
@@ -378,8 +376,8 @@ $$
 </h2>
 <p>Factors take vectors (or data frame columns) and create categories to group the values. Confused? It’s actually fairly simple.</p>
 <p>Think back to the data frame we built for the Bond films. If you use the code below, you’ll see the first six rows:</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">bond</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">bond</span><span class="op">)</span></code></pre></div>
 <pre><code>##              filmname year        actor     gross
 ## 1             Skyfall 2012 Daniel Craig 1108.5610
 ## 2         Thunderball 1965 Sean Connery 1014.9411
@@ -389,14 +387,14 @@ $$
 ## 6 You Only Live Twice 1967 Sean Connery  756.5444</code></pre>
 <p>Now let’s say you want a short list of the Bond actors. If you’ll notice in the data set, the actor names like “Daniel Craig” and “Sean Connery” are used repeatedly. These are basically ways to group the data frame with a common field name - the actor who played Bond.</p>
 <p>If we tried to get a list of these actors using the <code><a href="https://rdrr.io/r/base/levels.html">levels()</a></code> function, it wouldn’t work.</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">bond</span><span class="op">$</span><span class="va">actor</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">bond</span><span class="op">$</span><span class="va">actor</span><span class="op">)</span></code></pre></div>
 <pre><code>## NULL</code></pre>
 <p>That’s because it hasn’t been <strong>factored</strong> yet.</p>
 <p>This is a real simply fix. Simply use the <code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code> function and assign it to the field name within the data frame. You can use the code below to do this.</p>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bond</span><span class="op">$</span><span class="va">actor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">bond</span><span class="op">$</span><span class="va">actor</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">bond</span><span class="op">$</span><span class="va">actor</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">bond</span><span class="op">$</span><span class="va">actor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">bond</span><span class="op">$</span><span class="va">actor</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">bond</span><span class="op">$</span><span class="va">actor</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "Daniel Craig"   "George Lazenby" "Pierce Brosnan" "Roger Moore"   
 ## [5] "Sean Connery"   "Timothy Dalton"</code></pre>
 <p>And this will also show up in the environment tab in the top left.</p>
@@ -413,14 +411,14 @@ $$
 <p>Lists are objects that usually store other objects in a nice bundle. Those objects could be vectors, other lists, data frames, etc.</p>
 <p>Many of the more complex R base functions produce lists. A common one is produced by the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function.</p>
 <p>Use the code below to build a model with the James Bond data:</p>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bondmodel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">gross</span><span class="op">~</span><span class="va">actor</span>,data<span class="op">=</span><span class="va">bond</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">bondmodel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">gross</span><span class="op">~</span><span class="va">actor</span>,data<span class="op">=</span><span class="va">bond</span><span class="op">)</span></code></pre></div>
 <p>Now you can see the list this produces in the environment tab. As you can see, there’s a lot in this list.</p>
 <div class="inline-figure">
 <img src="1.34_List.png" width="50%" style="display: block; margin: auto;">
 You can also see what’s in the list using the following code:</div>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">bondmodel</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">bondmodel</span><span class="op">)</span></code></pre></div>
 <pre><code>##  [1] "coefficients"  "residuals"     "effects"       "rank"         
 ##  [5] "fitted.values" "assign"        "qr"            "df.residual"  
 ##  [9] "contrasts"     "xlevels"       "call"          "terms"        
@@ -428,15 +426,15 @@ You can also see what’s in the list using the following code:</div>
 <p>This gets to the crux of why it’s important to know when you’re dealing with a list. It changes the way you select components of that list.</p>
 <p>For example, let’s say you want just the coefficients from a model you had built.</p>
 <p>You can use the same <code>$</code> symbol as before.</p>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bondmodel</span><span class="op">$</span><span class="va">coefficients</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">bondmodel</span><span class="op">$</span><span class="va">coefficients</span></code></pre></div>
 <pre><code>##         (Intercept) actorGeorge Lazenby actorPierce Brosnan    actorRoger Moore 
 ##           820.31651          -314.41673          -309.37854          -269.48336 
 ##   actorSean Connery actorTimothy Dalton 
 ##           -95.43409          -487.19349</code></pre>
 <p>However, if you want to select a single coefficient, you have to use a number value afterwards:</p>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bondmodel</span><span class="op">$</span><span class="va">coefficients</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">bondmodel</span><span class="op">$</span><span class="va">coefficients</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span></code></pre></div>
 <pre><code>## actorRoger Moore 
 ##        -269.4834</code></pre>
 <p>That’s why it’s important to know if you’re pulling from a list or not. It changes the way that you select key parts of the data.</p>
@@ -490,15 +488,15 @@ You can also see what’s in the list using the following code:</div>
 <ol start="3" style="list-style-type: decimal">
 <li>We want to select the column <strong>mpg</strong> from the data frame <strong>mtcars</strong>. Would the following code output a vector or data frame?</li>
 </ol>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>
-<span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>
+  <span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
 <li>We want to select the column <strong>mpg</strong> from the data frame <strong>mtcars</strong>. Would the following code output a vector or data frame?</li>
 </ol>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>
-<span class="va">mtcars</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>
+  <span class="va">mtcars</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></code></pre></div>
 <ol start="5" style="list-style-type: decimal">
 <li>We want to select the column <strong>gear</strong> from the data frame <strong>mtcars</strong>, but we want to treat is as a categorical variable. How would you turn this column into a factor? (You can load the data set using <code>data(mtcars)</code>)</li>
 </ol>
@@ -506,7 +504,7 @@ You can also see what’s in the list using the following code:</div>
 </div>
 
   <div class="chapter-nav">
-<div class="prev"><a href="setup.html"><span class="header-section-number">3</span> Getting Setup in R and RStudio</a></div>
+<div class="prev"><a href="setup.html"><span class="header-section-number">3</span> How to Get Started with R and RStudio</a></div>
 <div class="next"><a href="baserfilter.html"><span class="header-section-number">5</span> How to Filter and Transform Data in Base R</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
@@ -540,7 +538,7 @@ You can also see what’s in the list using the following code:</div>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>R Programming in Plain English</strong>" was written by Taylor Rodgers. It was last built on 2021-12-20.</p>
+    <p>"<strong>R Programming in Plain English</strong>" was written by Taylor Rodgers. It was last built on 2021-12-31.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -1,9 +1,9 @@
-# How to Filter and Transform Data with the Dplyr Package {#dplyr}
+# How to Filter and Transform Data with the dplyr Package {#dplyr}
 In the last chapter, I showed you how to use R base to filter and transform data. Personally, I still think this is the best way to manage data in R. However, there’s another popular package for data filtering and transformation – the `dplyr` package.
 
 The `dplyr` package (pronounced like “data plier”) was developed by Hadley Wickham to allow more intuitive data transformation. It falls under the tidyverse packages, which includes other popular R packages created by Mr. Wickham.
 
-## Why is `dplyr` So Popular?
+## Why is dplyr So Popular?
 `dplyr` is popular for its intuitive syntax for filtering and transforming data frames. If your programming background is with SQL, you’ll find it an easier transition to make.
 
 `dplyr` is also highly readable compared to base R. That’s where I see the most value in it. You can send it over to another programmer and it’ll be easier for them to read what you’re doing with the data.
@@ -13,7 +13,7 @@ The `dplyr` package (pronounced like “data plier”) was developed by Hadley W
 
 This isn’t a knock against `dplyr`. Much of the work you’ll do requires a data frame and most R functions work with data frames fairly easily. But I have found that the functions I typically write (which we'll cover later) work a lot better when you understand base R.
 
-## The `dplyr` Syntax
+## The dplyr Syntax
 If you recall, filtering a data frame in base R looks like this:
 ```{r dplyr-fig, eval=FALSE}
 #If needed, you can reload the Bond data set with this script
@@ -45,7 +45,7 @@ In addition to `select()`, there’s also `mutate()` and `transmute()`, which se
 
 Filtering uses the `filter()` function and reduces the rows to those you specify.
 
-## How to Select and Mutate a Data Frame with `dplyr` in R
+## How to Select and Mutate a Data Frame with dplyr in R
 In dplyr, you can select columns using the `select()` function:
 ```{r dplyr-fig4, eval=FALSE}
 bond %>% select(actor,filmname,gross)
@@ -70,7 +70,7 @@ bond %>% transmute(actor,filmname,gross=gross*1000000)
 
 I personally like `transmute()` for selecting columns. However, `select()` and `mutate()` are appropriate in some situations.
 
-## How to Filter a Data Frame with `dplyr` in R
+## How to Filter a Data Frame with dplyr in R
 To filter rows in a data frame, use the `filter()` function:
 ```{r dplyr-fig7, eval=FALSE}
 bond %>% filter(year>=1980 & actor=="Daniel Craig")
@@ -99,7 +99,7 @@ actor_list <- c("Daniel Craig","Sean Connery","Timothy Dalton")
 bond %>% filter(actor %in% actor_list)
 ```
 
-## How to Summarize and Group Data with `dplyr` in R
+## How to Summarize and Group Data with dplyr in R
 Probably the most useful thing about `dplyr` is the ability to create new data frames that group and summarize data found in the larger data set. This is the primary reason I like `dplyr`.
 
 Let's say you wanted to take the Bond data set and find out the gross revenue mean and standard deviation for Daniel Craig and Sean Connery. To accomplish this in base R, you'd have to use the following code:

@@ -6,16 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 2 What is R Programming? | R Programming in Plain English</title>
 <meta name="author" content="Taylor Rodgers">
-<meta name="description" content="Before getting setup in R, you need to know what R programming is and what’s so special about it. R is a programming language built by statisticians for statistical analysis. It is well-suited...">
+<meta name="description" content="Before getting started in R, you need to know what R programming is and what’s so special about it. R is a programming language built by statisticians for statistical analysis. It is well-suited...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 2 What is R Programming? | R Programming in Plain English">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://github.com/taylorrodgers/taylorrodgers.github.io/whatisr.html">
 <meta property="og:image" content="https://github.com/taylorrodgers/taylorrodgers.github.io/BookCover.png">
-<meta property="og:description" content="Before getting setup in R, you need to know what R programming is and what’s so special about it. R is a programming language built by statisticians for statistical analysis. It is well-suited...">
+<meta property="og:description" content="Before getting started in R, you need to know what R programming is and what’s so special about it. R is a programming language built by statisticians for statistical analysis. It is well-suited...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 2 What is R Programming? | R Programming in Plain English">
-<meta name="twitter:description" content="Before getting setup in R, you need to know what R programming is and what’s so special about it. R is a programming language built by statisticians for statistical analysis. It is well-suited...">
+<meta name="twitter:description" content="Before getting started in R, you need to know what R programming is and what’s so special about it. R is a programming language built by statisticians for statistical analysis. It is well-suited...">
 <meta name="twitter:image" content="https://github.com/taylorrodgers/taylorrodgers.github.io/BookCover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -47,10 +47,10 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html"><span class="header-section-number">1</span> About This Book</a></li>
 <li><a class="active" href="whatisr.html"><span class="header-section-number">2</span> What is R Programming?</a></li>
-<li><a class="" href="setup.html"><span class="header-section-number">3</span> Getting Setup in R and RStudio</a></li>
+<li><a class="" href="setup.html"><span class="header-section-number">3</span> How to Get Started with R and RStudio</a></li>
 <li><a class="" href="objects.html"><span class="header-section-number">4</span> Object Types in R Programming</a></li>
 <li><a class="" href="baserfilter.html"><span class="header-section-number">5</span> How to Filter and Transform Data in Base R</a></li>
-<li><a class="" href="dplyr.html"><span class="header-section-number">6</span> How to Filter and Transform Data with the Dplyr Package</a></li>
+<li><a class="" href="dplyr.html"><span class="header-section-number">6</span> How to Filter and Transform Data with the dplyr Package</a></li>
 <li><a class="" href="packages.html"><span class="header-section-number">7</span> Understanding and Using R Packages</a></li>
 <li><a class="" href="function.html"><span class="header-section-number">8</span> How to Write Functions</a></li>
 <li><a class="" href="importdata.html"><span class="header-section-number">9</span> Importing Data into R</a></li>
@@ -69,41 +69,42 @@
 <h1>
 <span class="header-section-number">2</span> What is R Programming?<a class="anchor" aria-label="anchor" href="#whatisr"><i class="fas fa-link"></i></a>
 </h1>
-<p>Before getting setup in R, you need to know what R programming is and what’s so special about it.</p>
+<p>Before getting started in R, you need to know what R programming is and what’s so special about it.</p>
 <p>R is a programming language built by statisticians for statistical analysis. It is well-suited towards running advanced analysis, building predictive models, machine learning, and even more routine data management.</p>
-<p>R is <strong>open source</strong>. That means it’s free. The people who developed it wanted to make it accessible to anyone. Since then, R has moved beyond its humble beginnings and developed into a full-blown community of developers.</p>
-<p>Developers within the community contribute to the R language by developing packages. <strong>Packages</strong> contain functions that allow you to perform certain tasks.</p>
-<p>What does that mean in plain English?</p>
-<p>Imagine what it’s like to move into a new apartment. It’s usually empty when you first move in, but it has running water, a refrigerator, and place to stay warm. So it meets the basic criteria for living - food, water, and shelter.</p>
-<p>That’s similar to what <strong>base R</strong> provides. It meets the bare necessities to get started with statistical programming.</p>
-<p>An R <strong>package</strong> is like the new furniture you bring into the apartment. It’s the new coffee table and couch. It’s the new coat of paint. All of those things that take an empty apartment and changes it to meet <em>your</em> needs.</p>
-<p>And that’s what’s so great about the R programming language. It has a lot of flexibility. If you find one package confusing or challenging, you can probably find an easier one to perform the same task. Or you can build your own functions instead. The only thing is you have to understand the basics first.</p>
-<p>One of those basics is <strong>objects</strong>. We’ll cover this extensively in another chapter, but R is an <em>object-oriented</em> programming language. That means to succeed with it, you have to understand the object types and how they’re used.</p>
-<p>If that sounds overwhelming, don’t worry. It’s easier than you think. And focusing on these core components will go a long way to helping you succeed in R. As a matter of fact, I’d “guesstimate” that understanding these basics will take care of 80% of problems most R programming newbies experience.</p>
+<p>R is <strong>open-source</strong>, which makes it free. The people who developed it wanted to make it accessible to anyone. Since then, R has moved beyond its humble beginnings and developed into a full-blown community of developers.</p>
+<p>Those developers have expanded the R programming language to allow more advanced machine learning techniques, application development, website development, and even the publishing of digital books, which is how you’re reading this book now.</p>
+<p>This expansion is possible because of <strong>packages</strong>. Packages allow individual developers and teams to share new functionality with the broader community.</p>
+<p>And that to me is the best thing about the R programming language. There’s a vast community, filled with individuals, teams, and whole organizations, who regularly contribute and improve R.</p>
+<p>This provides us with multiple options for accomplishing our goals. If we find a package confusing or hard to use, there’s a good possibility of finding another that’s easier and more intuitive.</p>
+<p>If you’re wondering if there’s a catch, here it is: <em>you have to learn the basics first.</em></p>
+<p>One of those basic concepts include <strong>objects</strong>. We’ll cover this extensively in another chapter, but R is an <em>object-oriented</em> programming language. That means to succeed with it, you have to understand the various object types and how they’re used.</p>
+<p>If that sounds overwhelming, don’t worry. It’s easier than you think. And focusing on these core components will go a long way to helping you succeed in R. You’ll find these key principles show up again and again throughout your R journey.</p>
 <div id="is-r-the-best-statistical-programming-language" class="section level2" number="2.1">
 <h2>
 <span class="header-section-number">2.1</span> Is R the Best Statistical Programming Language?<a class="anchor" aria-label="anchor" href="#is-r-the-best-statistical-programming-language"><i class="fas fa-link"></i></a>
 </h2>
-<p>That’s a matter of debate and boy do people debate it. The nice thing about R is that it’s free and open source and has a vibrant community that contributes to it. It’s also meant for statistics. So much of the base functionality is well-suited towards statisticians and researchers alike.</p>
-<p>The two big competitors to R are SAS and Python.</p>
-<p><strong>SAS</strong> is a statistical programming language built by a for-profit company. It’s the opposite of open source, which means you have to pay money to use it. That’s not necessarily a bad thing though. It means there’s more rigorous quality testing because that’s what people expect from software that costs money. R packages, on the other hand, may not be as rigorously quality checked. At least not those developed by the community and not the original developers.</p>
-<p>The SAS Institute (the people who make SAS) have a lot of market power. They’ve been around for far longer and have ingrained themselves in academia and pharmaceutical research. Even though R and Python are the preferred choices for most newer companies and younger professionals, SAS has the advantage of being <strong>legacy code</strong>.</p>
-<p>You’re probably not familiar with that term if you haven’t ever programmed before. What that means is that even if R and Python were better alternatives to SAS, it would cost an organization a lot of money and time to have its programmers go back and re-write all their automated, enterprise-wide code.</p>
-<p>Personally, I’m actually a fan of SAS. I took it in my grad program and enjoyed its clean structure. Unlike R, which has so many packages and various ways to do the same things, SAS has the benefit of simplicity and clean documentation. That’s nice when you are already forcing yourself to learn statistics and don’t want to further stress yourself figuring out a programming language.</p>
-<p><strong>Python</strong> is an interesting competitor of R. It’s interesting because it wasn’t built for statistical programming. Like R, it’s open source and that has led to data scientists building packages that make statistical programming possible.</p>
+<p>That’s a matter of debate and boy do people debate it. The great thing about R is that, unlike many other open-source programming languages used in data science, it was originally built for statistics.</p>
+<p>That makes the default functionality well-suited towards statisticians and researchers alike. It’s quite possible that, as a researcher or analyst, you could produce the analysis you need without compiling a large list of extra packages.</p>
+<p>The two big competitors to R that I hear about most often are SAS and Python.</p>
+<p><strong>SAS</strong> is a statistical programming language built by a for-profit company. It’s the opposite of open-source, which means you have to pay money to use it. That’s not necessarily a bad thing though. It means there’s more rigorous quality testing because that’s what people expect from software that costs money. Some R packages may not be as rigorously quality checked.</p>
+<p>The SAS Institute (the people who make SAS) have a lot of market power too. They have ingrained themselves into academia and pharmaceutical research. Even though R and Python are the preferred choices for most newer companies and younger professionals, SAS has the advantage of being <strong>legacy code</strong>.</p>
+<p>You’re probably not familiar with that term if you haven’t ever programmed before. What it means in the practical sense is that even if R and Python were better alternatives to SAS, it would cost an organization a lot of money and time to go back and re-write all their automated, enterprise-wide code.</p>
+<p><strong>Python</strong> is a more interesting competitor of R, mostly because it wasn’t built for statistical programming. Like R, it’s open-source and that has led to data scientists building packages that make statistical programming possible.</p>
 <p>Python is probably more popular with data scientists than researchers and statisticians. Since data scientists are often joined at the hip with computer programmers, it naturally lends itself more to that work.</p>
 <p>I once worked with a company that ran all of its ETL (extract, transform, and load) processes off of Python. Since the data engineers and architects already used Python for that purpose, it wasn’t difficult for them to learn to use it for data science as well.</p>
 <p>Is Python better than R? I don’t know because I haven’t programmed much in Python. In my opinion, R is easier to learn for people who’ve already programmed in SQL, since it has a more direct syntax. Other people say that Python is easier to learn for programming newbies because it’s written more like the English language. I didn’t find that to be the case, myself.</p>
-<p>Some people also say that Python is better for enterprise-level or “production” grade solutions. I’m also less sure that’s the case now. Since I started writing this book, I’ve helped administer data science tools. I’ve learned through experience that Python is a tough programming language to manage, from an administrative perspective. There are lots of little rules and nuances, such as the Linux OS you use, and the manner in which you install Python versions, packages, and environments.</p>
-<p>For those reasons, I suggest learning R. It’s easier to download, easier to manage, and easier to learn in my experience.</p>
+<p>Some people also say that Python is better for enterprise-level or “production” grade solutions. I don’t really believe that either. Since I started writing this book, I’ve helped administer a few data science tools for clients. I’ve learned through experience that Python is a tough programming language to manage, from an administrative perspective. There are lots of little rules and nuances, such as the operating system you use, and the manner in which you install Python versions, packages, and environments.</p>
+<p>For those reasons, I suggest learning R. It’s easier to download, easier to manage, and easier to learn in my experience – especially for individuals.</p>
 </div>
-<div id="how-will-learning-r-versus-python-impact-my-job-opportunities" class="section level2" number="2.2">
+<div id="will-learning-r-over-python-impact-job-opportunities" class="section level2" number="2.2">
 <h2>
-<span class="header-section-number">2.2</span> How Will Learning R versus Python Impact My Job Opportunities?<a class="anchor" aria-label="anchor" href="#how-will-learning-r-versus-python-impact-my-job-opportunities"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.2</span> Will Learning R Over Python Impact Job Opportunities?<a class="anchor" aria-label="anchor" href="#will-learning-r-over-python-impact-job-opportunities"><i class="fas fa-link"></i></a>
 </h2>
-<p>If you’re worried that learning R over Python (or any other language) will hurt your job prospect, I have good news!</p>
-<p>The job market for data science professionals is so strong that companies can’t afford to be picky. For that reason, data science software companies are actually building their tools to use both R and Python. For example, RStudio allows Python and Jupyter (a Python-oriented app) allows R.</p>
-<p>This allows data scientists and other data professionals to use the language they know and companies to hire the best data scientist available - not the one who happens to know the specific programming language.</p>
+<p>As a researcher or data analyst, you may have your eye on the job market. Many people wonder whether Python leads to more job opportunities compared to R (or vice versa).</p>
+<p>I do have good news there.</p>
+<p>The job market for data scientists favors the data scientists more than the companies that hire them. For that reason, companies can’t be too picky with the skill sets they hire for.</p>
+<p>That’s led to many data science software companies making their products “tool agnostic.” For example, RStudio’s enterprise software actually allows Python development. The Python equivalents to RStudio often allow R development as well.</p>
+<p>This is to help ensure that data scientists can do their best work by using “the language they already know.”</p>
 </div>
 <div id="things-to-remember" class="section level2" number="2.3">
 <h2>
@@ -113,18 +114,19 @@
 <li>R programming is a free and allows for advanced statistical programming</li>
 <li>R is managed by a community of developers, who contribute to its growth through packages</li>
 <li>You must understand object types to succeed with R</li>
+<li>Picking R over Python (or vice versa) probably won’t have a big impact on career opportunities</li>
 </ul>
 </div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="index.html"><span class="header-section-number">1</span> About This Book</a></div>
-<div class="next"><a href="setup.html"><span class="header-section-number">3</span> Getting Setup in R and RStudio</a></div>
+<div class="next"><a href="setup.html"><span class="header-section-number">3</span> How to Get Started with R and RStudio</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#whatisr"><span class="header-section-number">2</span> What is R Programming?</a></li>
 <li><a class="nav-link" href="#is-r-the-best-statistical-programming-language"><span class="header-section-number">2.1</span> Is R the Best Statistical Programming Language?</a></li>
-<li><a class="nav-link" href="#how-will-learning-r-versus-python-impact-my-job-opportunities"><span class="header-section-number">2.2</span> How Will Learning R versus Python Impact My Job Opportunities?</a></li>
+<li><a class="nav-link" href="#will-learning-r-over-python-impact-job-opportunities"><span class="header-section-number">2.2</span> Will Learning R Over Python Impact Job Opportunities?</a></li>
 <li><a class="nav-link" href="#things-to-remember"><span class="header-section-number">2.3</span> Things to Remember</a></li>
 </ul>
 
@@ -143,7 +145,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>R Programming in Plain English</strong>" was written by Taylor Rodgers. It was last built on 2021-12-20.</p>
+    <p>"<strong>R Programming in Plain English</strong>" was written by Taylor Rodgers. It was last built on 2021-12-31.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

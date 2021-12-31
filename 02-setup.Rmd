@@ -1,4 +1,4 @@
-# Getting Setup in R and RStudio {#setup}
+# How to Get Started with R and RStudio {#setup}
 
 This chapter will tell you how to download **R** and **RStudio**. It will also explain the differences between these two tools and how to navigate their user interfaces. 
 
@@ -10,19 +10,19 @@ To download R, go to this website: https://www.r-project.org/
 
 You will then have to go through a series of options and screens to download R. Don’t worry. I’ll explain each of them along the way.
 
-First, you’ll select the “download R” link in the first paragraph.
+First, you’ll select the **download R** link in the first paragraph.
 
-```{r 1.1, echo=FALSE, out.width='50%', fig.asp=.75, fig.align='center'}
+```{r 1.1, echo=FALSE, out.width='80%',fig.align='center'}
 knitr::include_graphics("1.1_R_Download.png")
 ```
 
-Second, you’ll select a CRAN mirror. Select the one that’s closest to you. For example, I live in Lawrence, Kansas. That conveniently has a CRAN mirror in my own city. If you live in Melbourne, Australia, you’ll select the mirror hosted by the University of Melbourne.
+Second, you’ll select a CRAN mirror. Select the one that’s closest to you. For example, I live in Lawrence, Kansas. I conveniently have a CRAN mirror in my own town! If you live in Melbourne, Australia, you’ll select the mirror hosted by the University of Melbourne.
 
 ```{r 1.2, echo=FALSE,out.width='75%', fig.asp=.75, fig.align='center'}
 knitr::include_graphics("1.2_CRAN_Selection.png",dpi=200)
 ```
 
-Don’t worry. There’s not much difference to the user in these mirrors. It simply helps optimize your ability to download packages from a nearby source, rather than from some other country in the world. This isn’t a big deal for a small time programmer or researcher, but it’s beneficial for large scale operations to carefully choose their mirror.
+Don’t worry. There’s not much difference to the user in these mirrors. It simply helps optimize your ability to download packages from a nearby source, rather than from some other country in the world.
 
 Third, you’ll select the option for your operating system:
 
@@ -40,13 +40,15 @@ Download and install the latest release.
 
 ## Understanding Base R's User Interface
 
-I won’t focus too much on the R interface. We won’t use it much in this book. We’ll be using RStudio (more on that in a bit). However, go ahead and open up R. If you have a Mac, it will have this icon:
+I won’t focus too much on the R interface. We won’t use it much in this book. We’ll be using RStudio (more on that in a bit). However, let's go ahead and open up R and see what it looks like.
 
-```{r 1.5, echo=FALSE,fig.align="center",fig.asp=.75,out.width="10%"}
+If you have a Mac, it will have this icon. You can find it in your applications folder (on Macs). Let's go ahead and open it.
+
+```{r 1.5, echo=FALSE,fig.align="center",fig.asp=.75,out.width="15%"}
 knitr::include_graphics("1.5_R_Logo.png",dpi=75)
 ```
 
-Once you open it, you should see the **R console**. The R console is where you type commands. You'll continue to use the console in RStudio later.
+Once you open it, you should see the **R Console**. The R Console is where you type commands. You'll continue to use the console in RStudio later.
 
 ```{r 1.6, echo=FALSE,out.width='75%', fig.asp=.75, fig.align='center'}
 knitr::include_graphics("1.6_R_Console.png",dpi=225)
@@ -54,34 +56,28 @@ knitr::include_graphics("1.6_R_Console.png",dpi=225)
 
 Go ahead and input `2*2` to get a feel for it. You can hit **Ctrl+Enter** on a Windows version and **Command+Enter** on a Mac OS to run the command.
 
-```{r 1.7}
-  2*2
-```
-
-As you notice, the R console doesn’t allow you to go back and edit previously executed commands.
+As you may notice, the R console doesn’t allow you to go back and edit previously executed commands.
 
 In order to save and edit a script, you’ll need to create a document. A document in this context is basically just a text file that saves the code you want to reference later.
 
 Go to the **File menu** and select **New Document**. You should have two windows afterwards like the screenshot below:
 
-```{r 1.8, echo=FALSE,out.width='75%', fig.asp=.75, fig.align='center'}
+```{r 1.8, echo=FALSE,out.width='100%', fig.align='center'}
 knitr::include_graphics("1.7_New_Document.png",dpi=350)
 ```
 
 Go ahead and copy and paste this code into the document:
 
 ```{r 1.9, eval=FALSE}
-  
   install.packages("faraway")
   library(faraway)
   data(hprice)
   head(hprice)
-  
 ```
 
 Highlight different parts of the code and hit **Command-Enter** or **Ctrl-Enter** and see how it interacts with the console. (It may ask you to re-select a CRAN mirror. Go ahead and re-select the one you used to download.)
 
-```{r 1.10, echo=FALSE,out.width='75%', fig.asp=.75, fig.align='center'}
+```{r 1.10, echo=FALSE,out.width='100%',fig.align='center'}
 knitr::include_graphics("1.8_Run_Code.png",dpi=350)
 ```
 
@@ -95,28 +91,26 @@ Go ahead and close R for now. No need to save anything.
 
 The R console in the base version is a simple interface. Sometimes this is nice because you don’t get overwhelmed with all the information displayed in RStudio, which we’ll cover in a second. If you need to run a few calculations and know your data set well, this is a good setup.
 
-The downside is that the console can’t display large amounts of data.
+One big downside is that the console can’t display large amounts of data.
 
-If you look at the screen shot below, I attempted to review metadata from the US Census Bureau. As you can see, it’s all squished together because the R console can’t cleanly display it.
+If you look at the screen shot below, I attempted to review metadata from the US Census Bureau. I used the function `View()` to look at this table in a cleaner format. This table is semi-functional, but it's hard for me to scroll through it. There's also columns that can't even fit onto the screen.
 
-```{r 1.11, echo=FALSE,out.width='50%', fig.asp=.75, fig.align='center'}
-knitr::include_graphics("1.9_RConsole_Census.png",dpi=250)
+```{r 1.11, echo=FALSE,out.width='100%', fig.align='center'}
+knitr::include_graphics("1.9.1_RConsole_Census.png",dpi=250)
 ```
 
-In order to use the R console for further analysis, I’d have to find a different way to view this data I created.
+In order to use the original R interface for further analysis, I’d have to find a different way to view this data that I pulled.
 
 That’s where RStudio comes in handy.
 
 ## What is RStudio?
 
-If you don’t already feel totally confused and overwhelmed with understanding R and R packages – don’t worry. I’m about to make things even more confusing by introducing you to RStudio!
-
 **RStudio** is an IDE (integrated development environment) that allows more interactivity and for you to visually keep track of what you’re doing.
 
 In simpler words, it’s a handy user interface for programming in R.
 
-```{r 1.12, echo=FALSE,out.width='75%', fig.asp=.75, fig.align='center'}
-knitr::include_graphics("1.10_RStudio.png",dpi=450)
+```{r 1.12, echo=FALSE,out.width='100%', fig.align='center'}
+knitr::include_graphics("1.10.1_RStudio.png",dpi=450)
 ```
 
 It’s far easier to both get started and understand the R programming language by using RStudio. It makes importing data and packages easier. It also makes it easier to manage and visually review what data and packages you have loaded. And lastly, it’s just plain nicer looking.
@@ -137,9 +131,9 @@ You can tell that RStudio was designed for the end-user in mind by how painless 
 
 Go ahead and install it once the download finishes.
 
-You'll see an icon like this appear in your applications folder. Go ahead and open it.
+You'll see an icon like this appear in your applications folder (on Macs). Go ahead and open it.
 
-```{r 1.13.1, echo=FALSE,out.width='10%', fig.asp=.75, fig.align='center'}
+```{r 1.13.1, echo=FALSE,out.width='15%', fig.asp=.75, fig.align='center'}
 knitr::include_graphics("1.13.1_RStudio_Logo.png",dpi=75)
 ```
 
@@ -152,20 +146,21 @@ The RStudio interface is broken up into four panes. The default pane setting has
 3. Environment, History, and Connections
 4. Files, Plots, Package, Help, and Viewer
 
-```{r 1.14, echo=FALSE,out.width='75%', fig.asp=.75, fig.align='center'}
-knitr::include_graphics("1.12_RStudio_Labels.png",dpi=450)
+
+```{r 1.14, echo=FALSE,out.width='100%', fig.align='center'}
+knitr::include_graphics("1.12.1_RStudio_Labels.png",dpi=450)
 ```
 
-The **source** pane on the top left is a handy one.
+The **Source** pane on the top left is a handy one.
 
-```{r 1.15, echo=FALSE,out.width='75%', fig.asp=.75, fig.align='center'}
-knitr::include_graphics("1.13_RStudio_Source.png",dpi=450)
+```{r 1.15, echo=FALSE,out.width='100%', fig.align='center'}
+knitr::include_graphics("1.13.1_RStudio_Source.png",dpi=450)
 ```
 
-This pane displays previously saved or new R scripts you wrote in the past.
+This pane displays saved scripts you have opened or new ones you're currently writing.
 
-```{r 1.16, echo=FALSE,out.width='75%', fig.asp=.75, fig.align='center'}
-knitr::include_graphics("1.14_Saved_Script.png",dpi=250)
+```{r 1.16, echo=FALSE,out.width='100%', fig.align='center'}
+knitr::include_graphics("1.14.1_Saved_Script.png",dpi=250)
 ```
 
 You may not be able to see this pane yet. Especially if you've never opened or saved a script before. To view the source pane, go to the top menu and click **File**, **New File**, and then **R Script**.
@@ -174,120 +169,161 @@ You may not be able to see this pane yet. Especially if you've never opened or s
 knitr::include_graphics("1.14.1_New_R_Script.png",dpi=500)
 ```
 
+This will open a blank, untitled script for you to edit.
+
 The source pane can also show loaded data sets as well.
 
-```{r 1.17.1, echo=FALSE,out.width='75%', fig.asp=.75, fig.align='center'}
-knitr::include_graphics("1.15_Data_Set.png",dpi=250)
+```{r 1.17.1, echo=FALSE,out.width='100%', fig.align='center'}
+knitr::include_graphics("1.15.1_Data_Set.png",dpi=250)
 ```
 
-If you recall, I said base R had a limitation if you want to review extremely large data sets. This is where RStudio really comes in handy. Down below is the same Census data set that I attempted to view earlier:
+If you recall, I said base R had a limitation where it couldn't show really large data sets in a clean way. This is where RStudio really comes in handy. Down below is the same Census data set that I attempted to view earlier:
 
-```{r 1.18, echo=FALSE,out.width='75%', fig.asp=.75, fig.align='center'}
-knitr::include_graphics("1.16_API_List.png",dpi=250)
+```{r 1.18, echo=FALSE,out.width='100%', fig.align='center'}
+knitr::include_graphics("1.16.1_API_List.png",dpi=250)
 ```
 
 And here is how it looked in base R:
 
-```{r 1.19, echo=FALSE,out.width='75%', fig.asp=.75, fig.align='center'}
-knitr::include_graphics("1.9_RConsole_Census.png",dpi=250)
+```{r 1.19, echo=FALSE,out.width='100%', fig.asp=.75, fig.align='center'}
+knitr::include_graphics("1.9.1_RConsole_Census.png",dpi=250)
 ```
 
 The **console** pane on the bottom left is more or less the same as the base R console we reviewed earlier. It allows you to enter commands.
 
-```{r 1.20, echo=FALSE,out.width='75%', fig.asp=.75, fig.align='center'}
-knitr::include_graphics("1.17_RStudio_Console.png",dpi=450)
+```{r 1.20, echo=FALSE,out.width='100%', fig.align='center'}
+knitr::include_graphics("1.17.1_RStudio_Console.png",dpi=450)
 ```
 
 However, you won’t be able to save those commands as a script unless you write them in the source pane above. That’s similar to what we did with base R and that new document.
 
-```{r 1.21, echo=FALSE,out.width='75%', fig.asp=.75, fig.align='center'}
-knitr::include_graphics("1.18_Console_Source_Comparison.png",dpi=450)
+```{r 1.21, echo=FALSE,out.width='100%', fig.align='center'}
+knitr::include_graphics("1.18.1_Console_Source_Comparison.png",dpi=450)
 ```
 
-This pane also has a **Terminal** and an **R Markdown** tab (if you have the latter installed). The **Terminal** allows you to enter commands to interact with your computer. IT professionals use this frequently. You probably won't.
+This pane also has a **Terminal** and an **Jobs** tab (if you have the latter installed). The **Terminal** allows you to enter commands to interact with your computer. I used to think this wasn't a useful feature of RStudio, but I've actually grown to like it. It does make file management easier, but you would have to learn to invest some time in basic "command-line interface" commands.
 
-**R Markdown** may not appear for you yet. I'll explain what R Markdown in a later chapter, but this tab merely shows the log for producing an R Markdown export.
+The top right pane includes **Environment**, **History**, and **Connections** as tabular options.
 
-The top right pane includes **environment**, **history**, and **connections** as tabular options.
-
-```{r 1.22, echo=FALSE,out.width='75%', fig.asp=.75, fig.align='center'}
-knitr::include_graphics("1.19_RStudio_EnvironmentOthers.png",dpi=450)
+```{r 1.22, echo=FALSE,out.width='100%', fig.align='center'}
+knitr::include_graphics("1.19.1_RStudio_EnvironmentOthers.png",dpi=450)
 ```
 
 **Environment** is very handy and it’s something that sets RStudio apart from the base version. It shows **objects** with assigned names that are saved in your environment.
 
-```{r 1.23, echo=FALSE,out.width='75%', fig.asp=.75, fig.align='center'}
-knitr::include_graphics("1.20_Environment_Tab.png",dpi=150)
+```{r 1.23, echo=FALSE,out.width='100%', fig.asp=.75, fig.align='center'}
+knitr::include_graphics("1.20.1_Environment_Tab.png",dpi=150)
 ```
 
-We’ll go into objects extensively in the next chapter. Along with packages, *they’re the most important component of R programming.* What you need to remember here is that the environment tab in this top right pane tells you what you have saved.
+We’ll go into objects extensively in the next chapter. What you need to remember here is that the environment tab in this top right pane tells you what you have *temporarily* saved.
 
-The **history** section is one I don’t use too often, but I could see why some people would find it handy. It tells you what commands you’ve run during your R session. So anything you input in your console will show up here as a record.
+The **History** section is one I don’t use too often, but I could see why some people would find it handy. It tells you what commands you’ve run during your R session. So anything you input in your console will show up here as a record.
 
-```{r echo=FALSE,out.width='75%', fig.asp=.75, fig.align='center'}
-knitr::include_graphics("1.21_History_Tab.png",dpi=150)
+```{r echo=FALSE,out.width='100%', fig.asp=.75, fig.align='center'}
+knitr::include_graphics("1.21.1_History_Tab.png",dpi=150)
 ```
 
-The **connection** tab is useful for those who want to connect to a database or data warehouse. 
+The **Connection** tab is useful for those who want to connect to a database or data warehouse. 
 
-```{r 1.24, echo=FALSE,out.width='75%', fig.asp=.75, fig.align='center'}
-knitr::include_graphics("1.22_Connections_Tab.png",dpi=150)
+```{r 1.24, echo=FALSE,out.width='100%', fig.asp=.75, fig.align='center'}
+knitr::include_graphics("1.22.1_Connections_Tab.png",dpi=150)
 ```
 
 If you’re a researcher, you may not use this much. If you work with databases in any capacity, this will make it easier to simply query data directly from the database, as opposed to importing it in via CSV files or spreadsheets.
 
-The bottom right pane is a very useful addition provided by RStudio. It contains a separate tab for **files**, **plots**, **packages**, **help**, and **viewer**.
+The bottom right pane is a very useful addition provided by RStudio. It contains a separate tab for **Files**, **Plots**, **Packages**, **Help**, and **Viewer**.
 
-```{r 1.25, echo=FALSE,out.width='75%', fig.asp=.75, fig.align='center'}
-knitr::include_graphics("1.23_RStudio_PackagesEtc.png",dpi=450)
+```{r 1.25, echo=FALSE,out.width='100%', fig.align='center'}
+knitr::include_graphics("1.23.1_RStudio_PackagesEtc.png",dpi=450)
 ```
 
-I’m going to start with the **packages** tab. If you recall, I said that packages are what makes R such a useful programming language. It allows you to customize and import functions to suit your needs. 
+I’m going to start with the **Packages** tab. If you recall, I said that packages are what makes R such a useful programming language. It allows you to customize and import functions to suit your needs. 
 
-```{r 1.26, echo=FALSE,out.width='75%', fig.asp=.75, fig.align='center'}
-knitr::include_graphics("1.24_Packages.png",dpi=150)
+```{r 1.26, echo=FALSE,out.width='100%', fig.asp=.75, fig.align='center'}
+knitr::include_graphics("1.24.1_Packages.png",dpi=150)
 ```
 
 This is a useful little tab. If you open a previously saved script, you may find out that some functions need a package to execute. This tab can tell you whether you need to install that package or simply need to re-load it.
 
-I’ll have a whole chapter dedicated to finding packages, installing packages, and loading packages.
+I have a whole chapter later in this book focused on finding packages, installing packages, and loading packages.
 
-**Plots** is a tab that displays any plots you create using graphical commands. We’ll cover this in more detail in a later chapter.
+**Plots** is a tab that displays any plots you created using graphical commands. We’ll cover this in more detail in a later chapter.
 
-```{r 1.27, echo=FALSE,out.width='75%', fig.asp=.75, fig.align='center'}
-knitr::include_graphics("1.25_Plots.png",dpi=150)
+```{r 1.27, echo=FALSE,out.width='100%', fig.asp=.75, fig.align='center'}
+knitr::include_graphics("1.25.1_Plots.png",dpi=150)
 ```
 
-**Help** is a super helpful tab. You can find the extensive R documentation there that explains many of the functionality of R and how it operates. It also will display information you look up on packages and functions you download.
+**Help** is a super *helpful* tab. You can find the extensive R documentation there that explains many of the functionality of R and how it operates. It also will display information you look up on packages and functions you've downloaded.
 
-```{r 1.28, echo=FALSE,out.width='75%', fig.asp=.75, fig.align='center'}
-knitr::include_graphics("1.26_Help.png",dpi=150)
+```{r 1.28, echo=FALSE,out.width='100%', fig.asp=.75, fig.align='center'}
+knitr::include_graphics("1.26.1_Help.png",dpi=150)
 ```
 
 If you ever add a `?` before a function, it will display the documentation in the help section.
 
 Try adding the following command to the R console and see what happens:
+
 ```{r 1.29, results=FALSE}
   ?lm
 ```
 
 Here’s what it should look like on your screen:
 
-```{r 1.30, echo=FALSE,out.width='75%', fig.asp=.75, fig.align='center'}
-knitr::include_graphics("1.27_HelpLookup.png",dpi=300)
+```{r 1.30, echo=FALSE,out.width='100%', fig.align='center'}
+knitr::include_graphics("1.27.1_HelpLookup.png",dpi=300)
 ```
 
 Don’t forget about this trick! It helps a lot!
 
-Lastly, we have the **files** and the **viewer** tab.
+Lastly, we have the **Files** and the **Viewer** tab.
 
-```{r 1.31, echo=FALSE,out.width='75%', fig.asp=.75, fig.align='center'}
-knitr::include_graphics("1.28_Files.png",dpi=150)
+```{r 1.31, echo=FALSE,out.width='100%', fig.asp=.75, fig.align='center'}
+knitr::include_graphics("1.28.1_Files.png",dpi=150)
 ```
 
-The **files** tab displays all the files you can open in RStudio for a given folder. This is helpful because you don't have to specify a file path when loading files listed here.
+The **Files** tab displays all the files you can open in RStudio for a given folder. The file directory defaults to your project directory (more on that below) or your user directory on your computer. Whenever you have a script that references another file (such as a data set), this will help you determine the file path to specify.
 
-The **viewer** tab allows to display non-R related outputs, such as a website or JavaScript graphics. 
+The **Viewer** tab allows you to display non-R related outputs, such as a website or JavaScript graphics. I don't use this one too often myself.
+
+## Useful Project Organization Tip
+
+When you initially start out with RStudio, it's not hard to keep things clean and organized. But as you move to new projects and analysis, your Files tab will fill up with more and more items.
+
+To keep things organized, I suggest creating a new **Project**. RStudio has a simple way to create new folders that neatly batch your scripts together based on their project.
+
+To create a project, go to the top-right of the screen, select **Project: (None)**, and then select **New Project...**:
+
+```{r 1.32, echo=FALSE,fig.align='center'}
+knitr::include_graphics("1.28.2_NewProject.png",dpi=150)
+```
+
+If you haven't yet created a folder to store your scripts, you can select **New Directory**. If you have already created a folder, you can select **Existing Directory**:
+
+```{r 1.33, echo=FALSE,fig.align='center'}
+knitr::include_graphics("1.28.3_ExistingDirectory.png",dpi=150)
+```
+
+The **New Directory** option will allow you to determine a project type. For a beginner, you'd only want to select the **New Project** option. The other options are for more advanced R users.
+
+You will eventually be asked to create and name a new folder, or select an existing folder for your project.
+
+```{r 1.34, echo=FALSE,fig.align='center'}
+knitr::include_graphics("1.28.4_DirectoryName.png",dpi=150)
+```
+
+The name of the folder (or directory) will determine the name of the project. After you proceed through these steps, RStudio will create a `.Rproj` file that keeps track of these configurations.  If you save any new scripts, it will automatically save them to this folder.
+
+```{r 1.35, echo=FALSE,out.width="100%",fig.align='center'}
+knitr::include_graphics("1.28.5_RprojFile.png",dpi=150)
+```
+
+This project name will also appear in the drop-down menu at the top-right of the screen.
+
+```{r 1.36, echo=FALSE, fig.align='center'}
+knitr::include_graphics("1.28.6_SeeProjectName.png",dpi=100)
+```
+
+You can use this menu to navigate back and forth between projects.
 
 ## Things to Remember
 

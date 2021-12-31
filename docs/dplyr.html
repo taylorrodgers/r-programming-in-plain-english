@@ -4,17 +4,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 6 How to Filter and Transform Data with the Dplyr Package | R Programming in Plain English</title>
+<title>Chapter 6 How to Filter and Transform Data with the dplyr Package | R Programming in Plain English</title>
 <meta name="author" content="Taylor Rodgers">
 <meta name="description" content="In the last chapter, I showed you how to use R base to filter and transform data. Personally, I still think this is the best way to manage data in R. However, there’s another popular package for...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 6 How to Filter and Transform Data with the Dplyr Package | R Programming in Plain English">
+<meta property="og:title" content="Chapter 6 How to Filter and Transform Data with the dplyr Package | R Programming in Plain English">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://github.com/taylorrodgers/taylorrodgers.github.io/dplyr.html">
 <meta property="og:image" content="https://github.com/taylorrodgers/taylorrodgers.github.io/BookCover.png">
 <meta property="og:description" content="In the last chapter, I showed you how to use R base to filter and transform data. Personally, I still think this is the best way to manage data in R. However, there’s another popular package for...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 6 How to Filter and Transform Data with the Dplyr Package | R Programming in Plain English">
+<meta name="twitter:title" content="Chapter 6 How to Filter and Transform Data with the dplyr Package | R Programming in Plain English">
 <meta name="twitter:description" content="In the last chapter, I showed you how to use R base to filter and transform data. Personally, I still think this is the best way to manage data in R. However, there’s another popular package for...">
 <meta name="twitter:image" content="https://github.com/taylorrodgers/taylorrodgers.github.io/BookCover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -47,10 +47,10 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html"><span class="header-section-number">1</span> About This Book</a></li>
 <li><a class="" href="whatisr.html"><span class="header-section-number">2</span> What is R Programming?</a></li>
-<li><a class="" href="setup.html"><span class="header-section-number">3</span> Getting Setup in R and RStudio</a></li>
+<li><a class="" href="setup.html"><span class="header-section-number">3</span> How to Get Started with R and RStudio</a></li>
 <li><a class="" href="objects.html"><span class="header-section-number">4</span> Object Types in R Programming</a></li>
 <li><a class="" href="baserfilter.html"><span class="header-section-number">5</span> How to Filter and Transform Data in Base R</a></li>
-<li><a class="active" href="dplyr.html"><span class="header-section-number">6</span> How to Filter and Transform Data with the Dplyr Package</a></li>
+<li><a class="active" href="dplyr.html"><span class="header-section-number">6</span> How to Filter and Transform Data with the dplyr Package</a></li>
 <li><a class="" href="packages.html"><span class="header-section-number">7</span> Understanding and Using R Packages</a></li>
 <li><a class="" href="function.html"><span class="header-section-number">8</span> How to Write Functions</a></li>
 <li><a class="" href="importdata.html"><span class="header-section-number">9</span> Importing Data into R</a></li>
@@ -67,13 +67,13 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="dplyr" class="section level1" number="6">
 <h1>
-<span class="header-section-number">6</span> How to Filter and Transform Data with the Dplyr Package<a class="anchor" aria-label="anchor" href="#dplyr"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6</span> How to Filter and Transform Data with the dplyr Package<a class="anchor" aria-label="anchor" href="#dplyr"><i class="fas fa-link"></i></a>
 </h1>
 <p>In the last chapter, I showed you how to use R base to filter and transform data. Personally, I still think this is the best way to manage data in R. However, there’s another popular package for data filtering and transformation – the <code>dplyr</code> package.</p>
 <p>The <code>dplyr</code> package (pronounced like “data plier”) was developed by Hadley Wickham to allow more intuitive data transformation. It falls under the tidyverse packages, which includes other popular R packages created by Mr. Wickham.</p>
 <div id="why-is-dplyr-so-popular" class="section level2" number="6.1">
 <h2>
-<span class="header-section-number">6.1</span> Why is <code>dplyr</code> So Popular?<a class="anchor" aria-label="anchor" href="#why-is-dplyr-so-popular"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.1</span> Why is dplyr So Popular?<a class="anchor" aria-label="anchor" href="#why-is-dplyr-so-popular"><i class="fas fa-link"></i></a>
 </h2>
 <p><code>dplyr</code> is popular for its intuitive syntax for filtering and transforming data frames. If your programming background is with SQL, you’ll find it an easier transition to make.</p>
 <p><code>dplyr</code> is also highly readable compared to base R. That’s where I see the most value in it. You can send it over to another programmer and it’ll be easier for them to read what you’re doing with the data.</p>
@@ -87,16 +87,16 @@
 </div>
 <div id="the-dplyr-syntax" class="section level2" number="6.3">
 <h2>
-<span class="header-section-number">6.3</span> The <code>dplyr</code> Syntax<a class="anchor" aria-label="anchor" href="#the-dplyr-syntax"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.3</span> The dplyr Syntax<a class="anchor" aria-label="anchor" href="#the-dplyr-syntax"><i class="fas fa-link"></i></a>
 </h2>
 <p>If you recall, filtering a data frame in base R looks like this:</p>
-<div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb196"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#If needed, you can reload the Bond data set with this script</span>
 <span class="va">bond</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/taylorrodgers/bond/main/bond.csv"</span><span class="op">)</span>
 
 <span class="va">bond</span><span class="op">[</span><span class="va">bond</span><span class="op">[</span><span class="st">"year"</span><span class="op">]</span><span class="op">&gt;=</span><span class="fl">1990</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></code></pre></div>
 <p>That’s different in <code>dplyr</code>, which looks like this:</p>
-<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb197"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">bond</span> <span class="op">%&gt;%</span> <span class="fu">select</span><span class="op">(</span><span class="va">filmname</span>,<span class="va">year</span>,<span class="va">actor</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span><span class="op">&gt;=</span><span class="fl">1990</span><span class="op">)</span></code></pre></div>
 <p>You can literally think of the <code>dplyr</code> syntax as a set of instructions to read one-by-one:</p>
 <ol style="list-style-type: decimal">
@@ -120,28 +120,28 @@
 </div>
 <div id="how-to-select-and-mutate-a-data-frame-with-dplyr-in-r" class="section level2" number="6.5">
 <h2>
-<span class="header-section-number">6.5</span> How to Select and Mutate a Data Frame with <code>dplyr</code> in R<a class="anchor" aria-label="anchor" href="#how-to-select-and-mutate-a-data-frame-with-dplyr-in-r"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.5</span> How to Select and Mutate a Data Frame with dplyr in R<a class="anchor" aria-label="anchor" href="#how-to-select-and-mutate-a-data-frame-with-dplyr-in-r"><i class="fas fa-link"></i></a>
 </h2>
 <p>In dplyr, you can select columns using the <code>select()</code> function:</p>
-<div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">bond</span> <span class="op">%&gt;%</span> <span class="fu">select</span><span class="op">(</span><span class="va">actor</span>,<span class="va">filmname</span>,<span class="va">gross</span><span class="op">)</span></code></pre></div>
 <p>Executing the code above will only select the columns <em>actor</em>, <em>filmname</em>, and <em>gross.</em></p>
 <p>Sometimes you’ll need to transform or alter the data. That’s where <code>mutate()</code> comes in handy. <code>mutate()</code> will allow you to create new fields that alter existing ones. Confused?</p>
 <p>Execute the script below to see:</p>
-<div class="sourceCode" id="cb201"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">bond</span> <span class="op">%&gt;%</span> <span class="fu">mutate</span><span class="op">(</span>gross_millions<span class="op">=</span><span class="va">gross</span><span class="op">*</span><span class="fl">1000000</span><span class="op">)</span></code></pre></div>
 <p>The <code>mutate()</code> function added a new column to the end called <em>gross_millions</em> with our new calculation.</p>
 <p>The one drawback to <code>mutate()</code> is that it allow you to select specified columns. Rather than add another <code>%&gt;% select()</code> to your code, you can use the <code>transmute()</code> function. <code>transmute()</code> basically combines the functionality of <code>mutate()</code> and <code>select()</code>. You can both define the columns you want to keep and mutate others.</p>
-<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">bond</span> <span class="op">%&gt;%</span> <span class="fu">transmute</span><span class="op">(</span><span class="va">actor</span>,<span class="va">filmname</span>,gross<span class="op">=</span><span class="va">gross</span><span class="op">*</span><span class="fl">1000000</span><span class="op">)</span></code></pre></div>
 <p>I personally like <code>transmute()</code> for selecting columns. However, <code>select()</code> and <code>mutate()</code> are appropriate in some situations.</p>
 </div>
 <div id="how-to-filter-a-data-frame-with-dplyr-in-r" class="section level2" number="6.6">
 <h2>
-<span class="header-section-number">6.6</span> How to Filter a Data Frame with <code>dplyr</code> in R<a class="anchor" aria-label="anchor" href="#how-to-filter-a-data-frame-with-dplyr-in-r"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.6</span> How to Filter a Data Frame with dplyr in R<a class="anchor" aria-label="anchor" href="#how-to-filter-a-data-frame-with-dplyr-in-r"><i class="fas fa-link"></i></a>
 </h2>
 <p>To filter rows in a data frame, use the <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> function:</p>
-<div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb201"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">bond</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span><span class="op">&gt;=</span><span class="fl">1980</span> <span class="op">&amp;</span> <span class="va">actor</span><span class="op">==</span><span class="st">"Daniel Craig"</span><span class="op">)</span></code></pre></div>
 <p>If you noticed, we used the same operators as in base R. We can use any R operators as below:</p>
 <div class="inline-table"><table class="table table-sm">
@@ -191,21 +191,21 @@
 </tbody>
 </table></div>
 <p>You can apply any of these operators the <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> function:</p>
-<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">bond</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">actor</span> <span class="op">==</span> <span class="st">"Daniel Craig"</span> <span class="op">|</span> <span class="va">actor</span> <span class="op">==</span> <span class="st">"Sean Connery"</span><span class="op">)</span>
 <span class="va">bond</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">gross</span> <span class="op">&gt;=</span> <span class="fl">700</span> <span class="op">&amp;</span> <span class="va">year</span> <span class="op">&lt;</span> <span class="fl">2000</span><span class="op">)</span></code></pre></div>
 <p>Like in base R, you can also pass vectors in for dynamic filters:</p>
-<div class="sourceCode" id="cb205"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">actor_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Daniel Craig"</span>,<span class="st">"Sean Connery"</span>,<span class="st">"Timothy Dalton"</span><span class="op">)</span>
 <span class="va">bond</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">actor</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">actor_list</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="how-to-summarize-and-group-data-with-dplyr-in-r" class="section level2" number="6.7">
 <h2>
-<span class="header-section-number">6.7</span> How to Summarize and Group Data with <code>dplyr</code> in R<a class="anchor" aria-label="anchor" href="#how-to-summarize-and-group-data-with-dplyr-in-r"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.7</span> How to Summarize and Group Data with dplyr in R<a class="anchor" aria-label="anchor" href="#how-to-summarize-and-group-data-with-dplyr-in-r"><i class="fas fa-link"></i></a>
 </h2>
 <p>Probably the most useful thing about <code>dplyr</code> is the ability to create new data frames that group and summarize data found in the larger data set. This is the primary reason I like <code>dplyr</code>.</p>
 <p>Let’s say you wanted to take the Bond data set and find out the gross revenue mean and standard deviation for Daniel Craig and Sean Connery. To accomplish this in base R, you’d have to use the following code:</p>
-<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>actor_subselect<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Daniel Craig"</span>,<span class="st">"Sean Connery"</span><span class="op">)</span>, 
            average_revenue<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">bond</span><span class="op">[</span><span class="va">bond</span><span class="op">$</span><span class="va">actor</span><span class="op">==</span><span class="st">"Daniel Craig"</span>,<span class="st">"gross"</span><span class="op">]</span><span class="op">)</span>,
                              <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">bond</span><span class="op">[</span><span class="va">bond</span><span class="op">$</span><span class="va">actor</span><span class="op">==</span><span class="st">"Sean Connery"</span>,<span class="st">"gross"</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>,
@@ -213,7 +213,7 @@
                           <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">bond</span><span class="op">[</span><span class="va">bond</span><span class="op">$</span><span class="va">actor</span><span class="op">==</span><span class="st">"Sean Connery"</span>,<span class="st">"gross"</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>It’s not very simple, is it? Imagine having to do that for a much larger data set with even more actors!</p>
 <p><code>dplyr</code>’s <code>group_by()</code> and <code>summarize()</code> functions really cut down on this work. Here’s how we can accomplish the same thing as above:</p>
-<div class="sourceCode" id="cb207"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb205"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">bond</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">actor</span><span class="op">==</span><span class="st">"Daniel Craig"</span> <span class="op">|</span> <span class="va">actor</span> <span class="op">==</span> <span class="st">"Sean Connery"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
         <span class="fu">group_by</span><span class="op">(</span><span class="va">actor</span><span class="op">)</span> <span class="op">%&gt;%</span> 
         <span class="fu">summarize</span><span class="op">(</span>average_revenue<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">gross</span><span class="op">)</span>,sdev_revenue<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">gross</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -250,7 +250,7 @@
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#dplyr"><span class="header-section-number">6</span> How to Filter and Transform Data with the Dplyr Package</a></li>
+<li><a class="nav-link" href="#dplyr"><span class="header-section-number">6</span> How to Filter and Transform Data with the dplyr Package</a></li>
 <li><a class="nav-link" href="#why-is-dplyr-so-popular"><span class="header-section-number">6.1</span> Why is dplyr So Popular?</a></li>
 <li><a class="nav-link" href="#its-still-worth-learning-base-r"><span class="header-section-number">6.2</span> It’s Still Worth Learning Base R</a></li>
 <li><a class="nav-link" href="#the-dplyr-syntax"><span class="header-section-number">6.3</span> The dplyr Syntax</a></li>
@@ -277,7 +277,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>R Programming in Plain English</strong>" was written by Taylor Rodgers. It was last built on 2021-12-20.</p>
+    <p>"<strong>R Programming in Plain English</strong>" was written by Taylor Rodgers. It was last built on 2021-12-31.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
