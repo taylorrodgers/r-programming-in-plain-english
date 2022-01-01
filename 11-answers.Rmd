@@ -30,7 +30,7 @@ factor(mtcars$gear)
   q2 >= 20 & q2 <= 30
   q2[q2 >= 20 & q2 <= 30][1:3]
 ```
-3. Multiple the following matrices together.
+3. Multiply the following matrices together.
 ```{r A3.3, results=FALSE}
   q3_1 <- matrix(round(seq(1,40,3.27),0),3)
   q3_2 <- matrix(seq(1,8,1),4)

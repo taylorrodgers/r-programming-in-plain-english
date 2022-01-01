@@ -49,7 +49,7 @@
 <li><a class="" href="whatisr.html"><span class="header-section-number">2</span> What is R Programming?</a></li>
 <li><a class="" href="setup.html"><span class="header-section-number">3</span> How to Get Started with R and RStudio</a></li>
 <li><a class="active" href="objects.html"><span class="header-section-number">4</span> Object Types in R Programming</a></li>
-<li><a class="" href="baserfilter.html"><span class="header-section-number">5</span> How to Filter and Transform Data in Base R</a></li>
+<li><a class="" href="baserfilter.html"><span class="header-section-number">5</span> How to Filter and Transform Objects in Base R</a></li>
 <li><a class="" href="dplyr.html"><span class="header-section-number">6</span> How to Filter and Transform Data with the dplyr Package</a></li>
 <li><a class="" href="packages.html"><span class="header-section-number">7</span> Understanding and Using R Packages</a></li>
 <li><a class="" href="function.html"><span class="header-section-number">8</span> How to Write Functions</a></li>
@@ -73,7 +73,7 @@
 <p>In fact, I say it’s better to understand how these objects interact with one another over memorizing every base function and package out there.</p>
 <p>That’s different from the approach I took to learning R. When I learned R, I went straight to learning the base functions. You know, the cool stuff that does the regression analysis and confidence intervals and whatnot.</p>
 <p>That didn’t work out well for me. I was coming from a SQL background and thought data worked in a similar way with R.</p>
-<p>Had I started by learning the objects first, I would’ve saved a lot more time. I would’ve done less data manipulation in SQL or Excel and made simpler, more scalable R code.</p>
+<p>Had I started by learning about object types first, I would’ve saved a lot more time. I would’ve done less data manipulation in SQL or Excel and made simpler, more scalable R code.</p>
 <div id="why-do-objects-matter" class="section level2" number="4.1">
 <h2>
 <span class="header-section-number">4.1</span> Why Do Objects Matter?<a class="anchor" aria-label="anchor" href="#why-do-objects-matter"><i class="fas fa-link"></i></a>
@@ -85,7 +85,7 @@
 <li>Produces an object</li>
 <li>Calls upon a pre-existing object</li>
 </ul>
-<p>The simple code below utilizes five different object types:</p>
+<p>For example, the simple code below utilizes <em>five</em> different object types:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/r/stats/confint.html">confint.lm</a></span><span class="op">(</span><span class="va">happy_model</span><span class="op">)</span></code></pre></div>
 <p>This code for calculating confidence intervals calls upon a base <strong>function</strong>, evaluates an existing <strong>list</strong>, creates several <strong>vectors</strong> and an <strong>array</strong> to perform the analysis, and then outputs a <strong>matrix</strong>. All five are objects. (You can see the function’s script by pasting <code><a href="https://rdrr.io/r/stats/confint.html">stats::confint.lm</a></code> in your console.)</p>
@@ -143,8 +143,8 @@
 <code class="sourceCode R">  <span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span><span class="op">)</span>
   <span class="va">v1</span></code></pre></div>
 <pre><code>## [1]  TRUE FALSE  TRUE</code></pre>
-<p>What this code does is create a vector using the <code>c(input, input)</code> notation. It then assigns the vector the name <strong>v1</strong> using the <code>&lt;–</code> notation. (A shortcut to the <code>&lt;-</code> command is <strong>Option+“-”</strong>.)</p>
-<p>You build a <strong>character</strong> vector in the same way, only that you use <code>c("input", "input")</code> notation instead:</p>
+<p>What this code does is create a vector using the <code>c(input, input)</code> notation. It then assigns the vector the name <strong>v1</strong> using the <code>&lt;–</code> notation. (A shortcut to the <code>&lt;-</code> command is <strong>Option + “-”</strong> for Macs and <strong>Alt + “-”</strong> for Windows.)</p>
+<p>You build a <strong>character</strong> vector in the same way, only that you use <code>c("input", "input")</code> notation (with quotations “…”) instead.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R">  <span class="va">v2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Hola"</span>,<span class="st">"Howdy"</span>,<span class="st">"Hello"</span><span class="op">)</span>
   <span class="va">v2</span></code></pre></div>
@@ -154,7 +154,7 @@
 <code class="sourceCode R">  <span class="va">v3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>
   <span class="va">v3</span></code></pre></div>
 <pre><code>## [1] 1 2 3</code></pre>
-<p>The code above used the <code>c(n1:n2)</code> notation to create a range of values from n1 to n2, where n1 is 1 and n2 is 4. You can also use notations such as <code>c(n1, n2, n3, n4)</code> or like <code>c(n1:n4, n5:n6)</code>.</p>
+<p>The code above used the <code>c(n1:n2)</code> notation to create a range of values from n1 to n2, where n1 is 1 and n2 is 4. You can also use notations such as <code>c(n1, n2, n3, n4)</code> or something like <code>c(n1:n4, n5:n6)</code>.</p>
 <p>Play around with the code below and see what kind numeric vectors you can make!</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R">  <span class="va">v4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">6</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span>
@@ -172,9 +172,8 @@
 <pre><code>## [1] "Hola"  "Howdy" "Hello" "1"     "2"     "3"</code></pre>
 <p>The vector seems basic and not at all like the data sets you’ll be using. That might make you ask – will I even use vectors?</p>
 <p>Yes. Yes, you will.</p>
-<p>The more complex object, data frame, is comprised of individual vectors. (We’ll cover more about the data frame object later).</p>
-<p>Many functions will also <strong>output</strong> data in vector form or produce a list composed of vectors.</p>
-<p>Vectors are also useful as <strong>inputs</strong> into other functions, as well. If you look below, I used a function from the <code>censusapi</code> package. I create a vector beforehand and then use it as an input for the function below it.</p>
+<p>Many more complicated object types are comprised of individual vectors. Also, functions will also use vectors extensively. Some will produce vectors as an <strong>output</strong>. Others will require vectors as an <strong>input</strong>.</p>
+<p>For example, the script below uses a function from the <code>censusapi</code> package. I create a vector beforehand and then use it as an input for the function below it.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R">  <span class="va">variable_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"B15001_003E"</span>,<span class="st">"B15001_004E"</span>,<span class="st">"B15001_005E"</span>,
                      <span class="st">"B15001_044E"</span>,<span class="st">"B15001_045E"</span>,<span class="st">"B15001_046E"</span><span class="op">)</span>
@@ -182,13 +181,13 @@
             vintage<span class="op">=</span><span class="st">"2018"</span>,
             vars<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"NAME"</span>,<span class="va">variable_list</span><span class="op">)</span>,
             region<span class="op">=</span><span class="st">"state:*"</span><span class="op">)</span></code></pre></div>
-<p>You can use vectors in this way on a larger scale. For example, if you write a long script with many functions and references, vectors allow you to create a set of parameters at the beginning.</p>
+<p>You can use vectors in this way on a larger scale. For example, if you write a long script with many functions and references, vectors allow you to create a set of parameters at the beginning. You can then call upon them later in the script, which makes it more efficient to write and edit.</p>
 </div>
 <div id="matrices-and-arrays" class="section level2" number="4.5">
 <h2>
 <span class="header-section-number">4.5</span> Matrices and Arrays<a class="anchor" aria-label="anchor" href="#matrices-and-arrays"><i class="fas fa-link"></i></a>
 </h2>
-<p>Matrices and arrays in R are multi-dimensional vectors. Matrices have multiple rows and columns. Arrays have two or more dimensions. (More on that distinction in a bit).</p>
+<p>Matrices and arrays in R are multi-dimensional vectors. Matrices have multiple rows and columns. Arrays are matrices that have two or more dimensions. (More on that distinction in a bit).</p>
 <p>Like their vector counterpart, all matrix / array values must be the same mode or data type – not a mix. That means if you can’t have a numeric value alongside a character value.</p>
 <p>Here’s an example of a matrix:</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
@@ -197,9 +196,9 @@
 <pre><code>##      [,1] [,2]
 ## [1,]    2    1
 ## [2,]    0    3</code></pre>
-<p>Why would R programmers want this? It comes back to the R’s use as a statistical programming language. For example, multiple linear regression often has combined variables, which involves multiplying two matrices together.</p>
+<p>Why would R programmers want this? It comes back to R’s use as a statistical programming language. For example, multiple linear regression often has combined variables, which involves multiplying two matrices together.</p>
 <p>Providing these two object types in R that are solely for numeric values makes this easier.</p>
-<p>For example, you can multiply these two matrices together with the <code>%*%</code> command and get the same results you would by using matrix algebra:</p>
+<p>For example, you can multiply these two matrices together with the <code>%*%</code> command and get the same results you would by using matrix algebra.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R">  <span class="va">matrix1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">2</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
   <span class="va">matrix1</span></code></pre></div>
@@ -217,8 +216,8 @@
 <pre><code>##      [,1]
 ## [1,]   17
 ## [2,]   21</code></pre>
-<p>That’s the same as if you did it yourself by hand.
-<span class="math display">\[
+<p>That’s the same as if you did it yourself by hand.</p>
+<p><span class="math display">\[
  \begin{bmatrix}
   2 &amp; 1\\
   0 &amp; 3 \\
@@ -266,20 +265,20 @@
 ## [3,]    1    6
 ## [4,]    2    2</code></pre>
 <p>If the output up above looks like gibberish, don’t worry – most people think it’s confusing when they first see it. That’s because the R user interface doesn’t make it visually intuitive as to how the array operates.</p>
-<p>Let’s use a picture to visualize this instead. Think of it as if each matrix as a separate entity within the array:</p>
+<p>Let’s use a picture to visualize this instead. Think of each matrix as a separate entity within the array…</p>
 <div class="inline-figure"><img src="1.29_Arrays_Flat.png" width="75%" style="display: block; margin: auto;"></div>
-<p>What the array does is simply <em>stack</em> them on top of each other:</p>
+<p>What the array does is simply <em>stack</em> them on top of each other…</p>
 <div class="inline-figure"><img src="1.30_Arrays_Stacked.png" width="25%" style="display: block; margin: auto;"></div>
-<p>Since arrays with three dimensions are merely stacked matrices, that means each matrix within the array must have the same number of columns and rows.</p>
+<p>Since arrays with three dimensions are merely stacked matrices, that means each matrix within the array must have the same number of columns and rows as the others.</p>
 </div>
 <div id="data-frames" class="section level2" number="4.6">
 <h2>
 <span class="header-section-number">4.6</span> Data Frames<a class="anchor" aria-label="anchor" href="#data-frames"><i class="fas fa-link"></i></a>
 </h2>
-<p>Data frame is the object type that’s most similar to what you’d find in a SQL database. What I mean by that is that it’s organized and referenced by columns and can have many, many rows.</p>
+<p>Data frame is the object type that most people would feel comfortable using. It’s organized and referenced by columns and can have many, many rows. Each column contains the same amount of rows as other columns. And a row number in one column is connected to the same row number in the other columns.</p>
 <p>And most importantly, it can contain both numeric and character values! (Earth shattering, I know!)</p>
 <p>I like to think of a data frame as a way to combine vectors. As a matter of fact, you can build a data frame doing just that.</p>
-<p>Take this code below and run it. You’ll see that we make individual vectors containing data on James Bond movies<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;span class="citation"&gt;@noauthor_james_nodate&lt;/span&gt;&lt;/p&gt;'><sup>1</sup></a> and we then combine it into a data frame.</p>
+<p>Take this code below and run it. You’ll see that we make individual vectors containing data on James Bond movies<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;span class="citation"&gt;@noauthor_james_nodate&lt;/span&gt;&lt;/p&gt;'><sup>1</sup></a> and then combine it into a data frame.</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R">  <span class="va">filmname</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Skyfall"</span>,<span class="st">"Thunderball"</span>,<span class="st">"Goldfinger"</span>,
                 <span class="st">"Spectre"</span>,<span class="st">"Live and Let Die"</span>,
@@ -325,7 +324,7 @@
                      year<span class="op">=</span><span class="va">year</span>,
                      actor<span class="op">=</span><span class="va">actor</span>,
                      gross<span class="op">=</span><span class="va">gross</span><span class="op">)</span></code></pre></div>
-<p>And if you use the <code>$</code> sign, as we discussed before, you can re-select the individual vectors back out of it.</p>
+<p>And if you use the <code>$</code> sign, you can re-select the individual vectors back out of it.</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R">  <span class="va">bond</span><span class="op">$</span><span class="va">filmname</span></code></pre></div>
 <pre><code>##  [1] "Skyfall"                         "Thunderball"                    
@@ -391,7 +390,7 @@
 <code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">bond</span><span class="op">$</span><span class="va">actor</span><span class="op">)</span></code></pre></div>
 <pre><code>## NULL</code></pre>
 <p>That’s because it hasn’t been <strong>factored</strong> yet.</p>
-<p>This is a real simply fix. Simply use the <code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code> function and assign it to the field name within the data frame. You can use the code below to do this.</p>
+<p>This is a real simply fix. Simply use the <code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code> function and assign it to the field name within the data frame.</p>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R">  <span class="va">bond</span><span class="op">$</span><span class="va">actor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">bond</span><span class="op">$</span><span class="va">actor</span><span class="op">)</span>
   <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">bond</span><span class="op">$</span><span class="va">actor</span><span class="op">)</span></code></pre></div>
@@ -402,7 +401,7 @@
 <p>R used to automatically factor character variables for you. However, that functionality was removed in a recent update.</p>
 <p>You may see factors as a not-so-important object type, but that’s not true. It comes in handy with regression analysis. Especially if your categorical variables are numeric.</p>
 <p>For example, our Bond data frame may not include the actor name. It could simply have a number between 1 and 6 for the actor - with Sean Connery as 1 and Daniel Craig as 6. That means a regression analysis would’ve analyzed the actor as a continuous variable by default!</p>
-<p>This also comes up with experiments that analyze the impact of medicine. It’s not uncommon to label one drug as 1 and another drug as 2. That means you’d have to factor those drug codes so that your regression analysis reads them correctly.</p>
+<p>This also comes up with experiments that analyze the impact of medicine. It’s not uncommon to label one drug as 1 and another drug as 2. That means you’d have to factor those drug codes so that your analysis reads them correctly.</p>
 </div>
 <div id="lists" class="section level2" number="4.8">
 <h2>
@@ -414,16 +413,15 @@
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R">  <span class="va">bondmodel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">gross</span><span class="op">~</span><span class="va">actor</span>,data<span class="op">=</span><span class="va">bond</span><span class="op">)</span></code></pre></div>
 <p>Now you can see the list this produces in the environment tab. As you can see, there’s a lot in this list.</p>
-<div class="inline-figure">
-<img src="1.34_List.png" width="50%" style="display: block; margin: auto;">
-You can also see what’s in the list using the following code:</div>
+<div class="inline-figure"><img src="1.34_List.png" width="50%" style="display: block; margin: auto;"></div>
+<p>You can also see what’s in the list using the following code:</p>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">bondmodel</span><span class="op">)</span></code></pre></div>
 <pre><code>##  [1] "coefficients"  "residuals"     "effects"       "rank"         
 ##  [5] "fitted.values" "assign"        "qr"            "df.residual"  
 ##  [9] "contrasts"     "xlevels"       "call"          "terms"        
 ## [13] "model"</code></pre>
-<p>This gets to the crux of why it’s important to know when you’re dealing with a list. It changes the way you select components of that list.</p>
+<p>This gets to the heart of why it’s important to know when you’re dealing with a list. It <em>changes</em> the way you select components of that list.</p>
 <p>For example, let’s say you want just the coefficients from a model you had built.</p>
 <p>You can use the same <code>$</code> symbol as before.</p>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
@@ -432,7 +430,7 @@ You can also see what’s in the list using the following code:</div>
 ##           820.31651          -314.41673          -309.37854          -269.48336 
 ##   actorSean Connery actorTimothy Dalton 
 ##           -95.43409          -487.19349</code></pre>
-<p>However, if you want to select a single coefficient, you have to use a number value afterwards:</p>
+<p>However, if you want to select a single coefficient, you have to use a number value afterwards.</p>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R">  <span class="va">bondmodel</span><span class="op">$</span><span class="va">coefficients</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span></code></pre></div>
 <pre><code>## actorRoger Moore 
@@ -505,7 +503,7 @@ You can also see what’s in the list using the following code:</div>
 
   <div class="chapter-nav">
 <div class="prev"><a href="setup.html"><span class="header-section-number">3</span> How to Get Started with R and RStudio</a></div>
-<div class="next"><a href="baserfilter.html"><span class="header-section-number">5</span> How to Filter and Transform Data in Base R</a></div>
+<div class="next"><a href="baserfilter.html"><span class="header-section-number">5</span> How to Filter and Transform Objects in Base R</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -538,7 +536,7 @@ You can also see what’s in the list using the following code:</div>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>R Programming in Plain English</strong>" was written by Taylor Rodgers. It was last built on 2021-12-31.</p>
+    <p>"<strong>R Programming in Plain English</strong>" was written by Taylor Rodgers. It was last built on 2022-01-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

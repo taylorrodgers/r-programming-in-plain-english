@@ -8,7 +8,7 @@ That’s different from the approach I took to learning R. When I learned R, I w
 
 That didn’t work out well for me. I was coming from a SQL background and thought data worked in a similar way with R.
 
-Had I started by learning the objects first, I would’ve saved a lot more time. I would’ve done less data manipulation in SQL or Excel and made simpler, more scalable R code.
+Had I started by learning about object types first, I would’ve saved a lot more time. I would’ve done less data manipulation in SQL or Excel and made simpler, more scalable R code.
 
 ## Why Do Objects Matter?
 
@@ -19,7 +19,7 @@ Almost everything you program in R does one of the following:
 * Produces an object
 * Calls upon a pre-existing object
 
-The simple code below utilizes five different object types:
+For example, the simple code below utilizes *five* different object types:
 
 ```{r 2.1, include=FALSE}
 library(faraway)
@@ -51,7 +51,6 @@ For example, the following code will select most data types in SQL:
   FROM
     Data_Set
 ```
-
 
 That’s different from R. Data selection in R depends on the object type.
 
@@ -97,9 +96,9 @@ You can use the code below to create and view a **logical** vector:
   v1
 ```
 
-What this code does is create a vector using the `c(input, input)` notation. It then assigns the vector the name **v1** using the `<–` notation. (A shortcut to the `<-` command is **Option+"-"**.)
+What this code does is create a vector using the `c(input, input)` notation. It then assigns the vector the name **v1** using the `<–` notation. (A shortcut to the `<-` command is **Option + "-"** for Macs and **Alt + "-"** for Windows.)
 
-You build a **character** vector in the same way, only that you use `c("input", "input")` notation instead:
+You build a **character** vector in the same way, only that you use `c("input", "input")` notation (with quotations "...") instead.
 
 ```{r 2.7}
   v2 <- c("Hola","Howdy","Hello")
@@ -113,7 +112,7 @@ And a **numeric** vector (like the name suggests) looks like this:
   v3
 ```
 
-The code above used the `c(n1:n2)` notation to create a range of values from n1 to n2, where n1 is 1 and n2 is 4. You can also use notations such as `c(n1, n2, n3, n4)` or like `c(n1:n4, n5:n6)`.
+The code above used the `c(n1:n2)` notation to create a range of values from n1 to n2, where n1 is 1 and n2 is 4. You can also use notations such as `c(n1, n2, n3, n4)` or something like `c(n1:n4, n5:n6)`.
 
 Play around with the code below and see what kind numeric vectors you can make!
 
@@ -140,11 +139,9 @@ The vector seems basic and not at all like the data sets you’ll be using. That
 
 Yes. Yes, you will.
 
-The more complex object, data frame, is comprised of individual vectors. (We’ll cover more about the data frame object later).
+Many more complicated object types are comprised of individual vectors. Also, functions will also use vectors extensively. Some will produce vectors as an **output**. Others will require vectors as an **input**.
 
-Many functions will also **output** data in vector form or produce a list composed of vectors.
-
-Vectors are also useful as **inputs** into other functions, as well. If you look below, I used a function from the `censusapi` package. I create a vector beforehand and then use it as an input for the function below it.
+For example, the script below uses a function from the `censusapi` package. I create a vector beforehand and then use it as an input for the function below it.
 
 ```{r 2.12, eval=FALSE}
   variable_list <- c("B15001_003E","B15001_004E","B15001_005E",
@@ -155,11 +152,11 @@ Vectors are also useful as **inputs** into other functions, as well. If you look
             region="state:*")
 ```
 
-You can use vectors in this way on a larger scale. For example, if you write a long script with many functions and references, vectors allow you to create a set of parameters at the beginning.
+You can use vectors in this way on a larger scale. For example, if you write a long script with many functions and references, vectors allow you to create a set of parameters at the beginning. You can then call upon them later in the script, which makes it more efficient to write and edit.
 
 ## Matrices and Arrays
 
-Matrices and arrays in R are multi-dimensional vectors. Matrices have multiple rows and columns. Arrays have two or more dimensions. (More on that distinction in a bit).
+Matrices and arrays in R are multi-dimensional vectors. Matrices have multiple rows and columns. Arrays are matrices that have two or more dimensions. (More on that distinction in a bit).
 
 Like their vector counterpart, all matrix / array values must be the same mode or data type – not a mix. That means if you can't have a numeric value alongside a character value.
 
@@ -170,11 +167,11 @@ Here’s an example of a matrix:
   matrix1
 ```
 
-Why would R programmers want this? It comes back to the R’s use as a statistical programming language. For example, multiple linear regression often has combined variables, which involves multiplying two matrices together.
+Why would R programmers want this? It comes back to R’s use as a statistical programming language. For example, multiple linear regression often has combined variables, which involves multiplying two matrices together.
 
 Providing these two object types in R that are solely for numeric values makes this easier.
 
-For example, you can multiply these two matrices together with the `%*%` command and get the same results you would by using matrix algebra:
+For example, you can multiply these two matrices together with the `%*%` command and get the same results you would by using matrix algebra.
 
 ```{r 2.14}
   matrix1 <- matrix(c(2,0,1,3),nrow=2,ncol=2)
@@ -185,6 +182,7 @@ For example, you can multiply these two matrices together with the `%*%` command
 ```
 
 That's the same as if you did it yourself by hand.
+
 $$
  \begin{bmatrix}
   2 & 1\\
@@ -216,29 +214,29 @@ Arrays are more complex than their simple 2-D counterpart. Instead of a single s
 
 If the output up above looks like gibberish, don't worry – most people think it's confusing when they first see it. That's because the R user interface doesn't make it visually intuitive as to how the array operates.
 
-Let's use a picture to visualize this instead. Think of it as if each matrix as a separate entity within the array:
+Let's use a picture to visualize this instead. Think of each matrix as a separate entity within the array...
 
 ```{r 2.16, echo=FALSE,fig.align="center",out.width="75%"}
 knitr::include_graphics("1.29_Arrays_Flat.png",dpi=300)
 ```
 
-What the array does is simply *stack* them on top of each other:
+What the array does is simply *stack* them on top of each other...
 
 ```{r 2.17, echo=FALSE,fig.align="center",out.width="25%"}
 knitr::include_graphics("1.30_Arrays_Stacked.png",dpi=300)
 ```
 
-Since arrays with three dimensions are merely stacked matrices, that means each matrix within the array must have the same number of columns and rows.
+Since arrays with three dimensions are merely stacked matrices, that means each matrix within the array must have the same number of columns and rows as the others.
 
 ## Data Frames
 
-Data frame is the object type that’s most similar to what you’d find in a SQL database. What I mean by that is that it’s organized and referenced by columns and can have many, many rows. 
+Data frame is the object type that most people would feel comfortable using. It’s organized and referenced by columns and can have many, many rows. Each column contains the same amount of rows as other columns. And a row number in one column is connected to the same row number in the other columns.
 
 And most importantly, it can contain both numeric and character values! (Earth shattering, I know!)
 
 I like to think of a data frame as a way to combine vectors. As a matter of fact, you can build a data frame doing just that.
 
-Take this code below and run it. You’ll see that we make individual vectors containing data on James Bond movies^[@noauthor_james_nodate] and we then combine it into a data frame.
+Take this code below and run it. You’ll see that we make individual vectors containing data on James Bond movies^[@noauthor_james_nodate] and then combine it into a data frame.
 
 ```{r 2.18}
   filmname <- c("Skyfall","Thunderball","Goldfinger",
@@ -287,7 +285,7 @@ Take this code below and run it. You’ll see that we make individual vectors co
                      gross=gross)
 ```
 
-And if you use the `$` sign, as we discussed before, you can re-select the individual vectors back out of it.
+And if you use the `$` sign, you can re-select the individual vectors back out of it.
 
 ```{r 2.19}
   bond$filmname
@@ -321,12 +319,13 @@ If we tried to get a list of these actors using the `levels()` function, it woul
 
 That's because it hasn't been **factored** yet.
 
-This is a real simply fix. Simply use the `factor()` function and assign it to the field name within the data frame. You can use the code below to do this.
+This is a real simply fix. Simply use the `factor()` function and assign it to the field name within the data frame.
 
 ```{r 2.22.2}
   bond$actor <- factor(bond$actor)
   levels(bond$actor)
 ```
+
 And this will also show up in the environment tab in the top left.
 
 ```{r 2.22, echo=FALSE,fig.align="center",out.width="50%"}
@@ -339,7 +338,7 @@ You may see factors as a not-so-important object type, but that's not true. It c
 
 For example, our Bond data frame may not include the actor name. It could simply have a number between 1 and 6 for the actor - with Sean Connery as 1 and Daniel Craig as 6. That means a regression analysis would've analyzed the actor as a continuous variable by default!
 
-This also comes up with experiments that analyze the impact of medicine. It's not uncommon to label one drug as 1 and another drug as 2. That means you'd have to factor those drug codes so that your regression analysis reads them correctly.
+This also comes up with experiments that analyze the impact of medicine. It's not uncommon to label one drug as 1 and another drug as 2. That means you'd have to factor those drug codes so that your analysis reads them correctly.
 
 ## Lists
 
@@ -358,13 +357,14 @@ Now you can see the list this produces in the environment tab. As you can see, t
 ```{r 2.32, echo=FALSE,fig.align="center",out.width="50%"}
 knitr::include_graphics("1.34_List.png",dpi=150)
 ```
+
 You can also see what's in the list using the following code:
 
 ```{r 2.33}
   names(bondmodel)
 ```
 
-This gets to the crux of why it’s important to know when you’re dealing with a list. It changes the way you select components of that list.
+This gets to the heart of why it’s important to know when you’re dealing with a list. It *changes* the way you select components of that list.
 
 For example, let’s say you want just the coefficients from a model you had built. 
 
@@ -374,7 +374,7 @@ You can use the same `$` symbol as before.
   bondmodel$coefficients
 ```
 
-However, if you want to select a single coefficient, you have to use a number value afterwards:
+However, if you want to select a single coefficient, you have to use a number value afterwards.
 
 ```{r 2.35}
   bondmodel$coefficients[4]

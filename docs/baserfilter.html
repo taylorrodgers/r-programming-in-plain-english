@@ -4,17 +4,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 5 How to Filter and Transform Data in Base R | R Programming in Plain English</title>
+<title>Chapter 5 How to Filter and Transform Objects in Base R | R Programming in Plain English</title>
 <meta name="author" content="Taylor Rodgers">
 <meta name="description" content="In the last chapter, I explained the various object types in R. Now we want to learn how to filter and transform those objects. Notice how I didn’t say filter and transform “data”? That’s because...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 5 How to Filter and Transform Data in Base R | R Programming in Plain English">
+<meta property="og:title" content="Chapter 5 How to Filter and Transform Objects in Base R | R Programming in Plain English">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://github.com/taylorrodgers/taylorrodgers.github.io/baserfilter.html">
 <meta property="og:image" content="https://github.com/taylorrodgers/taylorrodgers.github.io/BookCover.png">
 <meta property="og:description" content="In the last chapter, I explained the various object types in R. Now we want to learn how to filter and transform those objects. Notice how I didn’t say filter and transform “data”? That’s because...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 5 How to Filter and Transform Data in Base R | R Programming in Plain English">
+<meta name="twitter:title" content="Chapter 5 How to Filter and Transform Objects in Base R | R Programming in Plain English">
 <meta name="twitter:description" content="In the last chapter, I explained the various object types in R. Now we want to learn how to filter and transform those objects. Notice how I didn’t say filter and transform “data”? That’s because...">
 <meta name="twitter:image" content="https://github.com/taylorrodgers/taylorrodgers.github.io/BookCover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -49,7 +49,7 @@
 <li><a class="" href="whatisr.html"><span class="header-section-number">2</span> What is R Programming?</a></li>
 <li><a class="" href="setup.html"><span class="header-section-number">3</span> How to Get Started with R and RStudio</a></li>
 <li><a class="" href="objects.html"><span class="header-section-number">4</span> Object Types in R Programming</a></li>
-<li><a class="active" href="baserfilter.html"><span class="header-section-number">5</span> How to Filter and Transform Data in Base R</a></li>
+<li><a class="active" href="baserfilter.html"><span class="header-section-number">5</span> How to Filter and Transform Objects in Base R</a></li>
 <li><a class="" href="dplyr.html"><span class="header-section-number">6</span> How to Filter and Transform Data with the dplyr Package</a></li>
 <li><a class="" href="packages.html"><span class="header-section-number">7</span> Understanding and Using R Packages</a></li>
 <li><a class="" href="function.html"><span class="header-section-number">8</span> How to Write Functions</a></li>
@@ -67,7 +67,7 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="baserfilter" class="section level1" number="5">
 <h1>
-<span class="header-section-number">5</span> How to Filter and Transform Data in Base R<a class="anchor" aria-label="anchor" href="#baserfilter"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5</span> How to Filter and Transform Objects in Base R<a class="anchor" aria-label="anchor" href="#baserfilter"><i class="fas fa-link"></i></a>
 </h1>
 <p>In the last chapter, I explained the various object types in R. Now we want to learn how to <strong>filter</strong> and <strong>transform</strong> those objects. Notice how I didn’t say filter and transform “data”? That’s because the methods you use to handle data in R heavily depend on the object type.</p>
 <p>Before I explain those methods though, we need to cover operators.</p>
@@ -77,7 +77,8 @@
 </h2>
 <p>If you’re new to programming, then you’re probably not familiar with the term <strong>operator</strong>. Operators, in plain English, modify or evaluate data. That’s important to data transformation and filtering.</p>
 <p>There are two types of operators in R: arithmetic and logical.</p>
-<p><strong>Arithmetic</strong> operators cover tasks like addition, subtraction, etc. You know? The basic math stuff. This is useful for data transformation and will be used in several examples later. Here are the common arithmetic operators:</p>
+<p><strong>Arithmetic</strong> operators cover tasks like addition, subtraction, etc. This is useful for data transformation and will be used in several examples later.</p>
+<p>Here are the common arithmetic operators:</p>
 <div class="inline-table"><table class="table table-sm">
 <thead><tr class="header">
 <th align="left">label</th>
@@ -114,7 +115,8 @@
 </tr>
 </tbody>
 </table></div>
-<p><strong>Logical</strong> operators takes the data and generates a TRUE or FALSE output, based on whether the data meets your requirement. This is more helpful for <em>filtering</em> data than transforming. Here are the common logical operators:</p>
+<p><strong>Logical</strong> operators takes the data and generates a TRUE or FALSE output, based on whether the data meets your requirement. This is more helpful for <em>filtering</em> data than transforming.</p>
+<p>Here are the common logical operators:</p>
 <div class="inline-table"><table class="table table-sm">
 <thead><tr class="header">
 <th align="left">label</th>
@@ -159,254 +161,269 @@
 </tr>
 </tbody>
 </table></div>
-<p>Don’t worry if you’re unsure of how to use these just yet. You’ll see examples for these in the next few sections. This is just for your easy reference.</p>
+<p>Don’t worry if you’re unsure of how to use these just yet. You’ll see examples for these in the next few sections. This is just for your easy reference later.</p>
 </div>
 <div id="how-to-filter-and-transform-data-from-a-vector" class="section level2" number="5.2">
 <h2>
 <span class="header-section-number">5.2</span> How to Filter and Transform Data From a Vector<a class="anchor" aria-label="anchor" href="#how-to-filter-and-transform-data-from-a-vector"><i class="fas fa-link"></i></a>
 </h2>
 <p>Vectors are the easiest object type to filter. Same with transforming the data within them.</p>
-<p>If you want to reference or view the entire vector, you simply enter the name you assigned the object:</p>
+<p>If you want to reference or view the entire vector, you simply enter the name you assigned the object.</p>
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">v5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">4</span><span class="op">)</span>
-<span class="va">v5</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">v5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">4</span><span class="op">)</span>
+  <span class="va">v5</span></code></pre></div>
 <pre><code>## [1] 1 5 5 2 1 4</code></pre>
-<p>(Remember: the <code>&lt;-</code> command allows you to name any object. You can use <strong>Option+“-”</strong> as a short-cut for <code>&lt;-</code>.)</p>
-<p>You also can select a single entry from a vector using the <code>[n]</code> notation:</p>
+<p>(Remember: the <code>&lt;-</code> command allows you to name any object. You can use <strong>Option + “-” </strong> for Macs and <strong>Alt + “-”</strong> for Windows as a short-cut for <code>&lt;-</code>.)</p>
+<p>You also can select a single entry from a vector using the <code>[n]</code> notation.</p>
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">v5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">4</span><span class="op">)</span>
-<span class="va">v5</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">v5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">4</span><span class="op">)</span>
+  <span class="va">v5</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
 <p>As you can see, the script above selected the third value from the vector.</p>
 <p>You can select a range of entries by using the <code>[n:n]</code> notation.</p>
 <div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">v5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">4</span><span class="op">)</span>
-<span class="va">v5</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">v5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">4</span><span class="op">)</span>
+  <span class="va">v5</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span></code></pre></div>
 <pre><code>## [1] 5 2</code></pre>
 <p>And, as we’ve seen before, you can create a new vector by referencing old vectors!</p>
 <div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">v2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Hola"</span>,<span class="st">"Howdy"</span>,<span class="st">"Hello"</span><span class="op">)</span>
-<span class="va">v7</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span>
-<span class="va">v8</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">v2</span>,<span class="va">v7</span><span class="op">)</span>
-<span class="va">v8</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">v2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Hola"</span>,<span class="st">"Howdy"</span>,<span class="st">"Hello"</span><span class="op">)</span>
+  <span class="va">v7</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span>
+  <span class="va">v8</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">v2</span>,<span class="va">v7</span><span class="op">)</span>
+  <span class="va">v8</span></code></pre></div>
 <pre><code>## [1] "Hola"  "Howdy" "Hello" "2"     "3"     "4"</code></pre>
 <p>You can also use other base R functions to filter data.</p>
 <p>For example, you may want to see the minimum or maximum value in a vector. You can use the <code><a href="https://rdrr.io/r/base/Extremes.html">max()</a></code> and <code><a href="https://rdrr.io/r/base/Extremes.html">min()</a></code> command to do so.</p>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">v5</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">v5</span></code></pre></div>
 <pre><code>## [1] 1 5 5 2 1 4</code></pre>
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">v5</span><span class="op">)</span> <span class="co"># Max value</span></code></pre></div>
+<code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">v5</span><span class="op">)</span> <span class="co"># Max value</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
 <div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">v5</span><span class="op">)</span> <span class="co"># Min value</span></code></pre></div>
+<code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">v5</span><span class="op">)</span> <span class="co"># Min value</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<p>And you can use logical operators as well. In the example below, I use the <code>&gt;=</code> and <code>&amp;</code> operators to filter values:</p>
+<p>And you can use logical operators as well. In the example below, I use the <code>&gt;=</code> and <code>&amp;</code> operators to filter values.</p>
 <div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">v5</span> <span class="op">&gt;=</span> <span class="fl">2</span> <span class="co"># Values greater than 2</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">v5</span> <span class="op">&gt;=</span> <span class="fl">2</span> <span class="co"># Values greater than 2</span></code></pre></div>
 <pre><code>## [1] FALSE  TRUE  TRUE  TRUE FALSE  TRUE</code></pre>
 <div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">v5</span> <span class="op">&gt;=</span> <span class="fl">3</span> <span class="op">&amp;</span> <span class="va">v5</span> <span class="op">&lt;=</span> <span class="fl">5</span> <span class="co"># Values between 3 and 5</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">v5</span> <span class="op">&gt;=</span> <span class="fl">3</span> <span class="op">&amp;</span> <span class="va">v5</span> <span class="op">&lt;=</span> <span class="fl">5</span> <span class="co"># Values between 3 and 5</span></code></pre></div>
 <pre><code>## [1] FALSE  TRUE  TRUE FALSE FALSE  TRUE</code></pre>
-<p>We can also use the <code>|</code> operator to find values that meet a criteria. For example, I filter the vector below to “Hola” and “Howdy.”</p>
+<p>We can also use the <code>|</code> (“or”) operator to find values that meet a criteria. For example, I filter the vector below to “Hola” and “Howdy.”</p>
 <div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">v2</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">v2</span></code></pre></div>
 <pre><code>## [1] "Hola"  "Howdy" "Hello"</code></pre>
 <div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">v2</span> <span class="op">==</span> <span class="st">"Hola"</span> <span class="op">|</span> <span class="va">v2</span> <span class="op">==</span> <span class="st">"Howdy"</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">v2</span> <span class="op">==</span> <span class="st">"Hola"</span> <span class="op">|</span> <span class="va">v2</span> <span class="op">==</span> <span class="st">"Howdy"</span></code></pre></div>
 <pre><code>## [1]  TRUE  TRUE FALSE</code></pre>
 <p>You probably noticed that these logical operators only return a TRUE or FALSE statement. That makes sense since it is a <em>logical</em> argument that’s evaluated. However, we may want to see the actual values that meet the argument. This isn’t important in an example like this, but it does come up later on for more complex objects.</p>
-<p>To show the actual values where the logical argument is true, you use the <code>object_name[argument]</code> notation. In the next few examples, I filter the vectors down to values that meet the arguments used in the last few examples:</p>
+<p>To show the actual values where the logical argument is true, you use the <code>object_name[argument]</code> notation.</p>
+<p>In the next few examples, I filter the vectors down to values that meet the arguments used in the last few examples:</p>
 <div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">v5</span><span class="op">[</span><span class="va">v5</span><span class="op">&gt;=</span><span class="fl">2</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">v5</span><span class="op">[</span><span class="va">v5</span><span class="op">&gt;=</span><span class="fl">2</span><span class="op">]</span></code></pre></div>
 <pre><code>## [1] 5 5 2 4</code></pre>
 <div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">v5</span><span class="op">[</span><span class="va">v5</span> <span class="op">&gt;=</span> <span class="fl">3</span> <span class="op">&amp;</span> <span class="va">v5</span> <span class="op">&lt;=</span> <span class="fl">5</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">v5</span><span class="op">[</span><span class="va">v5</span> <span class="op">&gt;=</span> <span class="fl">3</span> <span class="op">&amp;</span> <span class="va">v5</span> <span class="op">&lt;=</span> <span class="fl">5</span><span class="op">]</span></code></pre></div>
 <pre><code>## [1] 5 5 4</code></pre>
 <div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">v2</span><span class="op">[</span><span class="va">v2</span> <span class="op">==</span> <span class="st">"Hola"</span> <span class="op">|</span> <span class="va">v2</span> <span class="op">==</span> <span class="st">"Howdy"</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">v2</span><span class="op">[</span><span class="va">v2</span> <span class="op">==</span> <span class="st">"Hola"</span> <span class="op">|</span> <span class="va">v2</span> <span class="op">==</span> <span class="st">"Howdy"</span><span class="op">]</span></code></pre></div>
 <pre><code>## [1] "Hola"  "Howdy"</code></pre>
 <p>In the examples above, I simply took the logical argument and plugged it into the brackets.</p>
-<p>You can also change data easily when it comes to numeric vectors. For example, down below is a vector of box office revenue for James Bond films. Copy and paste this script into your R console and execute:</p>
+<p>You can also change data easily when it comes to numeric vectors. For example, down below is a vector of box office revenue for James Bond films.</p>
+<p>Copy and paste this script into your R console and execute:</p>
 <div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">gross</span> <span class="op">&lt;-</span> 
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1108561008</span>,<span class="fl">1014941117</span>,<span class="fl">912257512</span>,<span class="fl">880669186</span>,
-    <span class="fl">825110761</span>,<span class="fl">756544419</span>,<span class="fl">692713752</span>,<span class="fl">669789482</span>,
-    <span class="fl">655872400</span>,<span class="fl">648514469</span>,<span class="fl">622246378</span>,<span class="fl">576277964</span>,
-    <span class="fl">543639638</span>,<span class="fl">529548711</span>,<span class="fl">505899782</span>,<span class="fl">491617153</span>,
-    <span class="fl">486468881</span>,<span class="fl">478946402</span>,<span class="fl">448249281</span>,<span class="fl">440759072</span>,
-    <span class="fl">426244352</span>,<span class="fl">381088866</span>,<span class="fl">321172633</span>,<span class="fl">285157191</span><span class="op">)</span>
-<span class="va">gross</span></code></pre></div>
-<p>As you can see, the values are very large. To make our analysis easier, we can use an <em>arithmetic</em> operator I showed earlier. In this scenario, I want to make the values smaller. So I’m going to divide it using the <code>/</code> operator.</p>
+<code class="sourceCode R">  <span class="va">gross</span> <span class="op">&lt;-</span> 
+    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1108561008</span>,<span class="fl">1014941117</span>,<span class="fl">912257512</span>,<span class="fl">880669186</span>,
+      <span class="fl">825110761</span>,<span class="fl">756544419</span>,<span class="fl">692713752</span>,<span class="fl">669789482</span>,
+      <span class="fl">655872400</span>,<span class="fl">648514469</span>,<span class="fl">622246378</span>,<span class="fl">576277964</span>,
+      <span class="fl">543639638</span>,<span class="fl">529548711</span>,<span class="fl">505899782</span>,<span class="fl">491617153</span>,
+      <span class="fl">486468881</span>,<span class="fl">478946402</span>,<span class="fl">448249281</span>,<span class="fl">440759072</span>,
+      <span class="fl">426244352</span>,<span class="fl">381088866</span>,<span class="fl">321172633</span>,<span class="fl">285157191</span><span class="op">)</span>
+  <span class="va">gross</span></code></pre></div>
+<p>As you can see, the values are very large. To make our analysis easier, we can use one of the <em>arithmetic</em> operators that I showed earlier.</p>
+<p>In this scenario, I want to make the values smaller. So I’m going to divide it using the <code>/</code> operator.</p>
 <div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">gross</span><span class="op">/</span><span class="fl">1000000</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">gross</span> <span class="op">&lt;-</span> <span class="va">gross</span><span class="op">/</span><span class="fl">1000000</span>
+  <span class="va">gross</span></code></pre></div>
+<p>You may have noticed that I reassigned the vector the same name “gross”. You can do this if you want to overwrite the previous object assignment. Careful though. Those changes are permanent. That means to reverse them, you may need to run an earlier script to re-generate the original data or re-import your data set.</p>
 <p>You can also calculate individual values this way too.</p>
 <div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">gross</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span>  </code></pre></div>
+<code class="sourceCode R">  <span class="va">gross</span> <span class="op">&lt;-</span> 
+    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1108561008</span>,<span class="fl">1014941117</span>,<span class="fl">912257512</span>,<span class="fl">880669186</span>,
+      <span class="fl">825110761</span>,<span class="fl">756544419</span>,<span class="fl">692713752</span>,<span class="fl">669789482</span>,
+      <span class="fl">655872400</span>,<span class="fl">648514469</span>,<span class="fl">622246378</span>,<span class="fl">576277964</span>,
+      <span class="fl">543639638</span>,<span class="fl">529548711</span>,<span class="fl">505899782</span>,<span class="fl">491617153</span>,
+      <span class="fl">486468881</span>,<span class="fl">478946402</span>,<span class="fl">448249281</span>,<span class="fl">440759072</span>,
+      <span class="fl">426244352</span>,<span class="fl">381088866</span>,<span class="fl">321172633</span>,<span class="fl">285157191</span><span class="op">)</span>
+  <span class="va">gross</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span>  </code></pre></div>
 <pre><code>## [1] 880669186</code></pre>
 <div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">gross</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span><span class="op">/</span><span class="fl">100000</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">gross</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span><span class="op">/</span><span class="fl">100000</span></code></pre></div>
 <pre><code>## [1] 8806.692</code></pre>
-<p>And you can re-assign the value to a particular part of a vector using the methods we described above and the <code>&lt;-</code> notation. For example, we can see below how we re-assign values based on the location.</p>
+<p>And you can re-assign the value to a particular part of a vector using the methods we described above and the <code>&lt;-</code> notation.</p>
+<p>For example, we can see below how we re-assign values based on the location:</p>
 <div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">v8</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">4</span><span class="op">)</span> <span class="co"># Creates the original vector</span>
-<span class="va">v8</span><span class="op">[</span><span class="fl">6</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">8</span> <span class="co"># Replaces the sixth value with an 8</span>
-<span class="va">v8</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">3</span>,<span class="fl">1</span><span class="op">)</span> <span class="co"># Replaces the first three values</span>
-<span class="va">v8</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">v8</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">4</span><span class="op">)</span> <span class="co"># Creates the original vector</span>
+  <span class="va">v8</span><span class="op">[</span><span class="fl">6</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">8</span> <span class="co"># Replaces the sixth value with an 8</span>
+  <span class="va">v8</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">3</span>,<span class="fl">1</span><span class="op">)</span> <span class="co"># Replaces the first three values</span>
+  <span class="va">v8</span></code></pre></div>
 <pre><code>## [1] 4 3 1 2 1 8</code></pre>
 </div>
 <div id="how-to-filter-and-transform-data-from-a-matrix" class="section level2" number="5.3">
 <h2>
 <span class="header-section-number">5.3</span> How to Filter and Transform Data From a Matrix<a class="anchor" aria-label="anchor" href="#how-to-filter-and-transform-data-from-a-matrix"><i class="fas fa-link"></i></a>
 </h2>
-<p>Filtering the data within a matrix is both similar and different than a vector.</p>
-<p>It’s similar because we can use the <code>[n]</code> notation to select a single entry. We had done this before with a vector:</p>
+<p>Filtering the data within a matrix is both similar to and different from a vector.</p>
+<p>It’s similar because we can use the <code>[n]</code> notation to select a single entry. We had done this before with a vector.</p>
 <div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">v5</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">v5</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
 <p>You can do the same for a matrix. If you run the code below, you’ll re-create and view the matrix we used in the last chapter:</p>
 <div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matrix1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">2</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-<span class="va">matrix1</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">matrix1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">2</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+  <span class="va">matrix1</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    2    1
 ## [2,]    0    3</code></pre>
 <p>And here you’ll select the fourth value from that matrix using the <code>[4]</code> command:</p>
 <div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matrix1</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">matrix1</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<p>Now that isn’t very practical for a matrix. You may need to select a value from a specific row or column instead. This is where matrices are different from a vector. You’ll want to use the <code>[r,c]</code> command to determine which values you want. In the example below, I select the second row and first column of the matrix.</p>
+<p>Now that isn’t very practical for a matrix. You may need to select a value from a specific row or column instead. This is where matrices are different from a vector. You’ll want to use the <code>[r,c]</code> command to determine which values you want.</p>
+<p>In the example below, I select the second row and first column of the matrix:</p>
 <div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matrix1</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">matrix1</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">]</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
-<p>We can make this easier on ourselves. Instead of specifying row or column numbers, we can give them names. That way, we can use the <code>[row_name,column_name]</code> notation to select data from a matrix. Down below, I give our previously created matrix row and column names.</p>
+<p>We can make this easier on ourselves. Instead of specifying row or column numbers, we can give them names. That way, we can use the <code>[row_name,column_name]</code> notation to select data from a matrix.</p>
+<p>Down below, I give our previously created matrix row and column names:</p>
 <div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">matrix1</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Col1"</span>,<span class="st">"Col2"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">matrix1</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Row1"</span>,<span class="st">"Row2"</span><span class="op">)</span>
-<span class="va">matrix1</span><span class="op">[</span><span class="st">"Row2"</span>,<span class="st">"Col1"</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">matrix1</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Col1"</span>,<span class="st">"Col2"</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">matrix1</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Row1"</span>,<span class="st">"Row2"</span><span class="op">)</span>
+  <span class="va">matrix1</span><span class="op">[</span><span class="st">"Row2"</span>,<span class="st">"Col1"</span><span class="op">]</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <p>We can also apply vector filtering methods to matrices. For example, I want to see what values are greater than 0.</p>
 <div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matrix1</span> <span class="op">&gt;</span> <span class="fl">0</span> <span class="co"># Returns true or false</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">matrix1</span> <span class="op">&gt;</span> <span class="fl">0</span> <span class="co"># Returns true or false</span></code></pre></div>
 <pre><code>##       Col1 Col2
 ## Row1  TRUE TRUE
 ## Row2 FALSE TRUE</code></pre>
 <p>Funny enough though, you can’t return the actual values that meet this criteria in a matrix form. It’ll turn into a vector. That’s because the output may not have the same number of columns and rows as the original matrix. So R assumes it’ll need a one-dimensional object output.</p>
 <div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matrix1</span><span class="op">[</span><span class="va">matrix1</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">matrix1</span><span class="op">[</span><span class="va">matrix1</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">]</span></code></pre></div>
 <pre><code>## [1] 2 1 3</code></pre>
 <p>You can use the same techniques we outlined before with the vectors to transform the data within a matrix. Copy and paste the codes below to your R console and see the results. Feel free to play around with the inputs to see what happens.</p>
 <div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matrix1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">2</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>  
-<span class="va">matrix1</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">matrix1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">2</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>  
+  <span class="va">matrix1</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    2    1
 ## [2,]    0    3</code></pre>
 <div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matrix1</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">5</span>
-<span class="va">matrix1</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">matrix1</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">5</span>
+  <span class="va">matrix1</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    2    5
 ## [2,]    0    3</code></pre>
 <div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matrix1</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">2</span>
-<span class="va">matrix1</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">matrix1</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">2</span>
+  <span class="va">matrix1</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    2    2
 ## [2,]    0    2</code></pre>
 <div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matrix1</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span>
-<span class="va">matrix1</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">matrix1</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span>
+  <span class="va">matrix1</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    2    2
 ## [2,]    0    0</code></pre>
 <p>Like the vectors, you can transform the data within the matrix using the arithmetic operators we discussed earlier.</p>
 <div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matrix1</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">matrix1</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    2    2
 ## [2,]    0    0</code></pre>
 <div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matrix1</span> <span class="op">+</span> <span class="fl">2</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">matrix1</span> <span class="op">+</span> <span class="fl">2</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    4    4
 ## [2,]    2    2</code></pre>
 <div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matrix1</span> <span class="op">-</span> <span class="fl">4</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">matrix1</span> <span class="op">-</span> <span class="fl">4</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]   -2   -2
 ## [2,]   -4   -4</code></pre>
 <div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matrix1</span> <span class="op">^</span> <span class="fl">3</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">matrix1</span> <span class="op">^</span> <span class="fl">3</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    8    8
 ## [2,]    0    0</code></pre>
 <div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matrix1</span> <span class="op">*</span> <span class="fl">5</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">matrix1</span> <span class="op">*</span> <span class="fl">5</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]   10   10
 ## [2,]    0    0</code></pre>
 <p>You can also use these operators to combine matrices. We’ll need a few matrices to illustrate these examples though. Take the code I have below and execute it in your console, if you want to follow along with my examples.</p>
 <div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matrix1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">2</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-<span class="va">matrix1</span>
-<span class="va">matrix2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">7</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-<span class="va">matrix2</span>
-<span class="va">matrix6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">3</span>,<span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">2</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-<span class="va">matrix6</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">matrix1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">2</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+  <span class="va">matrix1</span>
+  <span class="va">matrix2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">7</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+  <span class="va">matrix2</span>
+  <span class="va">matrix6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">3</span>,<span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">2</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+  <span class="va">matrix6</span></code></pre></div>
 <p>It’s important to remember the dimensions of your matrices. Attempting to use addition on two matrices without the same dimensions won’t work.</p>
 <p>Matrix 1 and 2 do not have the same dimensions, so it will return an error:</p>
 <div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matrix1</span> <span class="op">+</span> <span class="va">matrix2</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">matrix1</span> <span class="op">+</span> <span class="va">matrix2</span></code></pre></div>
 <pre><code>## Error in matrix1 + matrix2: non-conformable arrays</code></pre>
 <p>However, Matrix 1 and Matrix 6 do have the same dimensions and will execute:</p>
 <div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matrix1</span> <span class="op">+</span> <span class="va">matrix6</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">matrix1</span> <span class="op">+</span> <span class="va">matrix6</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    6    2
 ## [2,]    3    6</code></pre>
 <p>Multiplying two matrices together can be misleading. For example, using the simple <code>*</code> operator will merely multiply the corresponding values in two matrices with the same dimensions. Confused? Look at the two matrices below and then look at the output:</p>
 <div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matrix1</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">matrix1</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    2    1
 ## [2,]    0    3</code></pre>
 <div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matrix6</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">matrix6</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    4    1
 ## [2,]    3    3</code></pre>
 <div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matrix1</span> <span class="op">*</span> <span class="va">matrix6</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">matrix1</span> <span class="op">*</span> <span class="va">matrix6</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    8    1
 ## [2,]    0    9</code></pre>
 <p>Entry [1,1] of the first matrix is 2. Entry [1,1] of the second matrix is 4. 2 x 4 = 8. That shows us that the multiplication used here is not true matrix multiplication.</p>
 <p>If you attempt to use the same <code>*</code> operator for Matrix 1 and Matrix 2 though, you will get an error:</p>
 <div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matrix1</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">matrix1</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    2    1
 ## [2,]    0    3</code></pre>
 <div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matrix2</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">matrix2</span></code></pre></div>
 <pre><code>##      [,1]
 ## [1,]    5
 ## [2,]    7</code></pre>
 <div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matrix1</span> <span class="op">*</span> <span class="va">matrix2</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">matrix1</span> <span class="op">*</span> <span class="va">matrix2</span></code></pre></div>
 <pre><code>## Error in matrix1 * matrix2: non-conformable arrays</code></pre>
 <p>That’s because these two matrices do not share the same dimensions.</p>
-<p>However, we can generate a single matrix from these two matrices using matrix algebra. To do so, we use the <code>%*%</code> operator.</p>
+<p>However, we can generate a single matrix from these two matrices using matrix algebra. To do so, we use the <code>%*%</code> operator:</p>
 <div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matrix7</span> <span class="op">&lt;-</span> <span class="va">matrix1</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">matrix2</span>  
-<span class="va">matrix7</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">matrix7</span> <span class="op">&lt;-</span> <span class="va">matrix1</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">matrix2</span>  
+  <span class="va">matrix7</span></code></pre></div>
 <pre><code>##      [,1]
 ## [1,]   17
 ## [2,]   21</code></pre>
 <p>You can also divide a matrix with another using the <code>%/%</code> operator:</p>
 <div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matrix7</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%/%</a></span> <span class="va">matrix2</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">matrix7</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%/%</a></span> <span class="va">matrix2</span></code></pre></div>
 <pre><code>##      [,1]
 ## [1,]    3
 ## [2,]    3</code></pre>
@@ -418,129 +435,233 @@
 </h2>
 <p>Selecting data from arrays is similar to what we did before. You can select an individual entry using the <code>[n]</code> command. If you look down below, we re-create the array we used in the last chapter. Copy and paste this code into your R console.</p>
 <div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matrix3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">4</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-<span class="va">matrix4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">6</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">4</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-<span class="va">matrix5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">2</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">4</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
-<span class="va">array1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">matrix3</span>,<span class="va">matrix4</span>,<span class="va">matrix5</span><span class="op">)</span>,
-                dim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>  
-<span class="va">array1</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">matrix3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">4</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+  <span class="va">matrix4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">6</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">4</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+  <span class="va">matrix5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">2</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">4</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+  <span class="va">array1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">matrix3</span>,<span class="va">matrix4</span>,<span class="va">matrix5</span><span class="op">)</span>,
+                  dim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>  
+  <span class="va">array1</span></code></pre></div>
 <p>This script will create three separate matrices, like you see below:</p>
-<div class="inline-figure"><img src="1.29_Arrays_Flat.png" width="50%%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="1.29_Arrays_Flat.png" width="75%" style="display: block; margin: auto;"></div>
 <p>And then stacks them into an array:</p>
-<div class="inline-figure"><img src="1.30_Arrays_Stacked.png" width="15%" style="display: block; margin: auto;"></div>
-<p>You can then select the first and twenty-second entry with the scripts below.</p>
+<div class="inline-figure"><img src="1.30_Arrays_Stacked.png" width="25%" style="display: block; margin: auto;"></div>
+<p>You can then select the first and twenty-second entry with the scripts below:</p>
 <div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">array1</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">array1</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 <div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">array1</span><span class="op">[</span><span class="fl">22</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">array1</span><span class="op">[</span><span class="fl">22</span><span class="op">]</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
-<p>To help you visualize this, I highlighted the fifth and twenty second values from the array in the illustration below:</p>
-<div class="inline-figure"><img src="1.35_Arrays_Highlight_1.png" width="50%" style="display: block; margin: auto;"></div>
+<p>To help you visualize this, I highlighted the fifth and twenty-second values from the array in the illustration below:</p>
+<div class="inline-figure"><img src="1.35_Arrays_Highlight_1.png" width="75%" style="display: block; margin: auto;"></div>
 <p>With arrays, selecting particular columns or rows gets difficult because arrays can have multiple dimensions. That introduces the <code>[r,c,d]</code> notation.</p>
 <p>Down below, we select the entire second row of every matrix in our array:</p>
 <div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">array1</span><span class="op">[</span><span class="fl">2</span>,,<span class="op">]</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">array1</span><span class="op">[</span><span class="fl">2</span>,,<span class="op">]</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    0    3    3
 ## [2,]    2    6    5</code></pre>
 <p>You may have noticed that this “flipped” the direction. R isn’t trying to confuse you. It’s merely displaying the previous, individual matrix rows as columns. So column 1 shows the results from matrix 1 in the previous array. Keep this in mind as you interact with arrays. The output may not always be intuitive.</p>
 <p>Down below is an illustration of how R processes this command.</p>
 <p>First, R finds the second row for each level of the array…</p>
-<div class="inline-figure"><img src="1.36.1_Array_Row_Selection.png" width="50%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="1.36.1_Array_Row_Selection.png" width="75%" style="display: block; margin: auto;"></div>
 <p>And R then pivots and places those rows into a new array, with each column representing the level of the array…</p>
-<div class="inline-figure"><img src="1.36.2_Array_Row_Selection.png" width="65%" style="display: block; margin: auto;"></div>
-<p>Just like rows, we can also the second column of every matrix:</p>
+<div class="inline-figure"><img src="1.36.2_Array_Row_Selection.png" width="70%" style="display: block; margin: auto;"></div>
+<p>Just like rows, we can also select the second column of every matrix within the array:</p>
 <div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">array1</span><span class="op">[</span>,<span class="fl">2</span>,<span class="op">]</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">array1</span><span class="op">[</span>,<span class="fl">2</span>,<span class="op">]</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    5    1    3
 ## [2,]    2    6    5
 ## [3,]    3    4    6
 ## [4,]    4    5    2</code></pre>
 <p>Down below is an illustration of how R processes this command. R takes the second column from each level of the array and outputs it. Each column of the output represents the level of the array.</p>
-<div class="inline-figure"><img src="1.37.1_Array_Column_Selection.png" width="70%" style="display: block; margin: auto;"></div>
-<p>We can also select every entry in the third matrix of our array:</p>
+<div class="inline-figure"><img src="1.37.1_Array_Column_Selection.png" width="75%" style="display: block; margin: auto;"></div>
+<p>We can also select a single level of the array by specifying the dimension, but leaving the row and column numbers blank:</p>
 <div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">array1</span><span class="op">[</span>,,<span class="fl">3</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">array1</span><span class="op">[</span>,,<span class="fl">3</span><span class="op">]</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    1    3
 ## [2,]    3    5
 ## [3,]    1    6
 ## [4,]    2    2</code></pre>
-<p>We can even get a specific entry by selecting the second row, second column of the third matrix in our array:</p>
+<p>And finally, we can even get a specific entry by selecting the row, column, and dimension of the array:</p>
 <div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">array1</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">array1</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">]</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
-<p>You can transform arrays in the same way as the other objects. Down below are some examples of how we can use those same techniques. Copy and paste the code below to your own computer to get an idea of how this works.</p>
+<p>You can transform arrays in the same way as the other objects. Down below are some examples of how we can use those same techniques.</p>
+<p>Copy and paste the code below to your own computer to get an idea of how this works:</p>
 <div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">array1</span> 
-<span class="co">#Changes the 2nd value of the entire array to a 2</span>
-<span class="va">array1</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">2</span>
-<span class="va">array1</span>
-<span class="co">#Changes the 2nd column of each matrix to a 2</span>
-<span class="va">array1</span><span class="op">[</span>,<span class="fl">2</span>,<span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">2</span>
-<span class="va">array1</span>
-<span class="co">#Changes the 2nd row, 1st column of the 3rd array to 0</span>
-<span class="va">array1</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span>
-<span class="va">array1</span>
-<span class="co">#Divided the 3rd matrix only by 3</span>
-<span class="va">array1</span><span class="op">[</span>,,<span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">array1</span><span class="op">[</span>,,<span class="fl">3</span><span class="op">]</span> <span class="op">/</span> <span class="fl">3</span>
-<span class="va">array1</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">array1</span> 
+  <span class="co">#Changes the 2nd value of the entire array to a 2</span>
+  <span class="va">array1</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">2</span>
+  <span class="va">array1</span>
+  <span class="co">#Changes the 2nd column of each matrix to a 2</span>
+  <span class="va">array1</span><span class="op">[</span>,<span class="fl">2</span>,<span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">2</span>
+  <span class="va">array1</span>
+  <span class="co">#Changes the 2nd row, 1st column of the 3rd array to 0</span>
+  <span class="va">array1</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span>
+  <span class="va">array1</span>
+  <span class="co">#Divided the 3rd matrix only by 3</span>
+  <span class="va">array1</span><span class="op">[</span>,,<span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">array1</span><span class="op">[</span>,,<span class="fl">3</span><span class="op">]</span> <span class="op">/</span> <span class="fl">3</span>
+  <span class="va">array1</span></code></pre></div>
 </div>
 <div id="how-to-filter-and-transform-data-from-a-data-frame" class="section level2" number="5.5">
 <h2>
 <span class="header-section-number">5.5</span> How to Filter and Transform Data from a Data Frame<a class="anchor" aria-label="anchor" href="#how-to-filter-and-transform-data-from-a-data-frame"><i class="fas fa-link"></i></a>
 </h2>
 <p>There’s two approaches you can take to selecting data from a data frame. There’s the “classic” approach, which I’ll show you in this section, and then there’s the <strong>data plyer</strong> approach.</p>
-<p>The classic approach uses R base to interact with data frames. The data plyer approach uses a package called <code>dplyr</code> to transform the data. The <code>dplyr</code> syntax is far more readable, which is handy for really long scripts. I personally recommend the data plyer approach and will detail it in a chapter called <em>How to Select and Transform Data Using the <code>dplyr</code> Package</em>.</p>
-<p>If you don’t want to confuse yourself by learning two different methods, feel free to skip this section and go to the chapter on <code>dplyr</code>. (Will be available in future versions). This section will show the classical approach.</p>
+<p>The classic approach uses R base to interact with data frames. The data plyer approach uses a package called <code>dplyr</code> to transform the data. The <code>dplyr</code> syntax is far more readable, which is handy for longer scripts.</p>
+<p>If you don’t want to confuse yourself by learning two different methods, feel free to skip this section and go to the chapter on <code>dplyr</code>. This section will show the classical approach.</p>
+<p>Personally though, I still recommend learning both methods. As you get more hands-on experience with R programming, you’ll find different situations call for different techniques.</p>
+<p>With that out of the way, let’s get started with the classical approach.</p>
 <p>Down below is a script to load the James Bond data frame from the last chapter:</p>
 <div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bond</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/taylorrodgers/bond/main/bond.csv"</span><span class="op">)</span></code></pre></div>
-<p>As you can see, a data frame is built using smaller vectors. This gives you a clue to how to select data.</p>
-<p>For example, you can re-select individual vectors back out using the <code>$</code> notation:</p>
+<code class="sourceCode R">  <span class="va">bond</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/taylorrodgers/bond/main/bond.csv"</span><span class="op">)</span></code></pre></div>
+<p>As you may recall, a data frame is basically comprised of individual vectors of equal lengths.</p>
+<p>You can re-select individual vectors back out of a data frame using the <code>$</code> notation:</p>
 <div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bond</span><span class="op">$</span><span class="va">filmname</span></code></pre></div>
-<p>(Note: You’ll need to run the scripts from this section on your own console. The output cannot fit cleanly on this pdf file.)</p>
-<p>You can also produce a vector using the <code>[,c]</code> notation. What this means is you’re ignoring the row and selecting a column number. We generate the same result as our last section with this method.</p>
-<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bond</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span></code></pre></div>
-<p>If you use the <code>[n]</code> notation, you’ll select the same column as before, but you’re keeping it in a data frame structure.</p>
+<code class="sourceCode R">  <span class="va">bond</span><span class="op">$</span><span class="va">filmname</span></code></pre></div>
+<pre><code>##  [1] "Skyfall"                         "Thunderball"                    
+##  [3] "Goldfinger"                      "Spectre"                        
+##  [5] "Live and Let Die"                "You Only Live Twice"            
+##  [7] "The Spy Who Loved Me"            "Casino Royale"                  
+##  [9] "Moonraker"                       "Diamonds Are Forever"           
+## [11] "Quantum of Solace"               "From Russia with Love"          
+## [13] "Die Another Day"                 "Goldeneye"                      
+## [15] "On Her Majesty's Secret Service" "The World is Not Enough"        
+## [17] "For Your Eyes Only"              "Tomorrow Never Dies"            
+## [19] "The Man with the Golden Gun"     "Dr. No"                         
+## [21] "Octopussy"                       "The Living Daylights"           
+## [23] "A View to a Kill"                "Licence to Kill"</code></pre>
+<p>You can also produce a vector using the <code>[,c]</code> notation. What this means is you’re ignoring the row and selecting a column number. We generate the same result as our last example with this method.</p>
 <div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bond</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">bond</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span></code></pre></div>
+<pre><code>##  [1] "Skyfall"                         "Thunderball"                    
+##  [3] "Goldfinger"                      "Spectre"                        
+##  [5] "Live and Let Die"                "You Only Live Twice"            
+##  [7] "The Spy Who Loved Me"            "Casino Royale"                  
+##  [9] "Moonraker"                       "Diamonds Are Forever"           
+## [11] "Quantum of Solace"               "From Russia with Love"          
+## [13] "Die Another Day"                 "Goldeneye"                      
+## [15] "On Her Majesty's Secret Service" "The World is Not Enough"        
+## [17] "For Your Eyes Only"              "Tomorrow Never Dies"            
+## [19] "The Man with the Golden Gun"     "Dr. No"                         
+## [21] "Octopussy"                       "The Living Daylights"           
+## [23] "A View to a Kill"                "Licence to Kill"</code></pre>
+<p>If you use the <code>[n]</code> notation, you’ll select the same column as before, but you’re keeping it in a data frame structure.</p>
+<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">bond</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></code></pre></div>
+<pre><code>##                           filmname
+## 1                          Skyfall
+## 2                      Thunderball
+## 3                       Goldfinger
+## 4                          Spectre
+## 5                 Live and Let Die
+## 6              You Only Live Twice
+## 7             The Spy Who Loved Me
+## 8                    Casino Royale
+## 9                        Moonraker
+## 10            Diamonds Are Forever
+## 11               Quantum of Solace
+## 12           From Russia with Love
+## 13                 Die Another Day
+## 14                       Goldeneye
+## 15 On Her Majesty's Secret Service
+## 16         The World is Not Enough
+## 17              For Your Eyes Only
+## 18             Tomorrow Never Dies
+## 19     The Man with the Golden Gun
+## 20                          Dr. No
+## 21                       Octopussy
+## 22            The Living Daylights
+## 23                A View to a Kill
+## 24                 Licence to Kill</code></pre>
 <p>As you may have noticed, the <code>[n]</code> notation in this context works differently than other object types. For data frames, <code>[n]</code> selects the <em>nth</em> column and NOT the <em>nth</em> data entry.</p>
 <p>You can use the <code>[n:n]</code> or the <code>[,n:n]</code> notation to select multiple columns. Both will be presented as a data frame.</p>
-<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bond</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>
-<span class="va">bond</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">bond</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></code></pre></div>
+<pre><code>##                           filmname year          actor
+## 1                          Skyfall 2012   Daniel Craig
+## 2                      Thunderball 1965   Sean Connery
+## 3                       Goldfinger 1964   Sean Connery
+## 4                          Spectre 2015   Daniel Craig
+## 5                 Live and Let Die 1973    Roger Moore
+## 6              You Only Live Twice 1967   Sean Connery
+## 7             The Spy Who Loved Me 1977    Roger Moore
+## 8                    Casino Royale 2006   Daniel Craig
+## 9                        Moonraker 1979    Roger Moore
+## 10            Diamonds Are Forever 1971   Sean Connery
+## 11               Quantum of Solace 2008   Daniel Craig
+## 12           From Russia with Love 1963   Sean Connery
+## 13                 Die Another Day 2002 Pierce Brosnan
+## 14                       Goldeneye 1995 Pierce Brosnan
+## 15 On Her Majesty's Secret Service 1969 George Lazenby
+## 16         The World is Not Enough 1999 Pierce Brosnan
+## 17              For Your Eyes Only 1981    Roger Moore
+## 18             Tomorrow Never Dies 1997 Pierce Brosnan
+## 19     The Man with the Golden Gun 1974    Roger Moore
+## 20                          Dr. No 1962   Sean Connery
+## 21                       Octopussy 1983    Roger Moore
+## 22            The Living Daylights 1987 Timothy Dalton
+## 23                A View to a Kill 1985    Roger Moore
+## 24                 Licence to Kill 1989 Timothy Dalton</code></pre>
+<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">bond</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></code></pre></div>
+<pre><code>##                           filmname year          actor
+## 1                          Skyfall 2012   Daniel Craig
+## 2                      Thunderball 1965   Sean Connery
+## 3                       Goldfinger 1964   Sean Connery
+## 4                          Spectre 2015   Daniel Craig
+## 5                 Live and Let Die 1973    Roger Moore
+## 6              You Only Live Twice 1967   Sean Connery
+## 7             The Spy Who Loved Me 1977    Roger Moore
+## 8                    Casino Royale 2006   Daniel Craig
+## 9                        Moonraker 1979    Roger Moore
+## 10            Diamonds Are Forever 1971   Sean Connery
+## 11               Quantum of Solace 2008   Daniel Craig
+## 12           From Russia with Love 1963   Sean Connery
+## 13                 Die Another Day 2002 Pierce Brosnan
+## 14                       Goldeneye 1995 Pierce Brosnan
+## 15 On Her Majesty's Secret Service 1969 George Lazenby
+## 16         The World is Not Enough 1999 Pierce Brosnan
+## 17              For Your Eyes Only 1981    Roger Moore
+## 18             Tomorrow Never Dies 1997 Pierce Brosnan
+## 19     The Man with the Golden Gun 1974    Roger Moore
+## 20                          Dr. No 1962   Sean Connery
+## 21                       Octopussy 1983    Roger Moore
+## 22            The Living Daylights 1987 Timothy Dalton
+## 23                A View to a Kill 1985    Roger Moore
+## 24                 Licence to Kill 1989 Timothy Dalton</code></pre>
 <p>To select an individual or range of rows, you use the same <code>[r,c]</code> notation as before:</p>
-<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bond</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,<span class="op">]</span> <span class="co"># Selects first three rows</span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">bond</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,<span class="op">]</span> <span class="co"># Selects first three rows</span></code></pre></div>
 <pre><code>##      filmname year        actor     gross
 ## 1     Skyfall 2012 Daniel Craig 1108.5610
 ## 2 Thunderball 1965 Sean Connery 1014.9411
 ## 3  Goldfinger 1964 Sean Connery  912.2575</code></pre>
 <p>You can also exclude rows or columns using the negative <code>-</code> sign before the row or column numbers:</p>
-<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bond</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="op">-</span><span class="fl">20</span>,<span class="op">]</span> <span class="co"># Excludes rows 1 through 20</span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">bond</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="op">-</span><span class="fl">20</span>,<span class="op">]</span> <span class="co"># Excludes rows 1 through 20</span></code></pre></div>
 <pre><code>##                filmname year          actor    gross
 ## 21            Octopussy 1983    Roger Moore 426.2444
 ## 22 The Living Daylights 1987 Timothy Dalton 381.0889
 ## 23     A View to a Kill 1985    Roger Moore 321.1726
 ## 24      Licence to Kill 1989 Timothy Dalton 285.1572</code></pre>
-<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bond</span><span class="op">[</span><span class="fl">3</span>,<span class="op">-</span><span class="fl">4</span><span class="op">]</span> <span class="co"># Row 3, excluding the 4th column</span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">bond</span><span class="op">[</span><span class="fl">3</span>,<span class="op">-</span><span class="fl">4</span><span class="op">]</span> <span class="co"># Row 3, excluding the 4th column</span></code></pre></div>
 <pre><code>##     filmname year        actor
 ## 3 Goldfinger 1964 Sean Connery</code></pre>
-<p>Just like the other object types, you can use logical and arithmetic operators, which makes it easy to filter to what you need. Note: this is where things start to get complicated with data frame filtering and why I suggest the <code>dplyr</code> package.</p>
-<p>Lets say we want to filter by year. We want only Bond films made after 1990. First, we’ll generate our TRUE / FALSE output. Go ahead and take the script below and run it in your own console:</p>
-<div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bond</span><span class="op">[</span><span class="st">"year"</span><span class="op">]</span><span class="op">&gt;=</span><span class="fl">1990</span></code></pre></div>
-<p>Now, you’ll notice that I intentionally kept this as a data frame object type. Had I used the <code>bond$year</code> notation, it would’ve turned it into a vector. This would’ve made further filtering later more difficult.</p>
+<p>Just like the other object types, you can use logical and arithmetic operators, which makes it easy to filter to what you need.</p>
+<p>Note: this is where things start to get complicated with data frame filtering and why I suggest learning the <code>dplyr</code> package.</p>
+<p>Let’s say we want to filter by year. We want only Bond films made after 1990.</p>
+<p>First, we’ll generate our TRUE / FALSE output. Go ahead and take the script below and run it in your own console:</p>
+<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">bond</span><span class="op">[</span><span class="st">"year"</span><span class="op">]</span><span class="op">&gt;=</span><span class="fl">1990</span></code></pre></div>
+<p>Now, you’ll notice that I intentionally kept this as a data frame object type. Had I used the <code>bond$year</code> notation, it would’ve turned it into a vector. This would’ve made filtering data more difficult later on.</p>
 <p>Next, we need to plug this into another script:</p>
-<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bond</span><span class="op">[</span><span class="va">bond</span><span class="op">[</span><span class="st">"year"</span><span class="op">]</span><span class="op">&gt;=</span><span class="fl">1990</span><span class="op">]</span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">bond</span><span class="op">[</span><span class="va">bond</span><span class="op">[</span><span class="st">"year"</span><span class="op">]</span><span class="op">&gt;=</span><span class="fl">1990</span><span class="op">]</span></code></pre></div>
 <pre><code>##  [1] "Skyfall"                 "Spectre"                
 ##  [3] "Casino Royale"           "Quantum of Solace"      
 ##  [5] "Die Another Day"         "Goldeneye"              
@@ -558,9 +679,9 @@
 ## [29] " 543.6396"               " 529.5487"              
 ## [31] " 491.6172"               " 478.9464"</code></pre>
 <p>If you notice though, this doesn’t cleanly give us the information we need.</p>
-<p>We need to make sure we preserve the columns. We can do this by simply adding a comma and / or specifying the column numbers:</p>
-<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bond</span><span class="op">[</span><span class="va">bond</span><span class="op">[</span><span class="st">"year"</span><span class="op">]</span><span class="op">&gt;=</span><span class="fl">1990</span>,<span class="op">]</span> <span class="co"># Includes all columns</span></code></pre></div>
+<p>We need to make sure we preserve the columns structure. We can do this by simply adding a comma and / or specifying the column numbers:</p>
+<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">bond</span><span class="op">[</span><span class="va">bond</span><span class="op">[</span><span class="st">"year"</span><span class="op">]</span><span class="op">&gt;=</span><span class="fl">1990</span>,<span class="op">]</span> <span class="co"># Includes all columns</span></code></pre></div>
 <pre><code>##                   filmname year          actor     gross
 ## 1                  Skyfall 2012   Daniel Craig 1108.5610
 ## 4                  Spectre 2015   Daniel Craig  880.6692
@@ -570,8 +691,8 @@
 ## 14               Goldeneye 1995 Pierce Brosnan  529.5487
 ## 16 The World is Not Enough 1999 Pierce Brosnan  491.6172
 ## 18     Tomorrow Never Dies 1997 Pierce Brosnan  478.9464</code></pre>
-<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bond</span><span class="op">[</span><span class="va">bond</span><span class="op">[</span><span class="st">"year"</span><span class="op">]</span><span class="op">&gt;=</span><span class="fl">1990</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="co"># Columns 1 through 3</span></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">bond</span><span class="op">[</span><span class="va">bond</span><span class="op">[</span><span class="st">"year"</span><span class="op">]</span><span class="op">&gt;=</span><span class="fl">1990</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="co"># Columns 1 through 3</span></code></pre></div>
 <pre><code>##                   filmname year          actor
 ## 1                  Skyfall 2012   Daniel Craig
 ## 4                  Spectre 2015   Daniel Craig
@@ -581,6 +702,7 @@
 ## 14               Goldeneye 1995 Pierce Brosnan
 ## 16 The World is Not Enough 1999 Pierce Brosnan
 ## 18     Tomorrow Never Dies 1997 Pierce Brosnan</code></pre>
+<p>Adding more filters would become more difficult from here. It would make the script a lot harder to read. I’ll go into better techniques for multiple filters in the next chapter on <code>dplyr</code>.</p>
 </div>
 <div id="how-to-filter-a-list" class="section level2" number="5.6">
 <h2>
@@ -589,53 +711,130 @@
 <p>Unlike the other object types, I won’t go into detail about transforming a list. The reason is that lists are usually reserved as an output of various functions. Or they’re a handy way of bunching other objects together. If you wanted to transform an object within a list, you’d probably transform that object directly.</p>
 <p>Filtering a list is a useful skill to have though.</p>
 <p>The script below creates a model using our James Bond data. That creates a <em>list</em> of the various calculations in a regression analysis. The <code><a href="https://rdrr.io/r/base/names.html">names()</a></code> function then shows you all the objects contained within the list:</p>
-<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bondmodel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">gross</span> <span class="op">~</span> <span class="va">actor</span>,data<span class="op">=</span><span class="va">bond</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">bondmodel</span><span class="op">)</span></code></pre></div>
-<p>(Note: You’ll need to run the scripts from this section on your own console. The output cannot fit cleanly on this pdf file.)</p>
+<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">bondmodel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">gross</span> <span class="op">~</span> <span class="va">actor</span>,data<span class="op">=</span><span class="va">bond</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">bondmodel</span><span class="op">)</span></code></pre></div>
+<pre><code>##  [1] "coefficients"  "residuals"     "effects"       "rank"         
+##  [5] "fitted.values" "assign"        "qr"            "df.residual"  
+##  [9] "contrasts"     "xlevels"       "call"          "terms"        
+## [13] "model"</code></pre>
 <p>We can select any of these objects within the list with the <code>$</code>, <code>["object_name"]</code>, or <code>[n]</code> notations:</p>
-<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bondmodel</span><span class="op">$</span><span class="va">coefficients</span>
-<span class="va">bondmodel</span><span class="op">[</span><span class="st">"coefficients"</span><span class="op">]</span>
-<span class="va">bondmodel</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">bondmodel</span><span class="op">$</span><span class="va">coefficients</span></code></pre></div>
+<pre><code>##         (Intercept) actorGeorge Lazenby actorPierce Brosnan    actorRoger Moore 
+##           820.31651          -314.41673          -309.37854          -269.48336 
+##   actorSean Connery actorTimothy Dalton 
+##           -95.43409          -487.19349</code></pre>
+<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">bondmodel</span><span class="op">[</span><span class="st">"coefficients"</span><span class="op">]</span></code></pre></div>
+<pre><code>## $coefficients
+##         (Intercept) actorGeorge Lazenby actorPierce Brosnan    actorRoger Moore 
+##           820.31651          -314.41673          -309.37854          -269.48336 
+##   actorSean Connery actorTimothy Dalton 
+##           -95.43409          -487.19349</code></pre>
+<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">bondmodel</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></code></pre></div>
+<pre><code>## $coefficients
+##         (Intercept) actorGeorge Lazenby actorPierce Brosnan    actorRoger Moore 
+##           820.31651          -314.41673          -309.37854          -269.48336 
+##   actorSean Connery actorTimothy Dalton 
+##           -95.43409          -487.19349</code></pre>
 <p>Now here’s where things get tricky. Let’s say we want to filter down to a smaller value within the objects of the list. That changes depending on those object types. Confused?</p>
 <p>It’s better if we go with a simpler example than the list generated by the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function.</p>
 <p>Down below, I create a list using some of the other objects we made in this lesson:</p>
-<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">v2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Hola"</span>,<span class="st">"Howdy"</span>,<span class="st">"Hello"</span><span class="op">)</span>
-<span class="va">v3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>
-<span class="va">list1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>vector1<span class="op">=</span><span class="va">v1</span>,
-              vector2<span class="op">=</span><span class="va">v2</span>,
-              vector3<span class="op">=</span><span class="va">v3</span>,
-              matrix1<span class="op">=</span><span class="va">matrix1</span>,
-              array1<span class="op">=</span><span class="va">array1</span>,
-              bond<span class="op">=</span><span class="va">bond</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span><span class="op">)</span>
+  <span class="va">v2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Hola"</span>,<span class="st">"Howdy"</span>,<span class="st">"Hello"</span><span class="op">)</span>
+  <span class="va">v3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>
+  <span class="va">list1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>vector1<span class="op">=</span><span class="va">v1</span>,
+                vector2<span class="op">=</span><span class="va">v2</span>,
+                vector3<span class="op">=</span><span class="va">v3</span>,
+                matrix1<span class="op">=</span><span class="va">matrix1</span>,
+                array1<span class="op">=</span><span class="va">array1</span>,
+                bond<span class="op">=</span><span class="va">bond</span><span class="op">)</span></code></pre></div>
 <p>I can select any one of those objects from the list using the <code>$</code> notation:</p>
-<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">list1</span><span class="op">$</span><span class="va">vector1</span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">list1</span><span class="op">$</span><span class="va">vector1</span></code></pre></div>
 <pre><code>## [1]  TRUE FALSE  TRUE</code></pre>
-<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">list1</span><span class="op">$</span><span class="va">matrix1</span></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">list1</span><span class="op">$</span><span class="va">matrix1</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    2    1
 ## [2,]    0    3</code></pre>
-<p>Now let’s say I want to select a specific data point from the list. Let’s say I want to know the Bond actors. I know that information was stored within a data frame within the list. To pull that data, I use a combination of filtering techniques.</p>
+<p>Now let’s say I want to select a specific data point from the list. Let’s say I want to know the Bond actors. I know that information was stored within a data frame within the list. To pull that data, I use a combination of the filtering techniques we’ve covered this chapter.</p>
 <p>First, I have to pull the data frame from the list. I do that with the <code>$</code> notation. Then, we treat the object type as a normal data frame.</p>
 <p>Here’s what I mean:</p>
-<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">list1</span><span class="op">$</span><span class="va">bond</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>
-<span class="va">list1</span><span class="op">$</span><span class="va">bond</span><span class="op">$</span><span class="va">actor</span>
-<span class="va">list1</span><span class="op">$</span><span class="va">bond</span><span class="op">[</span><span class="st">"actor"</span><span class="op">]</span></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">list1</span><span class="op">$</span><span class="va">bond</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span></code></pre></div>
+<pre><code>##             actor
+## 1    Daniel Craig
+## 2    Sean Connery
+## 3    Sean Connery
+## 4    Daniel Craig
+## 5     Roger Moore
+## 6    Sean Connery
+## 7     Roger Moore
+## 8    Daniel Craig
+## 9     Roger Moore
+## 10   Sean Connery
+## 11   Daniel Craig
+## 12   Sean Connery
+## 13 Pierce Brosnan
+## 14 Pierce Brosnan
+## 15 George Lazenby
+## 16 Pierce Brosnan
+## 17    Roger Moore
+## 18 Pierce Brosnan
+## 19    Roger Moore
+## 20   Sean Connery
+## 21    Roger Moore
+## 22 Timothy Dalton
+## 23    Roger Moore
+## 24 Timothy Dalton</code></pre>
+<div class="sourceCode" id="cb196"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">list1</span><span class="op">$</span><span class="va">bond</span><span class="op">$</span><span class="va">actor</span></code></pre></div>
+<pre><code>##  [1] "Daniel Craig"   "Sean Connery"   "Sean Connery"   "Daniel Craig"  
+##  [5] "Roger Moore"    "Sean Connery"   "Roger Moore"    "Daniel Craig"  
+##  [9] "Roger Moore"    "Sean Connery"   "Daniel Craig"   "Sean Connery"  
+## [13] "Pierce Brosnan" "Pierce Brosnan" "George Lazenby" "Pierce Brosnan"
+## [17] "Roger Moore"    "Pierce Brosnan" "Roger Moore"    "Sean Connery"  
+## [21] "Roger Moore"    "Timothy Dalton" "Roger Moore"    "Timothy Dalton"</code></pre>
+<div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">list1</span><span class="op">$</span><span class="va">bond</span><span class="op">[</span><span class="st">"actor"</span><span class="op">]</span></code></pre></div>
+<pre><code>##             actor
+## 1    Daniel Craig
+## 2    Sean Connery
+## 3    Sean Connery
+## 4    Daniel Craig
+## 5     Roger Moore
+## 6    Sean Connery
+## 7     Roger Moore
+## 8    Daniel Craig
+## 9     Roger Moore
+## 10   Sean Connery
+## 11   Daniel Craig
+## 12   Sean Connery
+## 13 Pierce Brosnan
+## 14 Pierce Brosnan
+## 15 George Lazenby
+## 16 Pierce Brosnan
+## 17    Roger Moore
+## 18 Pierce Brosnan
+## 19    Roger Moore
+## 20   Sean Connery
+## 21    Roger Moore
+## 22 Timothy Dalton
+## 23    Roger Moore
+## 24 Timothy Dalton</code></pre>
 <p>I do the same with the other object types here:</p>
-<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">list1</span><span class="op">$</span><span class="va">vector1</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">list1</span><span class="op">$</span><span class="va">vector1</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">list1</span><span class="op">$</span><span class="va">vector3</span><span class="op">[</span><span class="va">v3</span><span class="op">&gt;=</span><span class="fl">2</span><span class="op">]</span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">list1</span><span class="op">$</span><span class="va">vector3</span><span class="op">[</span><span class="va">v3</span><span class="op">&gt;=</span><span class="fl">2</span><span class="op">]</span></code></pre></div>
 <pre><code>## [1] 2 3</code></pre>
-<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">list1</span><span class="op">$</span><span class="va">array1</span><span class="op">[</span>,<span class="fl">2</span>,<span class="op">]</span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">list1</span><span class="op">$</span><span class="va">array1</span><span class="op">[</span>,<span class="fl">2</span>,<span class="op">]</span></code></pre></div>
 <pre><code>##      [,1] [,2]      [,3]
 ## [1,]    2    2 0.6666667
 ## [2,]    2    2 0.6666667
@@ -658,42 +857,42 @@
 <ol style="list-style-type: decimal">
 <li>Filter the following vector to values greater than 2. Display the actual number (not TRUE / FALSE).</li>
 </ol>
-<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">q1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">20</span>,<span class="fl">2</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">q1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">20</span>,<span class="fl">2</span><span class="op">)</span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
-<li>Filter the following vector to values between 19 and 20, but only for the first three entries that meet that criteria. (Hint: add <code>[n:n]</code> for the range of values after you determine which values meet that criteria)</li>
+<li>Filter the following vector to values between 20 and 30, but only for the first three entries that meet that criteria. (Hint: add <code>[n:n]</code> for the range of values after you determine which values meet that criteria)</li>
 </ol>
-<div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">q2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">20</span>,<span class="fl">32</span>,<span class="fl">7</span><span class="op">)</span>,<span class="fl">0</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">q2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">20</span>,<span class="fl">32</span>,<span class="fl">7</span><span class="op">)</span>,<span class="fl">0</span><span class="op">)</span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
-<li>Multiple the following matrices together.</li>
+<li>Multiply the following matrices together.</li>
 </ol>
-<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">q3_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">40</span>,<span class="fl">3.27</span><span class="op">)</span>,<span class="fl">0</span><span class="op">)</span>,<span class="fl">3</span><span class="op">)</span>
-<span class="va">q3_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">8</span>,<span class="fl">1</span><span class="op">)</span>,<span class="fl">4</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">q3_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">40</span>,<span class="fl">3.27</span><span class="op">)</span>,<span class="fl">0</span><span class="op">)</span>,<span class="fl">3</span><span class="op">)</span>
+  <span class="va">q3_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">8</span>,<span class="fl">1</span><span class="op">)</span>,<span class="fl">4</span><span class="op">)</span></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
 <li>Subtract 41 from every entry in the second column of the following matrix. Replace the column with those new values.</li>
 </ol>
-<div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">q4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">120</span>,<span class="fl">4</span><span class="op">)</span>,<span class="fl">10</span>,<span class="fl">3</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">q4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">120</span>,<span class="fl">4</span><span class="op">)</span>,<span class="fl">10</span>,<span class="fl">3</span><span class="op">)</span></code></pre></div>
 <ol start="5" style="list-style-type: decimal">
 <li>Select the second row from each matrix in the following array. Subtract 5 from those rows.</li>
 </ol>
-<div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">q5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span>data<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">15</span>,<span class="fl">1</span><span class="op">)</span>,<span class="fl">5</span>,<span class="fl">3</span><span class="op">)</span>,
-                  <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">60</span>,<span class="fl">4</span><span class="op">)</span>,<span class="fl">5</span>,<span class="fl">3</span><span class="op">)</span>,
-                  <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">30</span>,<span class="fl">2</span><span class="op">)</span>,<span class="fl">5</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>,
-            dim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">q5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span>data<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">15</span>,<span class="fl">1</span><span class="op">)</span>,<span class="fl">5</span>,<span class="fl">3</span><span class="op">)</span>,
+                    <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">60</span>,<span class="fl">4</span><span class="op">)</span>,<span class="fl">5</span>,<span class="fl">3</span><span class="op">)</span>,
+                    <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">30</span>,<span class="fl">2</span><span class="op">)</span>,<span class="fl">5</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>,
+              dim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <ol start="6" style="list-style-type: decimal">
 <li>Filter the James Bond data frame to only films starring Roger Moore.</li>
 </ol>
-<div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bond</span></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">bond</span></code></pre></div>
 <ol start="7" style="list-style-type: decimal">
 <li>Filter the James Bond data frame to films starring Sean Connery made after 1966.</li>
 </ol>
-<div class="sourceCode" id="cb195"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bond</span></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">bond</span></code></pre></div>
 
 </div>
 </div>
@@ -703,7 +902,7 @@
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#baserfilter"><span class="header-section-number">5</span> How to Filter and Transform Data in Base R</a></li>
+<li><a class="nav-link" href="#baserfilter"><span class="header-section-number">5</span> How to Filter and Transform Objects in Base R</a></li>
 <li><a class="nav-link" href="#what-are-operators"><span class="header-section-number">5.1</span> What Are Operators?</a></li>
 <li><a class="nav-link" href="#how-to-filter-and-transform-data-from-a-vector"><span class="header-section-number">5.2</span> How to Filter and Transform Data From a Vector</a></li>
 <li><a class="nav-link" href="#how-to-filter-and-transform-data-from-a-matrix"><span class="header-section-number">5.3</span> How to Filter and Transform Data From a Matrix</a></li>
@@ -729,7 +928,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>R Programming in Plain English</strong>" was written by Taylor Rodgers. It was last built on 2021-12-31.</p>
+    <p>"<strong>R Programming in Plain English</strong>" was written by Taylor Rodgers. It was last built on 2022-01-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

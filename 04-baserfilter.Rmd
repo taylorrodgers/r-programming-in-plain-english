@@ -1,4 +1,4 @@
-# How to Filter and Transform Data in Base R {#baserfilter}
+# How to Filter and Transform Objects in Base R {#baserfilter}
 
 In the last chapter, I explained the various object types in R. Now we want to learn how to **filter** and **transform** those objects. Notice how I didn't say filter and transform "data"? That's because the methods you use to handle data in R heavily depend on the object type.
 
@@ -10,7 +10,10 @@ If you're new to programming, then you're probably not familiar with the term **
 
 There are two types of operators in R: arithmetic and logical.
 
-**Arithmetic** operators cover tasks like addition, subtraction, etc. You know? The basic math stuff. This is useful for data transformation and will be used in several examples later. Here are the common arithmetic operators:
+**Arithmetic** operators cover tasks like addition, subtraction, etc. This is useful for data transformation and will be used in several examples later.
+
+Here are the common arithmetic operators:
+
 ```{r 3.01, echo=FALSE}
 label <- c("addition","subtraction","multiplication","division","exponent","matrix multiplication","matrix division")
 symbol <- c("+","-","*","/","^","%*%","%/%")
@@ -21,7 +24,9 @@ knitr::kable(
 )
 ```
 
-**Logical** operators takes the data and generates a TRUE or FALSE output, based on whether the data meets your requirement. This is more helpful for *filtering* data than transforming. Here are the common logical operators:
+**Logical** operators takes the data and generates a TRUE or FALSE output, based on whether the data meets your requirement. This is more helpful for *filtering* data than transforming.
+
+Here are the common logical operators:
 
 ```{r 3.02, echo=FALSE}
 label <- c("less than","greater than","less than or equal","greater than or equal","equal","does not equal","and","or","in")
@@ -33,26 +38,26 @@ knitr::kable(
 )
 ```
 
-Don't worry if you're unsure of how to use these just yet. You'll see examples for these in the next few sections. This is just for your easy reference.
+Don't worry if you're unsure of how to use these just yet. You'll see examples for these in the next few sections. This is just for your easy reference later.
 
 ## How to Filter and Transform Data From a Vector
 
 Vectors are the easiest object type to filter. Same with transforming the data within them.
 
-If you want to reference or view the entire vector, you simply enter the name you assigned the object:
+If you want to reference or view the entire vector, you simply enter the name you assigned the object.
 
 ```{r 3.1}
-v5 <- c(1,5,5,2,1,4)
-v5
+  v5 <- c(1,5,5,2,1,4)
+  v5
 ```
 
-(Remember: the `<-` command allows you to name any object. You can use **Option+"-"** as a short-cut for `<-`.)
+(Remember: the `<-` command allows you to name any object. You can use **Option + "-" ** for Macs and **Alt + "-"** for Windows as a short-cut for `<-`.)
 
-You also can select a single entry from a vector using the `[n]` notation:
+You also can select a single entry from a vector using the `[n]` notation.
 
 ```{r 3.2}
-v5 <- c(1,5,5,2,1,4)
-v5[3]
+  v5 <- c(1,5,5,2,1,4)
+  v5[3]
 ```
 
 As you can see, the script above selected the third value from the vector.
@@ -60,17 +65,17 @@ As you can see, the script above selected the third value from the vector.
 You can select a range of entries by using the `[n:n]` notation.
 
 ```{r 3.3}
-v5 <- c(1,5,5,2,1,4)
-v5[3:4]
+  v5 <- c(1,5,5,2,1,4)
+  v5[3:4]
 ```
 
 And, as we've seen before, you can create a new vector by referencing old vectors!
 
 ```{r 3.4}
-v2 <- c("Hola","Howdy","Hello")
-v7 <- c(2:4)
-v8 <- c(v2,v7)
-v8
+  v2 <- c("Hola","Howdy","Hello")
+  v7 <- c(2:4)
+  v8 <- c(v2,v7)
+  v8
 ```
 
 You can also use other base R functions to filter data.
@@ -78,153 +83,175 @@ You can also use other base R functions to filter data.
 For example, you may want to see the minimum or maximum value in a vector. You can use the `max()` and `min()` command to do so.
 
 ```{r 3.4.1}
-v5
-max(v5) # Max value
-min(v5) # Min value
+  v5
+  max(v5) # Max value
+  min(v5) # Min value
 ```
 
-And you can use logical operators as well. In the example below, I use the `>=` and `&` operators to filter values:
+And you can use logical operators as well. In the example below, I use the `>=` and `&` operators to filter values.
 
 ```{r 3.4.2}
-v5 >= 2 # Values greater than 2
-v5 >= 3 & v5 <= 5 # Values between 3 and 5
+  v5 >= 2 # Values greater than 2
+  v5 >= 3 & v5 <= 5 # Values between 3 and 5
 ```
 
-We can also use the `|` operator to find values that meet a criteria. For example, I filter the vector below to "Hola" and "Howdy."
+We can also use the `|` ("or") operator to find values that meet a criteria. For example, I filter the vector below to "Hola" and "Howdy."
 
 ```{r 3.4.3}
-v2
-v2 == "Hola" | v2 == "Howdy"
+  v2
+  v2 == "Hola" | v2 == "Howdy"
 ```
 
 You probably noticed that these logical operators only return a TRUE or FALSE statement. That makes sense since it is a *logical* argument that's evaluated. However, we may want to see the actual values that meet the argument. This isn't important in an example like this, but it does come up later on for more complex objects.
 
-To show the actual values where the logical argument is true, you use the `object_name[argument]` notation. In the next few examples, I filter the vectors down to values that meet the arguments used in the last few examples:
+To show the actual values where the logical argument is true, you use the `object_name[argument]` notation.
+
+In the next few examples, I filter the vectors down to values that meet the arguments used in the last few examples:
 
 ```{r 3.4.4}
-v5[v5>=2]
-v5[v5 >= 3 & v5 <= 5]
-v2[v2 == "Hola" | v2 == "Howdy"]
+  v5[v5>=2]
+  v5[v5 >= 3 & v5 <= 5]
+  v2[v2 == "Hola" | v2 == "Howdy"]
 ```
 
 In the examples above, I simply took the logical argument and plugged it into the brackets.
 
-You can also change data easily when it comes to numeric vectors. For example, down below is a vector of box office revenue for James Bond films. Copy and paste this script into your R console and execute:
+You can also change data easily when it comes to numeric vectors. For example, down below is a vector of box office revenue for James Bond films.
+
+Copy and paste this script into your R console and execute:
 
 ```{r 3.5, results=FALSE}
-gross <- 
-  c(1108561008,1014941117,912257512,880669186,
-    825110761,756544419,692713752,669789482,
-    655872400,648514469,622246378,576277964,
-    543639638,529548711,505899782,491617153,
-    486468881,478946402,448249281,440759072,
-    426244352,381088866,321172633,285157191)
-gross
+  gross <- 
+    c(1108561008,1014941117,912257512,880669186,
+      825110761,756544419,692713752,669789482,
+      655872400,648514469,622246378,576277964,
+      543639638,529548711,505899782,491617153,
+      486468881,478946402,448249281,440759072,
+      426244352,381088866,321172633,285157191)
+  gross
 ```
 
-As you can see, the values are very large. To make our analysis easier, we can use an *arithmetic* operator I showed earlier. In this scenario, I want to make the values smaller. So I'm going to divide it using the `/` operator.
+As you can see, the values are very large. To make our analysis easier, we can use one of the *arithmetic* operators that I showed earlier.
+
+In this scenario, I want to make the values smaller. So I'm going to divide it using the `/` operator.
 
 ```{r 3.6, results=FALSE}
-gross/1000000
+  gross <- gross/1000000
+  gross
 ```
+
+You may have noticed that I reassigned the vector the same name "gross". You can do this if you want to overwrite the previous object assignment. Careful though. Those changes are permanent. That means to reverse them, you may need to run an earlier script to re-generate the original data or re-import your data set.
 
 You can also calculate individual values this way too.
 
 ```{r 3.7}
-gross[4]  
-gross[4]/100000
+  gross <- 
+    c(1108561008,1014941117,912257512,880669186,
+      825110761,756544419,692713752,669789482,
+      655872400,648514469,622246378,576277964,
+      543639638,529548711,505899782,491617153,
+      486468881,478946402,448249281,440759072,
+      426244352,381088866,321172633,285157191)
+  gross[4]  
+  gross[4]/100000
 ```
 
-And you can re-assign the value to a particular part of a vector using the methods we described above and the `<-` notation. For example, we can see below how we re-assign values based on the location.
+And you can re-assign the value to a particular part of a vector using the methods we described above and the `<-` notation.
+
+For example, we can see below how we re-assign values based on the location:
 
 ```{r 3.8}
-v8 <- c(1,5,5,2,1,4) # Creates the original vector
-v8[6] <- 8 # Replaces the sixth value with an 8
-v8[1:3] <- c(4,3,1) # Replaces the first three values
-v8
+  v8 <- c(1,5,5,2,1,4) # Creates the original vector
+  v8[6] <- 8 # Replaces the sixth value with an 8
+  v8[1:3] <- c(4,3,1) # Replaces the first three values
+  v8
 ```
 
 ## How to Filter and Transform Data From a Matrix
 
-Filtering the data within a matrix is both similar and different than a vector.
+Filtering the data within a matrix is both similar to and different from a vector.
 
-It's similar because we can use the `[n]` notation to select a single entry. We had done this before with a vector:
+It's similar because we can use the `[n]` notation to select a single entry. We had done this before with a vector.
 
 ```{r 3.9}
-v5[2]
+  v5[2]
 ```
 
 You can do the same for a matrix. If you run the code below, you’ll re-create and view the matrix we used in the last chapter:
 
 ```{r 3.10}
-matrix1 <- matrix(c(2,0,1,3),nrow=2,ncol=2)
-matrix1
+  matrix1 <- matrix(c(2,0,1,3),nrow=2,ncol=2)
+  matrix1
 ```
 
 And here you’ll select the fourth value from that matrix using the `[4]` command:
 
 ```{r 3.11}
-matrix1[4]
+  matrix1[4]
 ```
 
-Now that isn’t very practical for a matrix. You may need to select a value from a specific row or column instead. This is where matrices are different from a vector. You’ll want to use the `[r,c]` command to determine which values you want. In the example below, I select the second row and first column of the matrix.
+Now that isn’t very practical for a matrix. You may need to select a value from a specific row or column instead. This is where matrices are different from a vector. You’ll want to use the `[r,c]` command to determine which values you want.
+
+In the example below, I select the second row and first column of the matrix:
 
 ```{r 3.12}
-matrix1[2,1]
+  matrix1[2,1]
 ```
 
-We can make this easier on ourselves. Instead of specifying row or column numbers, we can give them names. That way, we can use the `[row_name,column_name]` notation to select data from a matrix. Down below, I give our previously created matrix row and column names.
+We can make this easier on ourselves. Instead of specifying row or column numbers, we can give them names. That way, we can use the `[row_name,column_name]` notation to select data from a matrix.
+
+Down below, I give our previously created matrix row and column names:
 
 ```{r 3.13}
-colnames(matrix1) <- c("Col1","Col2")
-rownames(matrix1) <- c("Row1","Row2")
-matrix1["Row2","Col1"]
+  colnames(matrix1) <- c("Col1","Col2")
+  rownames(matrix1) <- c("Row1","Row2")
+  matrix1["Row2","Col1"]
 ```
 
 We can also apply vector filtering methods to matrices. For example, I want to see what values are greater than 0.
 
 ```{r 3.13.1}
-matrix1 > 0 # Returns true or false
+  matrix1 > 0 # Returns true or false
 ```
 
 Funny enough though, you can't return the actual values that meet this criteria in a matrix form. It'll turn into a vector. That's because the output may not have the same number of columns and rows as the original matrix. So R assumes it'll need a one-dimensional object output.
 
 ```{r 3.13.2}
-matrix1[matrix1 > 0]
+  matrix1[matrix1 > 0]
 ```
 
 You can use the same techniques we outlined before with the vectors to transform the data within a matrix. Copy and paste the codes below to your R console and see the results. Feel free to play around with the inputs to see what happens.
 
 ```{r 3.14}
-matrix1 <- matrix(c(2,0,1,3),nrow=2,ncol=2)  
-matrix1
-matrix1[3] <- 5
-matrix1
-matrix1[,2] <- 2
-matrix1
-matrix1[2,2] <- 0
-matrix1
+  matrix1 <- matrix(c(2,0,1,3),nrow=2,ncol=2)  
+  matrix1
+  matrix1[3] <- 5
+  matrix1
+  matrix1[,2] <- 2
+  matrix1
+  matrix1[2,2] <- 0
+  matrix1
 ```
 
 Like the vectors, you can transform the data within the matrix using the arithmetic operators we discussed earlier.
 
 ```{r 3.14.1}
-matrix1
-matrix1 + 2
-matrix1 - 4
-matrix1 ^ 3
-matrix1 * 5
+  matrix1
+  matrix1 + 2
+  matrix1 - 4
+  matrix1 ^ 3
+  matrix1 * 5
 ```
 
 You can also use these operators to combine matrices. We'll need a few matrices to illustrate these examples though. Take the code I have below and execute it in your console, if you want to follow along with my examples.
 
 ```{r 3.14.2, results=FALSE}
-matrix1 <- matrix(c(2,0,1,3),nrow=2,ncol=2)
-matrix1
-matrix2 <- matrix(c(5,7),nrow=2)
-matrix2
-matrix6 <- matrix(c(4,3,1,3),nrow=2,ncol=2)
-matrix6
+  matrix1 <- matrix(c(2,0,1,3),nrow=2,ncol=2)
+  matrix1
+  matrix2 <- matrix(c(5,7),nrow=2)
+  matrix2
+  matrix6 <- matrix(c(4,3,1,3),nrow=2,ncol=2)
+  matrix6
 ```
 
 It's important to remember the dimensions of your matrices. Attempting to use addition on two matrices without the same dimensions won't work.
@@ -232,21 +259,21 @@ It's important to remember the dimensions of your matrices. Attempting to use ad
 Matrix 1 and 2 do not have the same dimensions, so it will return an error:
 
 ```{r 3.14.3, error=TRUE}
-matrix1 + matrix2
+  matrix1 + matrix2
 ```
 
 However, Matrix 1 and Matrix 6 do have the same dimensions and will execute:
 
 ```{r 3.14.4}
-matrix1 + matrix6
+  matrix1 + matrix6
 ```
 
 Multiplying two matrices together can be misleading. For example, using the simple `*` operator will merely multiply the corresponding values in two matrices with the same dimensions. Confused? Look at the two matrices below and then look at the output:
 
 ```{r 3.14.5}
-matrix1
-matrix6
-matrix1 * matrix6
+  matrix1
+  matrix6
+  matrix1 * matrix6
 ```
 
 Entry [1,1] of the first matrix is 2. Entry [1,1] of the second matrix is 4. 2 x 4 = 8. That shows us that the multiplication used here is not true matrix multiplication.
@@ -254,26 +281,26 @@ Entry [1,1] of the first matrix is 2. Entry [1,1] of the second matrix is 4. 2 x
 If you attempt to use the same `*` operator for Matrix 1 and Matrix 2 though, you will get an error:
 
 ```{r 3.14.6}
-matrix1
-matrix2
+  matrix1
+  matrix2
 ```
 ```{r 3.14.7, error=TRUE}
-matrix1 * matrix2
+  matrix1 * matrix2
 ```
 
 That's because these two matrices do not share the same dimensions.
 
-However, we can generate a single matrix from these two matrices using matrix algebra. To do so, we use the `%*%` operator.
+However, we can generate a single matrix from these two matrices using matrix algebra. To do so, we use the `%*%` operator:
 
 ```{r 3.14.8}
-matrix7 <- matrix1 %*% matrix2  
-matrix7
+  matrix7 <- matrix1 %*% matrix2  
+  matrix7
 ```
 
 You can also divide a matrix with another using the `%/%` operator:
 
 ```{r 3.14.9}
-matrix7 %/% matrix2
+  matrix7 %/% matrix2
 ```
 
 Just remember the difference in how a matrix will interact with the `*`, `%*%`, `/`, and `%/%` operators. 
@@ -283,36 +310,37 @@ Just remember the difference in how a matrix will interact with the `*`, `%*%`, 
 Selecting data from arrays is similar to what we did before. You can select an individual entry using the `[n]` command. If you look down below, we re-create the array we used in the last chapter. Copy and paste this code into your R console.
 
 ```{r 3.15, results=FALSE}
-matrix3 <- matrix(c(2,0,1,4,5,2,3,4),nrow=4,ncol=2)
-matrix4 <- matrix(c(4,3,5,2,1,6,4,5),nrow=4,ncol=2)
-matrix5 <- matrix(c(1,3,1,2,3,5,6,2),nrow=4,ncol=2)
-array1 <- array(c(matrix3,matrix4,matrix5),
-                dim=c(4,2,3))  
-array1
+  matrix3 <- matrix(c(2,0,1,4,5,2,3,4),nrow=4,ncol=2)
+  matrix4 <- matrix(c(4,3,5,2,1,6,4,5),nrow=4,ncol=2)
+  matrix5 <- matrix(c(1,3,1,2,3,5,6,2),nrow=4,ncol=2)
+  array1 <- array(c(matrix3,matrix4,matrix5),
+                  dim=c(4,2,3))  
+  array1
 ```
+
 This script will create three separate matrices, like you see below:
 
-```{r 3.15.1, echo=FALSE,fig.align="center",out.width="50%%"}
-knitr::include_graphics("1.29_Arrays_Flat.png",dpi=150)
+```{r 3.15.1, echo=FALSE,fig.align="center",out.width="75%"}
+knitr::include_graphics("1.29_Arrays_Flat.png",dpi=300)
 ```
 
 And then stacks them into an array:
 
-```{r 3.15.2, echo=FALSE,fig.align="center",out.width="15%"}
-knitr::include_graphics("1.30_Arrays_Stacked.png",dpi=150)
+```{r 3.15.2, echo=FALSE,fig.align="center",out.width="25%"}
+knitr::include_graphics("1.30_Arrays_Stacked.png",dpi=300)
 ```
 
-You can then select the first and twenty-second entry with the scripts below.
+You can then select the first and twenty-second entry with the scripts below:
 
 ```{r 3.16}
-array1[1]
-array1[22]
+  array1[1]
+  array1[22]
 ```
 
-To help you visualize this, I highlighted the fifth and twenty second values from the array in the illustration below:
+To help you visualize this, I highlighted the fifth and twenty-second values from the array in the illustration below:
 
-```{r 3.16.1, echo=FALSE,fig.align="center",out.width="50%"}
-knitr::include_graphics("1.35_Arrays_Highlight_1.png",dpi=150)
+```{r 3.16.1, echo=FALSE,fig.align="center",out.width="75%"}
+knitr::include_graphics("1.35_Arrays_Highlight_1.png",dpi=300)
 ```
 
 With arrays, selecting particular columns or rows gets difficult because arrays can have multiple dimensions. That introduces the `[r,c,d]` notation.
@@ -320,7 +348,7 @@ With arrays, selecting particular columns or rows gets difficult because arrays 
 Down below, we select the entire second row of every matrix in our array:
 
 ```{r 3.17}
-array1[2,,]
+  array1[2,,]
 ```
 
 You may have noticed that this "flipped" the direction. R isn't trying to confuse you. It's merely displaying the previous, individual matrix rows as columns. So column 1 shows the results from matrix 1 in the previous array. Keep this in mind as you interact with arrays. The output may not always be intuitive.
@@ -329,140 +357,150 @@ Down below is an illustration of how R processes this command.
 
 First, R finds the second row for each level of the array...
 
-```{r 3.16.2, echo=FALSE,fig.align="center",out.width="50%"}
-knitr::include_graphics("1.36.1_Array_Row_Selection.png",dpi=150)
+```{r 3.16.2, echo=FALSE,fig.align="center",out.width="75%"}
+knitr::include_graphics("1.36.1_Array_Row_Selection.png",dpi=300)
 ```
 
 And R then pivots and places those rows into a new array, with each column representing the level of the array...
 
-```{r 3.16.3, echo=FALSE,fig.align="center",out.width="65%"}
-knitr::include_graphics("1.36.2_Array_Row_Selection.png",dpi=150)
+```{r 3.16.3, echo=FALSE,fig.align="center",out.width="70%"}
+knitr::include_graphics("1.36.2_Array_Row_Selection.png",dpi=300)
 ```
 
-Just like rows, we can also the second column of every matrix:
+Just like rows, we can also select the second column of every matrix within the array:
 
 ```{r 3.18}
-array1[,2,]
+  array1[,2,]
 ```
 
 Down below is an illustration of how R processes this command. R takes the second column from each level of the array and outputs it. Each column of the output represents the level of the array.
 
-```{r 3.18.1, echo=FALSE,fig.align="center",out.width="70%"}
-knitr::include_graphics("1.37.1_Array_Column_Selection.png",dpi=150)
+```{r 3.18.1, echo=FALSE,fig.align="center",out.width="75%"}
+knitr::include_graphics("1.37.1_Array_Column_Selection.png",dpi=300)
 ```
 
-We can also select every entry in the third matrix of our array:
+We can also select a single level of the array by specifying the dimension, but leaving the row and column numbers blank:
 
 ```{r 3.19}
-array1[,,3]
+  array1[,,3]
 ```
 
-We can even get a specific entry by selecting the second row, second column of the third matrix in our array:
+And finally, we can even get a specific entry by selecting the row, column, and dimension of the array:
 
 ```{r 3.20}
-array1[2,2,3]
+  array1[2,2,3]
 ```
 
-You can transform arrays in the same way as the other objects. Down below are some examples of how we can use those same techniques. Copy and paste the code below to your own computer to get an idea of how this works.
+You can transform arrays in the same way as the other objects. Down below are some examples of how we can use those same techniques.
+
+Copy and paste the code below to your own computer to get an idea of how this works:
 
 ```{r 3.21, results=FALSE}
-array1 
-#Changes the 2nd value of the entire array to a 2
-array1[2] <- 2
-array1
-#Changes the 2nd column of each matrix to a 2
-array1[,2,] <- 2
-array1
-#Changes the 2nd row, 1st column of the 3rd array to 0
-array1[2,1,3] <- 0
-array1
-#Divided the 3rd matrix only by 3
-array1[,,3] <- array1[,,3] / 3
-array1
+  array1 
+  #Changes the 2nd value of the entire array to a 2
+  array1[2] <- 2
+  array1
+  #Changes the 2nd column of each matrix to a 2
+  array1[,2,] <- 2
+  array1
+  #Changes the 2nd row, 1st column of the 3rd array to 0
+  array1[2,1,3] <- 0
+  array1
+  #Divided the 3rd matrix only by 3
+  array1[,,3] <- array1[,,3] / 3
+  array1
 ```
 
 ## How to Filter and Transform Data from a Data Frame
 
 There's two approaches you can take to selecting data from a data frame. There's the "classic" approach, which I'll show you in this section, and then there's the **data plyer** approach.
 
-The classic approach uses R base to interact with data frames. The data plyer approach uses a package called `dplyr` to transform the data. The `dplyr` syntax is far more readable, which is handy for really long scripts. I personally recommend the data plyer approach and will detail it in a chapter called *How to Select and Transform Data Using the `dplyr` Package*.
+The classic approach uses R base to interact with data frames. The data plyer approach uses a package called `dplyr` to transform the data. The `dplyr` syntax is far more readable, which is handy for longer scripts.
 
-If you don't want to confuse yourself by learning two different methods, feel free to skip this section and go to the chapter on `dplyr`. (Will be available in future versions). This section will show the classical approach.
+If you don't want to confuse yourself by learning two different methods, feel free to skip this section and go to the chapter on `dplyr`. This section will show the classical approach.
+
+Personally though, I still recommend learning both methods. As you get more hands-on experience with R programming, you'll find different situations call for different techniques.
+
+With that out of the way, let's get started with the classical approach.
 
 Down below is a script to load the James Bond data frame from the last chapter:
 
 ```{r 3.22, results=FALSE}
-bond <- read.csv("https://raw.githubusercontent.com/taylorrodgers/bond/main/bond.csv")
+  bond <- read.csv("https://raw.githubusercontent.com/taylorrodgers/bond/main/bond.csv")
 ```
 
-As you can see, a data frame is built using smaller vectors. This gives you a clue to how to select data.
+As you may recall, a data frame is basically comprised of individual vectors of equal lengths.
 
-For example, you can re-select individual vectors back out using the `$` notation:
+You can re-select individual vectors back out of a data frame using the `$` notation:
 
-```{r 3.24, results=FALSE}
-bond$filmname
+```{r 3.24}
+  bond$filmname
 ```
 
-(Note: You'll need to run the scripts from this section on your own console. The output cannot fit cleanly on this pdf file.)
+You can also produce a vector using the `[,c]` notation. What this means is you're ignoring the row and selecting a column number. We generate the same result as our last example with this method.
 
-You can also produce a vector using the `[,c]` notation. What this means is you're ignoring the row and selecting a column number. We generate the same result as our last section with this method.
-
-```{r 3.24.1, results=FALSE}
-bond[,1]
+```{r 3.24.1}
+  bond[,1]
 ```
 
 If you use the `[n]` notation, you'll select the same column as before, but you're keeping it in a data frame structure.
 
-```{r 3.25, results=FALSE}
-bond[1]
+```{r 3.25}
+  bond[1]
 ```
 
 As you may have noticed, the `[n]` notation in this context works differently than other object types. For data frames, `[n]` selects the *nth* column and NOT the *nth* data entry.
 
 You can use the `[n:n]` or the `[,n:n]` notation to select multiple columns. Both will be presented as a data frame.
 
-```{r 3.26, results=FALSE}
-bond[1:3]
-bond[,1:3]
+```{r 3.26}
+  bond[1:3]
+  bond[,1:3]
 ```
 
 To select an individual or range of rows, you use the same `[r,c]` notation as before:
 
 ```{r 3.27}
-bond[1:3,] # Selects first three rows
+  bond[1:3,] # Selects first three rows
 ```
 
 You can also exclude rows or columns using the negative `-` sign before the row or column numbers:
 
 ```{r 3.27.1}
-bond[-1:-20,] # Excludes rows 1 through 20
-bond[3,-4] # Row 3, excluding the 4th column
+  bond[-1:-20,] # Excludes rows 1 through 20
+  bond[3,-4] # Row 3, excluding the 4th column
 ```
 
-Just like the other object types, you can use logical and arithmetic operators, which makes it easy to filter to what you need. Note: this is where things start to get complicated with data frame filtering and why I suggest the `dplyr` package.
+Just like the other object types, you can use logical and arithmetic operators, which makes it easy to filter to what you need.
 
-Lets say we want to filter by year. We want only Bond films made after 1990. First, we'll generate our TRUE / FALSE output. Go ahead and take the script below and run it in your own console:
+Note: this is where things start to get complicated with data frame filtering and why I suggest learning the `dplyr` package.
+
+Let's say we want to filter by year. We want only Bond films made after 1990.
+
+First, we'll generate our TRUE / FALSE output. Go ahead and take the script below and run it in your own console:
 
 ```{r 3.28, results=FALSE}
-bond["year"]>=1990
+  bond["year"]>=1990
 ```
 
-Now, you'll notice that I intentionally kept this as a data frame object type. Had I used the `bond$year` notation, it would've turned it into a vector. This would've made further filtering later more difficult.
+Now, you'll notice that I intentionally kept this as a data frame object type. Had I used the `bond$year` notation, it would've turned it into a vector. This would've made filtering data more difficult later on.
 
 Next, we need to plug this into another script:
 
 ```{r 3.29}
-bond[bond["year"]>=1990]
+  bond[bond["year"]>=1990]
 ```
 
 If you notice though, this doesn't cleanly give us the information we need.
 
-We need to make sure we preserve the columns. We can do this by simply adding a comma and / or specifying the column numbers:
+We need to make sure we preserve the columns structure. We can do this by simply adding a comma and / or specifying the column numbers:
 
 ```{r 3.30}
-bond[bond["year"]>=1990,] # Includes all columns
-bond[bond["year"]>=1990,1:3] # Columns 1 through 3
+  bond[bond["year"]>=1990,] # Includes all columns
+  bond[bond["year"]>=1990,1:3] # Columns 1 through 3
 ```
+
+Adding more filters would become more difficult from here. It would make the script a lot harder to read. I'll go into better techniques for multiple filters in the next chapter on `dplyr`.
 
 ## How to Filter a List
 
@@ -472,19 +510,17 @@ Filtering a list is a useful skill to have though.
 
 The script below creates a model using our James Bond data. That creates a *list* of the various calculations in a regression analysis. The `names()` function then shows you all the objects contained within the list:
 
-```{r 3.31, results=FALSE}
-bondmodel <- lm(gross ~ actor,data=bond)
-names(bondmodel)
+```{r 3.31}
+  bondmodel <- lm(gross ~ actor,data=bond)
+  names(bondmodel)
 ```
-
-(Note: You'll need to run the scripts from this section on your own console. The output cannot fit cleanly on this pdf file.)
 
 We can select any of these objects within the list with the `$`, `["object_name"]`, or `[n]` notations:
 
-```{r 3.32, results=FALSE}
-bondmodel$coefficients
-bondmodel["coefficients"]
-bondmodel[1]
+```{r 3.32}
+  bondmodel$coefficients
+  bondmodel["coefficients"]
+  bondmodel[1]
 ```
 
 Now here's where things get tricky. Let's say we want to filter down to a smaller value within the objects of the list. That changes depending on those object types. Confused? 
@@ -493,42 +529,42 @@ It's better if we go with a simpler example than the list generated by the `lm()
 
 Down below, I create a list using some of the other objects we made in this lesson:
 ```{r 3.33}
-v1 <- c(TRUE,FALSE,TRUE)
-v2 <- c("Hola","Howdy","Hello")
-v3 <- c(1:3)
-list1 <- list(vector1=v1,
-              vector2=v2,
-              vector3=v3,
-              matrix1=matrix1,
-              array1=array1,
-              bond=bond)
+  v1 <- c(TRUE,FALSE,TRUE)
+  v2 <- c("Hola","Howdy","Hello")
+  v3 <- c(1:3)
+  list1 <- list(vector1=v1,
+                vector2=v2,
+                vector3=v3,
+                matrix1=matrix1,
+                array1=array1,
+                bond=bond)
 ```
 
 I can select any one of those objects from the list using the `$` notation:
 
 ```{r 3.34}
-list1$vector1
-list1$matrix1
+  list1$vector1
+  list1$matrix1
 ```
 
-Now let's say I want to select a specific data point from the list. Let's say I want to know the Bond actors. I know that information was stored within a data frame within the list. To pull that data, I use a combination of filtering techniques.
+Now let's say I want to select a specific data point from the list. Let's say I want to know the Bond actors. I know that information was stored within a data frame within the list. To pull that data, I use a combination of the filtering techniques we've covered this chapter.
 
 First, I have to pull the data frame from the list. I do that with the `$` notation. Then, we treat the object type as a normal data frame.
 
 Here's what I mean:
 
-```{r 3.35, results = FALSE}
-list1$bond[3]
-list1$bond$actor
-list1$bond["actor"]
+```{r 3.35}
+  list1$bond[3]
+  list1$bond$actor
+  list1$bond["actor"]
 ```
 
 I do the same with the other object types here:
 
 ```{r 3.36}
-list1$vector1[3]
-list1$vector3[v3>=2]
-list1$array1[,2,]
+  list1$vector1[3]
+  list1$vector3[v3>=2]
+  list1$array1[,2,]
 ```
 
 ## Things to Remember
@@ -541,33 +577,33 @@ Try to see if you can complete the following exercises. Answers are in the back 
 
 1. Filter the following vector to values greater than 2. Display the actual number (not TRUE / FALSE).
 ```{r Q3.1, results=FALSE}
-q1 <- seq(1,20,2)
+  q1 <- seq(1,20,2)
 ```
-2. Filter the following vector to values between 19 and 20, but only for the first three entries that meet that criteria. (Hint: add `[n:n]` for the range of values after you determine which values meet that criteria)
+2. Filter the following vector to values between 20 and 30, but only for the first three entries that meet that criteria. (Hint: add `[n:n]` for the range of values after you determine which values meet that criteria)
 ```{r Q3.2, results=FALSE}
-q2 <- round(rnorm(20,32,7),0)
+  q2 <- round(rnorm(20,32,7),0)
 ```
-3. Multiple the following matrices together.
+3. Multiply the following matrices together.
 ```{r Q3.3, results=FALSE}
-q3_1 <- matrix(round(seq(1,40,3.27),0),3)
-q3_2 <- matrix(seq(1,8,1),4)
+  q3_1 <- matrix(round(seq(1,40,3.27),0),3)
+  q3_2 <- matrix(seq(1,8,1),4)
 ```
 4. Subtract 41 from every entry in the second column of the following matrix. Replace the column with those new values.
 ```{r Q3.4, results=FALSE}
-q4 <- matrix(seq(1,120,4),10,3)
+  q4 <- matrix(seq(1,120,4),10,3)
 ```
 5. Select the second row from each matrix in the following array. Subtract 5 from those rows.
 ```{r Q3.5, results=FALSE}
-q5 <- array(data=c(matrix(seq(1,15,1),5,3),
-                  matrix(seq(4,60,4),5,3),
-                  matrix(seq(2,30,2),5,3)),
-            dim=c(5,3,3))
+  q5 <- array(data=c(matrix(seq(1,15,1),5,3),
+                    matrix(seq(4,60,4),5,3),
+                    matrix(seq(2,30,2),5,3)),
+              dim=c(5,3,3))
 ```
 6. Filter the James Bond data frame to only films starring Roger Moore.
 ```{r Q3.6, results=FALSE}
-bond
+  bond
 ```
 7. Filter the James Bond data frame to films starring Sean Connery made after 1966.
 ```{r Q3.7, results=FALSE}
-bond
+  bond
 ```
