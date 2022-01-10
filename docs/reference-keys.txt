@@ -66,6 +66,7 @@ how-to-write-your-own-functions
 writing-functions-using-control-flows
 applying-a-control-flow-to-our-summary-stats-function
 breaking-down-the-function-we-just-made
+assigning-functions-outputs-a-name
 things-to-remember-6
 exercises-4
 importdata

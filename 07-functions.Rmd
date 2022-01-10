@@ -30,13 +30,13 @@ Other functions include those developed by other R programmers, which you can ac
 
 R is flexible enough though that you can write your own functions as well. This might sound like more trouble than it's worth, but it's really not. It takes a lot of time to learn other people's functions. Not only that, you have to verify that their functions perform accurately. That's especially true for packages developed by lesser known organizations.
 
-Another problem is documentation. Much of the documentation for lesser known packages and their functions are poorly written. It's easy to misunderstand their inputs and how to use them correctly. I experience this often. I've saved a lot of development time simply writing my own functions.
+Another problem is documentation. Much of the documentation for lesser known packages and their functions are poorly written. It's easy to misunderstand their inputs and how to use them correctly. I experience this often. I've saved a lot of development time simply by writing my own functions.
 
 One last benefit relates to data management. Custom functions are handy for dealing with large, unstructured data sets. You can write specific instructions that can run on a loop until you've cycled through the various data points. This is actually a really big deal. In a few lines of code, you can accomplish what most people would need a paid tool like Alteryx to do.
 
 ## The Components of an R Function
 
-Regardless of whether you use an existing function or write your own, both require the same components to execute: **argument** and a **value**. 
+Regardless of whether you use an existing function or write your own, both require the same components to execute: an **argument** and a **value**. 
 
 These are the technical terms for it, but it might be easier to think of an argument as the **input** and the value as the **output**.
 
@@ -55,7 +55,7 @@ Try it yourself with these functions:
   ?confint
 ```
 
-In the example of the `mean` function, we see that it requires at least an `x` value. The **Arguments** section of the documentation states that x is merely an R object. 
+With the `mean` function, we see that it requires at least an `x` value. The **Arguments** section of the documentation states that x is merely a vector. 
 
 ```{r 5.1.1, echo=FALSE,fig.align="center",out.width="50%"}
 knitr::include_graphics("1.48.0_Function_Documentation.png",dpi=150)
@@ -112,7 +112,7 @@ Our end goal will be to create a function that:
 
 But first, let's start with a simpler version of this.
 
-For these examples, you'll need our James Bond data set. Go ahead and re-load it with the function below:
+For these examples, you'll need our James Bond data set. Go ahead and re-load it with the script below:
 
 ```{r 5.3}
   bond <- read.csv("https://raw.githubusercontent.com/taylorrodgers/bond/main/bond.csv")
@@ -133,7 +133,7 @@ You can see in the script below the template for a function and the new name and
   sd.simple <- function(data, field) expression 
 ```
 
-Now we'll need to calculate add an **expression**. An expression is the actual script that takes your arguments and uses them to execute certain tasks.
+Now we'll need to add an **expression**. An expression is the actual script that takes your arguments and uses them to execute certain tasks.
 
 To start the expression part of a new function, we use the `{}` notations:
 
@@ -286,7 +286,7 @@ Now this function will run, but there's still one piece we're missing. We need t
 
 In this function, the value we want is the **output** object, which is the data frame containing our summary statistics. We can merely add the output reference at the end, outside the control flow:
 
-```{r 5.4.12, eval=FALSE} 
+```{r 5.4.12} 
   summary.group <- function(data,group,field) {
     groups <- levels(factor(data[,paste(group)]))
     output <- data.frame(group=character(),
@@ -370,11 +370,12 @@ And finally, it displayed the complete data frame once it finished with the cont
 ```{r 5.4.13.10, echo=FALSE,fig.align="center",out.width="50%"}
 knitr::include_graphics("1.57_Function_Breakdown.png",dpi=150) 
 ```
+
 ## Assigning Functions Outputs a Name
 
 Any objects named within a function are not saved in your R environment. To save the results, you need to assign the executed function a name, like you would with any other object.
 
-```{r 5.4.14,eval=FALSE}
+```{r 5.4.14}
   bond_eval <- summary.group(bond,"actor","gross")
   bond_eval
 ```

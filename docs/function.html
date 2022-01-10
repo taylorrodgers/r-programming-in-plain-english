@@ -91,14 +91,14 @@
 <span class="header-section-number">8.2</span> Why You Should Learn to Write Your Own Functions<a class="anchor" aria-label="anchor" href="#why-you-should-learn-to-write-your-own-functions"><i class="fas fa-link"></i></a>
 </h2>
 <p>R is flexible enough though that you can write your own functions as well. This might sound like more trouble than it’s worth, but it’s really not. It takes a lot of time to learn other people’s functions. Not only that, you have to verify that their functions perform accurately. That’s especially true for packages developed by lesser known organizations.</p>
-<p>Another problem is documentation. Much of the documentation for lesser known packages and their functions are poorly written. It’s easy to misunderstand their inputs and how to use them correctly. I experience this often. I’ve saved a lot of development time simply writing my own functions.</p>
+<p>Another problem is documentation. Much of the documentation for lesser known packages and their functions are poorly written. It’s easy to misunderstand their inputs and how to use them correctly. I experience this often. I’ve saved a lot of development time simply by writing my own functions.</p>
 <p>One last benefit relates to data management. Custom functions are handy for dealing with large, unstructured data sets. You can write specific instructions that can run on a loop until you’ve cycled through the various data points. This is actually a really big deal. In a few lines of code, you can accomplish what most people would need a paid tool like Alteryx to do.</p>
 </div>
 <div id="the-components-of-an-r-function" class="section level2" number="8.3">
 <h2>
 <span class="header-section-number">8.3</span> The Components of an R Function<a class="anchor" aria-label="anchor" href="#the-components-of-an-r-function"><i class="fas fa-link"></i></a>
 </h2>
-<p>Regardless of whether you use an existing function or write your own, both require the same components to execute: <strong>argument</strong> and a <strong>value</strong>.</p>
+<p>Regardless of whether you use an existing function or write your own, both require the same components to execute: an <strong>argument</strong> and a <strong>value</strong>.</p>
 <p>These are the technical terms for it, but it might be easier to think of an argument as the <strong>input</strong> and the value as the <strong>output</strong>.</p>
 <p>Fortunately, R documentation tells you what the required arguments are for existing functions. Simply add a question mark <code>?</code> before a function and the documentation will appear in the <strong>Help</strong> tab on the bottom right pane of RStudio.</p>
 <div class="inline-figure"><img src="1.48_Function_Documentation.png" width="50%" style="display: block; margin: auto;"></div>
@@ -108,7 +108,7 @@
   <span class="op">?</span><span class="va">sd</span>
   <span class="op">?</span><span class="va">cor</span>
   <span class="op">?</span><span class="va">confint</span></code></pre></div>
-<p>In the example of the <code>mean</code> function, we see that it requires at least an <code>x</code> value. The <strong>Arguments</strong> section of the documentation states that x is merely an R object.</p>
+<p>With the <code>mean</code> function, we see that it requires at least an <code>x</code> value. The <strong>Arguments</strong> section of the documentation states that x is merely a vector.</p>
 <div class="inline-figure"><img src="1.48.0_Function_Documentation.png" width="50%" style="display: block; margin: auto;"></div>
 <p>The <strong>Value</strong> section will provide details on the output for this function.</p>
 <div class="inline-figure"><img src="1.49_Function_Documentation.png" width="50%" style="display: block; margin: auto;"></div>
@@ -146,7 +146,7 @@
 <li>calculates the mean and standard deviation of a continuous variable</li>
 </ol>
 <p>But first, let’s start with a simpler version of this.</p>
-<p>For these examples, you’ll need our James Bond data set. Go ahead and re-load it with the function below:</p>
+<p>For these examples, you’ll need our James Bond data set. Go ahead and re-load it with the script below:</p>
 <div class="sourceCode" id="cb229"><pre class="downlit sourceCode r">
 <code class="sourceCode R">  <span class="va">bond</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/taylorrodgers/bond/main/bond.csv"</span><span class="op">)</span></code></pre></div>
 <p>Our first function will calculate standard deviation for a continuous variable.</p>
@@ -157,7 +157,7 @@
 <span id="cb230-2"><a href="function.html#cb230-2" aria-hidden="true" tabindex="-1"></a>  name <span class="ot">&lt;-</span> <span class="cf">function</span>(arg_1, arg_2, …) expression </span>
 <span id="cb230-3"><a href="function.html#cb230-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># New function</span></span>
 <span id="cb230-4"><a href="function.html#cb230-4" aria-hidden="true" tabindex="-1"></a>  sd.simple <span class="ot">&lt;-</span> <span class="cf">function</span>(data, field) expression </span></code></pre></div>
-<p>Now we’ll need to calculate add an <strong>expression</strong>. An expression is the actual script that takes your arguments and uses them to execute certain tasks.</p>
+<p>Now we’ll need to add an <strong>expression</strong>. An expression is the actual script that takes your arguments and uses them to execute certain tasks.</p>
 <p>To start the expression part of a new function, we use the <code><a href="https://rdrr.io/r/base/Paren.html">{}</a></code> notations:</p>
 <div class="sourceCode" id="cb231"><pre class="downlit sourceCode r">
 <code class="sourceCode R">  <span class="va">sd.simple</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">field</span><span class="op">)</span> <span class="op">{</span>
@@ -298,6 +298,13 @@
 <p>If we run this function with the Bond data frame, we’ll get this result:</p>
 <div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
 <code class="sourceCode R">  <span class="fu">summary.group</span><span class="op">(</span><span class="va">bond</span>,<span class="st">"actor"</span>,<span class="st">"gross"</span><span class="op">)</span></code></pre></div>
+<pre><code>##            group     mean        sd
+## 1   Daniel Craig 820.3165 222.57396
+## 2 George Lazenby 505.8998        NA
+## 3 Pierce Brosnan 510.9380  30.61869
+## 4    Roger Moore 550.8332 177.63450
+## 5   Sean Connery 724.8824 213.95672
+## 6 Timothy Dalton 333.1230  67.83394</code></pre>
 </div>
 <div id="breaking-down-the-function-we-just-made" class="section level2" number="8.9">
 <h2>
@@ -308,7 +315,7 @@
 <p>First, the function reviewed the group we defined and created a vector with the members of that group.</p>
 <div class="inline-figure"><img src="1.52_Function_Breakdown.png" width="50%" style="display: block; margin: auto;"></div>
 <p>In this instance, that would include the Bond actors:</p>
-<div class="sourceCode" id="cb247"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
 <code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">bond</span><span class="op">[</span>,<span class="st">"actor"</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "Daniel Craig"   "George Lazenby" "Pierce Brosnan" "Roger Moore"   
 ## [5] "Sean Connery"   "Timothy Dalton"</code></pre>
@@ -319,7 +326,7 @@
 <p>Next, it filtered the Bond data set down to the first actor:</p>
 <div class="inline-figure"><img src="1.55_Function_Breakdown.png" width="50%" style="display: block; margin: auto;"></div>
 <p>Really, this function filtered the Bond data set in a similar way to the code below:</p>
-<div class="sourceCode" id="cb249"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
 <code class="sourceCode R">  <span class="va">groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">bond</span><span class="op">[</span>,<span class="st">"actor"</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
   <span class="va">bond</span><span class="op">[</span><span class="va">bond</span><span class="op">[</span>,<span class="st">"actor"</span><span class="op">]</span><span class="op">==</span><span class="va">groups</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,<span class="st">"gross"</span><span class="op">]</span></code></pre></div>
 <pre><code>## [1] 1108.5610  880.6692  669.7895  622.2464</code></pre>
@@ -329,18 +336,28 @@
 <pre><code>##      groups.1. mean.subdata. sd.subdata.
 ## 1 Daniel Craig      820.3165     222.574</code></pre>
 <p>And finally, it displayed the complete data frame once it finished with the control flow!</p>
-<div class="inline-figure">
-<img src="1.57_Function_Breakdown.png" width="50%" style="display: block; margin: auto;">
-## Assigning Functions Outputs a Name</div>
+<div class="inline-figure"><img src="1.57_Function_Breakdown.png" width="50%" style="display: block; margin: auto;"></div>
+</div>
+<div id="assigning-functions-outputs-a-name" class="section level2" number="8.10">
+<h2>
+<span class="header-section-number">8.10</span> Assigning Functions Outputs a Name<a class="anchor" aria-label="anchor" href="#assigning-functions-outputs-a-name"><i class="fas fa-link"></i></a>
+</h2>
 <p>Any objects named within a function are not saved in your R environment. To save the results, you need to assign the executed function a name, like you would with any other object.</p>
-<div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb253"><pre class="downlit sourceCode r">
 <code class="sourceCode R">  <span class="va">bond_eval</span> <span class="op">&lt;-</span> <span class="fu">summary.group</span><span class="op">(</span><span class="va">bond</span>,<span class="st">"actor"</span>,<span class="st">"gross"</span><span class="op">)</span>
   <span class="va">bond_eval</span></code></pre></div>
+<pre><code>##            group     mean        sd
+## 1   Daniel Craig 820.3165 222.57396
+## 2 George Lazenby 505.8998        NA
+## 3 Pierce Brosnan 510.9380  30.61869
+## 4    Roger Moore 550.8332 177.63450
+## 5   Sean Connery 724.8824 213.95672
+## 6 Timothy Dalton 333.1230  67.83394</code></pre>
 <p>This can apply to any existing functions.</p>
 </div>
-<div id="things-to-remember-6" class="section level2" number="8.10">
+<div id="things-to-remember-6" class="section level2" number="8.11">
 <h2>
-<span class="header-section-number">8.10</span> Things to Remember<a class="anchor" aria-label="anchor" href="#things-to-remember-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.11</span> Things to Remember<a class="anchor" aria-label="anchor" href="#things-to-remember-6"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>Functions are the only object type that modifies other objects</li>
@@ -350,9 +367,9 @@
 <li>Control flows or “loops” are a handy way to automate data management tasks at a granular level</li>
 </ul>
 </div>
-<div id="exercises-4" class="section level2" number="8.11">
+<div id="exercises-4" class="section level2" number="8.12">
 <h2>
-<span class="header-section-number">8.11</span> Exercises<a class="anchor" aria-label="anchor" href="#exercises-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.12</span> Exercises<a class="anchor" aria-label="anchor" href="#exercises-4"><i class="fas fa-link"></i></a>
 </h2>
 <p>Try to see if you can complete the following exercises. Answers are in the back of the book!</p>
 <ol style="list-style-type: decimal">
@@ -378,8 +395,9 @@
 <li><a class="nav-link" href="#writing-functions-using-control-flows"><span class="header-section-number">8.7</span> Writing Functions Using Control Flows</a></li>
 <li><a class="nav-link" href="#applying-a-control-flow-to-our-summary-stats-function"><span class="header-section-number">8.8</span> Applying a Control Flow to Our Summary Stats Function</a></li>
 <li><a class="nav-link" href="#breaking-down-the-function-we-just-made"><span class="header-section-number">8.9</span> Breaking Down the Function We Just Made</a></li>
-<li><a class="nav-link" href="#things-to-remember-6"><span class="header-section-number">8.10</span> Things to Remember</a></li>
-<li><a class="nav-link" href="#exercises-4"><span class="header-section-number">8.11</span> Exercises</a></li>
+<li><a class="nav-link" href="#assigning-functions-outputs-a-name"><span class="header-section-number">8.10</span> Assigning Functions Outputs a Name</a></li>
+<li><a class="nav-link" href="#things-to-remember-6"><span class="header-section-number">8.11</span> Things to Remember</a></li>
+<li><a class="nav-link" href="#exercises-4"><span class="header-section-number">8.12</span> Exercises</a></li>
 </ul>
 
       <div class="book-extra">
