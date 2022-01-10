@@ -37,7 +37,8 @@ things-to-remember-3
 exercises-1
 dplyr
 why-is-dplyr-so-popular
-its-still-worth-learning-base-r
+is-it-still-worth-learning-base-r
+how-to-install-and-load-dplyr
 the-dplyr-syntax
 understand-the-difference-between-selecting-and-filtering
 how-to-select-and-mutate-a-data-frame-with-dplyr-in-r
@@ -49,9 +50,8 @@ packages
 why-does-r-use-packages
 how-to-access-r-packages
 how-to-install-and-load-a-package---the-easy-way
-why-you-should-still-learn-to-install-and-load-packages-the-old-fashioned-way
 how-to-install-and-load-r-packages---the-old-fashioned-way
-a-simple-trick-to-include-install-and-load-any-packages-needed
+make-it-easy-for-the-next-person-to-use-the-required-packages
 how-to-find-new-packages-to-install
 how-to-find-documentation-on-packages
 things-to-remember-5
@@ -62,7 +62,7 @@ why-you-should-learn-to-write-your-own-functions
 the-components-of-an-r-function
 required-versus-non-required-arguments
 when-order-matters-for-arguments
-how-to-write-your-own-function
+how-to-write-your-own-functions
 writing-functions-using-control-flows
 applying-a-control-flow-to-our-summary-stats-function
 breaking-down-the-function-we-just-made

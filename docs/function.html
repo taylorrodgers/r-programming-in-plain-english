@@ -83,16 +83,16 @@
 <li>write your own function</li>
 </ol>
 <p>Both methods use the same underlying structure.</p>
-<p>The more common functions you’ll use include those in the R <strong>base</strong> and <strong>stats</strong> packages. These automatically come with R. These functions perform common calculations needed for statistical programming, such as <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code>, <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code>, <code><a href="https://rdrr.io/r/stats/sd.html">sd()</a></code>, <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>, <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> and <code><a href="https://rdrr.io/r/stats/confint.html">confint()</a></code>.</p>
-<p>Other “existing” functions can include those developed by other R programmers, which you can access by installing and loading other packages. (See the chapter on R packages for more details)</p>
+<p>The more common functions you’ll use include those in the R <code>base</code> and <code>stats</code> packages. These automatically come with R. These functions perform common calculations needed for statistical programming, such as <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code>, <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code>, <code><a href="https://rdrr.io/r/stats/sd.html">sd()</a></code>, <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>, <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> and <code><a href="https://rdrr.io/r/stats/confint.html">confint()</a></code>.</p>
+<p>Other functions include those developed by other R programmers, which you can access by installing and loading other packages. (See the chapter on R packages for more details.)</p>
 </div>
 <div id="why-you-should-learn-to-write-your-own-functions" class="section level2" number="8.2">
 <h2>
 <span class="header-section-number">8.2</span> Why You Should Learn to Write Your Own Functions<a class="anchor" aria-label="anchor" href="#why-you-should-learn-to-write-your-own-functions"><i class="fas fa-link"></i></a>
 </h2>
 <p>R is flexible enough though that you can write your own functions as well. This might sound like more trouble than it’s worth, but it’s really not. It takes a lot of time to learn other people’s functions. Not only that, you have to verify that their functions perform accurately. That’s especially true for packages developed by lesser known organizations.</p>
-<p>Sadly, not every package out there goes through rigorous quality checks and much of the documentation is poorly written. So it’s easy to misunderstand how a function works and then use it incorrectly.</p>
-<p>As a matter of fact, my professor in my machine learning class suggested creating our own scripts for some more advanced machine learning processes because existing packages didn’t work in every context. This is the trade off with open source programming languages.</p>
+<p>Another problem is documentation. Much of the documentation for lesser known packages and their functions are poorly written. It’s easy to misunderstand their inputs and how to use them correctly. I experience this often. I’ve saved a lot of development time simply writing my own functions.</p>
+<p>One last benefit relates to data management. Custom functions are handy for dealing with large, unstructured data sets. You can write specific instructions that can run on a loop until you’ve cycled through the various data points. This is actually a really big deal. In a few lines of code, you can accomplish what most people would need a paid tool like Alteryx to do.</p>
 </div>
 <div id="the-components-of-an-r-function" class="section level2" number="8.3">
 <h2>
@@ -103,40 +103,41 @@
 <p>Fortunately, R documentation tells you what the required arguments are for existing functions. Simply add a question mark <code>?</code> before a function and the documentation will appear in the <strong>Help</strong> tab on the bottom right pane of RStudio.</p>
 <div class="inline-figure"><img src="1.48_Function_Documentation.png" width="50%" style="display: block; margin: auto;"></div>
 <p>Try it yourself with these functions:</p>
-<div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="op">?</span><span class="va">mean</span>
-<span class="op">?</span><span class="va">sd</span>
-<span class="op">?</span><span class="va">cor</span>
-<span class="op">?</span><span class="va">confint</span></code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="op">?</span><span class="va">mean</span>
+  <span class="op">?</span><span class="va">sd</span>
+  <span class="op">?</span><span class="va">cor</span>
+  <span class="op">?</span><span class="va">confint</span></code></pre></div>
 <p>In the example of the <code>mean</code> function, we see that it requires at least an <code>x</code> value. The <strong>Arguments</strong> section of the documentation states that x is merely an R object.</p>
 <div class="inline-figure"><img src="1.48.0_Function_Documentation.png" width="50%" style="display: block; margin: auto;"></div>
-<p>We can see the <strong>Value</strong> section gives details on the output this function will generate.</p>
+<p>The <strong>Value</strong> section will provide details on the output for this function.</p>
 <div class="inline-figure"><img src="1.49_Function_Documentation.png" width="50%" style="display: block; margin: auto;"></div>
 </div>
 <div id="required-versus-non-required-arguments" class="section level2" number="8.4">
 <h2>
 <span class="header-section-number">8.4</span> Required versus Non-Required Arguments<a class="anchor" aria-label="anchor" href="#required-versus-non-required-arguments"><i class="fas fa-link"></i></a>
 </h2>
-<p>You may have noticed in the documentation for the <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> function that there were two other arguments: trim and na.rm. The <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> function still can execute, even if you don’t specify what those arguments are. The reason is that there’s a <em>default</em> setting already in place for them.</p>
+<p>You may have noticed in the documentation for the <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> function that there were two other arguments: <em>trim</em> and <em>na.rm.</em></p>
+<p>You can still execute the <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> function without those arguments. The reason is that there’s a <em>default</em> setting already in place for them.</p>
 <div class="inline-figure"><img src="1.48.1_Function_Documentation.png" width="50%" style="display: block; margin: auto;"></div>
-<p>Whoever created this function set the default for the <em>trim</em> to <code>0</code> and the <em>na.rm</em> argument to <code>FALSE</code>. That way the user only has to modify those arguments if it’s necessary.</p>
+<p>Whoever created this function set the default for the <em>trim</em> to <code>0</code> and the <em>na.rm</em> argument to <code>FALSE</code>. That way the user only has to modify those arguments <em>if they want to.</em></p>
 </div>
 <div id="when-order-matters-for-arguments" class="section level2" number="8.5">
 <h2>
 <span class="header-section-number">8.5</span> When Order Matters for Arguments<a class="anchor" aria-label="anchor" href="#when-order-matters-for-arguments"><i class="fas fa-link"></i></a>
 </h2>
-<p>If you execute <code><a href="https://rdrr.io/r/stats/lm.html">?lm</a></code> in your console, you’ll see the linear model function has argument options for <em>formula, data, subset, weights</em>, etc. That means we could execute the model using our Bond data as <code>lm(gross~actor,bond)</code>. Even though we don’t specify the arguments, R will execute this function because the formula argument (<code>gross~actor</code>) and the data argument (<code>bond</code>) are placed in the correct order.</p>
+<p>If you execute <code><a href="https://rdrr.io/r/stats/lm.html">?lm</a></code> in your console, you’ll see the linear model function has argument options for <em>formula, data, subset, weights</em>, etc. That means we could execute the model using our Bond data as <code>lm(gross~actor,bond)</code>. Even though we don’t specify the arguments, R will execute this function because the <em>formula</em> argument (<code>gross~actor</code>) and the <em>data</em> argument (<code>bond</code>) are placed in the correct order.</p>
 <p>You can see this order in the documentation:</p>
 <div class="inline-figure"><img src="1.50_Function_Documentation.png" width="50%" style="display: block; margin: auto;"></div>
 <p>If we tried this backwards, it wouldn’t work. Executing <code>lm(bond,gross~actor)</code> in your console would throw up an error. However, if we specify the arguments with an equal <code>=</code> sign, it will execute. That would look like this: <code>lm(data=bond,formula=gross~actor)</code>.</p>
 </div>
-<div id="how-to-write-your-own-function" class="section level2" number="8.6">
+<div id="how-to-write-your-own-functions" class="section level2" number="8.6">
 <h2>
-<span class="header-section-number">8.6</span> How to Write Your Own Function<a class="anchor" aria-label="anchor" href="#how-to-write-your-own-function"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.6</span> How to Write Your Own Functions<a class="anchor" aria-label="anchor" href="#how-to-write-your-own-functions"><i class="fas fa-link"></i></a>
 </h2>
-<p>As you may have noticed, existing R functions require at least one argument (with the option for more) and typically displays at least one values as an output. If you write your own functions, they’ll need the same thing.</p>
+<p>As you may have noticed, existing R functions require at least one argument (with the option for more) and displays <em>at least one</em> value as an output. If you write your own functions, they’ll need the same thing.</p>
 <p>According to R’s own base documentation, a function is defined by an assignment, such as:</p>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="function.html#cb227-1" aria-hidden="true" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="cf">function</span>(arg_1, arg_2, …) expression</span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="function.html#cb228-1" aria-hidden="true" tabindex="-1"></a>  name <span class="ot">&lt;-</span> <span class="cf">function</span>(arg_1, arg_2, …) expression</span></code></pre></div>
 <p>We’re going to follow this convention and create several functions, with each one becoming more and more complex.</p>
 <p>Our end goal will be to create a function that:</p>
 <ol style="list-style-type: decimal">
@@ -144,52 +145,51 @@
 <li>groups data based on a single categorical variable</li>
 <li>calculates the mean and standard deviation of a continuous variable</li>
 </ol>
-<p>But we’ll start with a simpler version of this first.</p>
-<p>Before we begin though, go ahead and reload James Bond data set, as we’ll use it in our examples later.</p>
-<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bond</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/taylorrodgers/bond/main/bond.csv"</span><span class="op">)</span></code></pre></div>
-<p>Our first function will calculate standard deviation for a continuous variable. This function actually exists already (<code><a href="https://rdrr.io/r/stats/sd.html">?sd</a></code>), but we want to become familiar with something simple before moving on to something that’s more complicated.</p>
-<p>First, we’ll need a name for the function and any arguments we know will need to be passed through. We know it’ll require a data frame and a field to calculate standard deviation. I call those <code>data</code> and <code>field</code>, respectively. I name the function <code>sd.simple</code>.</p>
+<p>But first, let’s start with a simpler version of this.</p>
+<p>For these examples, you’ll need our James Bond data set. Go ahead and re-load it with the function below:</p>
+<div class="sourceCode" id="cb229"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">bond</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/taylorrodgers/bond/main/bond.csv"</span><span class="op">)</span></code></pre></div>
+<p>Our first function will calculate standard deviation for a continuous variable.</p>
+<p>We’ll need to provide a name for the function and any arguments to pass through. I’ll name the function <code>sd.simple</code>.</p>
+<p>We also know it’ll require a data frame and a field to calculate standard deviation. I’ll call those <code>data</code> and <code>field</code>, respectively.</p>
 <p>You can see in the script below the template for a function and the new name and arguments that I replaced it with.</p>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="function.html#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Template  </span></span>
-<span id="cb229-2"><a href="function.html#cb229-2" aria-hidden="true" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="cf">function</span>(arg_1, arg_2, …) expression </span>
-<span id="cb229-3"><a href="function.html#cb229-3" aria-hidden="true" tabindex="-1"></a><span class="co"># New function</span></span>
-<span id="cb229-4"><a href="function.html#cb229-4" aria-hidden="true" tabindex="-1"></a>sd.simple <span class="ot">&lt;-</span> <span class="cf">function</span>(data, field) expression </span></code></pre></div>
-<p>Now we’ll need to calculate add an <strong>expression</strong>. An expression is the actual script that takes your arguments and uses them to execute certain tasks. Our expression will need to use the data frame, grouping variable, and calculate standard deviation.</p>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="function.html#cb230-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Template  </span></span>
+<span id="cb230-2"><a href="function.html#cb230-2" aria-hidden="true" tabindex="-1"></a>  name <span class="ot">&lt;-</span> <span class="cf">function</span>(arg_1, arg_2, …) expression </span>
+<span id="cb230-3"><a href="function.html#cb230-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># New function</span></span>
+<span id="cb230-4"><a href="function.html#cb230-4" aria-hidden="true" tabindex="-1"></a>  sd.simple <span class="ot">&lt;-</span> <span class="cf">function</span>(data, field) expression </span></code></pre></div>
+<p>Now we’ll need to calculate add an <strong>expression</strong>. An expression is the actual script that takes your arguments and uses them to execute certain tasks.</p>
 <p>To start the expression part of a new function, we use the <code><a href="https://rdrr.io/r/base/Paren.html">{}</a></code> notations:</p>
-<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sd.simple</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">field</span><span class="op">)</span> <span class="op">{</span>
-<span class="op">}</span></code></pre></div>
-<p>Next, we need the function to evaluate the data frame that’s placed in the <code>data</code> argument and select the <code>field</code> that’s specified. To do this, we use the same methods we used for selecting data from a data frame. (Note: when you design functions, it’s important to keep in mind the type of objects that will be entered into a function.)</p>
-<p>Now if we’re selecting a field directly from the <strong>Bond</strong> data frame we created earlier, our script would look something like this:</p>
 <div class="sourceCode" id="cb231"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bond</span><span class="op">[</span>,<span class="st">"gross"</span><span class="op">]</span></code></pre></div>
-<p>Since I want this function to be able to evaluate any data frame and field inputted, I simply replace certain parts of the script with the arguments. That means I replace “bond” with “data” and “gross” with “field,” which were the arguments I specified when I started writing this function. See what I mean below:</p>
+<code class="sourceCode R">  <span class="va">sd.simple</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">field</span><span class="op">)</span> <span class="op">{</span>
+  <span class="op">}</span></code></pre></div>
+<p>Next, we need the function to evaluate the data frame that’s placed in the <code>data</code> argument and select the <code>field</code> that’s specified. To do this, we use the same methods we used for selecting data from a data frame. (Note: when you design functions, it’s important to keep in mind the type of objects that will be entered into a function.)</p>
+<p>If you recall, we can select a field directly from a data frame like this:</p>
 <div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sd.simple</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>,<span class="va">field</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">field</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">field</span><span class="op">)</span><span class="op">]</span>
-<span class="op">}</span></code></pre></div>
-<p>Now you probably realized that I actually replaced “gross” with <code>paste(field)</code>. The <code><a href="https://rdrr.io/r/base/paste.html">paste()</a></code> function is a handy little tool when it comes to writing your own R functions. It allows you to inject an argument into a filtering command. So when we later specify our <code>field</code> argument to be “gross”, it’ll simply plug that argument into the function to filter the data frame.</p>
-<p>It probably confused you why we’re assigning an object the name <strong>field</strong> when we’ve already specified that as an argument. This will be more clear later, but it’s because the <strong>field</strong> argument is used to specify a variable within a data frame - not an existing R object. To make it easier to analyze in our next part of the function, we need to turn it into it’s own object.</p>
-<p>Next, we need to write a script to calculate standard devation. We’ll use the <em>sample standard deviation</em> equation, which is:</p>
+<code class="sourceCode R">  <span class="va">bond</span><span class="op">[</span>,<span class="st">"gross"</span><span class="op">]</span></code></pre></div>
+<p>We can use this same structure in our function. Down below, I replace “bond” and “gross” with the argument names inside the function.</p>
+<div class="sourceCode" id="cb233"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">sd.simple</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>,<span class="va">field</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">field</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">field</span><span class="op">)</span><span class="op">]</span>
+  <span class="op">}</span></code></pre></div>
+<p>Now you probably realized that I actually replaced “gross” with <code>paste(field)</code>. The <code><a href="https://rdrr.io/r/base/paste.html">paste()</a></code> function is a useful one to remember. It comes in handy when writing your own functions. It allows you to dynamically inject an argument throughout your function’s expression.</p>
+<p>Next, we need to write a script to calculate standard deviation. We’ll use the <em>sample standard deviation</em> equation, which is:</p>
 <p><span class="math display">\[
  \sqrt{\frac{\sum{(X_i-\bar{X})^2}}{n-1}}
 \]</span></p>
 <p>And we’ll plug that into our function:</p>
-<div class="sourceCode" id="cb233"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sd.simple</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>,<span class="va">field</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">field</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">field</span><span class="op">)</span><span class="op">]</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">field</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">field</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>
-       <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">field</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
-<p>And walla! We created our first function! To execute this function, we simply plug our arguments into the function.</p>
 <div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">sd.simple</span><span class="op">(</span><span class="va">bond</span>,<span class="st">"gross"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">sd.simple</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>,<span class="va">field</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">field</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">field</span><span class="op">)</span><span class="op">]</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">field</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">field</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">field</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+  <span class="op">}</span></code></pre></div>
+<p>And walla! We created our first function! To run this function, we simply add two arguments (data set and variable).</p>
+<div class="sourceCode" id="cb235"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="fu">sd.simple</span><span class="op">(</span><span class="va">bond</span>,<span class="st">"gross"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 214.4881</code></pre>
 <p>If you notice, I put quotation marks around the field argument “gross”. That’s because that argument is used with filtering a data frame, which requires quotation marks when we filter down to a column by column name (i.e. <code>data.frame[,"column name"]</code>). If we were using column number, we wouldn’t need to use a quotation mark (i.e. <code>data.frame[,n]</code>).</p>
 <p>We can check our work against the existing <code><a href="https://rdrr.io/r/stats/sd.html">sd()</a></code> function already built into R to make sure we did it correctly.</p>
-<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">sd.simple</span><span class="op">(</span><span class="va">bond</span>,<span class="st">"gross"</span><span class="op">)</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">bond</span><span class="op">[</span>,<span class="st">"gross"</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="fu">sd.simple</span><span class="op">(</span><span class="va">bond</span>,<span class="st">"gross"</span><span class="op">)</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">bond</span><span class="op">[</span>,<span class="st">"gross"</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>Looks like we got it right!</p>
 </div>
@@ -197,17 +197,19 @@
 <h2>
 <span class="header-section-number">8.7</span> Writing Functions Using Control Flows<a class="anchor" aria-label="anchor" href="#writing-functions-using-control-flows"><i class="fas fa-link"></i></a>
 </h2>
-<p>The truth is that you typically won’t need to write short functions like this one because there’s plenty of existing functions in base R that perform these kinds of calculations. The functions you’ll need to write are able to evaluate large amounts of data and run calculations on subsets of said data. That’s where things get tricky and where function writing is both a benefit and challenge.</p>
-<p>That’s where the <strong>control flow</strong> comes in handy. Some people call them “loops,” which I think is an easier term myself. A control flow simply repeats a calculation over and over again for certain subgroups. Even though this is easy to conceive, it’s a challenge to implement it without lots of thought and planning.</p>
-<p>There’s several different types of control flows, which you can read up by executing <code><a href="https://rdrr.io/r/base/Control.html">?Control</a></code> in your console.</p>
-<p>The one we’ll use is the <code>for (var in seq) expr</code> version. It’s hard to visualize how that works, unless we provide an example. Down below I create a loop that prints each individual word in the <code>statement</code> vector until we reach the end.</p>
-<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">statement</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"This"</span>,<span class="st">"book"</span>,<span class="st">"is"</span>,<span class="st">"the"</span>,<span class="st">"greatest"</span>,
-               <span class="st">"book"</span>,<span class="st">"ever"</span>,<span class="st">"and"</span>,<span class="st">"I"</span>,<span class="st">"will"</span>,
-               <span class="st">"recommend"</span>,<span class="st">"it"</span>,<span class="st">"to"</span>,<span class="st">"everyone"</span><span class="op">)</span>
-<span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">statement</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">statement</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<p>You usually won’t need to write functions for calculating things like standard deviation. There are plenty of existing functions for more routine calculations like that.</p>
+<p>Instead, people will find custom functions useful for things like data management. You can use these to run through large data sets and produce smaller outputs and summary statistics.</p>
+<p>That’s where the <strong>control flow</strong> comes in handy. Some people call them “loops,” which I think is the easier term to remember. A control flow simply repeats a calculation over and over again for certain subgroups. Even though it’s easy to conceive this concept, it’s a challenge to implement. It takes a combination of planning and trial-and-error.</p>
+<p>There are different types of control flows, which you can read up by executing <code><a href="https://rdrr.io/r/base/Control.html">?Control</a></code> in your console.</p>
+<p>The one we’ll use is the <code>for (var in seq) expr</code> version. I use this one the most often and it’ll probably serve most of your early needs in R programming.</p>
+<p>It’s hard to visualize how this expression works though. We’ll have to run through an example. Down below I create a loop that prints each individual word in the <code>statement</code> vector until we reach the end.</p>
+<div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">statement</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"This"</span>,<span class="st">"book"</span>,<span class="st">"is"</span>,<span class="st">"the"</span>,<span class="st">"greatest"</span>,
+                 <span class="st">"book"</span>,<span class="st">"ever"</span>,<span class="st">"and"</span>,<span class="st">"I"</span>,<span class="st">"will"</span>,
+                 <span class="st">"recommend"</span>,<span class="st">"it"</span>,<span class="st">"to"</span>,<span class="st">"everyone"</span><span class="op">)</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">statement</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">statement</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span>
+  <span class="op">}</span></code></pre></div>
 <pre><code>## [1] "This"
 ## [1] "book"
 ## [1] "is"
@@ -222,99 +224,92 @@
 ## [1] "it"
 ## [1] "to"
 ## [1] "everyone"</code></pre>
-<p>First, I create the vector. Then I said print every <code>i</code> entry of the vector until we reach the end. Even though this is a simple example, you can see why this would be useful in larger, more complicated scripting.</p>
+<p>First, I create the vector. Then I said print every <code>i</code> entry in the vector until we reach the end. Even though this is a simple example, you can see why this would be useful in more complex data management tasks.</p>
 </div>
 <div id="applying-a-control-flow-to-our-summary-stats-function" class="section level2" number="8.8">
 <h2>
 <span class="header-section-number">8.8</span> Applying a Control Flow to Our Summary Stats Function<a class="anchor" aria-label="anchor" href="#applying-a-control-flow-to-our-summary-stats-function"><i class="fas fa-link"></i></a>
 </h2>
-<p>Now we’re going to build upon our previous function with a control flow and use it to report both standard deviation and the average of a subgroup within a larger data frame. We’ll demonstrate this using the <strong>Bond</strong> data frame and report those summary statistics for each Bond actor’s net gross.</p>
-<p>First, to make sure it’s easy to visualize what we’re doing, I’m going to replace our own <em>standard deviation</em> script with the built-in <code><a href="https://rdrr.io/r/stats/sd.html">sd()</a></code> function. I’m also going to add the built-in <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> function and rename the function to “summary.group”.</p>
-<div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">summary.group</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>,<span class="va">field</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">field</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">field</span><span class="op">)</span><span class="op">]</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">field</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">field</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
-<p>Next, I’m going to replace the <strong>field</strong> assignment with <strong>groups</strong> and <strong>output</strong>.</p>
+<p>Now we’re going to build upon our previous function with a control flow and use it to report both standard deviation and the average of a subgroup within a larger data frame. We’ll demonstrate this using the <strong>Bond</strong> data frame. We’ll report those summary statistics for each Bond actor’s net gross.</p>
+<p>Down below, I replaced our previous <em>standard deviation</em> script with the built-in <code><a href="https://rdrr.io/r/stats/sd.html">sd()</a></code> function. This simpler script will make it easier to see how the control flow works. I also added the built-in <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> function and renamed the overall function to “summary.group”.</p>
 <div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">summary.group</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">group</span>, <span class="va">field</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">group</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
-  <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>group<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">character</a></span><span class="op">(</span><span class="op">)</span>,
-                       mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="op">)</span>,
-                       sd<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">field</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">field</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
-<p>The <strong>groups</strong> object creates a short vector that specifies the groups we want to evaluate. Since we’ll evaluate the actors in the Bond data frame, this would be Daniel Craig, Sean Connery, etc. It works similarly to the previous field object assignment we had.</p>
-<p>The <strong>output</strong> object is an empty data frame that will populate with our summary statistics, such as mean and standard deviation, as the control flow evaluates each subgroup. We want to create an empty data frame before the control flow, otherwise the control flow will continuously overwrite itself.</p>
-<p>Now we’ll begin our control flow. Down below I add the control flow and it evaluates each individual group found at the beginning of the function:</p>
+<code class="sourceCode R">  <span class="va">summary.group</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>,<span class="va">field</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">field</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">field</span><span class="op">)</span><span class="op">]</span>
+    <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">field</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">field</span><span class="op">)</span>
+  <span class="op">}</span></code></pre></div>
+<p>Next, I’m going to replace the <strong>field</strong> assignment with <strong>groups</strong> and <strong>output</strong>.</p>
 <div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">summary.group</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>,<span class="va">group</span>,<span class="va">field</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">group</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
-  <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>group<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">character</a></span><span class="op">(</span><span class="op">)</span>,
-                       mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="op">)</span>,
-                       sd<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-  <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">groups</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-    <span class="co">#sd(field) - can't run properly yet</span>
-    <span class="co">#mean(field) - can't run properly yet</span>
-    <span class="op">}</span>
+<code class="sourceCode R">  <span class="va">summary.group</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">group</span>, <span class="va">field</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">group</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
+    <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>group<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">character</a></span><span class="op">(</span><span class="op">)</span>,
+                         mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="op">)</span>,
+                         sd<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">field</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">field</span><span class="op">)</span>
   <span class="op">}</span></code></pre></div>
-<p>Now we’ll want to update the output data frame with the group name, the mean, and the standard deviation:</p>
+<p>The <strong>groups</strong> object creates a short vector that specifies the groups we want to evaluate. Since we’ll evaluate the actors in the Bond data frame, this would be Daniel Craig, Sean Connery, etc. It works similar to the previous field object assignment we had.</p>
+<p>The <strong>output</strong> object is an empty data frame that will populate with our summary statistics, such as mean and standard deviation, as the control flow evaluates each subgroup. We want to create an empty data frame before the control flow, otherwise the control flow will continuously overwrite it.</p>
+<p>Now we’ll begin our control flow. Down below I add the control flow and it evaluates each individual group found at the beginning of the function. Notice how I use <code>length(groups)</code> in the input for the <code>for()</code> function. This is a dynamic way of ensuring that the control flow runs for the number of grouping entries.</p>
 <div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">summary.group</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>,<span class="va">group</span>,<span class="va">field</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">group</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
-  <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>group<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">character</a></span><span class="op">(</span><span class="op">)</span>,
-                       mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="op">)</span>,
-                       sd<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-  <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">groups</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">subdata</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span><span class="va">data</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">group</span><span class="op">)</span><span class="op">]</span><span class="op">==</span><span class="va">groups</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
-                    <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">field</span><span class="op">)</span><span class="op">]</span>
-    <span class="va">output</span><span class="op">[</span><span class="va">i</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">groups</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
-                                <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">subdata</span><span class="op">)</span>,
-                                <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">subdata</span><span class="op">)</span><span class="op">)</span>
-    <span class="op">}</span>
-  <span class="op">}</span></code></pre></div>
-<p>Now there was a lot added there and I should explain. The <strong>subdata</strong> object filters down the data to the group we want to evaluate. The <code>output[i,1:3]</code> object updates the output data frame for row <code>i</code> with the group name, the mean of the field within that group, and the standard deviation.</p>
-<p>Now this function will run, but there’s still one piece we’re missing. We need to provide a <strong>value</strong>.</p>
-<p>In this function, our value we want to use is the <strong>output</strong> object, which is the data frame containing our summary statistics. We can merely add the output reference at the end, outside the control flow:</p>
+<code class="sourceCode R">  <span class="va">summary.group</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>,<span class="va">group</span>,<span class="va">field</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">group</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
+    <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>group<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">character</a></span><span class="op">(</span><span class="op">)</span>,
+                         mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="op">)</span>,
+                         sd<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+    <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">groups</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+      <span class="co">#sd(field) - can't run properly yet</span>
+      <span class="co">#mean(field) - can't run properly yet</span>
+      <span class="op">}</span>
+    <span class="op">}</span></code></pre></div>
+<p>Now we’ll want to update the output data frame with the group name, the mean, and the standard deviation:</p>
 <div class="sourceCode" id="cb244"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">summary.group</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>,<span class="va">group</span>,<span class="va">field</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">group</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
-  <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>group<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">character</a></span><span class="op">(</span><span class="op">)</span>,
-                       mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="op">)</span>,
-                       sd<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-  <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">groups</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">subdata</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span><span class="va">data</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">group</span><span class="op">)</span><span class="op">]</span><span class="op">==</span><span class="va">groups</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
-                    <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">field</span><span class="op">)</span><span class="op">]</span>
-    <span class="va">output</span><span class="op">[</span><span class="va">i</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">groups</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
-                                <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">subdata</span><span class="op">)</span>,
-                                <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">subdata</span><span class="op">)</span><span class="op">)</span>
-    <span class="op">}</span>
-  <span class="va">output</span>
-  <span class="op">}</span></code></pre></div>
-<p>If we run this function with the Bond data frame, we’ll get this result:</p>
+<code class="sourceCode R">  <span class="va">summary.group</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>,<span class="va">group</span>,<span class="va">field</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">group</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
+    <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>group<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">character</a></span><span class="op">(</span><span class="op">)</span>,
+                         mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="op">)</span>,
+                         sd<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+    <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">groups</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+      <span class="va">subdata</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span><span class="va">data</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">group</span><span class="op">)</span><span class="op">]</span><span class="op">==</span><span class="va">groups</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
+                      <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">field</span><span class="op">)</span><span class="op">]</span>
+      <span class="va">output</span><span class="op">[</span><span class="va">i</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">groups</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
+                                  <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">subdata</span><span class="op">)</span>,
+                                  <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">subdata</span><span class="op">)</span><span class="op">)</span>
+      <span class="op">}</span>
+    <span class="op">}</span></code></pre></div>
+<p>Now let me explain what I added here. The <strong>subdata</strong> object filters down the data to the group we want to evaluate. The <code>output[i,1:3]</code> object updates the output data frame for row <code>i</code> with the group name, as well as its mean and standard deviation.</p>
+<p>Now this function will run, but there’s still one piece we’re missing. We need to provide a <strong>value</strong>.</p>
+<p>In this function, the value we want is the <strong>output</strong> object, which is the data frame containing our summary statistics. We can merely add the output reference at the end, outside the control flow:</p>
 <div class="sourceCode" id="cb245"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">summary.group</span><span class="op">(</span><span class="va">bond</span>,<span class="st">"actor"</span>,<span class="st">"gross"</span><span class="op">)</span></code></pre></div>
-<pre><code>##            group     mean        sd
-## 1   Daniel Craig 820.3165 222.57396
-## 2 George Lazenby 505.8998      &lt;NA&gt;
-## 3 Pierce Brosnan  510.938  30.61869
-## 4    Roger Moore 550.8332  177.6345
-## 5   Sean Connery 724.8824 213.95672
-## 6 Timothy Dalton  333.123  67.83394</code></pre>
+<code class="sourceCode R">  <span class="va">summary.group</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>,<span class="va">group</span>,<span class="va">field</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">group</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
+    <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>group<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">character</a></span><span class="op">(</span><span class="op">)</span>,
+                         mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="op">)</span>,
+                         sd<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+    <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">groups</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+      <span class="va">subdata</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span><span class="va">data</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">group</span><span class="op">)</span><span class="op">]</span><span class="op">==</span><span class="va">groups</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
+                      <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">field</span><span class="op">)</span><span class="op">]</span>
+      <span class="va">output</span><span class="op">[</span><span class="va">i</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">groups</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
+                                  <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">subdata</span><span class="op">)</span>,
+                                  <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">subdata</span><span class="op">)</span><span class="op">)</span>
+      <span class="op">}</span>
+    <span class="va">output</span>
+    <span class="op">}</span></code></pre></div>
+<p>If we run this function with the Bond data frame, we’ll get this result:</p>
+<div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="fu">summary.group</span><span class="op">(</span><span class="va">bond</span>,<span class="st">"actor"</span>,<span class="st">"gross"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="breaking-down-the-function-we-just-made" class="section level2" number="8.9">
 <h2>
 <span class="header-section-number">8.9</span> Breaking Down the Function We Just Made<a class="anchor" aria-label="anchor" href="#breaking-down-the-function-we-just-made"><i class="fas fa-link"></i></a>
 </h2>
-<p>This probably is confusing to you since you’re not totally familiar with R control flows yet. It also doesn’t help that you’re still learning how to filter and transform the various object types.</p>
+<p>If you’re new to control flows, this probably confused you.</p>
 <p>To make it easier, I’m going to show you step-by-step how this function took the Bond data and created this output.</p>
 <p>First, the function reviewed the group we defined and created a vector with the members of that group.</p>
 <div class="inline-figure"><img src="1.52_Function_Breakdown.png" width="50%" style="display: block; margin: auto;"></div>
 <p>In this instance, that would include the Bond actors:</p>
 <div class="sourceCode" id="cb247"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">bond</span><span class="op">[</span>,<span class="st">"actor"</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">bond</span><span class="op">[</span>,<span class="st">"actor"</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "Daniel Craig"   "George Lazenby" "Pierce Brosnan" "Roger Moore"   
 ## [5] "Sean Connery"   "Timothy Dalton"</code></pre>
 <p>Second, the function created an empty data frame that will later store the actor names, their mean, and their standard deviation:</p>
@@ -325,22 +320,22 @@
 <div class="inline-figure"><img src="1.55_Function_Breakdown.png" width="50%" style="display: block; margin: auto;"></div>
 <p>Really, this function filtered the Bond data set in a similar way to the code below:</p>
 <div class="sourceCode" id="cb249"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">bond</span><span class="op">[</span>,<span class="st">"actor"</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
-<span class="va">bond</span><span class="op">[</span><span class="va">bond</span><span class="op">[</span>,<span class="st">"actor"</span><span class="op">]</span><span class="op">==</span><span class="va">groups</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,<span class="st">"gross"</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">bond</span><span class="op">[</span>,<span class="st">"actor"</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">bond</span><span class="op">[</span><span class="va">bond</span><span class="op">[</span>,<span class="st">"actor"</span><span class="op">]</span><span class="op">==</span><span class="va">groups</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,<span class="st">"gross"</span><span class="op">]</span></code></pre></div>
 <pre><code>## [1] 1108.5610  880.6692  669.7895  622.2464</code></pre>
 <p>The function then took the subdata and calculated our summary statistics. This populated the empty data set one by one…</p>
 <div class="inline-figure"><img src="1.56_Function_Breakdown.png" width="50%" style="display: block; margin: auto;"></div>
-<p>…with each new row looked something like this:</p>
+<p>…with each new row looking something like this:</p>
 <pre><code>##      groups.1. mean.subdata. sd.subdata.
 ## 1 Daniel Craig      820.3165     222.574</code></pre>
-<p>And finally, it displayed the complete data frame once finished with the control flow!</p>
+<p>And finally, it displayed the complete data frame once it finished with the control flow!</p>
 <div class="inline-figure">
 <img src="1.57_Function_Breakdown.png" width="50%" style="display: block; margin: auto;">
 ## Assigning Functions Outputs a Name</div>
 <p>Any objects named within a function are not saved in your R environment. To save the results, you need to assign the executed function a name, like you would with any other object.</p>
 <div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bond_eval</span> <span class="op">&lt;-</span> <span class="fu">summary.group</span><span class="op">(</span><span class="va">bond</span>,<span class="st">"actor"</span>,<span class="st">"gross"</span><span class="op">)</span>
-<span class="va">bond_eval</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">bond_eval</span> <span class="op">&lt;-</span> <span class="fu">summary.group</span><span class="op">(</span><span class="va">bond</span>,<span class="st">"actor"</span>,<span class="st">"gross"</span><span class="op">)</span>
+  <span class="va">bond_eval</span></code></pre></div>
 <p>This can apply to any existing functions.</p>
 </div>
 <div id="things-to-remember-6" class="section level2" number="8.10">
@@ -350,7 +345,7 @@
 <ul>
 <li>Functions are the only object type that modifies other objects</li>
 <li>Functions require an argument to execute and typically outputs a value</li>
-<li>Packages store various previously built functions that you can utilize</li>
+<li>Packages store previously built functions that you can utilize</li>
 <li>You can build your own functions to suit your R programming needs</li>
 <li>Control flows or “loops” are a handy way to automate data management tasks at a granular level</li>
 </ul>
@@ -361,7 +356,7 @@
 </h2>
 <p>Try to see if you can complete the following exercises. Answers are in the back of the book!</p>
 <ol style="list-style-type: decimal">
-<li>Modify the simply standard deviation function we wrote and change it to calculate mean. Do this without using the built-in <code>mean</code> function.</li>
+<li>Modify the simple standard deviation function we wrote and change it to calculate mean. Do this without using the built-in <code>mean</code> function.</li>
 <li>Alter the <code>summary.group</code> function to include median, maximum, and minimum values.</li>
 <li>Write a function for the <em>Fibonacci Sequence</em>, which ends at a number you choose. You’ll need to use a control flow to accomplish this and a default value for the end of the sequence. (Hint: You won’t use the <code>for(var in seq) expr</code> control flow. Execute <code><a href="https://rdrr.io/r/base/Control.html">?Control</a></code> to use a different version.)</li>
 </ol>
@@ -379,7 +374,7 @@
 <li><a class="nav-link" href="#the-components-of-an-r-function"><span class="header-section-number">8.3</span> The Components of an R Function</a></li>
 <li><a class="nav-link" href="#required-versus-non-required-arguments"><span class="header-section-number">8.4</span> Required versus Non-Required Arguments</a></li>
 <li><a class="nav-link" href="#when-order-matters-for-arguments"><span class="header-section-number">8.5</span> When Order Matters for Arguments</a></li>
-<li><a class="nav-link" href="#how-to-write-your-own-function"><span class="header-section-number">8.6</span> How to Write Your Own Function</a></li>
+<li><a class="nav-link" href="#how-to-write-your-own-functions"><span class="header-section-number">8.6</span> How to Write Your Own Functions</a></li>
 <li><a class="nav-link" href="#writing-functions-using-control-flows"><span class="header-section-number">8.7</span> Writing Functions Using Control Flows</a></li>
 <li><a class="nav-link" href="#applying-a-control-flow-to-our-summary-stats-function"><span class="header-section-number">8.8</span> Applying a Control Flow to Our Summary Stats Function</a></li>
 <li><a class="nav-link" href="#breaking-down-the-function-we-just-made"><span class="header-section-number">8.9</span> Breaking Down the Function We Just Made</a></li>
@@ -402,7 +397,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>R Programming in Plain English</strong>" was written by Taylor Rodgers. It was last built on 2022-01-01.</p>
+    <p>"<strong>R Programming in Plain English</strong>" was written by Taylor Rodgers. It was last built on 2022-01-10.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -71,8 +71,8 @@
 </h1>
 <p>Packages are one of the most important concepts in R programming. It’s almost hard to conceive R programming without them.</p>
 <p>An R <strong>package</strong> stores various functions and data sets for other users to access. It allows R to move beyond its roots in statistical programming and achieve more complex goals.</p>
-<p>For example, you might be writing a research paper. You want to clearly show the results of your regression analysis in this report, along with various tables and charts. You can use a combination of <em>Rmarkdown</em>, <em>ggplot2</em>, <em>xtable</em>, and various other packages to accomplish this goal.</p>
-<p>That way you don’t have to copy and paste your work to a word document as you analyze the results. You merely write it and program it in R and then export it to Word when you’re done. This saves you a lot of time in the long run and makes your code far more re-producible.</p>
+<p>For example, you might be writing a research paper. You want to clearly show the results of your regression analysis in this report, along with various tables and charts. You can use a combination of <code>rmarkdown</code>, <code>ggplot2</code>, <code>xtable</code>, and various other packages to accomplish this goal.</p>
+<p>That way you don’t have to copy and paste your work to a word document as you analyze the results. You merely write it and program it in R and then export it when you’re done. This saves you a lot of time in the long run and makes your code far more re-producible.</p>
 <div id="why-does-r-use-packages" class="section level2" number="7.1">
 <h2>
 <span class="header-section-number">7.1</span> Why Does R Use Packages?<a class="anchor" aria-label="anchor" href="#why-does-r-use-packages"><i class="fas fa-link"></i></a>
@@ -87,7 +87,7 @@
 <p>Before I show you how to use an R package, you need to understand there’s a difference between <strong>installing</strong> and <strong>loading</strong> a package. Installing means pulling it from CRAN and saving it on your computer. Loading a package means using it in your current R session.</p>
 <p>Why would R do this?</p>
 <p>Mostly for efficiency. It would take more memory if your R session ran every package installed on your computer. It improves your computer’s performance to load packages only as you need them.</p>
-<p>Also, it’s not uncommon for R packages from different developers to have functions with the same name, but different purposes and inputs. Forcing you to load only the package with the function solves this issue.</p>
+<p>Also, it’s not uncommon for R packages from different developers to have functions with the same name, but different purposes and inputs. Forcing you to load only the packages with the functions you need solves this issue.</p>
 </div>
 <div id="how-to-install-and-load-a-package---the-easy-way" class="section level2" number="7.3">
 <h2>
@@ -104,78 +104,74 @@
 <div class="inline-figure"><img src="1.39_Install_Dplyr.png" width="60%" style="display: block; margin: auto;"></div>
 <p>You will now see this package show up in the packages tab in the bottom right pane of RStudio:</p>
 <div class="inline-figure"><img src="1.40_Dplyr_Package.png" width="60%" style="display: block; margin: auto;"></div>
-<p>This doesn’t make the dplyr package available for us to use though. We still have to <em>load</em> it.</p>
+<p>This doesn’t make the <code>dplyr</code> package available for us to use though. We still have to <em>load</em> it.</p>
 <p>This is where RStudio makes things easy. All you have to do is click the little check box next to <strong>dplyr</strong> to load it.</p>
 <div class="inline-figure"><img src="1.41_Dplyr_Loaded.png" width="60%" style="display: block; margin: auto;"></div>
 <p>And now your package is loaded!</p>
 </div>
-<div id="why-you-should-still-learn-to-install-and-load-packages-the-old-fashioned-way" class="section level2" number="7.4">
+<div id="how-to-install-and-load-r-packages---the-old-fashioned-way" class="section level2" number="7.4">
 <h2>
-<span class="header-section-number">7.4</span> Why You Should Still Learn to Install and Load Packages the “Old Fashioned” Way<a class="anchor" aria-label="anchor" href="#why-you-should-still-learn-to-install-and-load-packages-the-old-fashioned-way"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.4</span> How to Install and Load R Packages - The Old Fashioned Way<a class="anchor" aria-label="anchor" href="#how-to-install-and-load-r-packages---the-old-fashioned-way"><i class="fas fa-link"></i></a>
 </h2>
-<p>A developer once told me people who use RStudio weren’t real “programmers.” Real programmers, he said, type everything out by hand. RStudio was for “posers.”</p>
-<p>If that’s true, I am happy to be a poser. RStudio makes package management far easier. But there are some legitimate reasons to use the old fashioned methods, other than proving yourself as a real programmer.</p>
-<p>If you need to share your code with other people, for example, it’s better to include any code that installs and / or loads packages needed. That way the person opening your script doesn’t have to guess which packages to load.</p>
-</div>
-<div id="how-to-install-and-load-r-packages---the-old-fashioned-way" class="section level2" number="7.5">
-<h2>
-<span class="header-section-number">7.5</span> How to Install and Load R Packages - The Old Fashioned Way<a class="anchor" aria-label="anchor" href="#how-to-install-and-load-r-packages---the-old-fashioned-way"><i class="fas fa-link"></i></a>
-</h2>
-<p>There are two key functions you need to remember to install and load a package:
-1. <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code>
-2. <code><a href="https://rdrr.io/r/base/library.html">library()</a></code></p>
+<p>Sometimes it’s better to hand-type code and that also applies to package management. That’s what I call the “old fashioned way.” You may choose this approach because you find it faster than scrolling through the user-interface. Or you might be writing a script that will be used again later on.</p>
+<p>There are two key functions you need to remember to install and load a package this way:</p>
+<ol style="list-style-type: decimal">
+<li><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code></li>
+<li><code><a href="https://rdrr.io/r/base/library.html">library()</a></code></li>
+</ol>
 <p><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code> installs the package from CRAN onto your computer. <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> will load it into your current R session.</p>
 <p>Oddly enough, there’s a difference in notation between the two. The <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code> function requires you to put quotations “” around the package name. <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> does not.</p>
 <p>To see what I mean, look at the example down below:</p>
-<div class="sourceCode" id="cb223"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb224"><pre class="downlit sourceCode r">
 <code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"dplyr"</span><span class="op">)</span>
   <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></code></pre></div>
 <p>Notice how the quotations marks are used in the first function? This is required for <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code>. The <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> function does not require it, but you can use quotation marks and it’ll still execute.</p>
 </div>
-<div id="a-simple-trick-to-include-install-and-load-any-packages-needed" class="section level2" number="7.6">
+<div id="make-it-easy-for-the-next-person-to-use-the-required-packages" class="section level2" number="7.5">
 <h2>
-<span class="header-section-number">7.6</span> A Simple Trick to Include Install and Load Any Packages Needed<a class="anchor" aria-label="anchor" href="#a-simple-trick-to-include-install-and-load-any-packages-needed"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.5</span> Make It Easy for the Next Person to Use the Required Packages<a class="anchor" aria-label="anchor" href="#make-it-easy-for-the-next-person-to-use-the-required-packages"><i class="fas fa-link"></i></a>
 </h2>
 <p>If you share your R script with a colleague, they may not have all packages needed on their local computer to execute it.</p>
-<p>To take care of this, you can include both the <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code> and <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> functions at the top of the script.</p>
-<p>If it’s a script that only you’ll use in the future, you only need to include the <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> function near the beginning, as you already installed the package beforehand.</p>
+<p>To take care of this, you can include both the <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code> and <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> functions at the top of the script that you send them.</p>
+<p>If you’re the only person who will open that script in the future, you only need to include the <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> function. Since you’ve already installed the package before, there’s no need to do it again.</p>
 </div>
-<div id="how-to-find-new-packages-to-install" class="section level2" number="7.7">
+<div id="how-to-find-new-packages-to-install" class="section level2" number="7.6">
 <h2>
-<span class="header-section-number">7.7</span> How to Find New Packages to Install<a class="anchor" aria-label="anchor" href="#how-to-find-new-packages-to-install"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.6</span> How to Find New Packages to Install<a class="anchor" aria-label="anchor" href="#how-to-find-new-packages-to-install"><i class="fas fa-link"></i></a>
 </h2>
-<p>One of the best kept secrets of computer engineers and programmers is that the majority of what they learned came from Google. Every time something doesn’t work, they google how to do it.</p>
-<p>Changes are high that you’ll do the same as you program in R and most of these sites will tell you what packages to download. It’s typically in the top left or right corner.</p>
+<p>One of the not-so-best kept secrets about programmers is that we rely on google for the majority of what we do. Every time something doesn’t work, we just google the answer!</p>
+<p>Chances are high that you’ll do the same as you program in R. Whenever you come across a website that documents a function, they’ll either specify the package at the start of the article or post it in the top right or left corner of the screen.</p>
 <div class="inline-figure"><img src="1.42_Package_Info.png" width="60%" style="display: block; margin: auto;"></div>
-<p>For example, I recently google’d “survival analysis in R.” Unlike regression analysis, R doesn’t have handy base functions to perform survival analysis. I found a couple of websites with information on how to do this in R. All of them required a new package called <strong>survival</strong>, which they displayed in the top left or right of the website.</p>
+<p>For example, I recently google’d “survival analysis in R.” Unlike regression analysis, R doesn’t have handy base functions to perform survival analysis. I found a couple of websites with information on how to do this in R. All of them required a package called <strong>survival</strong>, which they displayed in the top left or right of the website.</p>
 <div class="inline-figure"><img src="1.43_Package_Info.png" width="60%" style="display: block; margin: auto;"></div>
 </div>
-<div id="how-to-find-documentation-on-packages" class="section level2" number="7.8">
+<div id="how-to-find-documentation-on-packages" class="section level2" number="7.7">
 <h2>
-<span class="header-section-number">7.8</span> How to Find Documentation on Packages<a class="anchor" aria-label="anchor" href="#how-to-find-documentation-on-packages"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.7</span> How to Find Documentation on Packages<a class="anchor" aria-label="anchor" href="#how-to-find-documentation-on-packages"><i class="fas fa-link"></i></a>
 </h2>
-<p>Most packages you install will have documentation with it. Sadly, much of this documentation is unreadable, but it’s still a great resource and I rely on it heavily.</p>
-<p>To access this documentation, you can click on the hyperlinked package name in the packages tab.</p>
-<p>Click on the <strong>dplyr</strong> link on your own RStudio screen to see what I mean:</p>
+<p>Most packages you install will have documentation with it. Sadly, much of this documentation is not easy to read, but it’s still a great resource and I rely on it heavily.</p>
+<p>To access this documentation, you can click on the hyperlinked package name in the <strong>Packages</strong> tab.</p>
+<p>For example, try clicking on <code>dplyr</code>’s link on your own RStudio screen to see what I mean:</p>
 <div class="inline-figure"><img src="1.41_Dplyr_Loaded.png" width="60%" style="display: block; margin: auto;"></div>
 <p>This will take you to the <strong>Help</strong> tab and you can see documentation on all commands, functions, and data sets for a given package.</p>
 <div class="inline-figure"><img src="1.44_Package_Documentation.png" width="60%" style="display: block; margin: auto;"></div>
-<p>You can select any of these hyperlinks to view instructions for how to use a specific function from this package. Down below, I select the <strong>mutate</strong> function documentation.</p>
+<p>You can select any of these hyperlinks to view instructions for how to use a specific function from this package.</p>
+<p>Down below, I select the <strong>mutate</strong> hyperlink:</p>
 <div class="inline-figure"><img src="1.45_Select_Mutate_Documentation.png" width="60%" style="display: block; margin: auto;"></div>
-<p>And this will take you to the documentation page.</p>
+<p>And this will take you to the documentation page…</p>
 <div class="inline-figure"><img src="1.46_Mutate_Documentation.png" width="60%" style="display: block; margin: auto;"></div>
 <p>As you may have noticed, the documentation also lists the function’s package in the top left hand of the corner. This is useful as you look up functions later.</p>
 <div class="inline-figure"><img src="1.47_Package_Reference.png" width="60%" style="display: block; margin: auto;"></div>
-<p>You can also use certain commands to pull up this documentation. The following will bring up a package’s documentation in the Help tab.</p>
-<div class="sourceCode" id="cb224"><pre class="downlit sourceCode r">
+<p>You can also use certain commands to pull up this documentation. The following will bring up a package’s documentation in the <strong>Help</strong> tab.</p>
+<div class="sourceCode" id="cb225"><pre class="downlit sourceCode r">
 <code class="sourceCode R">  <span class="op">?</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/dplyr-package.html">dplyr</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>And you can look up individual functions from the package.</p>
-<div class="sourceCode" id="cb225"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
 <code class="sourceCode R">  <span class="op">?</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="things-to-remember-5" class="section level2" number="7.9">
+<div id="things-to-remember-5" class="section level2" number="7.8">
 <h2>
-<span class="header-section-number">7.9</span> Things to Remember<a class="anchor" aria-label="anchor" href="#things-to-remember-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.8</span> Things to Remember<a class="anchor" aria-label="anchor" href="#things-to-remember-5"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>Packages are what allows you to adapt R programming to meet your needs</li>
@@ -184,9 +180,9 @@
 <li>You can research packages using the <strong>Help</strong> tab in RStudio</li>
 </ul>
 </div>
-<div id="exercises-3" class="section level2" number="7.10">
+<div id="exercises-3" class="section level2" number="7.9">
 <h2>
-<span class="header-section-number">7.10</span> Exercises<a class="anchor" aria-label="anchor" href="#exercises-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.9</span> Exercises<a class="anchor" aria-label="anchor" href="#exercises-3"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li>Install the <code>tidyverse</code> set of packages. (Note: you only need to install “tidyverse” and it’ll load multiple packages.)</li>
@@ -204,13 +200,12 @@
 <li><a class="nav-link" href="#why-does-r-use-packages"><span class="header-section-number">7.1</span> Why Does R Use Packages?</a></li>
 <li><a class="nav-link" href="#how-to-access-r-packages"><span class="header-section-number">7.2</span> How to Access R Packages</a></li>
 <li><a class="nav-link" href="#how-to-install-and-load-a-package---the-easy-way"><span class="header-section-number">7.3</span> How to Install and Load a Package - The Easy Way</a></li>
-<li><a class="nav-link" href="#why-you-should-still-learn-to-install-and-load-packages-the-old-fashioned-way"><span class="header-section-number">7.4</span> Why You Should Still Learn to Install and Load Packages the “Old Fashioned” Way</a></li>
-<li><a class="nav-link" href="#how-to-install-and-load-r-packages---the-old-fashioned-way"><span class="header-section-number">7.5</span> How to Install and Load R Packages - The Old Fashioned Way</a></li>
-<li><a class="nav-link" href="#a-simple-trick-to-include-install-and-load-any-packages-needed"><span class="header-section-number">7.6</span> A Simple Trick to Include Install and Load Any Packages Needed</a></li>
-<li><a class="nav-link" href="#how-to-find-new-packages-to-install"><span class="header-section-number">7.7</span> How to Find New Packages to Install</a></li>
-<li><a class="nav-link" href="#how-to-find-documentation-on-packages"><span class="header-section-number">7.8</span> How to Find Documentation on Packages</a></li>
-<li><a class="nav-link" href="#things-to-remember-5"><span class="header-section-number">7.9</span> Things to Remember</a></li>
-<li><a class="nav-link" href="#exercises-3"><span class="header-section-number">7.10</span> Exercises</a></li>
+<li><a class="nav-link" href="#how-to-install-and-load-r-packages---the-old-fashioned-way"><span class="header-section-number">7.4</span> How to Install and Load R Packages - The Old Fashioned Way</a></li>
+<li><a class="nav-link" href="#make-it-easy-for-the-next-person-to-use-the-required-packages"><span class="header-section-number">7.5</span> Make It Easy for the Next Person to Use the Required Packages</a></li>
+<li><a class="nav-link" href="#how-to-find-new-packages-to-install"><span class="header-section-number">7.6</span> How to Find New Packages to Install</a></li>
+<li><a class="nav-link" href="#how-to-find-documentation-on-packages"><span class="header-section-number">7.7</span> How to Find Documentation on Packages</a></li>
+<li><a class="nav-link" href="#things-to-remember-5"><span class="header-section-number">7.8</span> Things to Remember</a></li>
+<li><a class="nav-link" href="#exercises-3"><span class="header-section-number">7.9</span> Exercises</a></li>
 </ul>
 
       <div class="book-extra">
@@ -228,7 +223,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>R Programming in Plain English</strong>" was written by Taylor Rodgers. It was last built on 2022-01-01.</p>
+    <p>"<strong>R Programming in Plain English</strong>" was written by Taylor Rodgers. It was last built on 2022-01-10.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

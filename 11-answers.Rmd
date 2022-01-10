@@ -97,7 +97,7 @@ mtcars %>%
 ## Chapter 7 - Understanding and Using R Packages
 
 1. To install the `tidyverse` set of packages, run the script `install.packages("tidyverse")`.
-2. To load the `dplyr` package, run the script `load(dplyr)`.
+2. To load the `dplyr` package, run the script `library(dplyr)`.
 
 ## Chapter 8 - How to Write Functions
 

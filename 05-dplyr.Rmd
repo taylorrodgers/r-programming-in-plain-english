@@ -1,32 +1,48 @@
 # How to Filter and Transform Data with the dplyr Package {#dplyr}
-In the last chapter, I showed you how to use R base to filter and transform data. Personally, I still think this is the best way to manage data in R. However, there’s another popular package for data filtering and transformation – the `dplyr` package.
+In the last chapter, I showed you how to use R base to filter and transform objects. You will need to learn how to use base R to work with most object types in R. 
 
-The `dplyr` package (pronounced like “data plier”) was developed by Hadley Wickham to allow more intuitive data transformation. It falls under the tidyverse packages, which includes other popular R packages created by Mr. Wickham.
+However, there’s another popular package for data filtering and transformation – the `dplyr` package.
+
+The `dplyr` package (pronounced like “data plier”) was developed to allow more intuitive data transformation. It falls under the `tidyverse`, which is a collection of other popular R packages.
+
+A big difference between this method and the last chapter is our focus. Rather than filtering and transforming *any object type*, we'll focus exclusively on data frames.
 
 ## Why is dplyr So Popular?
-`dplyr` is popular for its intuitive syntax for filtering and transforming data frames. If your programming background is with SQL, you’ll find it an easier transition to make.
+`dplyr` is popular for its intuitive syntax for filtering and transforming data frames. If your programming background is with SQL, you’ll find this an easier method to use.
 
 `dplyr` is also highly readable compared to base R. That’s where I see the most value in it. You can send it over to another programmer and it’ll be easier for them to read what you’re doing with the data.
 
-## It's Still Worth Learning Base R
+## Is It Still Worth Learning Base R?
 `dplyr`’s strengths are mostly limited to data frames, whereas base R can work with vectors, matrices, arrays, and lists. That makes it still worthwhile to study base R.
 
-This isn’t a knock against `dplyr`. Much of the work you’ll do requires a data frame and most R functions work with data frames fairly easily. But I have found that the functions I typically write (which we'll cover later) work a lot better when you understand base R.
+This isn’t a knock against `dplyr`. Much of the work you’ll do requires a data frame and most R functions work with data frames fairly easily. But I have found that the functions I typically write (which we'll cover later) work a lot better when you understand base R. 
+
+## How to Install and Load dplyr
+In our next chapter, I'll go into more detail about installing and loading packages. For now though, simply run the script below and you can follow along with our examples.
+
+```{r dplyr-fig0, eval=FALSE}
+  install.packages("dplyr")
+  load(dplyr)
+```
+
+You can also run `install.packages("tidyverse")`, which will install other packages related to data management, including `dplyr`.
 
 ## The dplyr Syntax
 If you recall, filtering a data frame in base R looks like this:
 ```{r dplyr-fig, eval=FALSE}
-#If needed, you can reload the Bond data set with this script
-bond <- read.csv("https://raw.githubusercontent.com/taylorrodgers/bond/main/bond.csv")
-
-bond[bond["year"]>=1990,1:3]
+  #If needed, you can reload the Bond data set with this script
+  bond <- read.csv("https://raw.githubusercontent.com/taylorrodgers/bond/main/bond.csv")
+  
+  bond[bond["year"]>=1990,1:3]
 ```
 That’s different in `dplyr`, which looks like this:
 
 ```{r dplyr-fig2, eval=FALSE}
-bond %>% select(filmname,year,actor) %>% filter(year>=1990)
+  bond %>% 
+    select(filmname,year,actor) %>% 
+    filter(year>=1990)
 ```
-You can literally think of the `dplyr` syntax as a set of instructions to read one-by-one:
+You can think of the `dplyr` syntax as a set of instructions to read one-by-one:
 
 1. Hey data set named "Bond"... `bond %>%`
 2. Tell me the film name, year released, and actor name for... `select(filmname,year,actor) %>%`
@@ -46,9 +62,10 @@ In addition to `select()`, there’s also `mutate()` and `transmute()`, which se
 Filtering uses the `filter()` function and reduces the rows to those you specify.
 
 ## How to Select and Mutate a Data Frame with dplyr in R
-In dplyr, you can select columns using the `select()` function:
+In `dplyr`, you can select columns using the `select()` function:
 ```{r dplyr-fig4, eval=FALSE}
-bond %>% select(actor,filmname,gross)
+  bond %>% 
+    select(actor,filmname,gross)
 ```
 
 Executing the code above will only select the columns *actor*, *filmname*, and *gross.*
@@ -57,67 +74,82 @@ Sometimes you’ll need to transform or alter the data. That’s where `mutate()
 
 Execute the script below to see:
 ```{r dplyr-fig5, eval=FALSE}
-bond %>% mutate(gross_millions=gross*1000000)
+  bond %>% 
+    mutate(gross_millions=gross*1000000)
 ```
 
 The `mutate()` function added a new column to the end called *gross_millions* with our new calculation.
 
-The one drawback to `mutate()` is that it allow you to select specified columns. Rather than add another `%>% select()` to your code, you can use the `transmute()` function. `transmute()` basically combines the functionality of `mutate()` and `select()`. You can both define the columns you want to keep and mutate others.
+One thing to keep in mind with `mutate()` is that it always includes all existing columns. This can be good or bad, depending on your goal.
+
+Let's say you want to create a new column, but not include the existing ones in your output. Rather than add another `%>% select()` to your code, you can use the `transmute()` function.
+
+`transmute()` combines the functionality of `mutate()` and `select()`. You can both define the columns you want to keep and mutate others.
 
 ```{r dplyr-fig6, eval=FALSE}
-bond %>% transmute(actor,filmname,gross=gross*1000000)
+  bond %>% 
+    transmute(actor,filmname,gross=gross*1000000)
 ```
 
-I personally like `transmute()` for selecting columns. However, `select()` and `mutate()` are appropriate in some situations.
+I personally like `transmute()` for selecting columns. However, `select()` and `mutate()` are appropriate in many situations as well.
 
 ## How to Filter a Data Frame with dplyr in R
 To filter rows in a data frame, use the `filter()` function:
 ```{r dplyr-fig7, eval=FALSE}
-bond %>% filter(year>=1980 & actor=="Daniel Craig")
+  bond %>% 
+    filter(year>=1980 & actor=="Daniel Craig")
 ```
 
-If you noticed, we used the same operators as in base R. We can use any R operators as below:
+If you noticed, we used the same operators as in base R. We can use any R operators shown below:
 ```{r dplyr-fig8, tidy=FALSE, echo=FALSE}
-label <- c("less than","greater than","less than or equal","greater than or equal","equal","does not equal","and","or","in")
-symbol <- c("<",">","<=",">=","==","!=","&","|","%in%")
-oper <- data.frame(label,symbol)
-knitr::kable(
-  oper, caption = 'R Operators',
-  booktabs = TRUE
-)
+  label <- c("less than","greater than","less than or equal",
+             "greater than or equal",
+             "equal","does not equal","and","or","in")
+  symbol <- c("<",">","<=",">=","==","!=","&","|","%in%")
+  oper <- data.frame(label,symbol)
+  knitr::kable(
+    oper, caption = 'R Operators',
+    booktabs = TRUE
+  )
 ```
 
-You can apply any of these operators the `filter()` function:
+You can apply any of these operators within the `filter()` function:
 ```{r dplyr-fig9, eval=FALSE}
-bond %>% filter(actor == "Daniel Craig" | actor == "Sean Connery")
-bond %>% filter(gross >= 700 & year < 2000)
+  bond %>% 
+    filter(actor == "Daniel Craig" | actor == "Sean Connery")
+  bond %>%
+    filter(gross >= 700 & year < 2000)
 ```
 
 Like in base R, you can also pass vectors in for dynamic filters:
 ```{r dplyr-fig10, eval=FALSE}
-actor_list <- c("Daniel Craig","Sean Connery","Timothy Dalton")
-bond %>% filter(actor %in% actor_list)
+  actor_list <- c("Daniel Craig","Sean Connery","Timothy Dalton")
+  bond %>% 
+    filter(actor %in% actor_list)
 ```
 
 ## How to Summarize and Group Data with dplyr in R
 Probably the most useful thing about `dplyr` is the ability to create new data frames that group and summarize data found in the larger data set. This is the primary reason I like `dplyr`.
 
-Let's say you wanted to take the Bond data set and find out the gross revenue mean and standard deviation for Daniel Craig and Sean Connery. To accomplish this in base R, you'd have to use the following code:
+Let's say you wanted to take the Bond data set and find out the mean and standard deviation for gross revenue, but only for the films starring Daniel Craig and Sean Connery.
+
+To accomplish this in base R, you'd have to use the following code:
 ```{r dplyr-fig11, eval=FALSE}
-data.frame(actor_subselect=c("Daniel Craig","Sean Connery"), 
-           average_revenue=c(mean(bond[bond$actor=="Daniel Craig","gross"]),
-                             mean(bond[bond$actor=="Sean Connery","gross"])),
-           sdev_revenue=c(sd(bond[bond$actor=="Daniel Craig","gross"]),
-                          sd(bond[bond$actor=="Sean Connery","gross"])))
+  data.frame(actor_subselect=c("Daniel Craig","Sean Connery"), 
+             average_revenue=c(mean(bond[bond$actor=="Daniel Craig","gross"]),
+                               mean(bond[bond$actor=="Sean Connery","gross"])),
+             sdev_revenue=c(sd(bond[bond$actor=="Daniel Craig","gross"]),
+                            sd(bond[bond$actor=="Sean Connery","gross"])))
 ```
 
 It’s not very simple, is it? Imagine having to do that for a much larger data set with even more actors!
 
 `dplyr`’s `group_by()` and `summarize()` functions really cut down on this work. Here’s how we can accomplish the same thing as above:
 ```{r dplyr-fig12, eval=FALSE}
-bond %>% filter(actor=="Daniel Craig" | actor == "Sean Connery") %>% 
-        group_by(actor) %>% 
-        summarize(average_revenue=mean(gross),sdev_revenue=sd(gross))
+  bond %>% 
+    filter(actor=="Daniel Craig" | actor == "Sean Connery") %>% 
+    group_by(actor) %>% 
+    summarize(average_revenue=mean(gross),sdev_revenue=sd(gross))
 ```
 
 Now you’ll notice this script isn’t shorter than what we did earlier. However, it’s a lot easier to read. That’s the beauty of `dplyr`!

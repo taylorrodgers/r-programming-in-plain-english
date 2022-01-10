@@ -413,9 +413,9 @@ Copy and paste the code below to your own computer to get an idea of how this wo
 
 ## How to Filter and Transform Data from a Data Frame
 
-There's two approaches you can take to selecting data from a data frame. There's the "classic" approach, which I'll show you in this section, and then there's the **data plyer** approach.
+There's two approaches you can take to selecting data from a data frame. There's the "classic" approach, which I'll show you in this section, and then there's the **data plier** approach.
 
-The classic approach uses R base to interact with data frames. The data plyer approach uses a package called `dplyr` to transform the data. The `dplyr` syntax is far more readable, which is handy for longer scripts.
+The classic approach uses R base to interact with data frames. The "data plier" approach uses a package called `dplyr` to transform the data. The `dplyr` syntax is far more readable, which is handy for longer scripts.
 
 If you don't want to confuse yourself by learning two different methods, feel free to skip this section and go to the chapter on `dplyr`. This section will show the classical approach.
 
