@@ -3,7 +3,7 @@ output:
   pdf_document: default
   html_document: default
 ---
-# Importing Data into R {#importdata}
+# How to Import Data into R {#importdata}
 
 There's three good ways to import data into R:
 
@@ -11,26 +11,27 @@ There's three good ways to import data into R:
 2. Connect to a database (SQL Server, AWS, etc.)
 3. Connect to an API (Google Analytics, Census Bureau, etc.)
 
-Students and researchers will use the first option the most. That's because your data sets are usually smaller and don't require a database. You can both write a command or use the RStudio user interface to import raw data files.
+Students and researchers will use the first option the most. That's because your data sets are usually smaller and don't require a database. You can either write a command or use the RStudio interface to import raw data files.
 
 The second option is what you'll use while working for a large organization. Most data is stored in a large database that you can access. If you work with a SQL database, you're in luck. You can access your database directly with RStudio! Although it does require some setup.
 
-The third option involves connecting to an *application programming interface* (API). That's a fancy way of saying you connect to an online application. Typically, you'll download existing packages that make this easier. That's not always true though. Sometimes you'll be stuck writing your own code to access an API and you may wonder if it's simply better to download the raw data files to import.
+The third option involves connecting to an *application programming interface* (API). That's a fancy way of saying you connect to an online application. Typically, you'll download existing packages that makes this process easier.
 
 ## How to Import a Raw Data File the Easy Way
 
-RStudio makes routine steps like raw data import easy. In the top right pane, you'll see an **Import Dataset** button. Click that.
+RStudio makes routine steps like importing raw data files easy. In the top right pane, you'll see an **Import Dataset** button. Click that.
 
 ```{r 6, echo=FALSE,fig.align="center",out.width="50%"}
 knitr::include_graphics("1.58_Import_Raw_Data.png",dpi=75) 
 ```
+
 You should get a menu that looks like this:
 
 ```{r 6.1, echo=FALSE,fig.align="center",out.width="50%"}
 knitr::include_graphics("1.58.1_Dropdown.png",dpi=75) 
 ```
 
-For the following example, we'll select "From Text (readr)...". This allows us to import .csv, .txt, and other text files. Importing a SAS data file isn't all that different from importing a CSV file.
+For the following example, we'll select "From Text (readr)...". This allows us to import .csv, .txt, and other text files.
 
 Click on "From Text(readr)..." and you should see this screen:
 
@@ -38,77 +39,75 @@ Click on "From Text(readr)..." and you should see this screen:
 knitr::include_graphics("1.59_Import_Raw_Data_Screen.png") 
 ```
 
-To get started, we first need to provide a file path or a URL in the top search bar. (Just use any raw data file on your computer or go to Kaggle.com to find one.)
+To continue, we need to provide a file path or a URL in the top search bar. If you want to practice these steps with me, you can select "Browse..." to find a specific file on your computer.
 
-You can select "Browse..." to find a specific file on your computer.
-
-Down below, you'll see I selected a .tsv file. As you can see, the data doesn't look right.
+Down below, you'll see I selected a .tsv file. As you can see, the data doesn't look quite right.
 
 ```{r 6.2.1, echo=FALSE,fig.align="center",out.width="75%"}
 knitr::include_graphics("1.60_Funky_Data.png") 
 ```
 
-That's because the RStudio's default setting for raw data import assumes the data is *comma-delimited*. We need to change the **Delimator:** option to "Tab."
+That's because the RStudio's default setting for raw data import assumes the data is *comma-delimited*. For the data set I'm using, I need to change the **Delimator:** option to "Tab."
 
 ```{r 6.3, echo=FALSE,fig.align="center",out.width="75%"}
 knitr::include_graphics("1.61_Change_Tab.png") 
 ```
 
-The data should look like this now:
+The data reads correctly after making this adjustment, as you can see below:
 
 ```{r 6.4, echo=FALSE,fig.align="center",out.width="75%"}
 knitr::include_graphics("1.62_NonFunky_Data.png") 
 ```
 
-Before you hit **Import** in the bottom right-hand corner of the window, look at what RStudio produced in the box above it.
+One thing you should pay attention to before hitting **Import** is the bottom right-hand corner of the window.
 
 ```{r 6.5, echo=FALSE,fig.align="center",out.width="60%"}
 knitr::include_graphics("1.63_NewCode.png",dpi=150) 
 ```
 
-As you can see, RStudio writes the script you'll use to import this data set. Selecting "import" will run this script afterwards.
+As you can see, RStudio writes the script that imports this data set. Selecting "import" will run this script afterwards.
 
-Go ahead and hit import now. You'll then see your data set appear as a data frame in the environment tab:
+Go ahead and hit import now with your own data set. You should see that data appear as a data frame in the environment tab:
 
 ```{r 6.6, echo=FALSE,fig.align="center",out.width="60%"}
 knitr::include_graphics("1.64_New_Data_Frame.png",dpi=150) 
 ```
 
-Congrats! You successfully imported a raw data file. You can follow similar steps for Excel, SAS, STATA, and other data file types!
+It's that easy! You can follow similar steps for Excel, SAS, STATA, and other data file types!
 
-## Import a Raw Data File the Hard Way
+## How to Import a Raw Data File the Hard Way
 
-In the last section, I actually provided a clue on how to import raw data the "hard" way. If you remember, I showed how using RStudio's built-in **Import Dataset** option will write the script that R will use to execute and import data:
+In the last section, I actually provided a clue on how to import raw data the "hard" way. If you remember, RStudio's built-in **Import Dataset** option writes and executes the script to import a data set:
 
 ```{r 6.7, echo=FALSE,fig.align="center",out.width="60%"}
 knitr::include_graphics("1.63_NewCode.png",dpi=150) 
 ```
 
-The hard way is writing that code yourself. Personally, I think that's a waste of time. I could see how some people might do it to show off how good at R programming they are, but I don't seek such recognition. I say just let the RStudio UI do it.
+The hard way is writing that code yourself. Personally, I think that's a waste of time. At least when you're getting started with R programming. After you get more programming experience, you may find it more efficient to write it yourself. But for now, I say just use the UI.
 
-## Save Import Functions
+## Don't Forget to Save Import Scripts
 
-It is a good idea, however, to save the scripts RStudio generates whenever you need to save a document. For example, you may have a raw data set saved to a URL or a shared drive in your organization. You may also need to share your R script as a saved file with other people. In that case, you want to go ahead and save the scripts to import all relevant data.
+It is a good idea, however, to save the scripts that RStudio generates for future use. For example, you may have a raw data set saved to a URL or a shared drive in your organization. You may also need to share your R script as a saved file with other people. In that case, you want to go ahead and save the scripts to import all relevant data.
 
-You'll need to include that at the top of your document, so future programmers can execute it and use the same data sets in your analysis.
+You'll need to include that at the top of your R script, so that future collaborators can load those data sets.
 
-Here's an example of how you'll do that:
+Here's what that would often look like:
 
 ```{r 6.8, eval=FALSE}
-library(readr)
-summer_train <- read_delim("Downloads/summer_train.tsv", "\t", escape_double = FALSE, trim_ws = TRUE)
-summer_test <- read_delim("Downloads/summer_test.tsv", "\t", escape_double = FALSE, trim_ws = TRUE)
-customers_data <- read_csv("Downloads/Wholesale customers data.csv")
-
-library(haven)
-kidney <- read_sas("Downloads/kidney.sas7bdat", NULL)
+  library(readr)
+  summer_train <- read_delim("Downloads/summer_train.tsv", "\t", escape_double = FALSE, trim_ws = TRUE)
+  summer_test <- read_delim("Downloads/summer_test.tsv", "\t", escape_double = FALSE, trim_ws = TRUE)
+  customers_data <- read_csv("Downloads/Wholesale customers data.csv")
+  
+  library(haven)
+  kidney <- read_sas("Downloads/kidney.sas7bdat", NULL)
 ```
 
-In the script above, I also made sure to load both the `readr` and `haven` package. Both are required to load the file paths below them.
+In the script above, I also make sure to load both the `readr` and `haven` packages. Both are required to load the file paths below them.
 
-## Connect to a Database
+## How to Connect to a Database
 
-To connect to a database tool, work with your RStudio admin. Ask them for key connection information, such as:
+To connect to a database tool, work with your RStudio or database admins. Ask them for key connection information, such as:
 
 1. Driver
 2. Server URL or IP address
@@ -118,41 +117,42 @@ To connect to a database tool, work with your RStudio admin. Ask them for key co
 
 Typically, these are the same inputs used when signing into your organization's database management software.
 
-You'll also need to ensure there's a driver setup on your local computer or on the network you use. I would ask that your RStudio admin to do this for you.
+You'll also need to ensure there's an ODBC driver on your local computer or on the network you use. Again, I'd suggest asking your RStudio or database admin (or possibly even your IT admin) for help on this.
 
 Once they have created the driver and you have the necessary credentials, you can connect to the database in the **Connections** tab in the upper-right pane:
 
 ```{r 6.11, echo=FALSE,fig.align="center",out.width="60%"}
 knitr::include_graphics("1.65_Connections.png",dpi=350) 
 ```
-Once you run through this process, you'll often see the menu option generate a script that looks similar to this:
+
+These steps will produce a script that looks like this:
 
 ```{r 6.12, eval=FALSE}
-library(odbc)
-con <- dbConnect(odbc(),
-                 Driver = "SQLServer",
-                 Server = "sqlhostname",
-                 Database = "dbase",
-                 UID = "username",
-                 PWD = rstudioapi::askForPassword("Database password:"),
-                 Port = 1433)
+  library(odbc)
+  con <- dbConnect(odbc(),
+                   Driver = "SQLServer",
+                   Server = "sqlhostname",
+                   Database = "dbase",
+                   UID = "username",
+                   PWD = rstudioapi::askForPassword("Database password:"),
+                   Port = 1433)
 ```
 
-You can then use the `dbReadTable()` function in the `DBI` package to import a table from the database into an R data frame:
+In the same way I advised you to save your data set import scripts, I would do the same for this one. You can copy and paste it to your R script for future use.
+
+After you complete that initial connection, you can use the  `dbReadTable()` function in the `DBI` package to import a table from the database into an R data frame.
 
 ```{r 6.13, eval=FALSE}
-dataset <- dbReadTable(con,"tablename")
+  dataset <- dbReadTable(con,"tablename")
 ```
-
-If you intend to share your work, I would include these connections at the top of your R script.
 
 ## Connect to an API
 
-Much like database, API connections are very tool specific. Actually, I'd say they're *more* tool specific than database connections. You'll need to configure both the source tool and R to accomplish this.
+API connections are more tool specific than the other data sources covered in this chapter. You'll need to configure both the source tool and R to accomplish this.
 
 Fortunately, there are R packages for the most common API connections out there. I would search something like "R package for *tool-name* API connection." You'll often find what you need.
 
-If you want to get practice with an API connection, you can read my article about connecting to the US Census Bureau's API at www.taylorrodgers.com.
+If you want to get practice with an API connection, you can read my article about connecting to the US Census Bureau's API [here](https://taylorrodgers.github.io/r-programming-examples/Ep2_Query_Census_Data.html).
 
 ## Things to Remember
 

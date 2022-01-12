@@ -4,17 +4,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 9 Importing Data into R | R Programming in Plain English</title>
+<title>Chapter 9 How to Import Data into R | R Programming in Plain English</title>
 <meta name="author" content="Taylor Rodgers">
 <meta name="description" content="There’s three good ways to import data into R: Import a raw data file (.csv, .xlsx, .tsv, etc.) Connect to a database (SQL Server, AWS, etc.) Connect to an API (Google Analytics, Census Bureau,...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 9 Importing Data into R | R Programming in Plain English">
+<meta property="og:title" content="Chapter 9 How to Import Data into R | R Programming in Plain English">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://github.com/taylorrodgers/taylorrodgers.github.io/importdata.html">
 <meta property="og:image" content="https://github.com/taylorrodgers/taylorrodgers.github.io/BookCover.png">
 <meta property="og:description" content="There’s three good ways to import data into R: Import a raw data file (.csv, .xlsx, .tsv, etc.) Connect to a database (SQL Server, AWS, etc.) Connect to an API (Google Analytics, Census Bureau,...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 9 Importing Data into R | R Programming in Plain English">
+<meta name="twitter:title" content="Chapter 9 How to Import Data into R | R Programming in Plain English">
 <meta name="twitter:description" content="There’s three good ways to import data into R: Import a raw data file (.csv, .xlsx, .tsv, etc.) Connect to a database (SQL Server, AWS, etc.) Connect to an API (Google Analytics, Census Bureau,...">
 <meta name="twitter:image" content="https://github.com/taylorrodgers/taylorrodgers.github.io/BookCover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -53,11 +53,12 @@
 <li><a class="" href="dplyr.html"><span class="header-section-number">6</span> How to Filter and Transform Data with the dplyr Package</a></li>
 <li><a class="" href="packages.html"><span class="header-section-number">7</span> Understanding and Using R Packages</a></li>
 <li><a class="" href="function.html"><span class="header-section-number">8</span> How to Write Functions</a></li>
-<li><a class="active" href="importdata.html"><span class="header-section-number">9</span> Importing Data into R</a></li>
+<li><a class="active" href="importdata.html"><span class="header-section-number">9</span> How to Import Data into R</a></li>
 <li><a class="" href="plotdata.html"><span class="header-section-number">10</span> How to Plot Data in R</a></li>
 <li><a class="" href="statfunctions.html"><span class="header-section-number">11</span> Statistical Functions in R: Common Functions and How They Work</a></li>
 <li><a class="" href="answers.html"><span class="header-section-number">12</span> Answer Key</a></li>
 <li><a class="" href="references.html">References</a></li>
+<li><a class="" href="about-the-author.html">About the Author</a></li>
 </ul>
 
         <div class="book-extra">
@@ -67,7 +68,7 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="importdata" class="section level1" number="9">
 <h1>
-<span class="header-section-number">9</span> Importing Data into R<a class="anchor" aria-label="anchor" href="#importdata"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9</span> How to Import Data into R<a class="anchor" aria-label="anchor" href="#importdata"><i class="fas fa-link"></i></a>
 </h1>
 <p>There’s three good ways to import data into R:</p>
 <ol style="list-style-type: decimal">
@@ -75,66 +76,64 @@
 <li>Connect to a database (SQL Server, AWS, etc.)</li>
 <li>Connect to an API (Google Analytics, Census Bureau, etc.)</li>
 </ol>
-<p>Students and researchers will use the first option the most. That’s because your data sets are usually smaller and don’t require a database. You can both write a command or use the RStudio user interface to import raw data files.</p>
+<p>Students and researchers will use the first option the most. That’s because your data sets are usually smaller and don’t require a database. You can either write a command or use the RStudio interface to import raw data files.</p>
 <p>The second option is what you’ll use while working for a large organization. Most data is stored in a large database that you can access. If you work with a SQL database, you’re in luck. You can access your database directly with RStudio! Although it does require some setup.</p>
-<p>The third option involves connecting to an <em>application programming interface</em> (API). That’s a fancy way of saying you connect to an online application. Typically, you’ll download existing packages that make this easier. That’s not always true though. Sometimes you’ll be stuck writing your own code to access an API and you may wonder if it’s simply better to download the raw data files to import.</p>
+<p>The third option involves connecting to an <em>application programming interface</em> (API). That’s a fancy way of saying you connect to an online application. Typically, you’ll download existing packages that makes this process easier.</p>
 <div id="how-to-import-a-raw-data-file-the-easy-way" class="section level2" number="9.1">
 <h2>
 <span class="header-section-number">9.1</span> How to Import a Raw Data File the Easy Way<a class="anchor" aria-label="anchor" href="#how-to-import-a-raw-data-file-the-easy-way"><i class="fas fa-link"></i></a>
 </h2>
-<p>RStudio makes routine steps like raw data import easy. In the top right pane, you’ll see an <strong>Import Dataset</strong> button. Click that.</p>
-<div class="inline-figure">
-<img src="1.58_Import_Raw_Data.png" width="50%" style="display: block; margin: auto;">
-You should get a menu that looks like this:</div>
+<p>RStudio makes routine steps like importing raw data files easy. In the top right pane, you’ll see an <strong>Import Dataset</strong> button. Click that.</p>
+<div class="inline-figure"><img src="1.58_Import_Raw_Data.png" width="50%" style="display: block; margin: auto;"></div>
+<p>You should get a menu that looks like this:</p>
 <div class="inline-figure"><img src="1.58.1_Dropdown.png" width="50%" style="display: block; margin: auto;"></div>
-<p>For the following example, we’ll select “From Text (readr)…”. This allows us to import .csv, .txt, and other text files. Importing a SAS data file isn’t all that different from importing a CSV file.</p>
+<p>For the following example, we’ll select “From Text (readr)…”. This allows us to import .csv, .txt, and other text files.</p>
 <p>Click on “From Text(readr)…” and you should see this screen:</p>
 <div class="inline-figure"><img src="1.59_Import_Raw_Data_Screen.png" width="75%" style="display: block; margin: auto;"></div>
-<p>To get started, we first need to provide a file path or a URL in the top search bar. (Just use any raw data file on your computer or go to Kaggle.com to find one.)</p>
-<p>You can select “Browse…” to find a specific file on your computer.</p>
-<p>Down below, you’ll see I selected a .tsv file. As you can see, the data doesn’t look right.</p>
+<p>To continue, we need to provide a file path or a URL in the top search bar. If you want to practice these steps with me, you can select “Browse…” to find a specific file on your computer.</p>
+<p>Down below, you’ll see I selected a .tsv file. As you can see, the data doesn’t look quite right.</p>
 <div class="inline-figure"><img src="1.60_Funky_Data.png" width="75%" style="display: block; margin: auto;"></div>
-<p>That’s because the RStudio’s default setting for raw data import assumes the data is <em>comma-delimited</em>. We need to change the <strong>Delimator:</strong> option to “Tab.”</p>
+<p>That’s because the RStudio’s default setting for raw data import assumes the data is <em>comma-delimited</em>. For the data set I’m using, I need to change the <strong>Delimator:</strong> option to “Tab.”</p>
 <div class="inline-figure"><img src="1.61_Change_Tab.png" width="75%" style="display: block; margin: auto;"></div>
-<p>The data should look like this now:</p>
+<p>The data reads correctly after making this adjustment, as you can see below:</p>
 <div class="inline-figure"><img src="1.62_NonFunky_Data.png" width="75%" style="display: block; margin: auto;"></div>
-<p>Before you hit <strong>Import</strong> in the bottom right-hand corner of the window, look at what RStudio produced in the box above it.</p>
+<p>One thing you should pay attention to before hitting <strong>Import</strong> is the bottom right-hand corner of the window.</p>
 <div class="inline-figure"><img src="1.63_NewCode.png" width="60%" style="display: block; margin: auto;"></div>
-<p>As you can see, RStudio writes the script you’ll use to import this data set. Selecting “import” will run this script afterwards.</p>
-<p>Go ahead and hit import now. You’ll then see your data set appear as a data frame in the environment tab:</p>
+<p>As you can see, RStudio writes the script that imports this data set. Selecting “import” will run this script afterwards.</p>
+<p>Go ahead and hit import now with your own data set. You should see that data appear as a data frame in the environment tab:</p>
 <div class="inline-figure"><img src="1.64_New_Data_Frame.png" width="60%" style="display: block; margin: auto;"></div>
-<p>Congrats! You successfully imported a raw data file. You can follow similar steps for Excel, SAS, STATA, and other data file types!</p>
+<p>It’s that easy! You can follow similar steps for Excel, SAS, STATA, and other data file types!</p>
 </div>
-<div id="import-a-raw-data-file-the-hard-way" class="section level2" number="9.2">
+<div id="how-to-import-a-raw-data-file-the-hard-way" class="section level2" number="9.2">
 <h2>
-<span class="header-section-number">9.2</span> Import a Raw Data File the Hard Way<a class="anchor" aria-label="anchor" href="#import-a-raw-data-file-the-hard-way"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.2</span> How to Import a Raw Data File the Hard Way<a class="anchor" aria-label="anchor" href="#how-to-import-a-raw-data-file-the-hard-way"><i class="fas fa-link"></i></a>
 </h2>
-<p>In the last section, I actually provided a clue on how to import raw data the “hard” way. If you remember, I showed how using RStudio’s built-in <strong>Import Dataset</strong> option will write the script that R will use to execute and import data:</p>
+<p>In the last section, I actually provided a clue on how to import raw data the “hard” way. If you remember, RStudio’s built-in <strong>Import Dataset</strong> option writes and executes the script to import a data set:</p>
 <div class="inline-figure"><img src="1.63_NewCode.png" width="60%" style="display: block; margin: auto;"></div>
-<p>The hard way is writing that code yourself. Personally, I think that’s a waste of time. I could see how some people might do it to show off how good at R programming they are, but I don’t seek such recognition. I say just let the RStudio UI do it.</p>
+<p>The hard way is writing that code yourself. Personally, I think that’s a waste of time. At least when you’re getting started with R programming. After you get more programming experience, you may find it more efficient to write it yourself. But for now, I say just use the UI.</p>
 </div>
-<div id="save-import-functions" class="section level2" number="9.3">
+<div id="dont-forget-to-save-import-scripts" class="section level2" number="9.3">
 <h2>
-<span class="header-section-number">9.3</span> Save Import Functions<a class="anchor" aria-label="anchor" href="#save-import-functions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.3</span> Don’t Forget to Save Import Scripts<a class="anchor" aria-label="anchor" href="#dont-forget-to-save-import-scripts"><i class="fas fa-link"></i></a>
 </h2>
-<p>It is a good idea, however, to save the scripts RStudio generates whenever you need to save a document. For example, you may have a raw data set saved to a URL or a shared drive in your organization. You may also need to share your R script as a saved file with other people. In that case, you want to go ahead and save the scripts to import all relevant data.</p>
-<p>You’ll need to include that at the top of your document, so future programmers can execute it and use the same data sets in your analysis.</p>
-<p>Here’s an example of how you’ll do that:</p>
+<p>It is a good idea, however, to save the scripts that RStudio generates for future use. For example, you may have a raw data set saved to a URL or a shared drive in your organization. You may also need to share your R script as a saved file with other people. In that case, you want to go ahead and save the scripts to import all relevant data.</p>
+<p>You’ll need to include that at the top of your R script, so that future collaborators can load those data sets.</p>
+<p>Here’s what that would often look like:</p>
 <div class="sourceCode" id="cb255"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span>
-<span class="va">summer_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim</a></span><span class="op">(</span><span class="st">"Downloads/summer_train.tsv"</span>, <span class="st">"\t"</span>, escape_double <span class="op">=</span> <span class="cn">FALSE</span>, trim_ws <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">summer_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim</a></span><span class="op">(</span><span class="st">"Downloads/summer_test.tsv"</span>, <span class="st">"\t"</span>, escape_double <span class="op">=</span> <span class="cn">FALSE</span>, trim_ws <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">customers_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"Downloads/Wholesale customers data.csv"</span><span class="op">)</span>
-
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://haven.tidyverse.org">haven</a></span><span class="op">)</span>
-<span class="va">kidney</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://haven.tidyverse.org/reference/read_sas.html">read_sas</a></span><span class="op">(</span><span class="st">"Downloads/kidney.sas7bdat"</span>, <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
-<p>In the script above, I also made sure to load both the <code>readr</code> and <code>haven</code> package. Both are required to load the file paths below them.</p>
+<code class="sourceCode R">  <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span>
+  <span class="va">summer_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim</a></span><span class="op">(</span><span class="st">"Downloads/summer_train.tsv"</span>, <span class="st">"\t"</span>, escape_double <span class="op">=</span> <span class="cn">FALSE</span>, trim_ws <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+  <span class="va">summer_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim</a></span><span class="op">(</span><span class="st">"Downloads/summer_test.tsv"</span>, <span class="st">"\t"</span>, escape_double <span class="op">=</span> <span class="cn">FALSE</span>, trim_ws <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+  <span class="va">customers_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"Downloads/Wholesale customers data.csv"</span><span class="op">)</span>
+  
+  <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://haven.tidyverse.org">haven</a></span><span class="op">)</span>
+  <span class="va">kidney</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://haven.tidyverse.org/reference/read_sas.html">read_sas</a></span><span class="op">(</span><span class="st">"Downloads/kidney.sas7bdat"</span>, <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+<p>In the script above, I also make sure to load both the <code>readr</code> and <code>haven</code> packages. Both are required to load the file paths below them.</p>
 </div>
-<div id="connect-to-a-database" class="section level2" number="9.4">
+<div id="how-to-connect-to-a-database" class="section level2" number="9.4">
 <h2>
-<span class="header-section-number">9.4</span> Connect to a Database<a class="anchor" aria-label="anchor" href="#connect-to-a-database"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.4</span> How to Connect to a Database<a class="anchor" aria-label="anchor" href="#how-to-connect-to-a-database"><i class="fas fa-link"></i></a>
 </h2>
-<p>To connect to a database tool, work with your RStudio admin. Ask them for key connection information, such as:</p>
+<p>To connect to a database tool, work with your RStudio or database admins. Ask them for key connection information, such as:</p>
 <ol style="list-style-type: decimal">
 <li>Driver</li>
 <li>Server URL or IP address</li>
@@ -143,32 +142,31 @@ You should get a menu that looks like this:</div>
 <li>Port</li>
 </ol>
 <p>Typically, these are the same inputs used when signing into your organization’s database management software.</p>
-<p>You’ll also need to ensure there’s a driver setup on your local computer or on the network you use. I would ask that your RStudio admin to do this for you.</p>
+<p>You’ll also need to ensure there’s an ODBC driver on your local computer or on the network you use. Again, I’d suggest asking your RStudio or database admin (or possibly even your IT admin) for help on this.</p>
 <p>Once they have created the driver and you have the necessary credentials, you can connect to the database in the <strong>Connections</strong> tab in the upper-right pane:</p>
-<div class="inline-figure">
-<img src="1.65_Connections.png" width="60%" style="display: block; margin: auto;">
-Once you run through this process, you’ll often see the menu option generate a script that looks similar to this:</div>
+<div class="inline-figure"><img src="1.65_Connections.png" width="60%" style="display: block; margin: auto;"></div>
+<p>These steps will produce a script that looks like this:</p>
 <div class="sourceCode" id="cb256"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-dbi/odbc">odbc</a></span><span class="op">)</span>
-<span class="va">con</span> <span class="op">&lt;-</span> <span class="fu">dbConnect</span><span class="op">(</span><span class="fu">odbc</span><span class="op">(</span><span class="op">)</span>,
-                 Driver <span class="op">=</span> <span class="st">"SQLServer"</span>,
-                 Server <span class="op">=</span> <span class="st">"sqlhostname"</span>,
-                 Database <span class="op">=</span> <span class="st">"dbase"</span>,
-                 UID <span class="op">=</span> <span class="st">"username"</span>,
-                 PWD <span class="op">=</span> <span class="fu">rstudioapi</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rstudioapi/man/askForPassword.html">askForPassword</a></span><span class="op">(</span><span class="st">"Database password:"</span><span class="op">)</span>,
-                 Port <span class="op">=</span> <span class="fl">1433</span><span class="op">)</span></code></pre></div>
-<p>You can then use the <code>dbReadTable()</code> function in the <code>DBI</code> package to import a table from the database into an R data frame:</p>
+<code class="sourceCode R">  <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-dbi/odbc">odbc</a></span><span class="op">)</span>
+  <span class="va">con</span> <span class="op">&lt;-</span> <span class="fu">dbConnect</span><span class="op">(</span><span class="fu">odbc</span><span class="op">(</span><span class="op">)</span>,
+                   Driver <span class="op">=</span> <span class="st">"SQLServer"</span>,
+                   Server <span class="op">=</span> <span class="st">"sqlhostname"</span>,
+                   Database <span class="op">=</span> <span class="st">"dbase"</span>,
+                   UID <span class="op">=</span> <span class="st">"username"</span>,
+                   PWD <span class="op">=</span> <span class="fu">rstudioapi</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rstudioapi/man/askForPassword.html">askForPassword</a></span><span class="op">(</span><span class="st">"Database password:"</span><span class="op">)</span>,
+                   Port <span class="op">=</span> <span class="fl">1433</span><span class="op">)</span></code></pre></div>
+<p>In the same way I advised you to save your data set import scripts, I would do the same for this one. You can copy and paste it to your R script for future use.</p>
+<p>After you complete that initial connection, you can use the <code>dbReadTable()</code> function in the <code>DBI</code> package to import a table from the database into an R data frame.</p>
 <div class="sourceCode" id="cb257"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dataset</span> <span class="op">&lt;-</span> <span class="fu">dbReadTable</span><span class="op">(</span><span class="va">con</span>,<span class="st">"tablename"</span><span class="op">)</span></code></pre></div>
-<p>If you intend to share your work, I would include these connections at the top of your R script.</p>
+<code class="sourceCode R">  <span class="va">dataset</span> <span class="op">&lt;-</span> <span class="fu">dbReadTable</span><span class="op">(</span><span class="va">con</span>,<span class="st">"tablename"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="connect-to-an-api" class="section level2" number="9.5">
 <h2>
 <span class="header-section-number">9.5</span> Connect to an API<a class="anchor" aria-label="anchor" href="#connect-to-an-api"><i class="fas fa-link"></i></a>
 </h2>
-<p>Much like database, API connections are very tool specific. Actually, I’d say they’re <em>more</em> tool specific than database connections. You’ll need to configure both the source tool and R to accomplish this.</p>
+<p>API connections are more tool specific than the other data sources covered in this chapter. You’ll need to configure both the source tool and R to accomplish this.</p>
 <p>Fortunately, there are R packages for the most common API connections out there. I would search something like “R package for <em>tool-name</em> API connection.” You’ll often find what you need.</p>
-<p>If you want to get practice with an API connection, you can read my article about connecting to the US Census Bureau’s API at www.taylorrodgers.com.</p>
+<p>If you want to get practice with an API connection, you can read my article about connecting to the US Census Bureau’s API <a href="https://taylorrodgers.github.io/r-programming-examples/Ep2_Query_Census_Data.html">here</a>.</p>
 </div>
 <div id="things-to-remember-7" class="section level2" number="9.6">
 <h2>
@@ -189,11 +187,11 @@ Once you run through this process, you’ll often see the menu option generate a
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#importdata"><span class="header-section-number">9</span> Importing Data into R</a></li>
+<li><a class="nav-link" href="#importdata"><span class="header-section-number">9</span> How to Import Data into R</a></li>
 <li><a class="nav-link" href="#how-to-import-a-raw-data-file-the-easy-way"><span class="header-section-number">9.1</span> How to Import a Raw Data File the Easy Way</a></li>
-<li><a class="nav-link" href="#import-a-raw-data-file-the-hard-way"><span class="header-section-number">9.2</span> Import a Raw Data File the Hard Way</a></li>
-<li><a class="nav-link" href="#save-import-functions"><span class="header-section-number">9.3</span> Save Import Functions</a></li>
-<li><a class="nav-link" href="#connect-to-a-database"><span class="header-section-number">9.4</span> Connect to a Database</a></li>
+<li><a class="nav-link" href="#how-to-import-a-raw-data-file-the-hard-way"><span class="header-section-number">9.2</span> How to Import a Raw Data File the Hard Way</a></li>
+<li><a class="nav-link" href="#dont-forget-to-save-import-scripts"><span class="header-section-number">9.3</span> Don’t Forget to Save Import Scripts</a></li>
+<li><a class="nav-link" href="#how-to-connect-to-a-database"><span class="header-section-number">9.4</span> How to Connect to a Database</a></li>
 <li><a class="nav-link" href="#connect-to-an-api"><span class="header-section-number">9.5</span> Connect to an API</a></li>
 <li><a class="nav-link" href="#things-to-remember-7"><span class="header-section-number">9.6</span> Things to Remember</a></li>
 </ul>
@@ -213,7 +211,7 @@ Once you run through this process, you’ll often see the menu option generate a
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>R Programming in Plain English</strong>" was written by Taylor Rodgers. It was last built on 2022-01-10.</p>
+    <p>"<strong>R Programming in Plain English</strong>" was written by Taylor Rodgers. It was last built on 2022-01-12.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

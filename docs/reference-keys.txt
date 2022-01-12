@@ -71,9 +71,9 @@ things-to-remember-6
 exercises-4
 importdata
 how-to-import-a-raw-data-file-the-easy-way
-import-a-raw-data-file-the-hard-way
-save-import-functions
-connect-to-a-database
+how-to-import-a-raw-data-file-the-hard-way
+dont-forget-to-save-import-scripts
+how-to-connect-to-a-database
 connect-to-an-api
 things-to-remember-7
 plotdata
