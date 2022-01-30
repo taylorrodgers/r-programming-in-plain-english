@@ -9,73 +9,83 @@ At its core, R programming is a statistical programming language. If you are an 
 
 ## How Statistical Functions Work in R Programming
 
-A great thing about statistical functions in R is that they often follow the same principles. You'll find that what works for one model type will work on others. 
+A great thing about statistical functions in R is that they often follow the same principles. The steps that apply to one function usually applies to others.
 
-Typically, the programming steps will follow this workflow.
+Typically, you'll use a model function (such as `lm()`) to create a `list` object. So long as you assign this object a name, you can apply various other functions to it and evaluate its performance.
 
-You'll use a model function, which will generate a `list` object. This makes it easy to apply other functions to the model object to evaluate performance or make predictions on new data.
+The common functions you'll apply to this model object are:
 
-You can use the `summary()` function on the model object to see basic model performance measures.
+1. `summary()`, which summarizes the model parameter estimates and overall model performance
+2. `predict()`, which allows you to see what your model predicts on both existing and new data sets
+3. `write_rds()`, which allows you to save the model file for future use (requires `readr` package)
+4. `anova()`, which allows you to generate an *analysis of variance* on a single model or compare multiple models
+5. `confint()`, which allows you to generate the confidence intervals on your model parameters
 
-If you're more interested in prediction, rather than testing a hypothesis, you can use the `predict()` function to apply that model object to new data. You can also export your model as an `.rds` file to share with colleagues for similar purposes.
-
-In addition, you can also apply other statistical R functions to the model, such as `anova()` and `confint()`, as well as others, to measure performance.
-
-It's okay if it's not clear how all those concepts above work together. I'll actually demonstrate it over the next few sections. But keep in mind that even if the model-type you want to use isn't covered in this section, these methods usually apply most of the time.
+It's okay if it's not clear yet how these concepts work together. I'll demonstrate them over the next few sections. Keep in mind that even if the model type you want is not covered in this section, these functions apply to *most model objects, most of the time.*
 
 Towards the end of this chapter, I'll provide some simple examples that walk you through the common statistical functions and models used in research.
 
 ## How to Build a Model in R (Example with Linear Regression)
 
-Every model you build uses a particular function to do so. Some functions actually support multiple model types. To get started, we'll use the `lm()` function build a linear regression model.
-
-Let's say we want to build a model with the `mtcars` data set. We want to build a model that uses **disp** to predict **mpg**. If you look at the data set below, we can see the summary statistics for those two columns.
+Let's say we want to build a model with the `mtcars` data set. We want a model that uses **disp** to predict **mpg**. If you look at the data set below, we can see the summary statistics for those two columns.
 
 ```{r 10.1}
-data(mtcars)
-summary(mtcars[c("mpg","disp")])
+  data(mtcars)
+  summary(mtcars[c("mpg","disp")])
 ```
 
-In order to build a model, we'll need to use the `lm()` function. To use this function, we only need to define our formula and our data set:
+In order to build a model, we'll use the `lm()` function. To use this function, we only need to define our formula and our data set:
 
 ```{r 10.2}
-mod1 <- lm(mpg~disp,data=mtcars)
+  mod1 <- lm(mpg~disp,data=mtcars)
 ```
 
 The formula is defined using a `~` sign. This basically implies our regression model is "mpg=disp".
 
-Another important thing to realize is the object that's produced. If you look at the **Environment** pane, you'll see a new `list` object for this model. 
+One important thing to note is the type of object this function generates. If you look at the **Environment** pane, you'll see this object saved as a `list`.
 
 ```{r 10.3, echo=FALSE,fig.align="center",out.width="75%"}
 knitr::include_graphics("1.66_ModelObject.png") 
 ```
 
-The `lm()` function produces a list and includes many summary statistics and other useful items that come in handy later. Most other statistical functions in R do this as well.
+This list includes many smaller components that come in handy later. Most other modeling functions in R mimic this workflow as well.
 
 ## How to Review Common Model Performance Statistics
 
 Building a model isn't that hard, as you can tell. Typically though, the real work lays in model evaluation. Most of these summary statistics can be found using the `summary()` function:
+
 ```{r 10.4}
-summary(mod1)
+  summary(mod1)
 ```
 
-As you can say, this `summary()` function tells you a lot about how good of a model it is. We can see the adjusted R-square, the F-Statistic, and the individual p-values for the parameter.
+As you can see, this `summary()` function reveals a lot about how well this model performs. We can see the adjusted R-square, the F-Statistic, and the individual p-value for the parameter estimate.
 
-You might ask why not just call `mod1`. You can do that, but it doesn't give you nearly the same detail
+You might ask why not just call `mod1`. Why do we have to use the `summary()` function? You can do that, but it doesn't give you nearly the same amount of detail.
+
 ```{r 10.5}
-mod1
+  mod1
 ```
 
-The reason will be more clear in a moment. "mod1" is the actual model. We can re-use this object to make predictions on new data. If the output of the `lm()` function resembled what you saw using the `summary()` function, it would make it more challenging to use on that new data.
+The reason will be more clear in a moment. "mod1" is the actual model. While we usually want the `summary()` output after building the model, there are several other things we want to evaluate. If the output of the `lm()` function didn't produce a model, but a summary like we saw, it would be more difficult to apply other functions, such as `predict()` and `confint()`, to it.
+
+Also, `summary()` is a universal function within R. It can also be applied to data frames and vectors. Not just the `lm()` output.
+
+### It's Useful to Save the Summary Output
 
 Sometimes, you may want to evaluate one model against another. Whenever that happens, it's useful to create another object for the summary output of the model. This will allow you to select individual pieces of the output you saw above.
 
 For example, I can create a new list for model 1's summary. I can then use the `$` notation to call individual performance indicators for that model, such as `adj.r.squared` or the `fstatistic`.
 
 ```{r 10.6, results=FALSE}
-mod1_summary <- summary(mod1)
-mod1_summary$adj.r.squared
-mod1_summary$fstatistic
+  mod1_summary <- summary(mod1)
+  mod1_summary$adj.r.squared
+  mod1_summary$fstatistic
+```
+
+You can determine what values are available in a model summary using the `names()` function:
+
+```{r 10.6.1}
+  names(mod1_summary)
 ```
 
 ## How to Make Predictions with a Model
@@ -85,46 +95,50 @@ Many researchers are more interested in the "inferential" side of statistics. In
 You can use the `predict()` function to make predictions on new data. Actually, you can use this function without new data simply by plugging the model object name in. This will show you what the model predicts using the original data set (which is often a useful model performance indicator on its own).
 
 ```{r 10.7}
-predict(mod1)
+  predict(mod1)
 ```
 
-Let's say we have a new set of **disp** values and we want to see what it predicts as the **mpg**. We simply specify the model name we want to use and the new data set name, like below:
+Let's say we have new values for **disp**. We want to see what our model predicts for **mpg** using these new records. All we have to do is specify the model object name and the data set object name in the `predict()` function:
 
 ```{r 10.8}
-disp_new <- data.frame(disp=c(rnorm(15,240,30))) #this simply generates random numbers
-predict(mod1,disp_new)
+  disp_new <- data.frame(disp=c(rnorm(15,240,30))) #this simply generates random numbers
+  predict(mod1,disp_new)
 ```
 
-As you can imagine, this `predict()` function comes in handy a lot. And it's a common feature for most model objects produced in other R packages. I've used this for neural nets and other more advanced predictive algorithms. It comes up again and again.
+As you can imagine, this `predict()` function comes in handy. And it's a common feature for most model objects produced in other R packages. I've used this for neural nets and other more advanced predictive algorithms. It comes up again and again.
 
 ## How to Save Your Model to Use Later
 
-Quite often, you'll need to save your model to re-use in other situations That's where the `.rds` file type comes in handy. `.rds` files allow you to save objects in your environment to reload later. 
+It's quite common to share models between colleagues. Maybe another researcher wants to re-produce what you created or another data scientist will integrate your model into a Shiny app. 
 
-You'll need to load the `readr` package to create these file types. After that, you'll use the `write_rds()` to create an `.rds` file and `read_rds()` to later load it elsewhere. (You may need to install this package using `install.packages()`.)
+That's where `.rds` files come in handy.
+
+`.rds` files allow you to save objects on your desktop or user directory for later use.
+
+You'll need to load the `readr` package to create these file types. After that, you'll use the `write_rds()` function to create an `.rds` file and `read_rds()` to load it. (You may need to install this package using `install.packages()`.)
 
 ```{r 10.9}
-library(readr)
-write_rds(mod1,"mod1.rds")
+  library(readr)
+  write_rds(mod1,"mod1.rds")
 ```
 
-After running the previous script, you'll see an `.rds` file appear in your current working directory (usually your project directory or your user login's default directory). You can specify the file path in that script above in the two quotations marks.
+After running the previous script, you'll see an `.rds` file appear in your current working directory (usually your project directory or your default user directory). You can specify the file path in that script above between the two quotations marks.
 
 ```{r 10.10, echo=FALSE,fig.align="center",out.width="75%"}
-knitr::include_graphics("1.66_ModelObject.png") 
+knitr::include_graphics("1.67_ModelRDS.png") 
 ```
 
 If you want to re-use this model, you can simply reload the `.rds` file using the `read_rds()` function. Be sure to assign this object a name to make it work.
 
 ```{r 10.11}
-model_reload <- read_rds("mod1.rds")
+  model_reload <- read_rds("mod1.rds")
 ```
 
-And here's the cool part about this `.rds` file - you don't need to reload the original data set to make this new model work! If you feed it new data, it'll make new predictions. This comes very handy whenever you build Shiny apps or want to productionalize the model.
+And here's the cool part about this `.rds` file - *you don't need to reload the original data set to make this new model work!* If you feed it new data, it'll make new predictions. This comes in handy whenever you build Shiny apps or want to "productionalize" the model.
 
 ```{r 10.12}
-disp_new <- data.frame(disp=c(rnorm(15,240,30)))
-predict(model_reload,disp_new)
+  disp_new <- data.frame(disp=c(rnorm(15,240,30)))
+  predict(model_reload,disp_new)
 ```
 
 ## How to Add Multiple Parameters to a Model
@@ -132,8 +146,8 @@ predict(model_reload,disp_new)
 You can add additional parameters to your model by adding to the formula in the `lm()` function. Let's say we want to add the **drat** and **wt** variables to your regression model. All you have to do specify both variables with a `+` sign between them.
 
 ```{r 10.13}
-mod2 <- lm(mpg~disp+drat+wt,mtcars)
-summary(mod2)
+  mod2 <- lm(mpg~disp+drat+wt,mtcars)
+  summary(mod2)
 ```
 
 As you can see above, those variables aren't necessarily the best addition or combination. But since it's an example, we won't worry too much about it here.
@@ -142,11 +156,11 @@ As you can see above, those variables aren't necessarily the best addition or co
 
 So far, I've only shown you how to add **continuous** variables. What if we want to add a **categorical** variable?
 
-If a column in a data frame has character values (i.e., text), a model function will automatically treat it as a categorical variable. If it contains numeric values, we'll need to make it a **factor**. (Review our chapter on object-types for a quick review on this topic.)
+If a column in a data frame has character values (i.e., text), a model function will automatically treat it as a categorical variable. If it contains numeric values, we'll need to make it a **factor**. (Review our chapter on object-types for a quick refresher on this topic.)
 
 ```{r 10.14}
-mod3 <- lm(mpg~disp+factor(cyl),mtcars)
-summary(mod3)
+  mod3 <- lm(mpg~disp+factor(cyl),mtcars)
+  summary(mod3)
 ```
 
 ## How to Add Transformed Variables to a Model
@@ -156,42 +170,42 @@ Quite often, you may need to transform your variables to make them work in a mod
 You could simply do these transformations in the formula argument in the `lm()` function. If you look below, I simply wrap both the independent and dependent variable with the `log()` function:
 
 ```{r 10.15}
-mod4 <- lm(log(mpg)~log(disp),mtcars)
-summary(mod4)
+  mod4 <- lm(log(mpg)~log(disp),mtcars)
+  summary(mod4)
 ```
 
-This works okay for smaller models. If you want to transform many variables, it's usually easier create new ones in the data set prior to building the model:
+This works okay for smaller models. If you want to transform several variables, it's usually easier to create new ones in the data set prior to building the model:
 
 ```{r 10.16}
-cars_log <- mtcars
-cars_log$mpg_log <- log(cars_log$mpg)
-cars_log$disp_log <- log(cars_log$disp)
-cars_log$qsec_log <- log(cars_log$qsec)
-
-summary(cars_log[c(1,3,7,12,13,14)])
+  cars_log <- mtcars
+  cars_log$mpg_log <- log(cars_log$mpg)
+  cars_log$disp_log <- log(cars_log$disp)
+  cars_log$qsec_log <- log(cars_log$qsec)
+  
+  summary(cars_log[c(1,3,7,12,13,14)])
 ```
 
 We can then use those new columns in the model function:
 
 ```{r 10.17}
-mod5 <- lm(mpg_log~disp_log+qsec_log,cars_log)
-summary(mod5)
+  mod5 <- lm(mpg_log~disp_log+qsec_log,data=cars_log)
+  summary(mod5)
 ```
 
 ## How to Add Variable Interactions to a Model
 
-It's not uncommon to include interactions in your model, especially if you have two variables that seem to be correlated. To create these interactions, you simply use the `*` between them in the model.
+It's not uncommon to include interactions in your model, especially if you have two variables that seem to be correlated. To create these interactions, you simply use the `*` between them in the model formula.
 
 ```{r 10.18}
-mod6 <- lm(mpg~drat+wt+drat*wt,mtcars)
-summary(mod6)
+  mod6 <- lm(mpg~drat+wt+drat*wt,data=mtcars)
+  summary(mod6)
 ```
 
 You actually don't even need to specify the variables individually. For example, rather than `mpg~drat+wt+drat*wt`, you can simply use `mpg~drat*wt` and the function will treat them individually and as interactions.
 
 ```{r 10.19}
-mod6 <- lm(mpg~drat*wt,mtcars)
-summary(mod6)
+  mod6 <- lm(mpg~drat*wt,mtcars)
+  summary(mod6)
 ```
 
 ## How to Calculate Model Confidence Intervals
@@ -199,34 +213,36 @@ summary(mod6)
 Even though the p-value tells you whether the variable is statistically significant, it's often a best practice to include confidence intervals in your analysis. R makes this very easy! Simply wrap the `confint()` function around your model object.
 
 ```{r 10.20}
-confint(mod2)
+  confint(mod2)
 ```
 
-If you want to have a higher critical value, you can change it using the **level** argument. 
+If you want to have a different critical value, you can change it using the **level** argument. 
 
 ```{r 10.21}
-confint(mod2,level=.9)
+  confint(mod2,level=.9)
 ```
 
 See `?confint` to read more about the function.
 
 ## How to Calculate Analysis of Variance Between Models
 
-Often you'll need to compare two models and see which one better explains the "variation" in the data. To do so, you simply create your two models and then use the `anova()` function:
+You'll often need to compare models with more parameter estimates to simpler ones. To do so, you simply create your two models and then use the `anova()` function:
 
 ```{r 10.22}
-anova(mod1,mod2)
+  anova(mod1,mod2)
 ```
 
-## Other Common Model Types - Logistical Regression
+## Other Common Model Types - Logistic Regression
 
-Chances are, you want to do more than a linear regression. While most statistics book will cover the programming steps involved with whatever models it covers. That said though, I can provide some general functions used in the more common statistical models, such as logistic regression and anova models.
+Chances are, you want to do more than a linear regression. Most statistics or ML textbooks will cover the programming steps involved for a particular model type. Those models usually follow the same procedures I highlighted earlier.
 
-To run a logistical model, you can use the `glm()` function. In the script below, I build use **mpg** and **wt** to predict whether **vs** is a 1 or a 0. I use the `family` argument to make it a logistical model.
+That said though, I can provide some general functions used in the more common statistical models, such as logistic regression and anova models.
+
+To run a logistic model, you can use the `glm()` function. In the script below, I build use **mpg** and **wt** to predict whether **vs** is a 1 or a 0. I use the `family` argument to make it a logistic model.
 
 ```{r 10.23}
-mod7 <- glm(vs~mpg+wt,data=mtcars,family=binomial(link="logit"))
-summary(mod7)
+  mod7 <- glm(vs~mpg+wt,data=mtcars,family=binomial(link="logit"))
+  summary(mod7)
 ```
 
 The `glm()` function has a larger range of model types than the `lm()` function. I suggest reviewing it with `?glm` in the console whenever you want to build a particular type of linear model not yet discussed here. The `family` argument may provide the right model type you need.
@@ -234,7 +250,7 @@ The `glm()` function has a larger range of model types than the `lm()` function.
 Just like we did for the linear regression model, we can use the `confint()` functions on this model object to generate a confidence interval. You can see this below:
 
 ```{r 10.24}
-confint(mod7)
+  confint(mod7)
 ```
 
 You can also use the `predict()` function on this model.
@@ -243,56 +259,56 @@ You can also use the `predict()` function on this model.
 
 To build an ANOVA model, you'll use the `aov()` function. This function follows a similar process to the `lm()` function and actually generates a regression model using the formula you enter.
 
-As you'll learn in your stats class, many ANOVA models focus on categorical variables to determine whether there's a difference in the mean outcome. The more common model for this scenario is a *fixed-effects model*. 
+As you'll learn in your stats class, many ANOVA models focus on categorical variables to determine whether there's a difference in the mean outcome. A common model for this scenario is a *fixed-effects model*. 
 
 Let's convert a few of our **cars** data into factors, so that we can build a fixed-effects model.
 
 ```{r 10.25}
-mtcars_factor <- mtcars
-mtcars_factor$gear <- factor(mtcars_factor$gear)
-mtcars_factor$vs <- factor(mtcars_factor$vs)
+  mtcars_factor <- mtcars
+  mtcars_factor$gear <- factor(mtcars_factor$gear)
+  mtcars_factor$vs <- factor(mtcars_factor$vs)
 ```
 
-Remember, most model functions in R will treat numeric inputs as a continuous variable. Since we want to treat these variables (which range include the labels 0, 1, 3, and 4), we need to ensure that the function we run treats them as categorical. That's why we factor them.
+Remember, most model functions in R will treat numeric inputs as a continuous variable. Since we want to treat these variables (which range includes the labels 0, 1, 3, and 4), we need to ensure that the function we run treats them as categorical. That's why we factor them.
 
 Now we can build the fixed-effects model using the `aov()` function:
 
 ```{r 10.26}
-mod8 <- aov(mpg~vs+gear,data=mtcars_factor)
-summary(mod8)
+  mod8 <- aov(mpg~vs+gear,data=mtcars_factor)
+  summary(mod8)
 ```
 
-The `summary()` function also gives you the ANOVA table for this model and allows you to determine which group has the bigger impact.
+The `summary()` function also gives you the ANOVA table for this model and allows you to determine which group explains the most variation.
 
 Sometimes you still want a model that shows you the actual impact a variable has on the expected output. We can do this by first running the `lm()` function with our formula.
 
 ```{r 10.27}
-mod9 <- lm(mpg~vs+gear,data=mtcars_factor)
-summary(mod9)
+  mod9 <- lm(mpg~vs+gear,data=mtcars_factor)
+  summary(mod9)
 ```
 
 And you can reference the model object again in the same `aov()` function from earlier and get your ANOVA table.
 
 ```{r 10.28}
-summary(mod8)
-summary(aov(mod9))
+  summary(mod8)
+  summary(aov(mod9))
 ```
 
 ## Things to Remember
 
-* Building and evaluating models follows the same steps, regardless of the function you use
+* Building and evaluating models often follows the same steps, regardless of the functions you use
 * The model function (`lm()`, `glm()`, `aov()`, etc.) produces a list
 * You can assign that list a name and reference it again
+* You can get most model performance metrics with the `summary()` function
 * You can use that model object to make predictions on both new and existing data with the `predict()` function
 * You can use that model object to generate confidence intervals with the `confint()`function
-* You can get most model performance metrics with the `summary()` function
 * You evaluate two models against one another with the `anova()` function
 * You can export your model (without exporting the data) using the `write_rds()` function
 
 ## Exercises
 
 1. Using the data set **iris** (`data(iris)`), build a linear regression model that uses **Sepal.Length** and **Sepal.Width** to predict **Petal.Length**. Assign the model the name "PracticeModel".
-2. Determine whether the two parameters are statistically signficant. (i.e., their p-values are less than 0.05.)
+2. Determine whether the two parameters are statistically significant. (i.e., their p-values are less than 0.05.)
 3. Predict the value of **Petal.Length** with a **Sepal.Length** of 5 and a **Sepal.Width** of 3.25. (Hint: create a single row data frame with those two values assigned to their respective column names.)
 4. Determine the model's confidence intervals.
 

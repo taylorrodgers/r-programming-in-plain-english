@@ -75,24 +75,32 @@
 <h2>
 <span class="header-section-number">11.1</span> How Statistical Functions Work in R Programming<a class="anchor" aria-label="anchor" href="#how-statistical-functions-work-in-r-programming"><i class="fas fa-link"></i></a>
 </h2>
-<p>A great thing about statistical functions in R is that they often follow the same principles. You’ll find that what works for one model type will work on others.</p>
-<p>Typically, the programming steps will follow this workflow.</p>
-<p>You’ll use a model function, which will generate a <code>list</code> object. This makes it easy to apply other functions to the model object to evaluate performance or make predictions on new data.</p>
-<p>You can use the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function on the model object to see basic model performance measures.</p>
-<p>If you’re more interested in prediction, rather than testing a hypothesis, you can use the <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> function to apply that model object to new data. You can also export your model as an <code>.rds</code> file to share with colleagues for similar purposes.</p>
-<p>In addition, you can also apply other statistical R functions to the model, such as <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> and <code><a href="https://rdrr.io/r/stats/confint.html">confint()</a></code>, as well as others, to measure performance.</p>
-<p>It’s okay if it’s not clear how all those concepts above work together. I’ll actually demonstrate it over the next few sections. But keep in mind that even if the model-type you want to use isn’t covered in this section, these methods usually apply most of the time.</p>
+<p>A great thing about statistical functions in R is that they often follow the same principles. The steps that apply to one function usually applies to others.</p>
+<p>Typically, you’ll use a model function (such as <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>) to create a <code>list</code> object. So long as you assign this object a name, you can apply various other functions to it and evaluate its performance.</p>
+<p>The common functions you’ll apply to this model object are:</p>
+<ol style="list-style-type: decimal">
+<li>
+<code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>, which summarizes the model parameter estimates and overall model performance</li>
+<li>
+<code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code>, which allows you to see what your model predicts on both existing and new data sets</li>
+<li>
+<code><a href="https://readr.tidyverse.org/reference/read_rds.html">write_rds()</a></code>, which allows you to save the model file for future use (requires <code>readr</code> package)</li>
+<li>
+<code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code>, which allows you to generate an <em>analysis of variance</em> on a single model or compare multiple models</li>
+<li>
+<code><a href="https://rdrr.io/r/stats/confint.html">confint()</a></code>, which allows you to generate the confidence intervals on your model parameters</li>
+</ol>
+<p>It’s okay if it’s not clear yet how these concepts work together. I’ll demonstrate them over the next few sections. Keep in mind that even if the model type you want is not covered in this section, these functions apply to <em>most model objects, most of the time.</em></p>
 <p>Towards the end of this chapter, I’ll provide some simple examples that walk you through the common statistical functions and models used in research.</p>
 </div>
 <div id="how-to-build-a-model-in-r-example-with-linear-regression" class="section level2" number="11.2">
 <h2>
 <span class="header-section-number">11.2</span> How to Build a Model in R (Example with Linear Regression)<a class="anchor" aria-label="anchor" href="#how-to-build-a-model-in-r-example-with-linear-regression"><i class="fas fa-link"></i></a>
 </h2>
-<p>Every model you build uses a particular function to do so. Some functions actually support multiple model types. To get started, we’ll use the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function build a linear regression model.</p>
-<p>Let’s say we want to build a model with the <code>mtcars</code> data set. We want to build a model that uses <strong>disp</strong> to predict <strong>mpg</strong>. If you look at the data set below, we can see the summary statistics for those two columns.</p>
+<p>Let’s say we want to build a model with the <code>mtcars</code> data set. We want a model that uses <strong>disp</strong> to predict <strong>mpg</strong>. If you look at the data set below, we can see the summary statistics for those two columns.</p>
 <div class="sourceCode" id="cb285"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"mpg"</span>,<span class="st">"disp"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"mpg"</span>,<span class="st">"disp"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <pre><code>##       mpg             disp      
 ##  Min.   :10.40   Min.   : 71.1  
 ##  1st Qu.:15.43   1st Qu.:120.8  
@@ -100,13 +108,13 @@
 ##  Mean   :20.09   Mean   :230.7  
 ##  3rd Qu.:22.80   3rd Qu.:326.0  
 ##  Max.   :33.90   Max.   :472.0</code></pre>
-<p>In order to build a model, we’ll need to use the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function. To use this function, we only need to define our formula and our data set:</p>
+<p>In order to build a model, we’ll use the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function. To use this function, we only need to define our formula and our data set:</p>
 <div class="sourceCode" id="cb287"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">~</span><span class="va">disp</span>,data<span class="op">=</span><span class="va">mtcars</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">mod1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">~</span><span class="va">disp</span>,data<span class="op">=</span><span class="va">mtcars</span><span class="op">)</span></code></pre></div>
 <p>The formula is defined using a <code>~</code> sign. This basically implies our regression model is “mpg=disp”.</p>
-<p>Another important thing to realize is the object that’s produced. If you look at the <strong>Environment</strong> pane, you’ll see a new <code>list</code> object for this model.</p>
+<p>One important thing to note is the type of object this function generates. If you look at the <strong>Environment</strong> pane, you’ll see this object saved as a <code>list</code>.</p>
 <div class="inline-figure"><img src="1.66_ModelObject.png" width="75%" style="display: block; margin: auto;"></div>
-<p>The <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function produces a list and includes many summary statistics and other useful items that come in handy later. Most other statistical functions in R do this as well.</p>
+<p>This list includes many smaller components that come in handy later. Most other modeling functions in R mimic this workflow as well.</p>
 </div>
 <div id="how-to-review-common-model-performance-statistics" class="section level2" number="11.3">
 <h2>
@@ -114,7 +122,7 @@
 </h2>
 <p>Building a model isn’t that hard, as you can tell. Typically though, the real work lays in model evaluation. Most of these summary statistics can be found using the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function:</p>
 <div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod1</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod1</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = mpg ~ disp, data = mtcars)
@@ -133,10 +141,10 @@
 ## Residual standard error: 3.251 on 30 degrees of freedom
 ## Multiple R-squared:  0.7183, Adjusted R-squared:  0.709 
 ## F-statistic: 76.51 on 1 and 30 DF,  p-value: 9.38e-10</code></pre>
-<p>As you can say, this <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function tells you a lot about how good of a model it is. We can see the adjusted R-square, the F-Statistic, and the individual p-values for the parameter.</p>
-<p>You might ask why not just call <code>mod1</code>. You can do that, but it doesn’t give you nearly the same detail</p>
+<p>As you can see, this <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function reveals a lot about how well this model performs. We can see the adjusted R-square, the F-Statistic, and the individual p-value for the parameter estimate.</p>
+<p>You might ask why not just call <code>mod1</code>. Why do we have to use the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function? You can do that, but it doesn’t give you nearly the same amount of detail.</p>
 <div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod1</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">mod1</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = mpg ~ disp, data = mtcars)
@@ -144,13 +152,25 @@
 ## Coefficients:
 ## (Intercept)         disp  
 ##    29.59985     -0.04122</code></pre>
-<p>The reason will be more clear in a moment. “mod1” is the actual model. We can re-use this object to make predictions on new data. If the output of the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function resembled what you saw using the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function, it would make it more challenging to use on that new data.</p>
+<p>The reason will be more clear in a moment. “mod1” is the actual model. While we usually want the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> output after building the model, there are several other things we want to evaluate. If the output of the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function didn’t produce a model, but a summary like we saw, it would be more difficult to apply other functions, such as <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> and <code><a href="https://rdrr.io/r/stats/confint.html">confint()</a></code>, to it.</p>
+<p>Also, <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> is a universal function within R. It can also be applied to data frames and vectors. Not just the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> output.</p>
+<div id="its-useful-to-save-the-summary-output" class="section level3" number="11.3.1">
+<h3>
+<span class="header-section-number">11.3.1</span> It’s Useful to Save the Summary Output<a class="anchor" aria-label="anchor" href="#its-useful-to-save-the-summary-output"><i class="fas fa-link"></i></a>
+</h3>
 <p>Sometimes, you may want to evaluate one model against another. Whenever that happens, it’s useful to create another object for the summary output of the model. This will allow you to select individual pieces of the output you saw above.</p>
 <p>For example, I can create a new list for model 1’s summary. I can then use the <code>$</code> notation to call individual performance indicators for that model, such as <code>adj.r.squared</code> or the <code>fstatistic</code>.</p>
 <div class="sourceCode" id="cb292"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod1_summary</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod1</span><span class="op">)</span>
-<span class="va">mod1_summary</span><span class="op">$</span><span class="va">adj.r.squared</span>
-<span class="va">mod1_summary</span><span class="op">$</span><span class="va">fstatistic</span></code></pre></div>
+<code class="sourceCode R">  <span class="va">mod1_summary</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod1</span><span class="op">)</span>
+  <span class="va">mod1_summary</span><span class="op">$</span><span class="va">adj.r.squared</span>
+  <span class="va">mod1_summary</span><span class="op">$</span><span class="va">fstatistic</span></code></pre></div>
+<p>You can determine what values are available in a model summary using the <code><a href="https://rdrr.io/r/base/names.html">names()</a></code> function:</p>
+<div class="sourceCode" id="cb293"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">mod1_summary</span><span class="op">)</span></code></pre></div>
+<pre><code>##  [1] "call"          "terms"         "residuals"     "coefficients" 
+##  [5] "aliased"       "sigma"         "df"            "r.squared"    
+##  [9] "adj.r.squared" "fstatistic"    "cov.unscaled"</code></pre>
+</div>
 </div>
 <div id="how-to-make-predictions-with-a-model" class="section level2" number="11.4">
 <h2>
@@ -158,8 +178,8 @@
 </h2>
 <p>Many researchers are more interested in the “inferential” side of statistics. In plain English, you’re hoping to prove or disprove a relationship between one variable and another. Others time, you may want to use your model to predict future events or outcomes. This is more common for data scientists like me.</p>
 <p>You can use the <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> function to make predictions on new data. Actually, you can use this function without new data simply by plugging the model object name in. This will show you what the model predicts using the original data set (which is often a useful model performance indicator on its own).</p>
-<div class="sourceCode" id="cb293"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">mod1</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb295"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">mod1</span><span class="op">)</span></code></pre></div>
 <pre><code>##           Mazda RX4       Mazda RX4 Wag          Datsun 710      Hornet 4 Drive 
 ##            23.00544            23.00544            25.14862            18.96635 
 ##   Hornet Sportabout             Valiant          Duster 360           Merc 240D 
@@ -176,34 +196,36 @@
 ##            13.11381            26.34386            24.64168            25.68030 
 ##      Ford Pantera L        Ferrari Dino       Maserati Bora          Volvo 142E 
 ##            15.13335            23.62366            17.19410            24.61283</code></pre>
-<p>Let’s say we have a new set of <strong>disp</strong> values and we want to see what it predicts as the <strong>mpg</strong>. We simply specify the model name we want to use and the new data set name, like below:</p>
-<div class="sourceCode" id="cb295"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">disp_new</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>disp<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">15</span>,<span class="fl">240</span>,<span class="fl">30</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co">#this simply generates random numbers</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">mod1</span>,<span class="va">disp_new</span><span class="op">)</span></code></pre></div>
+<p>Let’s say we have new values for <strong>disp</strong>. We want to see what our model predicts for <strong>mpg</strong> using these new records. All we have to do is specify the model object name and the data set object name in the <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> function:</p>
+<div class="sourceCode" id="cb297"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">disp_new</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>disp<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">15</span>,<span class="fl">240</span>,<span class="fl">30</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co">#this simply generates random numbers</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">mod1</span>,<span class="va">disp_new</span><span class="op">)</span></code></pre></div>
 <pre><code>##        1        2        3        4        5        6        7        8 
 ## 21.92072 19.57914 19.62402 18.37712 20.86951 18.68507 20.79849 19.15828 
 ##        9       10       11       12       13       14       15 
 ## 17.89549 20.64230 20.99769 17.17329 21.15449 18.20183 19.61650</code></pre>
-<p>As you can imagine, this <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> function comes in handy a lot. And it’s a common feature for most model objects produced in other R packages. I’ve used this for neural nets and other more advanced predictive algorithms. It comes up again and again.</p>
+<p>As you can imagine, this <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> function comes in handy. And it’s a common feature for most model objects produced in other R packages. I’ve used this for neural nets and other more advanced predictive algorithms. It comes up again and again.</p>
 </div>
 <div id="how-to-save-your-model-to-use-later" class="section level2" number="11.5">
 <h2>
 <span class="header-section-number">11.5</span> How to Save Your Model to Use Later<a class="anchor" aria-label="anchor" href="#how-to-save-your-model-to-use-later"><i class="fas fa-link"></i></a>
 </h2>
-<p>Quite often, you’ll need to save your model to re-use in other situations That’s where the <code>.rds</code> file type comes in handy. <code>.rds</code> files allow you to save objects in your environment to reload later.</p>
-<p>You’ll need to load the <code>readr</code> package to create these file types. After that, you’ll use the <code><a href="https://readr.tidyverse.org/reference/read_rds.html">write_rds()</a></code> to create an <code>.rds</code> file and <code><a href="https://readr.tidyverse.org/reference/read_rds.html">read_rds()</a></code> to later load it elsewhere. (You may need to install this package using <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code>.)</p>
-<div class="sourceCode" id="cb297"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span>
-<span class="fu"><a href="https://readr.tidyverse.org/reference/read_rds.html">write_rds</a></span><span class="op">(</span><span class="va">mod1</span>,<span class="st">"mod1.rds"</span><span class="op">)</span></code></pre></div>
-<p>After running the previous script, you’ll see an <code>.rds</code> file appear in your current working directory (usually your project directory or your user login’s default directory). You can specify the file path in that script above in the two quotations marks.</p>
-<div class="inline-figure"><img src="1.66_ModelObject.png" width="75%" style="display: block; margin: auto;"></div>
-<p>If you want to re-use this model, you can simply reload the <code>.rds</code> file using the <code><a href="https://readr.tidyverse.org/reference/read_rds.html">read_rds()</a></code> function. Be sure to assign this object a name to make it work.</p>
-<div class="sourceCode" id="cb298"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model_reload</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_rds.html">read_rds</a></span><span class="op">(</span><span class="st">"mod1.rds"</span><span class="op">)</span></code></pre></div>
-<p>And here’s the cool part about this <code>.rds</code> file - you don’t need to reload the original data set to make this new model work! If you feed it new data, it’ll make new predictions. This comes very handy whenever you build Shiny apps or want to productionalize the model.</p>
+<p>It’s quite common to share models between colleagues. Maybe another researcher wants to re-produce what you created or another data scientist will integrate your model into a Shiny app.</p>
+<p>That’s where <code>.rds</code> files come in handy.</p>
+<p><code>.rds</code> files allow you to save objects on your desktop or user directory for later use.</p>
+<p>You’ll need to load the <code>readr</code> package to create these file types. After that, you’ll use the <code><a href="https://readr.tidyverse.org/reference/read_rds.html">write_rds()</a></code> function to create an <code>.rds</code> file and <code><a href="https://readr.tidyverse.org/reference/read_rds.html">read_rds()</a></code> to load it. (You may need to install this package using <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code>.)</p>
 <div class="sourceCode" id="cb299"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">disp_new</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>disp<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">15</span>,<span class="fl">240</span>,<span class="fl">30</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">model_reload</span>,<span class="va">disp_new</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R">  <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span>
+  <span class="fu"><a href="https://readr.tidyverse.org/reference/read_rds.html">write_rds</a></span><span class="op">(</span><span class="va">mod1</span>,<span class="st">"mod1.rds"</span><span class="op">)</span></code></pre></div>
+<p>After running the previous script, you’ll see an <code>.rds</code> file appear in your current working directory (usually your project directory or your default user directory). You can specify the file path in that script above between the two quotations marks.</p>
+<div class="inline-figure"><img src="1.67_ModelRDS.png" width="75%" style="display: block; margin: auto;"></div>
+<p>If you want to re-use this model, you can simply reload the <code>.rds</code> file using the <code><a href="https://readr.tidyverse.org/reference/read_rds.html">read_rds()</a></code> function. Be sure to assign this object a name to make it work.</p>
+<div class="sourceCode" id="cb300"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">model_reload</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_rds.html">read_rds</a></span><span class="op">(</span><span class="st">"mod1.rds"</span><span class="op">)</span></code></pre></div>
+<p>And here’s the cool part about this <code>.rds</code> file - <em>you don’t need to reload the original data set to make this new model work!</em> If you feed it new data, it’ll make new predictions. This comes in handy whenever you build Shiny apps or want to “productionalize” the model.</p>
+<div class="sourceCode" id="cb301"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">disp_new</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>disp<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">15</span>,<span class="fl">240</span>,<span class="fl">30</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">model_reload</span>,<span class="va">disp_new</span><span class="op">)</span></code></pre></div>
 <pre><code>##        1        2        3        4        5        6        7        8 
 ## 20.82545 21.27865 20.16891 19.18273 18.64478 19.26571 19.85724 21.91752 
 ##        9       10       11       12       13       14       15 
@@ -214,9 +236,9 @@
 <span class="header-section-number">11.6</span> How to Add Multiple Parameters to a Model<a class="anchor" aria-label="anchor" href="#how-to-add-multiple-parameters-to-a-model"><i class="fas fa-link"></i></a>
 </h2>
 <p>You can add additional parameters to your model by adding to the formula in the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function. Let’s say we want to add the <strong>drat</strong> and <strong>wt</strong> variables to your regression model. All you have to do specify both variables with a <code>+</code> sign between them.</p>
-<div class="sourceCode" id="cb301"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">~</span><span class="va">disp</span><span class="op">+</span><span class="va">drat</span><span class="op">+</span><span class="va">wt</span>,<span class="va">mtcars</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod2</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb303"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">mod2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">~</span><span class="va">disp</span><span class="op">+</span><span class="va">drat</span><span class="op">+</span><span class="va">wt</span>,<span class="va">mtcars</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod2</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = mpg ~ disp + drat + wt, data = mtcars)
@@ -244,10 +266,10 @@
 <span class="header-section-number">11.7</span> How to Add a Categorical Variable to a Model<a class="anchor" aria-label="anchor" href="#how-to-add-a-categorical-variable-to-a-model"><i class="fas fa-link"></i></a>
 </h2>
 <p>So far, I’ve only shown you how to add <strong>continuous</strong> variables. What if we want to add a <strong>categorical</strong> variable?</p>
-<p>If a column in a data frame has character values (i.e., text), a model function will automatically treat it as a categorical variable. If it contains numeric values, we’ll need to make it a <strong>factor</strong>. (Review our chapter on object-types for a quick review on this topic.)</p>
-<div class="sourceCode" id="cb303"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">~</span><span class="va">disp</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>,<span class="va">mtcars</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod3</span><span class="op">)</span></code></pre></div>
+<p>If a column in a data frame has character values (i.e., text), a model function will automatically treat it as a categorical variable. If it contains numeric values, we’ll need to make it a <strong>factor</strong>. (Review our chapter on object-types for a quick refresher on this topic.)</p>
+<div class="sourceCode" id="cb305"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">mod3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">~</span><span class="va">disp</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>,<span class="va">mtcars</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod3</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = mpg ~ disp + factor(cyl), data = mtcars)
@@ -275,9 +297,9 @@
 </h2>
 <p>Quite often, you may need to transform your variables to make them work in a model. Let’s say you want to build a log-log model. That has different meanings depending on your field of study, but in econometrics, a log-log model transforms both the inputs and the outputs using the natural logarithm. (This is how they often calculate price elasticity.)</p>
 <p>You could simply do these transformations in the formula argument in the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function. If you look below, I simply wrap both the independent and dependent variable with the <code><a href="https://rdrr.io/r/base/Log.html">log()</a></code> function:</p>
-<div class="sourceCode" id="cb305"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">disp</span><span class="op">)</span>,<span class="va">mtcars</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod4</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb307"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">mod4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">disp</span><span class="op">)</span>,<span class="va">mtcars</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod4</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log(mpg) ~ log(disp), data = mtcars)
@@ -296,14 +318,14 @@
 ## Residual standard error: 0.1282 on 30 degrees of freedom
 ## Multiple R-squared:  0.8207, Adjusted R-squared:  0.8148 
 ## F-statistic: 137.3 on 1 and 30 DF,  p-value: 1.006e-12</code></pre>
-<p>This works okay for smaller models. If you want to transform many variables, it’s usually easier create new ones in the data set prior to building the model:</p>
-<div class="sourceCode" id="cb307"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">cars_log</span> <span class="op">&lt;-</span> <span class="va">mtcars</span>
-<span class="va">cars_log</span><span class="op">$</span><span class="va">mpg_log</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">cars_log</span><span class="op">$</span><span class="va">mpg</span><span class="op">)</span>
-<span class="va">cars_log</span><span class="op">$</span><span class="va">disp_log</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">cars_log</span><span class="op">$</span><span class="va">disp</span><span class="op">)</span>
-<span class="va">cars_log</span><span class="op">$</span><span class="va">qsec_log</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">cars_log</span><span class="op">$</span><span class="va">qsec</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">cars_log</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">7</span>,<span class="fl">12</span>,<span class="fl">13</span>,<span class="fl">14</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<p>This works okay for smaller models. If you want to transform several variables, it’s usually easier to create new ones in the data set prior to building the model:</p>
+<div class="sourceCode" id="cb309"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">cars_log</span> <span class="op">&lt;-</span> <span class="va">mtcars</span>
+  <span class="va">cars_log</span><span class="op">$</span><span class="va">mpg_log</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">cars_log</span><span class="op">$</span><span class="va">mpg</span><span class="op">)</span>
+  <span class="va">cars_log</span><span class="op">$</span><span class="va">disp_log</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">cars_log</span><span class="op">$</span><span class="va">disp</span><span class="op">)</span>
+  <span class="va">cars_log</span><span class="op">$</span><span class="va">qsec_log</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">cars_log</span><span class="op">$</span><span class="va">qsec</span><span class="op">)</span>
+  
+  <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">cars_log</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">7</span>,<span class="fl">12</span>,<span class="fl">13</span>,<span class="fl">14</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <pre><code>##       mpg             disp            qsec          mpg_log     
 ##  Min.   :10.40   Min.   : 71.1   Min.   :14.50   Min.   :2.342  
 ##  1st Qu.:15.43   1st Qu.:120.8   1st Qu.:16.89   1st Qu.:2.736  
@@ -319,9 +341,9 @@
 ##  3rd Qu.:5.786   3rd Qu.:2.939  
 ##  Max.   :6.157   Max.   :3.131</code></pre>
 <p>We can then use those new columns in the model function:</p>
-<div class="sourceCode" id="cb309"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg_log</span><span class="op">~</span><span class="va">disp_log</span><span class="op">+</span><span class="va">qsec_log</span>,<span class="va">cars_log</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod5</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb311"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">mod5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg_log</span><span class="op">~</span><span class="va">disp_log</span><span class="op">+</span><span class="va">qsec_log</span>,data<span class="op">=</span><span class="va">cars_log</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod5</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = mpg_log ~ disp_log + qsec_log, data = cars_log)
@@ -346,10 +368,10 @@
 <h2>
 <span class="header-section-number">11.9</span> How to Add Variable Interactions to a Model<a class="anchor" aria-label="anchor" href="#how-to-add-variable-interactions-to-a-model"><i class="fas fa-link"></i></a>
 </h2>
-<p>It’s not uncommon to include interactions in your model, especially if you have two variables that seem to be correlated. To create these interactions, you simply use the <code>*</code> between them in the model.</p>
-<div class="sourceCode" id="cb311"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">~</span><span class="va">drat</span><span class="op">+</span><span class="va">wt</span><span class="op">+</span><span class="va">drat</span><span class="op">*</span><span class="va">wt</span>,<span class="va">mtcars</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod6</span><span class="op">)</span></code></pre></div>
+<p>It’s not uncommon to include interactions in your model, especially if you have two variables that seem to be correlated. To create these interactions, you simply use the <code>*</code> between them in the model formula.</p>
+<div class="sourceCode" id="cb313"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">mod6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">~</span><span class="va">drat</span><span class="op">+</span><span class="va">wt</span><span class="op">+</span><span class="va">drat</span><span class="op">*</span><span class="va">wt</span>,data<span class="op">=</span><span class="va">mtcars</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod6</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = mpg ~ drat + wt + drat * wt, data = mtcars)
@@ -371,9 +393,9 @@
 ## Multiple R-squared:  0.7996, Adjusted R-squared:  0.7782 
 ## F-statistic: 37.25 on 3 and 28 DF,  p-value: 6.567e-10</code></pre>
 <p>You actually don’t even need to specify the variables individually. For example, rather than <code>mpg~drat+wt+drat*wt</code>, you can simply use <code>mpg~drat*wt</code> and the function will treat them individually and as interactions.</p>
-<div class="sourceCode" id="cb313"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">~</span><span class="va">drat</span><span class="op">*</span><span class="va">wt</span>,<span class="va">mtcars</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod6</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb315"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">mod6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">~</span><span class="va">drat</span><span class="op">*</span><span class="va">wt</span>,<span class="va">mtcars</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod6</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = mpg ~ drat * wt, data = mtcars)
@@ -400,16 +422,16 @@
 <span class="header-section-number">11.10</span> How to Calculate Model Confidence Intervals<a class="anchor" aria-label="anchor" href="#how-to-calculate-model-confidence-intervals"><i class="fas fa-link"></i></a>
 </h2>
 <p>Even though the p-value tells you whether the variable is statistically significant, it’s often a best practice to include confidence intervals in your analysis. R makes this very easy! Simply wrap the <code><a href="https://rdrr.io/r/stats/confint.html">confint()</a></code> function around your model object.</p>
-<div class="sourceCode" id="cb315"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/confint.html">confint</a></span><span class="op">(</span><span class="va">mod2</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb317"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/r/stats/confint.html">confint</a></span><span class="op">(</span><span class="va">mod2</span><span class="op">)</span></code></pre></div>
 <pre><code>##                   2.5 %       97.5 %
 ## (Intercept) 16.49999311 45.586521444
 ## disp        -0.03600944  0.003231128
 ## drat        -2.13657099  3.824501624
 ## wt          -5.66571478 -0.679250218</code></pre>
-<p>If you want to have a higher critical value, you can change it using the <strong>level</strong> argument.</p>
-<div class="sourceCode" id="cb317"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/confint.html">confint</a></span><span class="op">(</span><span class="va">mod2</span>,level<span class="op">=</span><span class="fl">.9</span><span class="op">)</span></code></pre></div>
+<p>If you want to have a different critical value, you can change it using the <strong>level</strong> argument.</p>
+<div class="sourceCode" id="cb319"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/r/stats/confint.html">confint</a></span><span class="op">(</span><span class="va">mod2</span>,level<span class="op">=</span><span class="fl">.9</span><span class="op">)</span></code></pre></div>
 <pre><code>##                     5 %          95 %
 ## (Intercept) 18.96558187  4.312093e+01
 ## disp        -0.03268312 -9.519212e-05
@@ -421,9 +443,9 @@
 <h2>
 <span class="header-section-number">11.11</span> How to Calculate Analysis of Variance Between Models<a class="anchor" aria-label="anchor" href="#how-to-calculate-analysis-of-variance-between-models"><i class="fas fa-link"></i></a>
 </h2>
-<p>Often you’ll need to compare two models and see which one better explains the “variation” in the data. To do so, you simply create your two models and then use the <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> function:</p>
-<div class="sourceCode" id="cb319"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">mod1</span>,<span class="va">mod2</span><span class="op">)</span></code></pre></div>
+<p>You’ll often need to compare models with more parameter estimates to simpler ones. To do so, you simply create your two models and then use the <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> function:</p>
+<div class="sourceCode" id="cb321"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">mod1</span>,<span class="va">mod2</span><span class="op">)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Model 1: mpg ~ disp
@@ -434,15 +456,16 @@
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
-<div id="other-common-model-types---logistical-regression" class="section level2" number="11.12">
+<div id="other-common-model-types---logistic-regression" class="section level2" number="11.12">
 <h2>
-<span class="header-section-number">11.12</span> Other Common Model Types - Logistical Regression<a class="anchor" aria-label="anchor" href="#other-common-model-types---logistical-regression"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.12</span> Other Common Model Types - Logistic Regression<a class="anchor" aria-label="anchor" href="#other-common-model-types---logistic-regression"><i class="fas fa-link"></i></a>
 </h2>
-<p>Chances are, you want to do more than a linear regression. While most statistics book will cover the programming steps involved with whatever models it covers. That said though, I can provide some general functions used in the more common statistical models, such as logistic regression and anova models.</p>
-<p>To run a logistical model, you can use the <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> function. In the script below, I build use <strong>mpg</strong> and <strong>wt</strong> to predict whether <strong>vs</strong> is a 1 or a 0. I use the <code>family</code> argument to make it a logistical model.</p>
-<div class="sourceCode" id="cb321"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod7</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">vs</span><span class="op">~</span><span class="va">mpg</span><span class="op">+</span><span class="va">wt</span>,data<span class="op">=</span><span class="va">mtcars</span>,family<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/family.html">binomial</a></span><span class="op">(</span>link<span class="op">=</span><span class="st">"logit"</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod7</span><span class="op">)</span></code></pre></div>
+<p>Chances are, you want to do more than a linear regression. Most statistics or ML textbooks will cover the programming steps involved for a particular model type. Those models usually follow the same procedures I highlighted earlier.</p>
+<p>That said though, I can provide some general functions used in the more common statistical models, such as logistic regression and anova models.</p>
+<p>To run a logistic model, you can use the <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> function. In the script below, I build use <strong>mpg</strong> and <strong>wt</strong> to predict whether <strong>vs</strong> is a 1 or a 0. I use the <code>family</code> argument to make it a logistic model.</p>
+<div class="sourceCode" id="cb323"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">mod7</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">vs</span><span class="op">~</span><span class="va">mpg</span><span class="op">+</span><span class="va">wt</span>,data<span class="op">=</span><span class="va">mtcars</span>,family<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/family.html">binomial</a></span><span class="op">(</span>link<span class="op">=</span><span class="st">"logit"</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod7</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = vs ~ mpg + wt, family = binomial(link = "logit"), 
@@ -469,8 +492,8 @@
 ## Number of Fisher Scoring iterations: 6</code></pre>
 <p>The <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> function has a larger range of model types than the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function. I suggest reviewing it with <code><a href="https://rdrr.io/r/stats/glm.html">?glm</a></code> in the console whenever you want to build a particular type of linear model not yet discussed here. The <code>family</code> argument may provide the right model type you need.</p>
 <p>Just like we did for the linear regression model, we can use the <code><a href="https://rdrr.io/r/stats/confint.html">confint()</a></code> functions on this model object to generate a confidence interval. You can see this below:</p>
-<div class="sourceCode" id="cb323"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/confint.html">confint</a></span><span class="op">(</span><span class="va">mod7</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb325"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/r/stats/confint.html">confint</a></span><span class="op">(</span><span class="va">mod7</span><span class="op">)</span></code></pre></div>
 <pre><code>## Waiting for profiling to be done...</code></pre>
 <pre><code>##                    2.5 %   97.5 %
 ## (Intercept) -31.90842474 2.921046
@@ -483,28 +506,28 @@
 <span class="header-section-number">11.13</span> Other Common Model Types - Anova Models<a class="anchor" aria-label="anchor" href="#other-common-model-types---anova-models"><i class="fas fa-link"></i></a>
 </h2>
 <p>To build an ANOVA model, you’ll use the <code><a href="https://rdrr.io/r/stats/aov.html">aov()</a></code> function. This function follows a similar process to the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function and actually generates a regression model using the formula you enter.</p>
-<p>As you’ll learn in your stats class, many ANOVA models focus on categorical variables to determine whether there’s a difference in the mean outcome. The more common model for this scenario is a <em>fixed-effects model</em>.</p>
+<p>As you’ll learn in your stats class, many ANOVA models focus on categorical variables to determine whether there’s a difference in the mean outcome. A common model for this scenario is a <em>fixed-effects model</em>.</p>
 <p>Let’s convert a few of our <strong>cars</strong> data into factors, so that we can build a fixed-effects model.</p>
-<div class="sourceCode" id="cb326"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mtcars_factor</span> <span class="op">&lt;-</span> <span class="va">mtcars</span>
-<span class="va">mtcars_factor</span><span class="op">$</span><span class="va">gear</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">mtcars_factor</span><span class="op">$</span><span class="va">gear</span><span class="op">)</span>
-<span class="va">mtcars_factor</span><span class="op">$</span><span class="va">vs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">mtcars_factor</span><span class="op">$</span><span class="va">vs</span><span class="op">)</span></code></pre></div>
-<p>Remember, most model functions in R will treat numeric inputs as a continuous variable. Since we want to treat these variables (which range include the labels 0, 1, 3, and 4), we need to ensure that the function we run treats them as categorical. That’s why we factor them.</p>
+<div class="sourceCode" id="cb328"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">mtcars_factor</span> <span class="op">&lt;-</span> <span class="va">mtcars</span>
+  <span class="va">mtcars_factor</span><span class="op">$</span><span class="va">gear</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">mtcars_factor</span><span class="op">$</span><span class="va">gear</span><span class="op">)</span>
+  <span class="va">mtcars_factor</span><span class="op">$</span><span class="va">vs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">mtcars_factor</span><span class="op">$</span><span class="va">vs</span><span class="op">)</span></code></pre></div>
+<p>Remember, most model functions in R will treat numeric inputs as a continuous variable. Since we want to treat these variables (which range includes the labels 0, 1, 3, and 4), we need to ensure that the function we run treats them as categorical. That’s why we factor them.</p>
 <p>Now we can build the fixed-effects model using the <code><a href="https://rdrr.io/r/stats/aov.html">aov()</a></code> function:</p>
-<div class="sourceCode" id="cb327"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod8</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">~</span><span class="va">vs</span><span class="op">+</span><span class="va">gear</span>,data<span class="op">=</span><span class="va">mtcars_factor</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod8</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb329"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">mod8</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">~</span><span class="va">vs</span><span class="op">+</span><span class="va">gear</span>,data<span class="op">=</span><span class="va">mtcars_factor</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod8</span><span class="op">)</span></code></pre></div>
 <pre><code>##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
 ## vs           1  496.5   496.5  29.407 8.74e-06 ***
 ## gear         2  156.8    78.4   4.642   0.0182 *  
 ## Residuals   28  472.8    16.9                     
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-<p>The <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function also gives you the ANOVA table for this model and allows you to determine which group has the bigger impact.</p>
+<p>The <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function also gives you the ANOVA table for this model and allows you to determine which group explains the most variation.</p>
 <p>Sometimes you still want a model that shows you the actual impact a variable has on the expected output. We can do this by first running the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function with our formula.</p>
-<div class="sourceCode" id="cb329"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod9</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">~</span><span class="va">vs</span><span class="op">+</span><span class="va">gear</span>,data<span class="op">=</span><span class="va">mtcars_factor</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod9</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb331"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">mod9</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">~</span><span class="va">vs</span><span class="op">+</span><span class="va">gear</span>,data<span class="op">=</span><span class="va">mtcars_factor</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod9</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = mpg ~ vs + gear, data = mtcars_factor)
@@ -526,16 +549,16 @@
 ## Multiple R-squared:  0.5802, Adjusted R-squared:  0.5352 
 ## F-statistic:  12.9 on 3 and 28 DF,  p-value: 1.787e-05</code></pre>
 <p>And you can reference the model object again in the same <code><a href="https://rdrr.io/r/stats/aov.html">aov()</a></code> function from earlier and get your ANOVA table.</p>
-<div class="sourceCode" id="cb331"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod8</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb333"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod8</span><span class="op">)</span></code></pre></div>
 <pre><code>##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
 ## vs           1  496.5   496.5  29.407 8.74e-06 ***
 ## gear         2  156.8    78.4   4.642   0.0182 *  
 ## Residuals   28  472.8    16.9                     
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-<div class="sourceCode" id="cb333"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">mod9</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb335"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">mod9</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
 ## vs           1  496.5   496.5  29.407 8.74e-06 ***
 ## gear         2  156.8    78.4   4.642   0.0182 *  
@@ -548,12 +571,12 @@
 <span class="header-section-number">11.14</span> Things to Remember<a class="anchor" aria-label="anchor" href="#things-to-remember-9"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
-<li>Building and evaluating models follows the same steps, regardless of the function you use</li>
+<li>Building and evaluating models often follows the same steps, regardless of the functions you use</li>
 <li>The model function (<code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>, <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code>, <code><a href="https://rdrr.io/r/stats/aov.html">aov()</a></code>, etc.) produces a list</li>
 <li>You can assign that list a name and reference it again</li>
+<li>You can get most model performance metrics with the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function</li>
 <li>You can use that model object to make predictions on both new and existing data with the <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> function</li>
 <li>You can use that model object to generate confidence intervals with the <code><a href="https://rdrr.io/r/stats/confint.html">confint()</a></code>function</li>
-<li>You can get most model performance metrics with the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function</li>
 <li>You evaluate two models against one another with the <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> function</li>
 <li>You can export your model (without exporting the data) using the <code><a href="https://readr.tidyverse.org/reference/read_rds.html">write_rds()</a></code> function</li>
 </ul>
@@ -564,7 +587,7 @@
 </h2>
 <ol style="list-style-type: decimal">
 <li>Using the data set <strong>iris</strong> (<code>data(iris)</code>), build a linear regression model that uses <strong>Sepal.Length</strong> and <strong>Sepal.Width</strong> to predict <strong>Petal.Length</strong>. Assign the model the name “PracticeModel”.</li>
-<li>Determine whether the two parameters are statistically signficant. (i.e., their p-values are less than 0.05.)</li>
+<li>Determine whether the two parameters are statistically significant. (i.e., their p-values are less than 0.05.)</li>
 <li>Predict the value of <strong>Petal.Length</strong> with a <strong>Sepal.Length</strong> of 5 and a <strong>Sepal.Width</strong> of 3.25. (Hint: create a single row data frame with those two values assigned to their respective column names.)</li>
 <li>Determine the model’s confidence intervals.</li>
 </ol>
@@ -579,7 +602,9 @@
 <li><a class="nav-link" href="#statfunctions"><span class="header-section-number">11</span> Statistical Functions in R: Common Functions and How They Work</a></li>
 <li><a class="nav-link" href="#how-statistical-functions-work-in-r-programming"><span class="header-section-number">11.1</span> How Statistical Functions Work in R Programming</a></li>
 <li><a class="nav-link" href="#how-to-build-a-model-in-r-example-with-linear-regression"><span class="header-section-number">11.2</span> How to Build a Model in R (Example with Linear Regression)</a></li>
-<li><a class="nav-link" href="#how-to-review-common-model-performance-statistics"><span class="header-section-number">11.3</span> How to Review Common Model Performance Statistics</a></li>
+<li>
+<a class="nav-link" href="#how-to-review-common-model-performance-statistics"><span class="header-section-number">11.3</span> How to Review Common Model Performance Statistics</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#its-useful-to-save-the-summary-output"><span class="header-section-number">11.3.1</span> It’s Useful to Save the Summary Output</a></li></ul>
+</li>
 <li><a class="nav-link" href="#how-to-make-predictions-with-a-model"><span class="header-section-number">11.4</span> How to Make Predictions with a Model</a></li>
 <li><a class="nav-link" href="#how-to-save-your-model-to-use-later"><span class="header-section-number">11.5</span> How to Save Your Model to Use Later</a></li>
 <li><a class="nav-link" href="#how-to-add-multiple-parameters-to-a-model"><span class="header-section-number">11.6</span> How to Add Multiple Parameters to a Model</a></li>
@@ -588,7 +613,7 @@
 <li><a class="nav-link" href="#how-to-add-variable-interactions-to-a-model"><span class="header-section-number">11.9</span> How to Add Variable Interactions to a Model</a></li>
 <li><a class="nav-link" href="#how-to-calculate-model-confidence-intervals"><span class="header-section-number">11.10</span> How to Calculate Model Confidence Intervals</a></li>
 <li><a class="nav-link" href="#how-to-calculate-analysis-of-variance-between-models"><span class="header-section-number">11.11</span> How to Calculate Analysis of Variance Between Models</a></li>
-<li><a class="nav-link" href="#other-common-model-types---logistical-regression"><span class="header-section-number">11.12</span> Other Common Model Types - Logistical Regression</a></li>
+<li><a class="nav-link" href="#other-common-model-types---logistic-regression"><span class="header-section-number">11.12</span> Other Common Model Types - Logistic Regression</a></li>
 <li><a class="nav-link" href="#other-common-model-types---anova-models"><span class="header-section-number">11.13</span> Other Common Model Types - Anova Models</a></li>
 <li><a class="nav-link" href="#things-to-remember-9"><span class="header-section-number">11.14</span> Things to Remember</a></li>
 <li><a class="nav-link" href="#exercises-6"><span class="header-section-number">11.15</span> Exercises</a></li>
@@ -609,7 +634,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>R Programming in Plain English</strong>" was written by Taylor Rodgers. It was last built on 2022-01-12.</p>
+    <p>"<strong>R Programming in Plain English</strong>" was written by Taylor Rodgers. It was last built on 2022-01-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

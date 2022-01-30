@@ -1,7 +1,5 @@
 # About the Author  {-}
 
-Taylor Rodgers is a writer, data scientist, and self-publisher. He has written two how-to books related to data science, including *Data Work: A Jargon-Free Guide to Managing Successful Data Teams* and *R Programming in Plain English*, and has plans for several more future releases.
+Taylor Rodgers is a writer, data scientist, and self-publisher. He has written two how-to books relating to data science, including *Data Work: A Jargon-Free Guide to Managing Successful Data Teams* and *R Programming in Plain English*, and has plans for several more future releases.
 
-Taylor is an avid R user. He has used R for statistical analysis, machine learning, data visualizations, and Shiny app development. He is a regular contributor to his local R user group in Kansas City. He also occasionally posts R tutorials to a YouTube channel.
-
-Taylor has a masters degree in applied statistics from the University of Kansas Medical Center and a bachelors degree in economics from the University of Kansas.
+Taylor is an avid R user. He regularly uses R for statistical analysis, machine learning, data visualizations, and Shiny app development. He has a masters degree in applied statistics from the University of Kansas Medical Center and a bachelors degree in economics from the University of Kansas.

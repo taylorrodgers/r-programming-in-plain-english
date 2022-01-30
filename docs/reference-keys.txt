@@ -77,7 +77,7 @@ how-to-connect-to-a-database
 connect-to-an-api
 things-to-remember-7
 plotdata
-which-r-plot-package-is-best
+pros-and-cons-of-data-viz-packages
 so-which-data-viz-package-is-actually-the-best
 how-to-write-ggplot2-scripts
 how-to-plot-common-data-visualizations-in-ggplot2
@@ -92,6 +92,7 @@ statfunctions
 how-statistical-functions-work-in-r-programming
 how-to-build-a-model-in-r-example-with-linear-regression
 how-to-review-common-model-performance-statistics
+its-useful-to-save-the-summary-output
 how-to-make-predictions-with-a-model
 how-to-save-your-model-to-use-later
 how-to-add-multiple-parameters-to-a-model
@@ -100,7 +101,7 @@ how-to-add-transformed-variables-to-a-model
 how-to-add-variable-interactions-to-a-model
 how-to-calculate-model-confidence-intervals
 how-to-calculate-analysis-of-variance-between-models
-other-common-model-types---logistical-regression
+other-common-model-types---logistic-regression
 other-common-model-types---anova-models
 things-to-remember-9
 exercises-6

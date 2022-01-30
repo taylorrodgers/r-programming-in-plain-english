@@ -236,7 +236,7 @@ And most importantly, it can contain both numeric and character values! (Earth s
 
 I like to think of a data frame as a way to combine vectors. As a matter of fact, you can build a data frame doing just that.
 
-Take this code below and run it. You’ll see that we make individual vectors containing data on James Bond movies^[@noauthor_james_nodate] and then combine it into a data frame.
+Take this code below and run it. You’ll see that we make individual vectors containing data on James Bond movies^[@Bond] and then combine it into a data frame.
 
 ```{r 2.18}
   filmname <- c("Skyfall","Thunderball","Goldfinger",

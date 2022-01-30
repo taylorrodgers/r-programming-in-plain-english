@@ -65,34 +65,34 @@ factor(mtcars$gear)
 
 1. You would use the `%>%` notation, `filter()` function, and the operates `|`, `==`, and `>` to accomplish this.
 ```{r A6.1, eval=FALSE}
-data(mtcars)
-library(dplyr)
-mtcars %>% filter(gear==4 | hp > 115)
+  data(mtcars)
+  library(dplyr)
+  mtcars %>% filter(gear==4 | hp > 115)
 ```
 2. In addition to the same script as above, you would use the `select()` function to reduce the columns.
 ```{r A6.2, eval=FALSE}
-data(mtcars)
-library(dplyr)
-mtcars %>% 
-  filter(gear==4 | hp > 115) %>%
-  select(mpg,cyl,gear,hp)
+  data(mtcars)
+  library(dplyr)
+  mtcars %>% 
+    filter(gear==4 | hp > 115) %>%
+    select(mpg,cyl,gear,hp)
 ```
 3. Instead of using `select()` in the previous script, you would use `transmute()`. This function allows you to both transform a column and select only those that are mentioned.
 ```{r A6.3, eval=FALSE}
-data(mtcars)
-library(dplyr)
-mtcars %>% 
-  filter(gear==4 | hp > 115) %>%
-  transmute(mpg_log=log(mpg),cyl,gear,hp)
+  data(mtcars)
+  library(dplyr)
+  mtcars %>% 
+    filter(gear==4 | hp > 115) %>%
+    transmute(mpg_log=log(mpg),cyl,gear,hp)
 ```
 4. You would use the `filter()`, `group_by()`, and `summarize()` functions to pull this summary data.
 ```{r A6.4, eval=FALSE}
-data(mtcars)
-library(dplyr)
-mtcars %>% 
-  filter(wt > 2) %>%
-  group_by(gear) %>%
-  summarize(avg_mpg=mean(mpg))
+  data(mtcars)
+  library(dplyr)
+  mtcars %>% 
+    filter(wt > 2) %>%
+    group_by(gear) %>%
+    summarize(avg_mpg=mean(mpg))
 ```
 ## Chapter 7 - Understanding and Using R Packages
 
@@ -148,75 +148,75 @@ mtcars %>%
 
 1. Use the `ggplot()`, `aes()`, and `geom_point()` functions to construct a plot.
 ```{r A10.1, eval=FALSE}
-library(ggplot2)
-data(mtcars)
-ggplot(data=mtcars,
-        mapping=aes(x=hp,y=mpg)) +
-  geom_point(size=3)
+  library(ggplot2)
+  data(mtcars)
+  ggplot(data=mtcars,
+          mapping=aes(x=hp,y=mpg)) +
+    geom_point(size=3)
 ```
 2. Simply add `factor(cyl)` to the **color** argument in the `aes()` function.
 ```{r A10.2, eval=FALSE}
-library(ggplot2)
-data(mtcars)
-ggplot(data=mtcars,
-        mapping=aes(x=hp,y=mpg,color=factor(cyl))) +
-  geom_point(size=3)
+  library(ggplot2)
+  data(mtcars)
+  ggplot(data=mtcars,
+          mapping=aes(x=hp,y=mpg,color=factor(cyl))) +
+    geom_point(size=3)
 ```
 3. Use the **x**, **y**, and **color** arguments in the `labs()` function to use a more intuitive naming convention.
 ```{r A10.3, eval=FALSE}
-library(ggplot2)
-data(mtcars)
-ggplot(data=mtcars,
-        mapping=aes(x=hp,y=mpg,color=factor(cyl))) +
-  geom_point(size=3) +
-  labs(x="Horsepower",
-       y="Miles Per Gallon",
-       color="Cylinders")
+  library(ggplot2)
+  data(mtcars)
+  ggplot(data=mtcars,
+          mapping=aes(x=hp,y=mpg,color=factor(cyl))) +
+    geom_point(size=3) +
+    labs(x="Horsepower",
+         y="Miles Per Gallon",
+         color="Cylinders")
 ```
 4. Use the **title** argument in the `labs()` function.
 ```{r A10.4, eval=FALSE}
-library(ggplot2)
-data(mtcars)
-ggplot(data=mtcars,
-        mapping=aes(x=hp,y=mpg,color=factor(cyl))) +
-  geom_point(size=3) +
-  labs(x="Horsepower",
-       y="Miles Per Gallon",
-       color="Cylinders",
-       title="Car Performance")
+  library(ggplot2)
+  data(mtcars)
+  ggplot(data=mtcars,
+          mapping=aes(x=hp,y=mpg,color=factor(cyl))) +
+    geom_point(size=3) +
+    labs(x="Horsepower",
+         y="Miles Per Gallon",
+         color="Cylinders",
+         title="Car Performance")
 ```
-5. Use the `theme_pew()` theme from the `ggthemes` package.
+5. Use the `theme_few()` theme from the `ggthemes` package.
 ```{r A10.5, eval=FALSE}
-library(ggplot2)
-library(ggthemes)
-data(mtcars)
-ggplot(data=mtcars,
-        mapping=aes(x=hp,y=mpg,color=factor(cyl))) +
-  geom_point(size=3) +
-  labs(x="Horsepower",
-       y="Miles Per Gallon",
-       color="Cylinders",
-       title="Car Performance") +
-  theme_few()
+  library(ggplot2)
+  library(ggthemes)
+  data(mtcars)
+  ggplot(data=mtcars,
+          mapping=aes(x=hp,y=mpg,color=factor(cyl))) +
+    geom_point(size=3) +
+    labs(x="Horsepower",
+         y="Miles Per Gallon",
+         color="Cylinders",
+         title="Car Performance") +
+    theme_few()
 ```
 
 ## Chapter 11 - Statistical Functions in R
 
 1. After loading your data with `data()`, use the `lm()` function to build a model.
 ```{r A11.1,eval=FALSE}
-data(iris)
-PracticeModel <- lm(Petal.Length~Sepal.Length+Sepal.Width,data=iris)
+  data(iris)
+  PracticeModel <- lm(Petal.Length~Sepal.Length+Sepal.Width,data=iris)
 ```
 2. Use the `summary()` function on your model to determine model performance, such as p-values.
 ```{r A11.2,eval=FALSE}
-summary(PracticeModel)
+  summary(PracticeModel)
 ```
 3. Use the `predict()` function to make model predictions on a new data set.
 ```{r A11.3,eval=FALSE}
-NewData <- data.frame(Sepal.Length=5,Sepal.Width=3.25)
-predict(PracticeModel,NewData)
+  NewData <- data.frame(Sepal.Length=5,Sepal.Width=3.25)
+  predict(PracticeModel,NewData)
 ```
 4. Use the `confint()` function to determine the confident intervals for a model.
 ```{r A11.4,eval=FALSE}
-confint(PracticeModel)
+  confint(PracticeModel)
 ```
