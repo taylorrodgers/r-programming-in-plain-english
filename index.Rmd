@@ -24,11 +24,11 @@ It’s hard enough to learn statistics. The same for psychology, business, socio
 
 ## What This Book Provides
 
-I want to make a quick note about something. Few things I write about in this book are original. I heavily relied on the default R documentation^[@R-base], as well as many other package-specific documentation pages, to write this book. (See **References** page for complete list of sources.)
+Few things I write about in this book are original. I heavily relied on the default R documentation^[@R-base], as well as many other package-specific documentation pages, to write this book. (See **References** page for complete list of sources.)
 
 What makes this book a better resource though is the way it's written. I make things far more easier for beginners to understand. R documentation is often written with terminology that sounds foreign to people who don't already know R programming.
 
-The other key difference is the depth of the content. This book is *not* a reference book. It's about teaching the core concepts of R programming that come up again and again. Understanding this foundation will make it easier for you to use reference materials later. 
+The other key benefit to this book is the depth (or lack thereof) of the content. This book is *not* a reference book. It's about teaching the core concepts of R programming that come up again and again. Understanding this foundation will make it easier for you to use reference materials later. 
 
 In other words, you'll know what to "Google." :)
 
@@ -40,6 +40,6 @@ That said, the final chapter does assume you know these concepts already. So I w
 
 ## About the Author
 
-Taylor Rodgers is a data scientist, writer, and self-publisher. He has written two how-to books relating to data science, including *Data Work: A Jargon-Free Guide to Managing Successful Data Teams* and *R Programming in Plain English*, and has plans for several more future releases.
+I am a data scientist, writer, and self-publisher. I have written two how-to books relating to data science, including *Data Work: A Jargon-Free Guide to Managing Successful Data Teams* and *R Programming in Plain English*, and have plans for several more future releases.
 
-Taylor is an avid R user. He regularly uses R for statistical analysis, machine learning, data visualizations, and Shiny app development. He has a masters degree in applied statistics from the University of Kansas Medical Center and a bachelors degree in economics from the University of Kansas.
+I am an avid R user. I regularly use R for statistical analysis, machine learning, data visualizations, and Shiny app development. I have a Masters of Science in Applied Statistics from the University of Kansas Medical Center and a Bachelors of the Arts in Economics from the University of Kansas.
