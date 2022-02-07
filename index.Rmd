@@ -24,22 +24,22 @@ It’s hard enough to learn statistics. The same for psychology, business, socio
 
 ## What This Book Provides
 
-One important thing to note is that few concepts mentioned in this book are original. I primarily relied on the default R documentation^[@R-base], as well as various other package-specific documentation (see **References** page for details.)
+I want to make a quick note about something. Few things I write about in this book are original. I heavily relied on the default R documentation^[@R-base], as well as many other package-specific documentation pages, to write this book. (See **References** page for complete list of sources.)
 
-What this book does is make this material more accessible to beginners. R documentation is often written with terminology that sounds foreign to people who don't already know R programming.
+What makes this book a better resource though is the way it's written. I make things far more easier for beginners to understand. R documentation is often written with terminology that sounds foreign to people who don't already know R programming.
 
-Rather than teach you every single concept or function, I focus on teaching core concepts that come up again and again. This foundation will make it easier for you to later read through R documentation or "know what to Google."
+The other key difference is the depth of the content. This book is *not* a reference book. It's about teaching the core concepts of R programming that come up again and again. Understanding this foundation will make it easier for you to use reference materials later. 
 
-## Things You Should Know Before Reading
+In other words, you'll know what to "Google." :)
 
-Since R is mostly for statistics, you should know some statistics before reading this book. For example, I assume you know what a p-value is. The same for confidence intervals, regression analysis, and R-square.
+## You Don’t Need to Know Statistics to Use This Book... Until the End
 
-That being said, this book would make a great companion piece to your first statistics class. I don't cover the common statistical functions until the end of the book. If your book or professor references code to perform certain calculations, this will help you understand what it's doing.
+This book would make a great companion piece to your first statistics class. I don't cover the common statistical functions until the end of the book. If your class book or professor references code to perform certain calculations, this will help you understand what it's doing.
+
+That said, the final chapter does assume you know these concepts already. So I won't spend much time defining what a p-value is or what makes a fixed-effects model.
 
 ## About the Author
 
 Taylor Rodgers is a data scientist, writer, and self-publisher. He has written two how-to books relating to data science, including *Data Work: A Jargon-Free Guide to Managing Successful Data Teams* and *R Programming in Plain English*, and has plans for several more future releases.
 
 Taylor is an avid R user. He regularly uses R for statistical analysis, machine learning, data visualizations, and Shiny app development. He has a masters degree in applied statistics from the University of Kansas Medical Center and a bachelors degree in economics from the University of Kansas.
-
-With that out of the way, let’s begin!
