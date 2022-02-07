@@ -1,6 +1,8 @@
 tab:dplyr-fig8
 about-this-book
+what-this-book-provides
 things-you-should-know-before-reading
+about-the-author
 whatisr
 is-r-the-best-statistical-programming-language
 will-learning-r-over-python-impact-job-opportunities

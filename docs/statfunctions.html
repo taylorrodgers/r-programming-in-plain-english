@@ -58,7 +58,6 @@
 <li><a class="active" href="statfunctions.html"><span class="header-section-number">11</span> Statistical Functions in R: Common Functions and How They Work</a></li>
 <li><a class="" href="answers.html"><span class="header-section-number">12</span> Answer Key</a></li>
 <li><a class="" href="references.html">References</a></li>
-<li><a class="" href="about-the-author.html">About the Author</a></li>
 </ul>
 
         <div class="book-extra">
@@ -111,7 +110,7 @@
 <p>In order to build a model, we’ll use the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function. To use this function, we only need to define our formula and our data set:</p>
 <div class="sourceCode" id="cb287"><pre class="downlit sourceCode r">
 <code class="sourceCode R">  <span class="va">mod1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">~</span><span class="va">disp</span>,data<span class="op">=</span><span class="va">mtcars</span><span class="op">)</span></code></pre></div>
-<p>The formula is defined using a <code>~</code> sign. This basically implies our regression model is “mpg=disp”.</p>
+<p>The formula is defined using a <code>~</code> sign. This basically implies our regression model is “mpg=disp.”</p>
 <p>One important thing to note is the type of object this function generates. If you look at the <strong>Environment</strong> pane, you’ll see this object saved as a <code>list</code>.</p>
 <div class="inline-figure"><img src="1.66_ModelObject.png" width="75%" style="display: block; margin: auto;"></div>
 <p>This list includes many smaller components that come in handy later. Most other modeling functions in R mimic this workflow as well.</p>
@@ -586,7 +585,7 @@
 <span class="header-section-number">11.15</span> Exercises<a class="anchor" aria-label="anchor" href="#exercises-6"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
-<li>Using the data set <strong>iris</strong> (<code>data(iris)</code>), build a linear regression model that uses <strong>Sepal.Length</strong> and <strong>Sepal.Width</strong> to predict <strong>Petal.Length</strong>. Assign the model the name “PracticeModel”.</li>
+<li>Using the data set <strong>iris</strong> (<code>data(iris)</code>), build a linear regression model that uses <strong>Sepal.Length</strong> and <strong>Sepal.Width</strong> to predict <strong>Petal.Length</strong>. Assign the model the name “PracticeModel.”</li>
 <li>Determine whether the two parameters are statistically significant. (i.e., their p-values are less than 0.05.)</li>
 <li>Predict the value of <strong>Petal.Length</strong> with a <strong>Sepal.Length</strong> of 5 and a <strong>Sepal.Width</strong> of 3.25. (Hint: create a single row data frame with those two values assigned to their respective column names.)</li>
 <li>Determine the model’s confidence intervals.</li>
@@ -634,7 +633,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>R Programming in Plain English</strong>" was written by Taylor Rodgers. It was last built on 2022-01-30.</p>
+    <p>"<strong>R Programming in Plain English</strong>" was written by Taylor Rodgers. It was last built on 2022-02-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

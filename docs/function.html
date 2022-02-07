@@ -58,7 +58,6 @@
 <li><a class="" href="statfunctions.html"><span class="header-section-number">11</span> Statistical Functions in R: Common Functions and How They Work</a></li>
 <li><a class="" href="answers.html"><span class="header-section-number">12</span> Answer Key</a></li>
 <li><a class="" href="references.html">References</a></li>
-<li><a class="" href="about-the-author.html">About the Author</a></li>
 </ul>
 
         <div class="book-extra">
@@ -187,7 +186,7 @@
 <div class="sourceCode" id="cb235"><pre class="downlit sourceCode r">
 <code class="sourceCode R">  <span class="fu">sd.simple</span><span class="op">(</span><span class="va">bond</span>,<span class="st">"gross"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 214.4881</code></pre>
-<p>If you notice, I put quotation marks around the field argument “gross”. That’s because that argument is used with filtering a data frame, which requires quotation marks when we filter down to a column by column name (i.e. <code>data.frame[,"column name"]</code>). If we were using column number, we wouldn’t need to use a quotation mark (i.e. <code>data.frame[,n]</code>).</p>
+<p>If you notice, I put quotation marks around the field argument “gross.” That’s because that argument is used with filtering a data frame, which requires quotation marks when we filter down to a column by column name (i.e. <code>data.frame[,"column name"]</code>). If we were using column number, we wouldn’t need to use a quotation mark (i.e. <code>data.frame[,n]</code>).</p>
 <p>We can check our work against the existing <code><a href="https://rdrr.io/r/stats/sd.html">sd()</a></code> function already built into R to make sure we did it correctly.</p>
 <div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
 <code class="sourceCode R">  <span class="fu">sd.simple</span><span class="op">(</span><span class="va">bond</span>,<span class="st">"gross"</span><span class="op">)</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">bond</span><span class="op">[</span>,<span class="st">"gross"</span><span class="op">]</span><span class="op">)</span></code></pre></div>
@@ -232,7 +231,7 @@
 <span class="header-section-number">8.8</span> Applying a Control Flow to Our Summary Stats Function<a class="anchor" aria-label="anchor" href="#applying-a-control-flow-to-our-summary-stats-function"><i class="fas fa-link"></i></a>
 </h2>
 <p>Now we’re going to build upon our previous function with a control flow and use it to report both standard deviation and the average of a subgroup within a larger data frame. We’ll demonstrate this using the <strong>Bond</strong> data frame. We’ll report those summary statistics for each Bond actor’s net gross.</p>
-<p>Down below, I replaced our previous <em>standard deviation</em> script with the built-in <code><a href="https://rdrr.io/r/stats/sd.html">sd()</a></code> function. This simpler script will make it easier to see how the control flow works. I also added the built-in <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> function and renamed the overall function to “summary.group”.</p>
+<p>Down below, I replaced our previous <em>standard deviation</em> script with the built-in <code><a href="https://rdrr.io/r/stats/sd.html">sd()</a></code> function. This simpler script will make it easier to see how the control flow works. I also added the built-in <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> function and renamed the overall function to “summary.group.”</p>
 <div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
 <code class="sourceCode R">  <span class="va">summary.group</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>,<span class="va">field</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">field</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">field</span><span class="op">)</span><span class="op">]</span>
@@ -416,7 +415,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>R Programming in Plain English</strong>" was written by Taylor Rodgers. It was last built on 2022-01-30.</p>
+    <p>"<strong>R Programming in Plain English</strong>" was written by Taylor Rodgers. It was last built on 2022-02-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

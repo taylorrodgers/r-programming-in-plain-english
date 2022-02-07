@@ -1,150 +1,361 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="" xml:lang="">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 1 About This Book | R Programming in Plain English</title>
-<meta name="author" content="Taylor Rodgers">
-<meta name="description" content="A simple guide to R programming for those without programming experience.">
-<meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 1 About This Book | R Programming in Plain English">
-<meta property="og:type" content="book">
-<meta property="og:url" content="https://github.com/taylorrodgers/taylorrodgers.github.io">
-<meta property="og:image" content="https://github.com/taylorrodgers/taylorrodgers.github.io/BookCover.png">
-<meta property="og:description" content="A simple guide to R programming for those without programming experience.">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 1 About This Book | R Programming in Plain English">
-<meta name="twitter:description" content="A simple guide to R programming for those without programming experience.">
-<meta name="twitter:image" content="https://github.com/taylorrodgers/taylorrodgers.github.io/BookCover.png">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/_Lato-0.4.0/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
-<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>R Programming in Plain English</title>
+  <meta name="description" content="A simple guide to R programming for those without programming experience." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="R Programming in Plain English" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://github.com/taylorrodgers/taylorrodgers.github.io" />
+  <meta property="og:image" content="https://github.com/taylorrodgers/taylorrodgers.github.io/BookCover.png" />
+  <meta property="og:description" content="A simple guide to R programming for those without programming experience." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="R Programming in Plain English" />
+  
+  <meta name="twitter:description" content="A simple guide to R programming for those without programming experience." />
+  <meta name="twitter:image" content="https://github.com/taylorrodgers/taylorrodgers.github.io/BookCover.png" />
+
+<meta name="author" content="Taylor Rodgers" />
+
+
+<meta name="date" content="2022-02-07" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="whatisr.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
-<body data-spy="scroll" data-target="#toc">
 
-<div class="container-fluid">
-<div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<body>
 
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="">R Programming in Plain English</a>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
-    </div>
 
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-</form>
 
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="active" href="index.html"><span class="header-section-number">1</span> About This Book</a></li>
-<li><a class="" href="whatisr.html"><span class="header-section-number">2</span> What is R Programming?</a></li>
-<li><a class="" href="setup.html"><span class="header-section-number">3</span> How to Get Started with R and RStudio</a></li>
-<li><a class="" href="objects.html"><span class="header-section-number">4</span> Object Types in R Programming</a></li>
-<li><a class="" href="baserfilter.html"><span class="header-section-number">5</span> How to Filter and Transform Objects in Base R</a></li>
-<li><a class="" href="dplyr.html"><span class="header-section-number">6</span> How to Filter and Transform Data with the dplyr Package</a></li>
-<li><a class="" href="packages.html"><span class="header-section-number">7</span> Understanding and Using R Packages</a></li>
-<li><a class="" href="function.html"><span class="header-section-number">8</span> How to Write Functions</a></li>
-<li><a class="" href="importdata.html"><span class="header-section-number">9</span> How to Import Data into R</a></li>
-<li><a class="" href="plotdata.html"><span class="header-section-number">10</span> How to Plot Data in R</a></li>
-<li><a class="" href="statfunctions.html"><span class="header-section-number">11</span> Statistical Functions in R: Common Functions and How They Work</a></li>
-<li><a class="" href="answers.html"><span class="header-section-number">12</span> Answer Key</a></li>
-<li><a class="" href="references.html">References</a></li>
-<li><a class="" href="about-the-author.html">About the Author</a></li>
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R Programming in Plain English</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About This Book</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#what-this-book-provides"><i class="fa fa-check"></i><b>1.1</b> What This Book Provides</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#things-you-should-know-before-reading"><i class="fa fa-check"></i><b>1.2</b> Things You Should Know Before Reading</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#about-the-author"><i class="fa fa-check"></i><b>1.3</b> About the Author</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="whatisr.html"><a href="whatisr.html"><i class="fa fa-check"></i><b>2</b> What is R Programming?</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="whatisr.html"><a href="whatisr.html#is-r-the-best-statistical-programming-language"><i class="fa fa-check"></i><b>2.1</b> Is R the Best Statistical Programming Language?</a></li>
+<li class="chapter" data-level="2.2" data-path="whatisr.html"><a href="whatisr.html#will-learning-r-over-python-impact-job-opportunities"><i class="fa fa-check"></i><b>2.2</b> Will Learning R Over Python Impact Job Opportunities?</a></li>
+<li class="chapter" data-level="2.3" data-path="whatisr.html"><a href="whatisr.html#things-to-remember"><i class="fa fa-check"></i><b>2.3</b> Things to Remember</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>3</b> How to Get Started with R and RStudio</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="setup.html"><a href="setup.html#how-to-download-r"><i class="fa fa-check"></i><b>3.1</b> How to Download R</a></li>
+<li class="chapter" data-level="3.2" data-path="setup.html"><a href="setup.html#understanding-base-rs-user-interface"><i class="fa fa-check"></i><b>3.2</b> Understanding Base R’s User Interface</a></li>
+<li class="chapter" data-level="3.3" data-path="setup.html"><a href="setup.html#limitations-of-r-base"><i class="fa fa-check"></i><b>3.3</b> Limitations of R Base</a></li>
+<li class="chapter" data-level="3.4" data-path="setup.html"><a href="setup.html#what-is-rstudio"><i class="fa fa-check"></i><b>3.4</b> What is RStudio?</a></li>
+<li class="chapter" data-level="3.5" data-path="setup.html"><a href="setup.html#how-to-download-rstudio"><i class="fa fa-check"></i><b>3.5</b> How to Download RStudio</a></li>
+<li class="chapter" data-level="3.6" data-path="setup.html"><a href="setup.html#understanding-rstudio-interface"><i class="fa fa-check"></i><b>3.6</b> Understanding RStudio Interface</a></li>
+<li class="chapter" data-level="3.7" data-path="setup.html"><a href="setup.html#useful-project-organization-tip"><i class="fa fa-check"></i><b>3.7</b> Useful Project Organization Tip</a></li>
+<li class="chapter" data-level="3.8" data-path="setup.html"><a href="setup.html#things-to-remember-1"><i class="fa fa-check"></i><b>3.8</b> Things to Remember</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="objects.html"><a href="objects.html"><i class="fa fa-check"></i><b>4</b> Object Types in R Programming</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="objects.html"><a href="objects.html#why-do-objects-matter"><i class="fa fa-check"></i><b>4.1</b> Why Do Objects Matter?</a></li>
+<li class="chapter" data-level="4.2" data-path="objects.html"><a href="objects.html#understanding-object-types-makes-it-easier-to-transform-and-analyze"><i class="fa fa-check"></i><b>4.2</b> Understanding Object Types Makes It Easier to Transform and Analyze</a></li>
+<li class="chapter" data-level="4.3" data-path="objects.html"><a href="objects.html#the-basic-objects-to-remember"><i class="fa fa-check"></i><b>4.3</b> The Basic Objects to Remember</a></li>
+<li class="chapter" data-level="4.4" data-path="objects.html"><a href="objects.html#vectors"><i class="fa fa-check"></i><b>4.4</b> Vectors</a></li>
+<li class="chapter" data-level="4.5" data-path="objects.html"><a href="objects.html#matrices-and-arrays"><i class="fa fa-check"></i><b>4.5</b> Matrices and Arrays</a></li>
+<li class="chapter" data-level="4.6" data-path="objects.html"><a href="objects.html#data-frames"><i class="fa fa-check"></i><b>4.6</b> Data Frames</a></li>
+<li class="chapter" data-level="4.7" data-path="objects.html"><a href="objects.html#factors"><i class="fa fa-check"></i><b>4.7</b> Factors</a></li>
+<li class="chapter" data-level="4.8" data-path="objects.html"><a href="objects.html#lists"><i class="fa fa-check"></i><b>4.8</b> Lists</a></li>
+<li class="chapter" data-level="4.9" data-path="objects.html"><a href="objects.html#functions"><i class="fa fa-check"></i><b>4.9</b> Functions</a></li>
+<li class="chapter" data-level="4.10" data-path="objects.html"><a href="objects.html#things-to-remember-2"><i class="fa fa-check"></i><b>4.10</b> Things to Remember</a></li>
+<li class="chapter" data-level="4.11" data-path="objects.html"><a href="objects.html#exercises"><i class="fa fa-check"></i><b>4.11</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="baserfilter.html"><a href="baserfilter.html"><i class="fa fa-check"></i><b>5</b> How to Filter and Transform Objects in Base R</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="baserfilter.html"><a href="baserfilter.html#what-are-operators"><i class="fa fa-check"></i><b>5.1</b> What Are Operators?</a></li>
+<li class="chapter" data-level="5.2" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-and-transform-data-from-a-vector"><i class="fa fa-check"></i><b>5.2</b> How to Filter and Transform Data From a Vector</a></li>
+<li class="chapter" data-level="5.3" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-and-transform-data-from-a-matrix"><i class="fa fa-check"></i><b>5.3</b> How to Filter and Transform Data From a Matrix</a></li>
+<li class="chapter" data-level="5.4" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-and-transform-data-from-arrays"><i class="fa fa-check"></i><b>5.4</b> How to Filter and Transform Data from Arrays</a></li>
+<li class="chapter" data-level="5.5" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-and-transform-data-from-a-data-frame"><i class="fa fa-check"></i><b>5.5</b> How to Filter and Transform Data from a Data Frame</a></li>
+<li class="chapter" data-level="5.6" data-path="baserfilter.html"><a href="baserfilter.html#how-to-filter-a-list"><i class="fa fa-check"></i><b>5.6</b> How to Filter a List</a></li>
+<li class="chapter" data-level="5.7" data-path="baserfilter.html"><a href="baserfilter.html#things-to-remember-3"><i class="fa fa-check"></i><b>5.7</b> Things to Remember</a></li>
+<li class="chapter" data-level="5.8" data-path="baserfilter.html"><a href="baserfilter.html#exercises-1"><i class="fa fa-check"></i><b>5.8</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="dplyr.html"><a href="dplyr.html"><i class="fa fa-check"></i><b>6</b> How to Filter and Transform Data with the dplyr Package</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="dplyr.html"><a href="dplyr.html#why-is-dplyr-so-popular"><i class="fa fa-check"></i><b>6.1</b> Why is dplyr So Popular?</a></li>
+<li class="chapter" data-level="6.2" data-path="dplyr.html"><a href="dplyr.html#is-it-still-worth-learning-base-r"><i class="fa fa-check"></i><b>6.2</b> Is It Still Worth Learning Base R?</a></li>
+<li class="chapter" data-level="6.3" data-path="dplyr.html"><a href="dplyr.html#how-to-install-and-load-dplyr"><i class="fa fa-check"></i><b>6.3</b> How to Install and Load dplyr</a></li>
+<li class="chapter" data-level="6.4" data-path="dplyr.html"><a href="dplyr.html#the-dplyr-syntax"><i class="fa fa-check"></i><b>6.4</b> The dplyr Syntax</a></li>
+<li class="chapter" data-level="6.5" data-path="dplyr.html"><a href="dplyr.html#understand-the-difference-between-selecting-and-filtering"><i class="fa fa-check"></i><b>6.5</b> Understand the Difference Between Selecting and Filtering</a></li>
+<li class="chapter" data-level="6.6" data-path="dplyr.html"><a href="dplyr.html#how-to-select-and-mutate-a-data-frame-with-dplyr-in-r"><i class="fa fa-check"></i><b>6.6</b> How to Select and Mutate a Data Frame with dplyr in R</a></li>
+<li class="chapter" data-level="6.7" data-path="dplyr.html"><a href="dplyr.html#how-to-filter-a-data-frame-with-dplyr-in-r"><i class="fa fa-check"></i><b>6.7</b> How to Filter a Data Frame with dplyr in R</a></li>
+<li class="chapter" data-level="6.8" data-path="dplyr.html"><a href="dplyr.html#how-to-summarize-and-group-data-with-dplyr-in-r"><i class="fa fa-check"></i><b>6.8</b> How to Summarize and Group Data with dplyr in R</a></li>
+<li class="chapter" data-level="6.9" data-path="dplyr.html"><a href="dplyr.html#things-to-remember-4"><i class="fa fa-check"></i><b>6.9</b> Things to Remember</a></li>
+<li class="chapter" data-level="6.10" data-path="dplyr.html"><a href="dplyr.html#exercises-2"><i class="fa fa-check"></i><b>6.10</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>7</b> Understanding and Using R Packages</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="packages.html"><a href="packages.html#why-does-r-use-packages"><i class="fa fa-check"></i><b>7.1</b> Why Does R Use Packages?</a></li>
+<li class="chapter" data-level="7.2" data-path="packages.html"><a href="packages.html#how-to-access-r-packages"><i class="fa fa-check"></i><b>7.2</b> How to Access R Packages</a></li>
+<li class="chapter" data-level="7.3" data-path="packages.html"><a href="packages.html#how-to-install-and-load-a-package---the-easy-way"><i class="fa fa-check"></i><b>7.3</b> How to Install and Load a Package - The Easy Way</a></li>
+<li class="chapter" data-level="7.4" data-path="packages.html"><a href="packages.html#how-to-install-and-load-r-packages---the-old-fashioned-way"><i class="fa fa-check"></i><b>7.4</b> How to Install and Load R Packages - The Old Fashioned Way</a></li>
+<li class="chapter" data-level="7.5" data-path="packages.html"><a href="packages.html#make-it-easy-for-the-next-person-to-use-the-required-packages"><i class="fa fa-check"></i><b>7.5</b> Make It Easy for the Next Person to Use the Required Packages</a></li>
+<li class="chapter" data-level="7.6" data-path="packages.html"><a href="packages.html#how-to-find-new-packages-to-install"><i class="fa fa-check"></i><b>7.6</b> How to Find New Packages to Install</a></li>
+<li class="chapter" data-level="7.7" data-path="packages.html"><a href="packages.html#how-to-find-documentation-on-packages"><i class="fa fa-check"></i><b>7.7</b> How to Find Documentation on Packages</a></li>
+<li class="chapter" data-level="7.8" data-path="packages.html"><a href="packages.html#things-to-remember-5"><i class="fa fa-check"></i><b>7.8</b> Things to Remember</a></li>
+<li class="chapter" data-level="7.9" data-path="packages.html"><a href="packages.html#exercises-3"><i class="fa fa-check"></i><b>7.9</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="function.html"><a href="function.html"><i class="fa fa-check"></i><b>8</b> How to Write Functions</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="function.html"><a href="function.html#two-approaches-to-using-r-functions"><i class="fa fa-check"></i><b>8.1</b> Two Approaches to Using R Functions</a></li>
+<li class="chapter" data-level="8.2" data-path="function.html"><a href="function.html#why-you-should-learn-to-write-your-own-functions"><i class="fa fa-check"></i><b>8.2</b> Why You Should Learn to Write Your Own Functions</a></li>
+<li class="chapter" data-level="8.3" data-path="function.html"><a href="function.html#the-components-of-an-r-function"><i class="fa fa-check"></i><b>8.3</b> The Components of an R Function</a></li>
+<li class="chapter" data-level="8.4" data-path="function.html"><a href="function.html#required-versus-non-required-arguments"><i class="fa fa-check"></i><b>8.4</b> Required versus Non-Required Arguments</a></li>
+<li class="chapter" data-level="8.5" data-path="function.html"><a href="function.html#when-order-matters-for-arguments"><i class="fa fa-check"></i><b>8.5</b> When Order Matters for Arguments</a></li>
+<li class="chapter" data-level="8.6" data-path="function.html"><a href="function.html#how-to-write-your-own-functions"><i class="fa fa-check"></i><b>8.6</b> How to Write Your Own Functions</a></li>
+<li class="chapter" data-level="8.7" data-path="function.html"><a href="function.html#writing-functions-using-control-flows"><i class="fa fa-check"></i><b>8.7</b> Writing Functions Using Control Flows</a></li>
+<li class="chapter" data-level="8.8" data-path="function.html"><a href="function.html#applying-a-control-flow-to-our-summary-stats-function"><i class="fa fa-check"></i><b>8.8</b> Applying a Control Flow to Our Summary Stats Function</a></li>
+<li class="chapter" data-level="8.9" data-path="function.html"><a href="function.html#breaking-down-the-function-we-just-made"><i class="fa fa-check"></i><b>8.9</b> Breaking Down the Function We Just Made</a></li>
+<li class="chapter" data-level="8.10" data-path="function.html"><a href="function.html#assigning-functions-outputs-a-name"><i class="fa fa-check"></i><b>8.10</b> Assigning Functions Outputs a Name</a></li>
+<li class="chapter" data-level="8.11" data-path="function.html"><a href="function.html#things-to-remember-6"><i class="fa fa-check"></i><b>8.11</b> Things to Remember</a></li>
+<li class="chapter" data-level="8.12" data-path="function.html"><a href="function.html#exercises-4"><i class="fa fa-check"></i><b>8.12</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="importdata.html"><a href="importdata.html"><i class="fa fa-check"></i><b>9</b> How to Import Data into R</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="importdata.html"><a href="importdata.html#how-to-import-a-raw-data-file-the-easy-way"><i class="fa fa-check"></i><b>9.1</b> How to Import a Raw Data File the Easy Way</a></li>
+<li class="chapter" data-level="9.2" data-path="importdata.html"><a href="importdata.html#how-to-import-a-raw-data-file-the-hard-way"><i class="fa fa-check"></i><b>9.2</b> How to Import a Raw Data File the Hard Way</a></li>
+<li class="chapter" data-level="9.3" data-path="importdata.html"><a href="importdata.html#dont-forget-to-save-import-scripts"><i class="fa fa-check"></i><b>9.3</b> Don’t Forget to Save Import Scripts</a></li>
+<li class="chapter" data-level="9.4" data-path="importdata.html"><a href="importdata.html#how-to-connect-to-a-database"><i class="fa fa-check"></i><b>9.4</b> How to Connect to a Database</a></li>
+<li class="chapter" data-level="9.5" data-path="importdata.html"><a href="importdata.html#connect-to-an-api"><i class="fa fa-check"></i><b>9.5</b> Connect to an API</a></li>
+<li class="chapter" data-level="9.6" data-path="importdata.html"><a href="importdata.html#things-to-remember-7"><i class="fa fa-check"></i><b>9.6</b> Things to Remember</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="plotdata.html"><a href="plotdata.html"><i class="fa fa-check"></i><b>10</b> How to Plot Data in R</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="plotdata.html"><a href="plotdata.html#pros-and-cons-of-data-viz-packages"><i class="fa fa-check"></i><b>10.1</b> Pros and Cons of Data Viz Packages</a></li>
+<li class="chapter" data-level="10.2" data-path="plotdata.html"><a href="plotdata.html#so-which-data-viz-package-is-actually-the-best"><i class="fa fa-check"></i><b>10.2</b> So Which Data Viz Package is Actually the Best?</a></li>
+<li class="chapter" data-level="10.3" data-path="plotdata.html"><a href="plotdata.html#how-to-write-ggplot2-scripts"><i class="fa fa-check"></i><b>10.3</b> How to Write ggplot2 Scripts</a></li>
+<li class="chapter" data-level="10.4" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-common-data-visualizations-in-ggplot2"><i class="fa fa-check"></i><b>10.4</b> How to Plot Common Data Visualizations in ggplot2</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-a-scatterplot"><i class="fa fa-check"></i><b>10.4.1</b> How to Plot a Scatterplot</a></li>
+<li class="chapter" data-level="10.4.2" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-a-bar-graph-histogram"><i class="fa fa-check"></i><b>10.4.2</b> How to Plot a Bar Graph / Histogram</a></li>
+<li class="chapter" data-level="10.4.3" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-a-line-graph"><i class="fa fa-check"></i><b>10.4.3</b> How to Plot a Line Graph</a></li>
+<li class="chapter" data-level="10.4.4" data-path="plotdata.html"><a href="plotdata.html#how-to-plot-a-box-and-whiskers-plot"><i class="fa fa-check"></i><b>10.4.4</b> How to Plot a Box-and-Whiskers Plot</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="plotdata.html"><a href="plotdata.html#how-to-improve-labels-and-other-formatting-tips"><i class="fa fa-check"></i><b>10.5</b> How to Improve Labels and Other Formatting Tips</a></li>
+<li class="chapter" data-level="10.6" data-path="plotdata.html"><a href="plotdata.html#things-to-remember-8"><i class="fa fa-check"></i><b>10.6</b> Things to Remember</a></li>
+<li class="chapter" data-level="10.7" data-path="plotdata.html"><a href="plotdata.html#exercises-5"><i class="fa fa-check"></i><b>10.7</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="statfunctions.html"><a href="statfunctions.html"><i class="fa fa-check"></i><b>11</b> Statistical Functions in R: Common Functions and How They Work</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="statfunctions.html"><a href="statfunctions.html#how-statistical-functions-work-in-r-programming"><i class="fa fa-check"></i><b>11.1</b> How Statistical Functions Work in R Programming</a></li>
+<li class="chapter" data-level="11.2" data-path="statfunctions.html"><a href="statfunctions.html#how-to-build-a-model-in-r-example-with-linear-regression"><i class="fa fa-check"></i><b>11.2</b> How to Build a Model in R (Example with Linear Regression)</a></li>
+<li class="chapter" data-level="11.3" data-path="statfunctions.html"><a href="statfunctions.html#how-to-review-common-model-performance-statistics"><i class="fa fa-check"></i><b>11.3</b> How to Review Common Model Performance Statistics</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="statfunctions.html"><a href="statfunctions.html#its-useful-to-save-the-summary-output"><i class="fa fa-check"></i><b>11.3.1</b> It’s Useful to Save the Summary Output</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="statfunctions.html"><a href="statfunctions.html#how-to-make-predictions-with-a-model"><i class="fa fa-check"></i><b>11.4</b> How to Make Predictions with a Model</a></li>
+<li class="chapter" data-level="11.5" data-path="statfunctions.html"><a href="statfunctions.html#how-to-save-your-model-to-use-later"><i class="fa fa-check"></i><b>11.5</b> How to Save Your Model to Use Later</a></li>
+<li class="chapter" data-level="11.6" data-path="statfunctions.html"><a href="statfunctions.html#how-to-add-multiple-parameters-to-a-model"><i class="fa fa-check"></i><b>11.6</b> How to Add Multiple Parameters to a Model</a></li>
+<li class="chapter" data-level="11.7" data-path="statfunctions.html"><a href="statfunctions.html#how-to-add-a-categorical-variable-to-a-model"><i class="fa fa-check"></i><b>11.7</b> How to Add a Categorical Variable to a Model</a></li>
+<li class="chapter" data-level="11.8" data-path="statfunctions.html"><a href="statfunctions.html#how-to-add-transformed-variables-to-a-model"><i class="fa fa-check"></i><b>11.8</b> How to Add Transformed Variables to a Model</a></li>
+<li class="chapter" data-level="11.9" data-path="statfunctions.html"><a href="statfunctions.html#how-to-add-variable-interactions-to-a-model"><i class="fa fa-check"></i><b>11.9</b> How to Add Variable Interactions to a Model</a></li>
+<li class="chapter" data-level="11.10" data-path="statfunctions.html"><a href="statfunctions.html#how-to-calculate-model-confidence-intervals"><i class="fa fa-check"></i><b>11.10</b> How to Calculate Model Confidence Intervals</a></li>
+<li class="chapter" data-level="11.11" data-path="statfunctions.html"><a href="statfunctions.html#how-to-calculate-analysis-of-variance-between-models"><i class="fa fa-check"></i><b>11.11</b> How to Calculate Analysis of Variance Between Models</a></li>
+<li class="chapter" data-level="11.12" data-path="statfunctions.html"><a href="statfunctions.html#other-common-model-types---logistic-regression"><i class="fa fa-check"></i><b>11.12</b> Other Common Model Types - Logistic Regression</a></li>
+<li class="chapter" data-level="11.13" data-path="statfunctions.html"><a href="statfunctions.html#other-common-model-types---anova-models"><i class="fa fa-check"></i><b>11.13</b> Other Common Model Types - Anova Models</a></li>
+<li class="chapter" data-level="11.14" data-path="statfunctions.html"><a href="statfunctions.html#things-to-remember-9"><i class="fa fa-check"></i><b>11.14</b> Things to Remember</a></li>
+<li class="chapter" data-level="11.15" data-path="statfunctions.html"><a href="statfunctions.html#exercises-6"><i class="fa fa-check"></i><b>11.15</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="answers.html"><a href="answers.html"><i class="fa fa-check"></i><b>12</b> Answer Key</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="answers.html"><a href="answers.html#chapter-4---object-types-in-r-programming"><i class="fa fa-check"></i><b>12.1</b> Chapter 4 - Object Types in R Programming</a></li>
+<li class="chapter" data-level="12.2" data-path="answers.html"><a href="answers.html#chapter-5---how-to-filter-and-transform-data-in-base-r"><i class="fa fa-check"></i><b>12.2</b> Chapter 5 - How to Filter and Transform Data in Base R</a></li>
+<li class="chapter" data-level="12.3" data-path="answers.html"><a href="answers.html#chapter-6---how-to-filter-and-transform-data-with-the-dplyr-package"><i class="fa fa-check"></i><b>12.3</b> Chapter 6 - How to Filter and Transform Data with the Dplyr Package</a></li>
+<li class="chapter" data-level="12.4" data-path="answers.html"><a href="answers.html#chapter-7---understanding-and-using-r-packages"><i class="fa fa-check"></i><b>12.4</b> Chapter 7 - Understanding and Using R Packages</a></li>
+<li class="chapter" data-level="12.5" data-path="answers.html"><a href="answers.html#chapter-8---how-to-write-functions"><i class="fa fa-check"></i><b>12.5</b> Chapter 8 - How to Write Functions</a></li>
+<li class="chapter" data-level="12.6" data-path="answers.html"><a href="answers.html#chapter-10---how-to-plot-data-in-r"><i class="fa fa-check"></i><b>12.6</b> Chapter 10 - How to Plot Data in R</a></li>
+<li class="chapter" data-level="12.7" data-path="answers.html"><a href="answers.html#chapter-11---statistical-functions-in-r"><i class="fa fa-check"></i><b>12.7</b> Chapter 11 - Statistical Functions in R</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
 </ul>
 
-        <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/taylorrodgers/taylorrodgers.github.io">View book source <i class="fab fa-github"></i></a></p>
-        </div>
       </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R Programming in Plain English</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">R Programming in Plain English</h1>
+<p class="author"><em>Taylor Rodgers</em></p>
+<p class="date"><em>2022-02-07</em></p>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><!--bookdown:title:end--><!--bookdown:title:start--><div id="about-this-book" class="section level1" number="1">
-<h1>
-<span class="header-section-number">1</span> About This Book<a class="anchor" aria-label="anchor" href="#about-this-book"><i class="fas fa-link"></i></a>
-</h1>
+<div id="about-this-book" class="section level1" number="1">
+<h1><span class="header-section-number">Chapter 1</span> About This Book</h1>
 <p>I never liked most programming books. The same with most programming courses. The reason is that many of them assume you already have a programming background.</p>
 <p>That assumption doesn’t work well with the R programming language. It’s unique because it’s a <em>statistical</em> programming language. That means the people often needing to learn it are researchers, statisticians, and data analysts – not computer engineers.</p>
-<p>That’s why I wrote this book. I wanted to explain R programming to people who don’t know how to program. I want to strip away all the bloated, technical jargon used in most texts and explain R programming “in plain English.”</p>
+<p>That’s why I wrote this book. I wanted to explain R programming to people who don’t know how to program. I wanted to strip away all the bloated, technical jargon used in most texts and explain R programming “in plain English.”</p>
 <p>It’s hard enough to learn statistics. The same for psychology, business, sociology, medicine, economics, marketing, or whatever you were crazy enough to devote the best years of your life to learning. We don’t need the programming language we use to analyze our data to be as hard to learn as the subject itself.</p>
-<div id="things-you-should-know-before-reading" class="section level2" number="1.1">
-<h2>
-<span class="header-section-number">1.1</span> Things You Should Know Before Reading<a class="anchor" aria-label="anchor" href="#things-you-should-know-before-reading"><i class="fas fa-link"></i></a>
-</h2>
-<p>Since R is used mostly for statistics, you should know some statistics before reading this book. For example, I assume you know what a p-value is. The same for confidence intervals, regression analysis, and R-square.</p>
-<p>That being said, this book would make a great companion piece to your first statistics class. If your book or professor references code to perform certain calculations, this will help you understand what it’s doing.</p>
+<div id="what-this-book-provides" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> What This Book Provides</h2>
+<p>One important thing to note is that few concepts mentioned in this book are original. I primarily relied on the default R documentation<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, as well as various other package-specific documentation (see References{#References} page for details.)</p>
+<p>What this book does is make this material more accessible to beginners. R documentation is often written with terminology that sounds foreign to people who don’t already know R programming.</p>
+<p>Rather than teach you every single concept or function, I focus on teaching core concepts that come up again and again. This foundation will make it easier for you to later read through R documentation or “know what to Google.”</p>
+</div>
+<div id="things-you-should-know-before-reading" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Things You Should Know Before Reading</h2>
+<p>Since R is mostly for statistics, you should know some statistics before reading this book. For example, I assume you know what a p-value is. The same for confidence intervals, regression analysis, and R-square.</p>
+<p>That being said, this book would make a great companion piece to your first statistics class. I don’t cover the common statistical functions until the end of the book. If your book or professor references code to perform certain calculations, this will help you understand what it’s doing.</p>
+</div>
+<div id="about-the-author" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> About the Author</h2>
+<p>Taylor Rodgers is a data scientist, writer, and self-publisher. He has written two how-to books relating to data science, including <em>Data Work: A Jargon-Free Guide to Managing Successful Data Teams</em> and <em>R Programming in Plain English</em>, and has plans for several more future releases.</p>
+<p>Taylor is an avid R user. He regularly uses R for statistical analysis, machine learning, data visualizations, and Shiny app development. He has a masters degree in applied statistics from the University of Kansas Medical Center and a bachelors degree in economics from the University of Kansas.</p>
 <p>With that out of the way, let’s begin!</p>
 
 </div>
 </div>
-  <div class="chapter-nav">
-<div class="empty"></div>
-<div class="next"><a href="whatisr.html"><span class="header-section-number">2</span> What is R Programming?</a></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#about-this-book"><span class="header-section-number">1</span> About This Book</a></li>
-<li><a class="nav-link" href="#things-you-should-know-before-reading"><span class="header-section-number">1.1</span> Things You Should Know Before Reading</a></li>
-</ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/taylorrodgers/taylorrodgers.github.io/blob/main/index.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/taylorrodgers/taylorrodgers.github.io/edit/main/index.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
-        </ul>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p><span class="citation">R Core Team (2021)</span><a href="index.html#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
-    </nav>
-</div>
+            </section>
 
-</div>
-</div> <!-- .container -->
+          </div>
+        </div>
+      </div>
 
-<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>R Programming in Plain English</strong>" was written by Taylor Rodgers. It was last built on 2022-01-30.</p>
+<a href="whatisr.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
   </div>
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
-</div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
-for (let popover of popovers) {
-  const div = document.createElement('div');
-  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
-  div.innerHTML = popover.getAttribute('data-content');
-
-  var has_math = div.querySelector("span.math");
-  if (has_math) {
-    document.body.appendChild(div);
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
-    MathJax.Hub.Queue(function() {
-      popover.setAttribute('data-content', div.innerHTML);
-      document.body.removeChild(div);
-    })
-  }
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
 }
+});
+});
 </script>
+
 </body>
+
 </html>

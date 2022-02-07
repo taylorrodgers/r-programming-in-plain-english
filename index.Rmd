@@ -6,6 +6,8 @@ site: bookdown::bookdown_site
 output: bookdown::bs4_book
 url: https://github.com/taylorrodgers/taylorrodgers.github.io
 cover-image: BookCover.png
+bibliography: book.bib
+nocite: '@*'
 description: |
   A simple guide to R programming for those without programming experience.
 ---
@@ -16,14 +18,28 @@ I never liked most programming books. The same with most programming courses. Th
 
 That assumption doesn’t work well with the R programming language. It’s unique because it’s a *statistical* programming language. That means the people often needing to learn it are researchers, statisticians, and data analysts – not computer engineers.
 
-That’s why I wrote this book. I wanted to explain R programming to people who don’t know how to program. I want to strip away all the bloated, technical jargon used in most texts and explain R programming “in plain English.”
+That’s why I wrote this book. I wanted to explain R programming to people who don’t know how to program. I wanted to strip away all the bloated, technical jargon used in most texts and explain R programming “in plain English.”
 
 It’s hard enough to learn statistics. The same for psychology, business, sociology, medicine, economics, marketing, or whatever you were crazy enough to devote the best years of your life to learning. We don’t need the programming language we use to analyze our data to be as hard to learn as the subject itself.
 
+## What This Book Provides
+
+One important thing to note is that few concepts mentioned in this book are original. I primarily relied on the default R documentation^[@R-base], as well as various other package-specific documentation (see **References** page for details.)
+
+What this book does is make this material more accessible to beginners. R documentation is often written with terminology that sounds foreign to people who don't already know R programming.
+
+Rather than teach you every single concept or function, I focus on teaching core concepts that come up again and again. This foundation will make it easier for you to later read through R documentation or "know what to Google."
+
 ## Things You Should Know Before Reading
 
-Since R is used mostly for statistics, you should know some statistics before reading this book. For example, I assume you know what a p-value is. The same for confidence intervals, regression analysis, and R-square.
+Since R is mostly for statistics, you should know some statistics before reading this book. For example, I assume you know what a p-value is. The same for confidence intervals, regression analysis, and R-square.
 
-That being said, this book would make a great companion piece to your first statistics class. If your book or professor references code to perform certain calculations, this will help you understand what it's doing.
+That being said, this book would make a great companion piece to your first statistics class. I don't cover the common statistical functions until the end of the book. If your book or professor references code to perform certain calculations, this will help you understand what it's doing.
+
+## About the Author
+
+Taylor Rodgers is a data scientist, writer, and self-publisher. He has written two how-to books relating to data science, including *Data Work: A Jargon-Free Guide to Managing Successful Data Teams* and *R Programming in Plain English*, and has plans for several more future releases.
+
+Taylor is an avid R user. He regularly uses R for statistical analysis, machine learning, data visualizations, and Shiny app development. He has a masters degree in applied statistics from the University of Kansas Medical Center and a bachelors degree in economics from the University of Kansas.
 
 With that out of the way, let’s begin!
