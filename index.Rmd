@@ -6,6 +6,8 @@ site: bookdown::bookdown_site
 output: bookdown::bs4_book
 url: https://github.com/taylorrodgers/taylorrodgers.github.io
 cover-image: BookCover.png
+includes:
+  in_header: googleanalytics.html
 bibliography: book.bib
 nocite: '@*'
 description: |
