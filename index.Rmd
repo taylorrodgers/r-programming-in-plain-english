@@ -3,11 +3,12 @@ title:  "R Programming in Plain English"
 author: "Taylor Rodgers"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
-output: bookdown::bs4_book
+output: 
+  bookdown::bs4_book:
+    includes:
+      in_header: googleanalytics.html
 url: https://github.com/taylorrodgers/taylorrodgers.github.io
 cover-image: BookCover.png
-includes:
-  in_header: googleanalytics.html
 bibliography: book.bib
 nocite: '@*'
 description: |
