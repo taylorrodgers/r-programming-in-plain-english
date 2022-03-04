@@ -1,11 +1,10 @@
 tab:dplyr-fig8
 about-this-book
 what-this-book-provides
-you-dont-need-to-know-statistics-to-use-this-book-until-the-end
+you-dont-need-to-know-statistics-to-read-this-book
 about-the-author
 whatisr
 is-r-the-best-statistical-programming-language
-will-learning-r-over-python-impact-job-opportunities
 things-to-remember
 setup
 how-to-download-r

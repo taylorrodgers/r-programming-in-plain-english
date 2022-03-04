@@ -46,18 +46,6 @@ Some people also say that Python is better for enterprise-level or "production" 
 
 For those reasons, I suggest learning R. It's easier to download, easier to manage, and easier to learn in my experience  – especially for individuals.
 
-## Will Learning R Over Python Impact Job Opportunities?
-
-As a researcher or data analyst, you may have your eye on the job market. Many people wonder whether Python leads to more job opportunities compared to R (or vice versa).
-
-I do have good news there.
-
-The job market for data scientists favors the data scientists more than the companies that hire them. For that reason, companies can't be too picky with the skill sets they hire for.
-
-That's led to many data science software companies making their products "tool agnostic." For example, RStudio's enterprise software actually allows Python development. The Python equivalents to RStudio often allow R development as well.
-
-This is to help ensure that data scientists can do their best work by using "the language they already know."
-
 ## Things to Remember
 
 * R programming is a free and allows for advanced statistical programming
